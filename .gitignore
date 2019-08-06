@@ -1,4 +1,4 @@
-#ÄÄÆÄÀÏ °á°ú Á¦¿Ü¹°
+#ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ü¹ï¿½
 *.com
 *.class
 *.dll
@@ -6,10 +6,10 @@
 *.o
 *.so
 
-#·Î±×ÆÄÀÏ
+#ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½
 *.log
 
-#¿î¿µÃ¼Á¦¿¡¼­ ¸¸µå´Â ½Ã½ºÅÛ ÆÄÀÏµé Á¦¿Ü
+#ï¿½î¿µÃ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½ï¿½
 .DS_Store
 .DS_Store?
 ._*
@@ -17,3 +17,27 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+#ì•„ë˜ë¶€í„°ëŠ” ì´í´ë¦½ìŠ¤ í”„ë¡œì íŠ¸ ê¸°ë³¸ ì„¤ì • í›„ì— ë¶™ì—¬ë„£ì.
+#ì´í´ë¦½ìŠ¤ í”„ë¡œì íŠ¸ë¥¼ ìœ„í•œ íŒŒì¼
+.metatdata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+.project
+.externalToolBuilders/
+*.launch
+.classpath
+.factorypath
+.buildpath
+.target
+.tern-project
+.springBeans
+.recommenders/
