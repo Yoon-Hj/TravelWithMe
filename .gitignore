@@ -1,0 +1,19 @@
+#컴파일 결과 제외물
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+#로그파일
+*.log
+
+#운영체제에서 만드는 시스템 파일들 제외
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
