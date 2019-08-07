@@ -28,9 +28,21 @@
 		<property name="mapperLocations"
 			value="classpath*:dao/mapper/**/*.xml"></property>
 	</bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="memberDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"></property>
+		<property name="mapperInterface" value="dao.IMemberDao"></property>
+	</bean>
 
+	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="boardDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"></property>
+		<property name="mapperInterface" value="dao.IBoardDao"></property>
+	</bean>
 
-
-
+	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="adminDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"></property>
+		<property name="mapperInterface" value="dao.IAdminDao"></property>
+	</bean>
+	
 
 </beans>
