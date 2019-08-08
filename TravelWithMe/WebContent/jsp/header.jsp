@@ -5,31 +5,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Travel With Me</title>
 </head>
 <body>
-<script type="text/javascript">
-	var sessionid = <%=(String)session.getAttribute("id")%>
-</script>
-	
-	<c:choose>
-		<c:when test="<%=(String)session.getAttribute("id")%>">
-			<input type="button" value="LOGIN">
-			<input type="button" value="JOIN">
-		</c:when>
-		
-		<c:when test="<%=(String)session.getAttribute("id")%> == admin">
-			<input type="button" value="LOGOUT">
-			<input type="button" value="ADMIN PAGE">
-		</c:when>
-		
-		<c:otherwise>
-			<%=(String)session.getAttribute("id")%>님
-			<input type="button" value="LOGOUT">
-			<input type="button" value="MY PAGE">
-		</c:otherwise>
-	</c:choose>
-	
+
+	<div style="float: right;">
+		<c:choose>
+			<c:when test="${user==null}">
+				<input type="button" value="LOGIN">
+				<input type="button" value="JOIN">
+			</c:when>
+			<c:when test="${user==admin}">
+				<input type="button" value="LOGOUT">
+				<input type="button" value="ADMIN PAGE">		
+			</c:when>
+			<c:otherwise>
+				${user}님
+				<input type="button" value="LOGOUT">
+				<input type="button" value="MY PAGE">
+			</c:otherwise>
+		</c:choose>
+		<label>&#8801;</label>	
+	</div>
 	
 </body>
 </html>
