@@ -19,5 +19,5 @@ public class MemberController {
 	private BoardService m_bsvc;
 	@Autowired
 	private AdminService m_asvc;
-
+	
 }
