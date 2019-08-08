@@ -1,7 +1,11 @@
 package controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import service.AdminService;
 import service.BoardService;
@@ -15,4 +19,5 @@ public class MemberController {
 	private BoardService m_bsvc;
 	@Autowired
 	private AdminService m_asvc;
+
 }
