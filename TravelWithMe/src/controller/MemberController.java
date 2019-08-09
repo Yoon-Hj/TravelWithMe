@@ -29,6 +29,7 @@ public class MemberController {
 	
 	
 	
+	
 	@RequestMapping("mypage.do")
 	public ModelAndView mypage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
