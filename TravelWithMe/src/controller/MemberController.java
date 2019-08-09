@@ -31,7 +31,11 @@ public class MemberController {
 	@RequestMapping("mypage.do")
 	public void mypage(HttpSession session) {
 		String mid = (String)session.getAttribute("user");
-		
-		
+		System.out.println("컨트롤러 왔다.");
+		m_msvc.getMyInfo(mid);
+		m_bsvc.getMyBoard(mid);
+		System.out.println("테스트 서비스로 들어간다.");
+		mid = "admin";
+		m_msvc.testMethod(mid);
 	}
 }
