@@ -4,5 +4,34 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="dao.IAdminDao">
-
+	
+	<!-- 검색 결과에 해당하는 회원 아이디 조회 -->
+	<select id="searchId" parameterType="String">
+		select * from member where mid like '%${keyword}%'
+	</select>
+	
+	<!-- 회원 신뢰지수, 가이드등급 업데이트 -->
+	<update id="updateMemPoint" parameterType="java.util.HashMap">
+		update member set mpoint = mpoint + #{mpoint}, mguidepoint = mguidepoint + #{mguidepoint} where mid = #{mid}
+	</update>	
+	
+	<!-- 활성화코드가 1인 여행취향 리스트 조회 -->
+	<select id="selectLikeList" resultType="preference">
+		select likecode, likename from preference where likeon = 1
+	</select>
+	
+	<!-- 여행취향 추가 -->
+	<insert id="insertPrefer" parameterType="preference" useGeneratedKeys="true" keyProperty="likecode">
+		<selectKey resultType="int" keyProperty="likecode" order="BEFORE">
+			select preference_seq.nextval from dual		
+		</selectKey>
+		insert into preference values ('N'||${likecode}, #{likename}, #{likeon})
+	</insert>
+	
+	<!-- 여행취향 삭제 -->
+	<update id="updatePrefer" parameterType="String">
+		update preference set likeon = 0 where likecode = #{likecode}
+	</update>
+	
+	
 </mapper>

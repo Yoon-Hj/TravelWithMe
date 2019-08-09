@@ -15,9 +15,23 @@ public class MemberService {
 	@Autowired
 	private IBoardDao m_bdao;
 	
-	public void joinMember(HashMap<String, Object> params) {
-		if(params.get("pwd").equals(params.get("pwd_check"))) {
-			dao.insertMember(params);
-		}
+
+	
+	
+	public void testMethod(String mid) {
+		System.out.println("서비스에서 받은 mid : " + mid);
+		System.out.println(m_mdao.selectMemInfo(mid));
+		System.out.println("서비스 종료한다.");
+	}
+	
+	public HashMap<String, Object> getMyInfo(String mid) {
+		HashMap<String, Object> returnVal = new HashMap<String, Object>();
+		
+		returnVal.put("memberInfo", m_mdao.selectMemInfo(mid));
+		returnVal.put("notice", m_mdao.selectNoticeById(mid));
+		returnVal.put("register", m_mdao.selectRegisterById(mid));
+		
+		return returnVal;
+
 	}
 }

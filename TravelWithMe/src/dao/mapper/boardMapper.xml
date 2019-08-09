@@ -1,8 +1,295 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="dao.IBoardDao">
 
+<!-- 내가 작성한 게시글 조회하기 -->
+
+<select id="selectBoardById" parameterType="String" resultType="java.util.HashMap">
+	select bnum,bkind,bwritedate,btitle from 
+	(select * from board where mid = #{mid} and cdel = 0 order by bwritedate desc) 
+    <![CDATA[ where rownum <= 5]]>
+</select>
+
+<!-- 여행취향에 맞는 동행게시물 4개조회하기 -->
+
+<select id="selectAccomListByLike" parameterType="String" resultType="AccomBoard">
+	select * 
+	from (select b.bnum, b.btitle, b.breadcount, b.mid, a.aarea, a.astartdate, a.afinishdate
+	         from board b, (select * from accompany
+	                                where astartdate > sysdate
+	                               <if test="likecode != null">and likecode = #{likecode}</if>) a
+	         where b.bnum = a.bnum
+	         and b.cdel = 0
+	         order by b.breadcount desc) a
+	<![CDATA[where rownum <= 4]]>
+</select>
+
+<!-- 조회순으로 가이드 게시물 조회하기 -->
+<select id="selectGuideListByRcnt" resultType="GuideBoard">
+	select * 
+    from (select b.bnum, b.btitle, b.breadcount, b.mid, g.garea ,g.gstartdate, g.gfinishdate, p.photopath
+            from (select * from guide
+                     <![CDATA[ where genddate >= sysdate ]]> ) g, board b left join (select bnum, photopath
+                                                                                     from photo
+                                                                                     where porder = 1) p
+            on b.bnum = p.bnum
+            where b.bnum = g.bnum
+            and b.cdel = 0
+            order by b.breadcount desc)
+    <![CDATA[ where rownum <= 4]]>
+</select>
+
+<!-- 각 게시판의 전체 게시글 갯수 조회 -->
+<sql id="bkind">
+	<choose>
+		<when test="bkind == 'A'">
+			accompany
+		</when>
+		<when test="bkind == 'G'">
+			guide
+		</when>
+		<otherwise>
+			community
+		</otherwise>
+	</choose>
+</sql>
+<select id="getBoardCount" parameterType="String" resultType="int">
+	select count(*) from board where bkind = <include refid="bkind"/> and cdel=0
+</select>
+
+<!-- 페이징 데이터로 동행게시물 조회하기 -->
+
+<!-- 페이징 데이터로 가이드게시글 조회하기 -->
+
+<!-- 페이징 데이터로 커뮤니티게시글 조회하기 -->
+
+<!-- 키워드로 동행게시글 조회하기 -->
+
+<!-- 키워드로 가이드게시글 조회하기 -->
+
+<!-- 키워드로 커뮤니티게시글 조회하기 -->
+
+
+<!-- 게시글 번호로 동행게시글 내용 읽어오기 -->
+<select id="selectOneAccom" parameterType="int" resultType="AccomBoard">
+	select * from board NATURAL JOIN accompany where bnum = #{bnum}
+</select>
+
+<!-- 게시글 번호로 게시글 정책 읽어오기 -->
+<select id="selectPolicyByBnum" parameterType="int" resultType="java.util.HashMap">
+	 select * from policy where bnum = #{bum}
+</select>
+
+<!-- 게시글 번호로 게시글 댓글 읽어오기 -->
+<select id="selectCommentList" parameterType="int" resultType="Comments">
+	 select * from comments where bnum = #{bnum} order by cgrid, cnum
+</select>
+
+<!-- 게시글 번호로 게시글 신청자 받아오기 -->
+<select id="selectRegisterListByBnum" parameterType="int" resultType="java.util.HashMap">
+	select mid, rnop, rid from register whrere bnum = #{bnum}
+</select>
+
+<!-- 게시글 번호로 동행게시글 현재 신청가능 인원 수 조회하기  -->
+<select id="getPossibleNop" parameterType="int" resultType="int">
+	 select anop - nvl((select sum(rnop)
+                       from register
+                       where bnum = #{bnum}
+                       group by bnum), 0)
+    from accompany
+    where bnum = #{bnum}
+</select>
+
+<!-- 게시글에 동행 및 가이드투어 신청하기 -->
+<insert id="insertRegister" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="rid">
+	<selectKey resultType="int" keyProperty="rid" order="BEFORE">
+			select register_seq.nextval from dual
+	</selectKey>
+	insert into register values ('R'||${rid}, #{bnum}, #{regId}, default, #{nop}, default, default)
+</insert>
+
+<!-- 게시글에 동행 및 가이드 투어 신청 취소하기 -->
+<delete id="deleteRegister" parameterType="String">
+	delete from register where rid=#{rid}
+</delete>
+
+<!-- 댓글 달기 -->
+<insert id="insertComment" parameterType="Comments" useGeneratedKeys="true" keyProperty="cnum">
+	<selectKey resultType="int" keyProperty="cnum" order="BEFORE">
+			select comments_seq.nextval from dual
+	</selectKey>
+	insert into comments values (#{cnum}, #{cnum}, #{bnum}, #{mid}, #{ccontent}, default, default)
+</insert>
+
+<!-- Re댓글 달기 -->
+<insert id="insertRecomment" parameterType="Comments" useGeneratedKeys="true" keyProperty="cnum">
+	<selectKey resultType="int" keyProperty="cnum" order="BEFORE">
+			select comments_seq.nextval from dual
+	</selectKey>
+	insert into comments values (#{cnum}, #{cgrid}, #{bnum}, #{mid}, #{ccontent}, default, default)
+</insert>
+
+<!-- 댓글,답글 삭제 -->
+<update id="deleteComment" parameterType="int">
+	update comments set cdel = 1 where cnum = #{cnum}
+</update>
+
+<!-- 게시글 삭제 -->
+<update id="deleteBoard" parameterType="int">
+	update board set cdel = 1 where bnum = #{bnum}
+</update>
+
+<!-- 동행글 게시글테이블 삽입 -->
+<insert id="insertBoard" parameterType="AccomBoard" useGeneratedKeys="true" keyProperty="bnum">
+	<selectKey resultType="int" keyProperty="bnum" order="BEFORE">
+			select board_seq.nextval from dual
+	</selectKey>
+	insert into board values 
+	(#{bnum}, #{bkind}, #{mid}, default, #{btitle}, #{bcontent}, default, default)
+</insert>
+
+<!-- 동행글 동행테이블 삽입 -->
+<insert id="insertAccom" parameterType="AccomBoard">
+	insert into accompany values 
+	(#{bnum}, #{aarea}, #{astartdate}, #{afinishdate}, #{atime}, #{adepartplace}, #{adeparttime},
+                                               #{anop}, #{likecode}, #{transport}, #{acourse})
+</insert>
+
+<!-- 정책테이블에 새로운 게시글의 정책 삽입 -->
+<insert id="insertPolicy" parameterType="java.util.HashMap">
+	insert into policy values (#{bnum}, #{pcode}, #{pvalue})
+</insert>
+
+<!-- 동행글 게시글테이블 수정 -->
+<update id="updateBoard" parameterType="AccomBoard">
+	update board set btitle = #{btitle}, bcontent = #{bcontent} where bnum = #{bum}
+</update>
+
+<!-- 동행글 동행테이블 수정 -->
+<update id="updateAccom" parameterType="AccomBoard">
+	update accompany set aarea = #{aarea}, astartdate = #{astartdate}, afinishdate = #{afinishdate}, atime = #{atime},
+                                     adepartplace = #{adepartplace}, adeparttime = #{adeparttime}, anop = #{anop}, 
+                                     likecode = #{likecode}, transport = #{transport}, acourse = #{acourse}
+                                     where bnum = #{bnum}
+</update>
+
+<!-- 정책테이블에서 기존의 정책 삭제 -->
+<delete id="deletePolicy" parameterType="int">
+	delete from policy where bnum = #{bnum}
+</delete>
+
+<!-- 게시글 번호로 가이드게시글 내용 읽어오기 -->
+<select id="selectOneGuide" parameterType="int" resultType="GuideBoard">
+	select * from board NATURAL JOIN guide where bnum = #{bnum}
+</select>
+
+<!-- 게시글 번호로 가이드게시글 사진경로 읽어오기 -->
+<select id="selectAllPhotoByBnum" parameterType="int" resultType="String">
+	select photopath from photo where bnum = #{bnum} order by porder
+</select>
+
+<!-- 게시글 번호로 가이드게시글 세부일정 읽어오기 -->
+<select id="selectGScheByBnum" parameterType="int" resultType="Guideschedule">
+	select * from guideschedule where bnum = #{bnum} order by sdate, stime
+</select>
+
+<!-- 가이드게시글 게시글 테이블에 삽입  -->
+<insert id="insertBoard" parameterType="GuideBoard" useGeneratedKeys="true" keyProperty="bnum">
+	<selectKey resultType="int" keyProperty="bnum" order="BEFORE">
+			select board_seq.nextval from dual
+	</selectKey>
+	insert into board values (#{bnum}, #{bkind}, #{mid}, default, #{btitle}, #{bcontent}, default, default)
+</insert>
+
+<!-- 가이드게시글 가이드 테이블에 삽입  -->
+<insert id="insertGuide" parameterType="GuideBoard">
+	insert into guide values (#{bnum}, #{garea}, #{gstartdate}, #{gfinishdate}, #{gtime}, #{genddate}, #{gdepartplace}, 
+                                               #{gdeparttime}, #{gnop}, #{gthema})
+</insert>
+
+<!-- 가이드게시글 세부일정 테이블에 삽입  -->
+<insert id="insertGuideSche" parameterType="Guideschedule" useGeneratedKeys="true" keyProperty="scode">
+	<selectKey resultType="int" keyProperty="scode" order="BEFORE">
+			select guideschedule_seq.nextval from dual
+	</selectKey>
+	insert into guideschedule values ('S'||${scode}, #{bnum}, #{sdate}, #{stime}, #{splace})
+</insert>
+
+<!-- 가이드게시글 사진 테이블에 삽입  -->
+<insert id="insertPhoto" parameterType="java.util.HashMap">
+	insert into photo values (#{bnum}, #{porder}, #{photopath})
+</insert>
+
+<!-- 가이드글 게시글테이블 수정 -->
+<update id="updateBoard" parameterType="GuideBoard">
+	update board set btitle = #{btitle}, bcontent = #{bcontent} where bnum = #{bum}
+</update>
+
+<!-- 가이드글 가이드테이블 수정 -->
+<update id="updateGuide" parameterType="GuideBoard">
+	update guide set garea = #{garea}, gstartdate = #{gstartdate}, gfinishdate = #{gfinishdate}, gtime = #{gtime},
+                                    genddate = #{genddate}, gdepartplace = #{gdepartplace}, gdeparttime = #{gdeparttime}, 
+                                    gnop = #{gnop}, gthema = #{gthema} where bnum = #{bnum}
+</update>
+
+<!-- 가이드글 세부일정 삭제 -->
+<delete id="deleteGuideSche" parameterType="String">
+	delete from guideschedule where scode=#{scode}
+</delete>
+
+<!-- 게시글 번호로 커뮤니티게시글 읽어오기 -->
+<select id="selectOneComm" parameterType="int" resultType="CommuBoard">
+	select * from board NATURAL JOIN community where bnum = #{bnum}
+</select>
+
+<!-- 커뮤니티게시글 게시글테이블 삽입 -->
+<insert id="insertBoard" parameterType="CommuBoard" useGeneratedKeys="true" keyProperty="bnum">
+	<selectKey resultType="int" keyProperty="bnum" order="BEFORE">
+			select board_seq.nextval from dual
+	</selectKey>
+	insert into board values (#{bnum}, #{bkind}, #{mid}, default, #{btitle}, #{bcontent}, default, default)
+</insert>
+
+<!-- 커뮤니티게시글 커뮤니티테이블 삽입 -->
+<insert id="insertComm" parameterType="CommuBoard">
+	insert into community values (#{bnum}, #{commukind})
+</insert>
+
+<!-- 커뮤니티게시글 게시글테이블 수정 -->
+<update id="updateBoard" parameterType="CommuBoard">
+	update board set btitle = #{btitle}, bcontent = #{bcontent} where bnum = #{bum}
+</update>
+
+<!-- 커뮤니티게시글 커뮤니티테이블 수정 -->
+<update id="updateComm" parameterType="CommuBoard">
+	update accompany set commukind = #{commukind} where bnum = #{bnum}
+</update>
+
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
