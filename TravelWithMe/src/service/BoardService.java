@@ -1,6 +1,7 @@
 package service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +30,8 @@ public class BoardService {
 	
 	
 	
-	public void getMyBoard(String mid) {
-		
+	public List<HashMap<String, Object>> getMyBoard(String mid) {
+		return b_bdao.selectBoardById(mid);
 	}
 	
 	

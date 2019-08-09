@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import service.AdminService;
 import service.BoardService;
@@ -29,13 +30,16 @@ public class MemberController {
 	
 	
 	@RequestMapping("mypage.do")
-	public void mypage(HttpSession session) {
+	public ModelAndView mypage(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
 		String mid = (String)session.getAttribute("user");
 		System.out.println("컨트롤러 왔다.");
-		m_msvc.getMyInfo(mid);
-		m_bsvc.getMyBoard(mid);
-		System.out.println("테스트 서비스로 들어간다.");
-		mid = "admin";
-		m_msvc.testMethod(mid);
+		
+		mav.addAllObjects(m_msvc.getMyInfo(mid));
+		mav.addObject("myBoard", m_bsvc.getMyBoard(mid));
+		
+		
+		
+		return mav;
 	}
 }
