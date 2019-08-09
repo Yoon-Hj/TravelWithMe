@@ -22,8 +22,12 @@ public class BoardController {
 	private AdminService b_asvc;
 	
 	
-	
-	
+	@RequestMapping("t.do")
+	public void test() {
+		System.out.println("요청 받는데?");
+	}
+	@RequestMapping("attractionInfo.do")
+	public void t() {}
 	
 	
 	
