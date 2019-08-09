@@ -151,6 +151,15 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/net.sf.sociaal/xmlpull-xpp3 -->
+		<dependency>
+			<groupId>net.sf.sociaal</groupId>
+			<artifactId>xmlpull-xpp3</artifactId>
+			<version>3.0.0.20130526</version>
+		</dependency>
+		
+		
 
 	</dependencies>
 
