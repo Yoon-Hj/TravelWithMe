@@ -38,6 +38,7 @@ public class BoardController {
 	
 	
 	
+	
 	@RequestMapping("attractionInfo.do")
 	public void attractionInfo() {}
 	
