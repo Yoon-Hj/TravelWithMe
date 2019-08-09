@@ -20,4 +20,16 @@ public class MemberController {
 	@Autowired
 	private AdminService m_asvc;
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping("mypage.do")
+	public void mypage() {
+		
+	}
 }
