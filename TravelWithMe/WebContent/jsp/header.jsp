@@ -52,7 +52,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">로그인</button>
         </div>
-        
+      
       </div>
     </div>
   </div>

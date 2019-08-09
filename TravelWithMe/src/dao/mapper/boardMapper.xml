@@ -11,7 +11,7 @@
 <select id="selectBoardById" parameterType="String" resultType="java.util.HashMap">
 	select bnum,bkind,bwritedate,btitle from 
 	(select * from board where mid = #{mid} and cdel = 0 order by bwritedate desc) 
-    <![CDATA[ where rownum <= 5 ]]>
+    <![CDATA[ where rownum <= 5]]>
 </select>
 
 <!-- 여행취향에 맞는 동행게시물 4개조회하기 -->
@@ -25,7 +25,7 @@
 	         where b.bnum = a.bnum
 	         and b.cdel = 0
 	         order by b.breadcount desc) a
-	<![CDATA[where rownum <= 4;]]>
+	<![CDATA[where rownum <= 4]]>
 </select>
 
 <!-- 페이징 데이터로 동행게시물 조회하기 -->
@@ -42,7 +42,7 @@
             where b.bnum = g.bnum
             and b.cdel = 0
             order by b.breadcount desc)
-    <![CDATA[ where rownum <= 4;]]>
+    <![CDATA[ where rownum <= 4]]>
 </select>
 
 <!-- 페이징 데이터로 가이드게시글 조회하기 -->
@@ -81,8 +81,35 @@
                        where bnum = #{bnum}
                        group by bnum), 0)
     from accompany
-    where bnum = #{bnum};
+    where bnum = #{bnum}
 </select>
+
+<!-- 게시글에 동행 및 가이드투어 신청하기 -->
+<insert id="insertRegister" parameterType="java.util.HashMap">
+	insert into register values (#{rid}, #{bnum}, #{regId}, default, #{nop}, default, default)
+</insert>
+
+<!-- 게시글에 동행 및 가이트 투어 신청 취소하기 -->
+<delete id="deleteRegister" parameterType="String">
+	delete from register where rid=#{rid}
+</delete>
+
+<!-- 댓글 달기 -->
+<insert id="insertComment" parameterType="Comments">
+	insert into comments values (#{cnum}, #{cnum}, #{bnum}, #{mid}, #{ccontent}, default, default)
+</insert>
+
+<!-- Re댓글 달기 -->
+<insert id="insertRecomment" parameterType="Comments">
+	insert into comments values (#{cnum}, #{cgrid}, #{bnum}, #{mid}, #{ccontent}, default, default)
+</insert>
+
+<!-- 댓글,답글 삭제 -->
+<update id="deleteComment" parameterType="int">
+	update comments set cdel = 1 where cnum = #{cnum}
+</update>
+
+
 </mapper>
 
 
