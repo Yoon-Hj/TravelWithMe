@@ -7,13 +7,13 @@
 $(document).ready(function(){
 	$(".areaBtn").on('click', function(){
 		var areacode = $(this).val();
-		location.href="area.do?areacode=" + areacode;
+		location.href="apiAreaSearch.do?areacode=" + areacode;
 	});
 	
 	$(".PageNavi1").on('click', function(){
 		var page = $(this).val();
 		var keyword = $("#keyword").val();
-		location.href="api.do?page=" + page + "&keyword=" + keyword;
+		location.href="apiKeywordSearch.do?page=" + page + "&keyword=" + keyword;
 	});
 	
 	$(".PageNavi2").on('click', function(){
@@ -21,14 +21,14 @@ $(document).ready(function(){
 		var sDate = $("#sDate").val();
 		var eDate = $("#eDate").val();
 		var area = $("#area option:selected").val();
-		location.href="festival.do?page=" + page + "&area=" + area
+		location.href="festivalSearch.do?page=" + page + "&area=" + area
 		+ "&eventStartDate=" + sDate + "&eventEndDate=" + eDate;
 	});
 
 	$(".PageNavi3").on('click', function(){
 		var page = $(this).val();
 		var selArea = $("#selArea").val();
-		location.href="area.do?page=" + page + "&areacode=" + selArea;
+		location.href="apiAreaSearch.do?page=" + page + "&areacode=" + selArea;
 	});
 	
 	

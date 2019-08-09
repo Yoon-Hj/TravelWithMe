@@ -27,19 +27,19 @@ public class BoardController {
 	
 	
 	
-	@RequestMapping("api.do")
-	public ModelAndView apiTest(@RequestParam(defaultValue="1")String page, String keyword) {
+	@RequestMapping("apiKeywordSearch.do")
+	public ModelAndView apiKeywordSearch(@RequestParam(defaultValue="1")String page, String keyword) {
 		System.out.println("컨트롤러 왔음");
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addAllObjects(b_bsvc.apiTest(page, keyword));
-		mav.setViewName("test");
+		mav.setViewName("keywordSearch");
 		
 		return mav;
 	}
 	
-	@RequestMapping("festival.do")
-	public ModelAndView searchFestival(@RequestParam(defaultValue="1") String page,
+	@RequestMapping("festivalSearch.do")
+	public ModelAndView festivalSearch(@RequestParam(defaultValue="1") String page,
 			@RequestParam(defaultValue="") String area,
 			String eventStartDate,
 			@RequestParam(defaultValue="") String eventEndDate) {
@@ -56,13 +56,13 @@ public class BoardController {
 		result.put("area", area);
 		
 		mav.addAllObjects(result);
-		mav.setViewName("festival");
+		mav.setViewName("festivalSearch");
 		
 		return mav;
 	}
 	
-	@RequestMapping("area.do")
-	public ModelAndView searchArea(
+	@RequestMapping("apiAreaSearch.do")
+	public ModelAndView apiAreaSearch(
 			@RequestParam(defaultValue="1")String page,
 			String areacode) {
 		ModelAndView mav = new ModelAndView();
@@ -70,7 +70,7 @@ public class BoardController {
 		result.put("selectedArea", areacode);
 		
 		mav.addAllObjects(result);
-		mav.setViewName("areaResult");
+		mav.setViewName("areaSearch");
 		
 		return mav;
 	}
