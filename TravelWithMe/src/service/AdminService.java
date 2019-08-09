@@ -15,4 +15,6 @@ public class AdminService {
 	private IBoardDao a_bdao;
 	@Autowired
 	private IAdminDao a_adao;
+	
+	
 }

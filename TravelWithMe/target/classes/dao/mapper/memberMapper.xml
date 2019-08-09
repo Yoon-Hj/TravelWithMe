@@ -23,12 +23,96 @@
 	</select>
 	
 	<!-- 아이디로 알림내역 조회 -->
-	<select id="selectNoticeById" parameterType="String" resultType="notice">
+	<select id="selectAllNoticeById" parameterType="String" resultType="notice">
 		select b1.bkind, b1.btitle, b2.* from board b1, (select a1.*, a2.nkreason from notice a1, noticekind a2
-        where a1.nkcode = a2.nkcode order by a1.noticetime desc) b2 where b1.bnum = b2.bnum and b2.mid = #{mid};
+        where a1.nkcode = a2.nkcode order by a1.noticetime desc) b2 where b1.bnum = b2.bnum and b2.mid = #{mid}
 	</select>
 	
+	<!-- 아이디로 알림내역 5개만 조회 -->
+	<select id="selectNoticeById" parameterType="String" resultType="notice">
+		select b1.bkind, b1.btitle, b2.* from board b1, (select a1.*, a2.nkreason from notice a1, noticekind a2
+        where a1.nkcode = a2.nkcode order by a1.noticetime desc) b2 where b1.bnum = b2.bnum and b2.mid = #{mid} and <![CDATA[rownum <= 5]]>
+	</select>
 	
+	<!-- 아이디로 회원정보 조회 -->
+	<select id="selectMemInfo" parameterType="String" resultType="member">
+		select * from member where mid = #{mid}
+	</select>
 	
+	<!-- 아이디로 신청내역 5개만 조회 -->
+	<select id="selectRegisterById" parameterType="String" resultType="register">
+		 select bkind, btitle, b.bnum, rid from board b, (select * from register where mid = #{mid} order by rdate desc) r
+		 where b.bnum = r.bnum and <![CDATA[rownum <= 5]]>
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="selectId" parameterType="java.util.HashMap" resultType="String">
+		select mid from member where mname = #{mname} and mcontact = #{mcontact}
+	</select>
+	
+	<!-- 비밀번호 찾기; 아이디 존재하는지 확인 -->
+	<select id="selectOneMem" parameterType="java.util.HashMap" resultType="String">
+		select mid from member where mid = #{mid} and  mname = #{mname} and mcontact = #{mcontact}
+	</select>
+	
+	<!-- 비밀번호 재설정 -->
+	<update id="updatePw" parameterType="java.util.HashMap">
+		update member set mpw = #{mpw} where mid = #{mid} 
+	</update>
+	
+	<!-- 아이디 중복확인 -->
+	<select id="selectOneId" parameterType="String" resultType="String">
+		select uid from usedid where uid = #{mid}
+	</select>
+	
+	<!-- 회원 추가 -->
+	<insert id="insertMember" parameterType="member">
+		insert into values member (#{mid}, #{mpw}, #{mname}, #{mbirth}, #{mcontact}, #{mgender}, default, default)	
+	</insert>
+	
+	<!-- 회원 아이디 추가 -->
+	<insert id="insertUsedid" parameterType="String">
+		insert into values usedid (#{uid})
+	</insert>
+	
+	<!-- 회원 여행취향 추가 -->
+	<insert id="insertMempick" parameterType="mempick">
+		insert into values mempick (#{mid}, #{likecode})
+	</insert>
+	
+	<!-- 알림내역 추가 -->
+	<insert id="insertNotice" parameterType="notice" useGeneratedKeys="true" keyProperty="nid">
+		<selectKey resultType="int" keyProperty="nid" order="BEFORE">
+			select notice_seq.nextval from dual		
+		</selectKey>
+			insert into notice values ('N'||${mid}, #{nkcode}, #{bnum}, #{mid}, default, default)
+	</insert>
+	
+	<!-- 아이디로 연락처 조회 -->
+	<select id="selectContact" parameterType="String" resultType="String">
+		select mcontact from member where mid = #{mid}
+	</select>
+	
+	<!-- 게시글번호로 신청자 정보 조회 -->
+	<select id="selectRegiMemInfo" parameterType="int" resultType="java.util.HashMap">
+		select m.mid, m.mname, m.mcontact, r.rid from member m, register r where m.mid = r.mid and r.bnum = #{bnum} 
+	</select>
+	
+	<!-- 아이디로 신청내역 조회 -->
+	<select id="selectAllRegisterById" parameterType="String" resultType="register">
+		select bkind, btitle, b.bnum, rid from board b, (select * from register where mid = #{mid} order by rdate desc) r
+		where b.bnum = r.bnum
+	</select>
+	
+	<!-- 회원 정보 업데이트 -->
+	<update id="updateMember" parameterType="member">
+		update member set mpw = #{mpw}, mname = #{mname}, mbirth = #{mbirth}, mcontact = #{mcontact}, mgender = #{mgender}
+		where mid = #{mid}
+	</update>
+	
+	<!-- 회원 삭제 -->
+	<delete id="deleteMember" parameterType="String">
+		delete from member where mid = #{mid}
+	</delete>
 	
 </mapper>
