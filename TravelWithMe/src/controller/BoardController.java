@@ -22,14 +22,16 @@ public class BoardController {
 	private AdminService b_asvc;
 	
 	
-	@RequestMapping("t.do")
-	public void test() {
-		System.out.println("요청 받는데?");
-	}
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("attractionInfo.do")
-	public void t() {}
-	
-	
+	public void attractionInfo() {}
 	
 	@RequestMapping("apiKeywordSearch.do")
 	public ModelAndView apiKeywordSearch(@RequestParam(defaultValue="1")String page, String keyword) {
@@ -48,11 +50,6 @@ public class BoardController {
 			String eventStartDate,
 			@RequestParam(defaultValue="") String eventEndDate) {
 		ModelAndView mav = new ModelAndView();
-		
-		System.out.println("컨트롤러임 page : " + page);
-		System.out.println("컨트롤러임 area : " + area);
-		System.out.println("컨트롤러임 sdate : " + eventStartDate);
-		System.out.println("컨트롤러임 edate : " + eventEndDate);
 		
 		HashMap<String, Object> result = b_bsvc.festivalSearch(page, area, eventStartDate, eventEndDate);
 		result.put("eventStartDate", eventStartDate);

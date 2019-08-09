@@ -142,7 +142,6 @@ public class UseAPI {
 			e.printStackTrace();
 		}
 
-		System.out.println("서비스임 이제 detail 검색 해볼것임");
 		resultInfo.put("detailIntro", detailIntro(contentid, contenttypeid));
 		resultInfo.put("detailInfo", detailInfoParser(contentid, contenttypeid));
 		return resultInfo;
@@ -161,35 +160,27 @@ public class UseAPI {
 							+ "&introYN=Y");
 			switch (contenttypeid) {
 			case "12":
-				System.out.println("관광지 검색이다");
 				returnVal = attractionIntroParser(url);
 				break;
 			case "14":
-				System.out.println("문화 검색이다");
 				returnVal = cultureIntroParser(url);
 				break;
 			case "15":
-				System.out.println("축제 검색이다");
 				returnVal = festivalIntroParser(url);
 				break;
 			case "25":
-				System.out.println("여행코스 검색이다");
 				returnVal = courseIntroParser(url);
 				break;
 			case "28":
-				System.out.println("레포츠 검색이다");
 				returnVal = leportsIntroParser(url);
 				break;
 			case "32":
-				System.out.println("숙박 검색이다");
 				returnVal = lodgingIntroParser(url);
 				break;
 			case "38":
-				System.out.println("쇼핑 검색이다");
 				returnVal = shoppingIntroParser(url);
 				break;
 			case "39":
-				System.out.println("음식 검색이다");
 				returnVal = foodIntroParser(url);
 				break;
 			default:
@@ -333,7 +324,6 @@ public class UseAPI {
 
 
 	public XmlPullParser requestAPI(URL url) {
-		System.out.println("api 요청 보낸다???");
 		URLConnection urlConn;
 		BufferedReader br = null;
 		XmlPullParser parser = null;
@@ -352,7 +342,6 @@ public class UseAPI {
 			parser = factory.newPullParser();
 			parser.setInput(new StringReader(data));
 
-			System.out.println(data);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -524,7 +513,6 @@ public class UseAPI {
 		resultInfo.put("endpage", getEndpage(page, cnt));
 		resultInfo.put("lastpage", getLastpage(cnt));
 
-		System.out.println(resultInfo);
 		resultInfo.put("ilist", ilist);
 
 		return resultInfo;
