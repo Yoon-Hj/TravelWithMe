@@ -12,4 +12,12 @@ public class MemberService {
 	private IMemberDao m_mdao;
 	@Autowired
 	private IBoardDao m_bdao;
+	
+	
+	
+	
+	
+	public void getMyInfo(String mid) {
+		
+	}
 }

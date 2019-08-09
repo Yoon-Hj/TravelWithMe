@@ -29,7 +29,9 @@ public class BoardService {
 	
 	
 	
-	
+	public void getMyBoard(String mid) {
+		
+	}
 	
 	
 	// 키워드 검색

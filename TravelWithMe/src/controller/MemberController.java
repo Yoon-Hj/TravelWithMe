@@ -29,7 +29,9 @@ public class MemberController {
 	
 	
 	@RequestMapping("mypage.do")
-	public void mypage() {
+	public void mypage(HttpSession session) {
+		String mid = (String)session.getAttribute("user");
+		
 		
 	}
 }
