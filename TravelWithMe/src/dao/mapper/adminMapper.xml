@@ -33,5 +33,4 @@
 		update preference set likeon = 0 where likecode = #{likecode}
 	</update>
 	
-	
 </mapper>
