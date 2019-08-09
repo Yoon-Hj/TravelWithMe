@@ -54,4 +54,5 @@ public interface IBoardDao {
 	public void deleteComment(int cnum);
 	public void insertPolicy(HashMap<String, Object> policy);
 	public void deletePolicy(int bnum);
+	public int getBoardCount(String bkind);
 }

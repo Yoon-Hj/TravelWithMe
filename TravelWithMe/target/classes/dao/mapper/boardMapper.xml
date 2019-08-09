@@ -28,8 +28,6 @@
 	<![CDATA[where rownum <= 4]]>
 </select>
 
-<!-- 페이징 데이터로 동행게시물 조회하기 -->
-
 <!-- 조회순으로 가이드 게시물 조회하기 -->
 <select id="selectGuideListByRcnt" resultType="GuideBoard">
 	select * 
@@ -44,6 +42,26 @@
             order by b.breadcount desc)
     <![CDATA[ where rownum <= 4]]>
 </select>
+
+<!-- 각 게시판의 전체 게시글 갯수 조회 -->
+<sql id="bkind">
+	<choose>
+		<when test="bkind == 'A'">
+			accompany
+		</when>
+		<when test="bkind == 'G'">
+			guide
+		</when>
+		<otherwise>
+			community
+		</otherwise>
+	</choose>
+</sql>
+<select id="getBoardCount" parameterType="String" resultType="int">
+	select count(*) from board where bkind = <include refid="bkind"/> and cdel=0
+</select>
+
+<!-- 페이징 데이터로 동행게시물 조회하기 -->
 
 <!-- 페이징 데이터로 가이드게시글 조회하기 -->
 
