@@ -62,7 +62,7 @@
 	
 	<!-- 아이디 중복확인 -->
 	<select id="selectOneId" parameterType="String" resultType="String">
-		select uid from usedid where uid = #{mid}
+		select usedid from usedid where uid = #{mid}
 	</select>
 	
 	<!-- 회원 추가 -->
@@ -72,7 +72,7 @@
 	
 	<!-- 회원 아이디 추가 -->
 	<insert id="insertUsedid" parameterType="String">
-		insert into values usedid (#{uid})
+		insert into values usedid (#{usedid})
 	</insert>
 	
 	<!-- 회원 여행취향 추가 -->
