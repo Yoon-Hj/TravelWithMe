@@ -12,14 +12,14 @@
 <body>
 <h1>시작 페이지다.</h1><hr>
 <h3>키워드 검색</h3>
-<form action="api.do">
+<form action="apiKeywordSearch.do">
 <input type="text" name="keyword" required>
 <input type="submit" value="검색">
 </form>
 
 <hr>
 <h3>축제 검색</h3>
-<form action="festival.do">
+<form action="festivalSearch.do">
 <input type="date" name="eventStartDate" required>
 <input type="date" name="eventEndDate">
 <select name="area">
