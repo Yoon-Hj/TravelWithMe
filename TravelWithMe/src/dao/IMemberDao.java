@@ -28,8 +28,9 @@ public interface IMemberDao {
 	public void updatePw(HashMap<String, Object> params);
 	
 	//회원가입
-	public String selectOneId(String id);
+	public String selectOneId(String uid);
 	public void insertMember(Member member);
+	public void insertUsedid(String uid);
 	public void insertMempick(Mempick mempick);
 	
 	//알림내역
@@ -45,7 +46,10 @@ public interface IMemberDao {
 	//게시글에 해당하는 신청자 리스트 조회
 	public HashMap<String, Object> selectRegiMemInfo(int bnum);
 	
+	//회원정보 수정
+	public void updateMember(Member member);
+	
 	//회원 탈퇴
-	public void deleteMem(String mid);
+	public void deleteMember(String mid);
 	
 }

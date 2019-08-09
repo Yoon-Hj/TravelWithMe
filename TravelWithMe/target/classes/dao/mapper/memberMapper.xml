@@ -62,17 +62,22 @@
 	
 	<!-- 아이디 중복확인 -->
 	<select id="selectOneId" parameterType="String" resultType="String">
-		select mid from member where mid = #{mid}
+		select uid from usedid where uid = #{mid}
 	</select>
 	
 	<!-- 회원 추가 -->
 	<insert id="insertMember" parameterType="member">
-		insert into values member(#{mid}, #{mpw}, #{mname}, #{mbirth}, #{mcontact}, #{mgender}, default, default)	
+		insert into values member (#{mid}, #{mpw}, #{mname}, #{mbirth}, #{mcontact}, #{mgender}, default, default)	
+	</insert>
+	
+	<!-- 회원 아이디 추가 -->
+	<insert id="insertUsedid" parameterType="String">
+		insert into values usedid (#{uid})
 	</insert>
 	
 	<!-- 회원 여행취향 추가 -->
 	<insert id="insertMempick" parameterType="mempick">
-		insert into values mempick(#{mid}, #{likecode})
+		insert into values mempick (#{mid}, #{likecode})
 	</insert>
 	
 	<!-- 알림내역 추가 -->
@@ -99,8 +104,14 @@
 		where b.bnum = r.bnum
 	</select>
 	
+	<!-- 회원 정보 업데이트 -->
+	<update id="updateMember" parameterType="member">
+		update member set mpw = #{mpw}, mname = #{mname}, mbirth = #{mbirth}, mcontact = #{mcontact}, mgender = #{mgender}
+		where mid = #{mid}
+	</update>
+	
 	<!-- 회원 삭제 -->
-	<delete id="deleteMem" parameterType="String">
+	<delete id="deleteMember" parameterType="String">
 		delete from member where mid = #{mid}
 	</delete>
 	
