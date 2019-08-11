@@ -41,10 +41,10 @@ public class MemberController {
 		String mid = (String)session.getAttribute("user");
 		System.out.println("컨트롤러 왔다.");
 		
-		mav.addAllObjects(m_msvc.getMyInfo(mid));
-		mav.addObject("myBoard", m_bsvc.getMyBoard(mid));
+//		mav.addAllObjects(m_msvc.getMyInfo(mid));
+//		mav.addObject("myBoard", m_bsvc.getMyBoard(mid));
 		
-		
+		m_msvc.testMethod(mid);
 		
 		return mav;
 	}
