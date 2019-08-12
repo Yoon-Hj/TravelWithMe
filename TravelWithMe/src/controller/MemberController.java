@@ -33,13 +33,23 @@ public class MemberController {
 	
 	
 	
+	@RequestMapping("headerTest.do")
+	public void t() {}
 	
-	
-	
+	@RequestMapping("login_test.do")
+	public void login_test(HttpSession session) {
+		// 세션에 아이디 저장 테스트
+		session.setAttribute("user", "test1");
+		System.out.println("로그인으로 왔음");
+		//return "headerTest";
+	}
 	
 	@RequestMapping("logout.do")
-	public void logout(HttpSession session) {
+	public String logout(HttpSession session) {
+		System.out.println("로그아웃 한다.");
+		System.out.println(session.getAttribute("user"));
 		session.invalidate();
+		return "headerTest";
 	}
 	
 	
