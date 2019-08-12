@@ -36,6 +36,26 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 			CloseStatus status) throws Exception {
 		super.afterConnectionClosed(session, status);
 		thread.stop();
+		String add1 = String.valueOf(session.getRemoteAddress());
+		String[] a1 = add1.split(":");
+		String add2 = null;
+		String[] a2 = null;
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		System.out.println(sessionSet.size());
+		for(WebSocketSession s : sessionSet) {
+			add2 = String.valueOf(s.getRemoteAddress());
+			a2 = add1.split(":");
+			System.out.println("==============================");
+			System.out.println("a1 : " + a1[0]);
+			System.out.println("a2 : " + a2[0]);
+			System.out.println("==============================");
+		}
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		
+		
+		
+		
+		
 		sessionSet.remove(session);
 		System.out.println("소켓이 제거 된거임.");
 		this.logger.info("remove session!");
@@ -51,11 +71,12 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 		thread = new Thread(){
 			@Override
 			public void run() {
+				int i = 0;
 				while (true){
 					try {
 						int cnt = testDao.test();
-						sendMessage ("데이터 수 :  "+ cnt);
-						Thread.sleep(1000);
+						sendMessage (i++ + "번째 데이터 수 :  "+ cnt);
+						Thread.sleep(2000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 						break;
@@ -94,9 +115,7 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 				try{
 					System.out.println("메세지를 페이지로 보내는건가");
 					session.sendMessage(new TextMessage(message));
-
 				}catch (Exception ignored){
-
 					this.logger.error("fail to send message!", ignored);
 				}
 			}
@@ -125,7 +144,31 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 //		};
 //		thread.start();
 	}
-
+	
+	class SessionThread implements Runnable{
+		WebSocketSession s;
+		
+		public SessionThread(WebSocketSession s) {
+			this.s = s;
+		}
+		
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			int i = 0;
+			while (true){
+				try {
+					int cnt = testDao.test();
+					sendMessage (i++ + "번째 데이터 수 :  "+ cnt);
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+					break;
+				}
+			}
+		}
+		
+	}
 
 
 }

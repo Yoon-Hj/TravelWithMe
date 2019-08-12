@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 
 
-var wsUri = "ws://localhost:80/TravelWithMe/websocket/echo.do";
+var wsUri = "ws://70.12.109.53:80/TravelWithMe/websocket/echo.do";
 
 function init() {
 	//output = document.getElementById("output");
@@ -12,6 +12,7 @@ var websocket = null;
 
 var user = $('#user').val();
 if(user != ""){
+	alert(wsUri);
 	websocket = new WebSocket(wsUri);
 	websocket.onopen = function(evt) {
 		onOpen(evt)
