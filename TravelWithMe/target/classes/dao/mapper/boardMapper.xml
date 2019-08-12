@@ -29,7 +29,7 @@
 </select>
 
 <!-- 조회순으로 가이드 게시물 조회하기 -->
-<select id="selectGuideListByRcnt" resultType="GuideBoard">
+<select id="selectGuideListByRcnt" resultType="guideBoard">
 	select * 
     from (select b.bnum, b.btitle, b.breadcount, b.mid, g.garea ,g.gstartdate, g.gfinishdate, p.photopath
             from (select * from guide
@@ -75,7 +75,7 @@
 
 
 <!-- 게시글 번호로 동행게시글 내용 읽어오기 -->
-<select id="selectOneAccom" parameterType="int" resultType="AccomBoard">
+<select id="selectOneAccom" parameterType="int" resultType="accomBoard">
 	select * from board NATURAL JOIN accompany where bnum = #{bnum}
 </select>
 
@@ -85,7 +85,7 @@
 </select>
 
 <!-- 게시글 번호로 게시글 댓글 읽어오기 -->
-<select id="selectCommentList" parameterType="int" resultType="Comments">
+<select id="selectCommentList" parameterType="int" resultType="comments">
 	 select * from comments where bnum = #{bnum} order by cgrid, cnum
 </select>
 
@@ -118,7 +118,7 @@
 </delete>
 
 <!-- 댓글 달기 -->
-<insert id="insertComment" parameterType="Comments" useGeneratedKeys="true" keyProperty="cnum">
+<insert id="insertComment" parameterType="comments" useGeneratedKeys="true" keyProperty="cnum">
 	<selectKey resultType="int" keyProperty="cnum" order="BEFORE">
 			select comments_seq.nextval from dual
 	</selectKey>
@@ -126,7 +126,7 @@
 </insert>
 
 <!-- Re댓글 달기 -->
-<insert id="insertRecomment" parameterType="Comments" useGeneratedKeys="true" keyProperty="cnum">
+<insert id="insertRecomment" parameterType="comments" useGeneratedKeys="true" keyProperty="cnum">
 	<selectKey resultType="int" keyProperty="cnum" order="BEFORE">
 			select comments_seq.nextval from dual
 	</selectKey>
@@ -144,7 +144,7 @@
 </update>
 
 <!-- 동행글 게시글테이블 삽입 -->
-<insert id="insertBoard" parameterType="AccomBoard" useGeneratedKeys="true" keyProperty="bnum">
+<insert id="insertAccomBoard" parameterType="accomBoard" useGeneratedKeys="true" keyProperty="bnum">
 	<selectKey resultType="int" keyProperty="bnum" order="BEFORE">
 			select board_seq.nextval from dual
 	</selectKey>
@@ -153,7 +153,7 @@
 </insert>
 
 <!-- 동행글 동행테이블 삽입 -->
-<insert id="insertAccom" parameterType="AccomBoard">
+<insert id="insertAccom" parameterType="accomBoard">
 	insert into accompany values 
 	(#{bnum}, #{aarea}, #{astartdate}, #{afinishdate}, #{atime}, #{adepartplace}, #{adeparttime},
                                                #{anop}, #{likecode}, #{transport}, #{acourse})
@@ -165,12 +165,12 @@
 </insert>
 
 <!-- 동행글 게시글테이블 수정 -->
-<update id="updateBoard" parameterType="AccomBoard">
+<update id="updateAccomBoard" parameterType="accomBoard">
 	update board set btitle = #{btitle}, bcontent = #{bcontent} where bnum = #{bum}
 </update>
 
 <!-- 동행글 동행테이블 수정 -->
-<update id="updateAccom" parameterType="AccomBoard">
+<update id="updateAccom" parameterType="accomBoard">
 	update accompany set aarea = #{aarea}, astartdate = #{astartdate}, afinishdate = #{afinishdate}, atime = #{atime},
                                      adepartplace = #{adepartplace}, adeparttime = #{adeparttime}, anop = #{anop}, 
                                      likecode = #{likecode}, transport = #{transport}, acourse = #{acourse}
@@ -183,7 +183,7 @@
 </delete>
 
 <!-- 게시글 번호로 가이드게시글 내용 읽어오기 -->
-<select id="selectOneGuide" parameterType="int" resultType="GuideBoard">
+<select id="selectOneGuide" parameterType="int" resultType="guideBoard">
 	select * from board NATURAL JOIN guide where bnum = #{bnum}
 </select>
 
@@ -193,26 +193,26 @@
 </select>
 
 <!-- 게시글 번호로 가이드게시글 세부일정 읽어오기 -->
-<select id="selectGScheByBnum" parameterType="int" resultType="Guideschedule">
+<select id="selectGScheByBnum" parameterType="int" resultType="guideschedule">
 	select * from guideschedule where bnum = #{bnum} order by sdate, stime
 </select>
 
 <!-- 가이드게시글 게시글 테이블에 삽입  -->
-<insert id="insertBoard" parameterType="GuideBoard" useGeneratedKeys="true" keyProperty="bnum">
+<insert id="insertGuideBoard" parameterType="guideBoard" useGeneratedKeys="true" keyProperty="bnum">
 	<selectKey resultType="int" keyProperty="bnum" order="BEFORE">
 			select board_seq.nextval from dual
 	</selectKey>
 	insert into board values (#{bnum}, #{bkind}, #{mid}, default, #{btitle}, #{bcontent}, default, default)
-</insert>
+</insert> 
 
 <!-- 가이드게시글 가이드 테이블에 삽입  -->
-<insert id="insertGuide" parameterType="GuideBoard">
+<insert id="insertGuide" parameterType="guideBoard">
 	insert into guide values (#{bnum}, #{garea}, #{gstartdate}, #{gfinishdate}, #{gtime}, #{genddate}, #{gdepartplace}, 
                                                #{gdeparttime}, #{gnop}, #{gthema})
 </insert>
 
 <!-- 가이드게시글 세부일정 테이블에 삽입  -->
-<insert id="insertGuideSche" parameterType="Guideschedule" useGeneratedKeys="true" keyProperty="scode">
+<insert id="insertGuideSche" parameterType="guideschedule" useGeneratedKeys="true" keyProperty="scode">
 	<selectKey resultType="int" keyProperty="scode" order="BEFORE">
 			select guideschedule_seq.nextval from dual
 	</selectKey>
@@ -225,12 +225,12 @@
 </insert>
 
 <!-- 가이드글 게시글테이블 수정 -->
-<update id="updateBoard" parameterType="GuideBoard">
+<update id="updateGuideBoard" parameterType="guideBoard">
 	update board set btitle = #{btitle}, bcontent = #{bcontent} where bnum = #{bum}
 </update>
 
 <!-- 가이드글 가이드테이블 수정 -->
-<update id="updateGuide" parameterType="GuideBoard">
+<update id="updateGuide" parameterType="guideBoard">
 	update guide set garea = #{garea}, gstartdate = #{gstartdate}, gfinishdate = #{gfinishdate}, gtime = #{gtime},
                                     genddate = #{genddate}, gdepartplace = #{gdepartplace}, gdeparttime = #{gdeparttime}, 
                                     gnop = #{gnop}, gthema = #{gthema} where bnum = #{bnum}
@@ -242,12 +242,12 @@
 </delete>
 
 <!-- 게시글 번호로 커뮤니티게시글 읽어오기 -->
-<select id="selectOneComm" parameterType="int" resultType="CommuBoard">
+<select id="selectOneComm" parameterType="int" resultType="commuBoard">
 	select * from board NATURAL JOIN community where bnum = #{bnum}
 </select>
 
 <!-- 커뮤니티게시글 게시글테이블 삽입 -->
-<insert id="insertBoard" parameterType="CommuBoard" useGeneratedKeys="true" keyProperty="bnum">
+<insert id="insertCommBoard" parameterType="commuBoard" useGeneratedKeys="true" keyProperty="bnum">
 	<selectKey resultType="int" keyProperty="bnum" order="BEFORE">
 			select board_seq.nextval from dual
 	</selectKey>
@@ -255,17 +255,17 @@
 </insert>
 
 <!-- 커뮤니티게시글 커뮤니티테이블 삽입 -->
-<insert id="insertComm" parameterType="CommuBoard">
+<insert id="insertComm" parameterType="commuBoard">
 	insert into community values (#{bnum}, #{commukind})
 </insert>
 
 <!-- 커뮤니티게시글 게시글테이블 수정 -->
-<update id="updateBoard" parameterType="CommuBoard">
+<update id="updateCommBoard" parameterType="commuBoard">
 	update board set btitle = #{btitle}, bcontent = #{bcontent} where bnum = #{bum}
-</update>
+</update> 
 
 <!-- 커뮤니티게시글 커뮤니티테이블 수정 -->
-<update id="updateComm" parameterType="CommuBoard">
+<update id="updateComm" parameterType="commuBoard">
 	update accompany set commukind = #{commukind} where bnum = #{bnum}
 </update>
 

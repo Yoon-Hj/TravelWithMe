@@ -16,9 +16,9 @@ public interface IBoardDao {
 	//동행게시글에서 사용하는 DAO
 	public List<AccomBoard> selectAccomListByLike(String likecode);
 	public AccomBoard selectOneAccom(int bnum);
-	public void insertBoard(AccomBoard accomboard);
+	public void insertAccomBoard(AccomBoard accomboard);
 	public void insertAccom(AccomBoard accomboard);
-	public void updateBoard(AccomBoard accomboard);
+	public void updateAccomBoard(AccomBoard accomboard);
 	public void updateAccom(AccomBoard accomboard);
 	
 	//가이드게시글에서 사용하는 DAO
@@ -26,19 +26,19 @@ public interface IBoardDao {
 	public GuideBoard selectOneGuide(int bnum);
 	public List<String> selectAllPhotoByBnum(int bnum);
 	public List<Guideschedule> selectGScheByBnum(int bnum);
-	public void insertBoard(GuideBoard guideboard);
+	public void insertGuideBoard(GuideBoard guideboard);
 	public void insertGuide(GuideBoard guideboard);
 	public void insertGuideSche(Guideschedule guidesche);
 	public void insertPhoto(HashMap<String, Object> photo);
-	public void updateBoard(GuideBoard guideboard);
+	public void updateGuideBoard(GuideBoard guideboard);
 	public void updateGuide(GuideBoard guideboard);
 	public void deleteGuideSche(String scode);
 	
 	//커뮤니티게시글에서 사용한는 DAO
 	public CommuBoard selectOneComm(int bnum);
-	public void insertBoard(CommuBoard commuboard);
+	public void insertCommBoard(CommuBoard commuboard);
 	public void insertComm(CommuBoard commuboard);
-	public void updateBoard(CommuBoard commuboard);
+	public void updateCommBoard(CommuBoard commuboard);
 	public void updateComm(CommuBoard commuboard);
 
 	//게시글에서 공동으로 사용하는 DAO
