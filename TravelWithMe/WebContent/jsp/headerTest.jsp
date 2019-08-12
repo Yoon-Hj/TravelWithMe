@@ -12,12 +12,15 @@
 </head>
 <body>
 <input type="hidden" value="${user }" id="user">
-
+<h1>ID : ${user }</h1>
 
 <h1 style="text-align: center;">헤더페이지 테스트함</h1>
 
 	<br>
-	<button id="login">로그인</button>
+	<input type="text" id="loginId">
+	<input type="password" id="loginPw">
+	
+	<button id="login">로그인</button><BR><BR><BR>
 	<div style="text-align: center;">
 
 		<form action="">
