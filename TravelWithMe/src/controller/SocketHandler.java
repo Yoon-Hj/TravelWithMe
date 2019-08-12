@@ -19,10 +19,9 @@ import dao.IBoardDao;
 public class SocketHandler extends TextWebSocketHandler implements InitializingBean {
 	private final Logger logger = LogManager.getLogger(getClass());
 	private Set<WebSocketSession> sessionSet = new HashSet<WebSocketSession>();
+
 	@Autowired
 	private IBoardDao testDao; 
-	
-	Thread thread = null;
 	
 	
 	public SocketHandler (){
@@ -35,28 +34,10 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 	public void afterConnectionClosed(WebSocketSession session,
 			CloseStatus status) throws Exception {
 		super.afterConnectionClosed(session, status);
-		thread.stop();
-		String add1 = String.valueOf(session.getRemoteAddress());
-		String[] a1 = add1.split(":");
-		String add2 = null;
-		String[] a2 = null;
-		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		System.out.println(sessionSet.size());
-		for(WebSocketSession s : sessionSet) {
-			add2 = String.valueOf(s.getRemoteAddress());
-			a2 = add1.split(":");
-			System.out.println("==============================");
-			System.out.println("a1 : " + a1[0]);
-			System.out.println("a2 : " + a2[0]);
-			System.out.println("==============================");
-		}
-		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-		
-		
-		
-		
 		
 		sessionSet.remove(session);
+		session.close();
+		
 		System.out.println("소켓이 제거 된거임.");
 		this.logger.info("remove session!");
 	}
@@ -65,26 +46,11 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 	public void afterConnectionEstablished(WebSocketSession session)
 			throws Exception {
 		super.afterConnectionEstablished(session);
-		sessionSet.add(session);
 		System.out.println("세션이 더해진거임?");
 		this.logger.info("add session!");
-		thread = new Thread(){
-			@Override
-			public void run() {
-				int i = 0;
-				while (true){
-					try {
-						int cnt = testDao.test();
-						sendMessage (i++ + "번째 데이터 수 :  "+ cnt);
-						Thread.sleep(2000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-						break;
-					}
-				}
-			}
-		};
-		thread.start();
+		
+		sessionSet.add(session);
+		new Thread(new SessionThread(session)).start();
 	}
 
 	@Override
@@ -109,7 +75,7 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 	}
 
 	public void sendMessage (String message){
-		for (WebSocketSession session: this.sessionSet){
+		for (WebSocketSession session: sessionSet){
 			System.out.println(message);
 			if (session.isOpen()){
 				try{
@@ -126,24 +92,9 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		System.out.println("뭔가 되긴 하냐");
-//		thread = new Thread(){
-//			@Override
-//			public void run() {
-//				while (true){
-//					try {
-//						int cnt = testDao.getCount();
-//						System.out.println("카운트 센다 : " + cnt);
-//						sendMessage ("send message index "+ cnt);
-//						Thread.sleep(1000);
-//					} catch (InterruptedException e) {
-//						e.printStackTrace();
-//						break;
-//					}
-//				}
-//			}
-//		};
-//		thread.start();
 	}
+	
+	
 	
 	class SessionThread implements Runnable{
 		WebSocketSession s;
@@ -151,7 +102,7 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 		public SessionThread(WebSocketSession s) {
 			this.s = s;
 		}
-		
+
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
@@ -165,6 +116,7 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 					e.printStackTrace();
 					break;
 				}
+				if(!s.isOpen()) break;
 			}
 		}
 		

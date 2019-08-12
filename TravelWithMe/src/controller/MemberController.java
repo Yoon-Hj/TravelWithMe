@@ -61,7 +61,6 @@ public class MemberController {
 		System.out.println("로그아웃 한다.");
 		System.out.println(session.getAttribute("user"));
 		session.invalidate();
-//		return "redirect:hjTest.do";
 	}
 	
 	
