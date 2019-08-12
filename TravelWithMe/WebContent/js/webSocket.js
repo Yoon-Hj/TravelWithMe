@@ -2,13 +2,32 @@ $(document).ready(function(){
 
 
 
-var wsUri = "ws://localhost:80/TWM_test/websocket/echo.do";
+var wsUri = "ws://localhost:80/TravelWithMe/websocket/echo.do";
 
 function init() {
 	//output = document.getElementById("output");
 	//output = $('#output');
 }
 var websocket = null;
+
+var user = $('#user').val();
+if(user != ""){
+	websocket = new WebSocket(wsUri);
+	websocket.onopen = function(evt) {
+		onOpen(evt)
+	};
+	websocket.onmessage = function(evt) {
+		onMessage(evt)
+	};
+
+	websocket.onerror = function(evt) {
+		onError(evt)
+	};
+}
+
+
+
+
 
 $('#login').on('click', function(){
 	websocket = new WebSocket(wsUri);
@@ -28,7 +47,6 @@ $('#login').on('click', function(){
 function onOpen(evt) {
 	//writeToScreen("Connected to Endpoint!");
 	doSend(textID.value);
-	alert("??");
 	$.ajax({
 		url : "login_test.do",
 		type : "post",
@@ -36,7 +54,7 @@ function onOpen(evt) {
 			alert("ㅇㅇ 잘 되는군");
 		}
 	});
-	alert("일단 끝나긴 함");
+	//history.go(0);
 }
 
 function onMessage(evt) {

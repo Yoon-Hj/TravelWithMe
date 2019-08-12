@@ -31,7 +31,8 @@ public class MemberController {
 	
 	
 	
-	
+	@RequestMapping("hjTest.do")
+	public void qw() {}
 	
 	@RequestMapping("headerTest.do")
 	public void t() {}
@@ -41,6 +42,9 @@ public class MemberController {
 		// 세션에 아이디 저장 테스트
 		session.setAttribute("user", "test1");
 		System.out.println("로그인으로 왔음");
+		
+		
+		
 		//return "headerTest";
 	}
 	

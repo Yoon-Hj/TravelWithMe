@@ -53,8 +53,8 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 			public void run() {
 				while (true){
 					try {
-//						int cnt = testDao.getCount();
-//						sendMessage ("데이터 수 :  "+ cnt);
+						int cnt = testDao.test();
+						sendMessage ("데이터 수 :  "+ cnt);
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();

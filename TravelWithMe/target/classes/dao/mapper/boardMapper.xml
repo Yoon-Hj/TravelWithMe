@@ -269,6 +269,16 @@
 	update accompany set commukind = #{commukind} where bnum = #{bnum}
 </update>
 
+
+
+
+
+
+<select id="test" resultType="int">
+	select count(*) from board
+</select>
+
+
 </mapper>
 
 
