@@ -29,7 +29,6 @@ public class BoardService {
 	
 	
 	
-	
 	public List<HashMap<String, Object>> getMyBoard(String mid) {
 		return b_bdao.selectBoardById(mid);
 	}
@@ -39,7 +38,7 @@ public class BoardService {
 	public HashMap<String, Object> apiTest(String pageNo, String keyword){
 		return API.totalSearch(pageNo, keyword);
 	}
-	//축제검색
+	// 축제검색
 	public HashMap<String, Object> festivalSearch(String pageNo, String areaCode, 
 			String eventStartDate, String eventEndDate) {
 		return API.festivalSearch(pageNo, areaCode, eventStartDate, eventEndDate);

@@ -1220,20 +1220,4 @@ public class UseAPI {
 		else return (cnt/perpage) + 1;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

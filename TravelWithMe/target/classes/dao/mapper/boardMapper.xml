@@ -47,17 +47,17 @@
 <sql id="bkind">
 	<choose>
 		<when test="bkind == 'A'">
-			accompany
+			'A'
 		</when>
 		<when test="bkind == 'G'">
-			guide
+			'G'
 		</when>
 		<otherwise>
-			community
+			'C'
 		</otherwise>
 	</choose>
 </sql>
-<select id="getBoardCount" parameterType="String" resultType="int">
+<select id="getBoardCount" parameterType="java.util.HashMap" resultType="int">
 	select count(*) from board where bkind = <include refid="bkind"/> and cdel=0
 </select>
 
