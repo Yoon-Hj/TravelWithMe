@@ -38,7 +38,8 @@ public class MemberController {
 	@RequestMapping("mypage.do")
 	public ModelAndView mypage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		String mid = (String)session.getAttribute("user");
+//		String mid = (String)session.getAttribute("user");
+		String mid = "test1234";
 		System.out.println("컨트롤러 왔다.");
 		
 //		mav.addAllObjects(m_msvc.getMyInfo(mid));
