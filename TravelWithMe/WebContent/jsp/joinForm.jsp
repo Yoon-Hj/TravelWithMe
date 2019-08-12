@@ -6,8 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
-</script>
-<script type="text/javascript">
+
 
 $("#user_id").blur(function() {
 	// id = "id_reg" / name = "userId"
@@ -20,10 +19,18 @@ $("#user_id").blur(function() {
 			
 			if (data == 1) {
 					// 1 : 아이디가 중복되는 문구
-					$("#id_check").text("사용중인 아이디입니다 :p");
+					$("#id_check").text("중복된 아이디입니다.");
 					$("#id_check").css("color", "red");
 					$("#reg_submit").attr("disabled", true);
-				} else {
+				} 
+			
+			else if(data == 0){
+				$("#id_check").text("사용가능한 아이디입니다.");
+				$("#id_check").css("color", "green");
+				$("#reg_submit").attr("disabled", true);
+			}
+			
+			else {
 					
 					if(idJ.test(user_id)){
 						// 0 : 아이디 길이 / 문자열 검사
@@ -49,19 +56,21 @@ $("#user_id").blur(function() {
 			}
 		});
 	});
-</script>
+	</script>
 
-</script>
+
+
 </head>
 <style>
 .all { width: 800px; position: absolute; top:15%; left: 25%; margin-left: ;}
 .title { width: 400px; position: absolute; top:0%; left: 25%; margin-left: ; }
 </style>
+
 <body>
 <h1 class="title">SIGN UP</h1>
 
 
-<form action=".do">
+<form action="testnext.do">
 	
 		<div class="all">
    <div>

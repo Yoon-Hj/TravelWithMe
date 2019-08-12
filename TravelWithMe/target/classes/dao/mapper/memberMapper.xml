@@ -62,7 +62,7 @@
 	
 	<!-- 아이디 중복확인 -->
 	<select id="selectOneId" parameterType="String" resultType="String">
-		select usedid from usedid where uid = #{mid}
+		select usedid from usedid where usedid = #{mid}
 	</select>
 	
 	<!-- 회원 추가 -->

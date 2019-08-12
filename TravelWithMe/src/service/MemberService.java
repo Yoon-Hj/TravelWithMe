@@ -15,7 +15,17 @@ public class MemberService {
 	@Autowired
 	private IBoardDao m_bdao;
 	
-
+	public int checkId(String user_id) {
+        
+		int rev=0;
+		if(m_mdao.selectOneId(user_id) == null) {
+			rev=0;
+		}
+		else{rev=1;};
+		
+		return rev;
+  
+	}
 	
 	
 	public void testMethod(String mid) {
