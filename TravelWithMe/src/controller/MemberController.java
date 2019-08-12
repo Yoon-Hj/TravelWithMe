@@ -35,6 +35,14 @@ public class MemberController {
 	
 	
 	
+	
+	
+	@RequestMapping("logout.do")
+	public void logout(HttpSession session) {
+		session.invalidate();
+	}
+	
+	
 	@RequestMapping("mypage.do")
 	public ModelAndView mypage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
