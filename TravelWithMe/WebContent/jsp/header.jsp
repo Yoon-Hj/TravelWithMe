@@ -73,24 +73,27 @@
 		<c:when test="${user==null}">
 	   		<input type="button" value="LOGIN" data-toggle="modal" data-target="#loginForm" style="margin-left:1080px; background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
 	   		<input type="button" value="JOIN" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
+	   		
 	   		<span style="margin-left:10px; font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span> 
 	   	</c:when>
 	   	
 	   	<c:when test="${user==admin}">
-	   		<button type="button" id="logout">LOGOUT</button>
-	   		<button type="button">ADMIN PAGE</button>
+	   		<input type="button" value="LOGOUT" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
+	   		<input type="button" value="ADMIN PAGE" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
+
 	   		<span style="font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span>
 	   	</c:when>
 	   	
 	   	<c:otherwise>
-	   		<p>${user}님</p>
-		   		<span id="out" style="color:red;font-size:10px">?</span>
-				<button type="button" id="logout">LOGOUT</button>
-		   		<button type="button">MY PAGE</button>
-		   		<span style="font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span>
+		   		<a style="font-family: 함초롬돋움; font-weight: bold; margin-left: 830px;">${user}님</a>
+				<a href="#" style="color: #969696; margin-left: 10px">Messages<span class="badge" style="color: black; font-size: 20px">5</span></a>
+		
+				<input type="button" value="LOGOUT" style="margin-left: 10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
+			   	<input type="button" value="MY PAGE" style="margin-left: 10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
+	
+			  	<span style="font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span>
 	   	</c:otherwise>	
 	 </c:choose>
-  
   
 	<!-- 로그인 모달 -->
 	  <div class="modal fade" id="loginForm">

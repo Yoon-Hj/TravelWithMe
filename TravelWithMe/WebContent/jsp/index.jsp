@@ -165,7 +165,7 @@
 			</div>
 		</section>
 	</div>
-
+	
 	<!-- The Modal -->
 	<div class="modal fade" id="useguideModal">
     	<div class="modal-dialog">
@@ -195,7 +195,9 @@
  	 <div style="position: fixed; bottom: 23px; right: 10px;">
  	 	<a href="#0"><img src="imgs/top.png" style="width: 60px;height: 60px;"></a>
  	 </div>
+ 	 
 	<script src="js/full-page-scroll.js"></script>
+	
 	<script type="text/javascript">
 		//location.href="../index.do";
 		new fullScroll({
@@ -206,7 +208,6 @@
 			animateFunction: 'ease'
 		});
 	</script>
-	
 	
 </body>
 
