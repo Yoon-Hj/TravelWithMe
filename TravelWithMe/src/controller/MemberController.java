@@ -35,11 +35,6 @@ public class MemberController {
 	
 	
 	
-	@RequestMapping("hjTest.do")
-	public void qw() {}
-	
-	@RequestMapping("headerTest.do")
-	public void t() {}
 	
 	@RequestMapping("login.do")
 	public @ResponseBody String login_test(HttpSession session,
