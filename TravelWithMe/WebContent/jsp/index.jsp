@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../css/full-page-scroll.css">
+<link rel="stylesheet" type="text/css" href="css/full-page-scroll.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -15,28 +15,28 @@
 <style type="text/css">
 
 	.section1 {
-		background-image: url(../imgs/korea.jpg);
+		background-image: url(imgs/korea.jpg);
 		background-size: cover;
 	}
 
 	.section2 {
-		background-image: url(../imgs/jeju.jpg);
+		background-image: url(imgs/jeju.jpg);
 		background-size: cover;
 		margin-top: -40px;
 	}
 
 	.section3 {
-		background-image: url(../imgs/night.jpg);
+		background-image: url(imgs/night.jpg);
 		background-size: cover;
 	}
 
 	.section4 {
-		background-image: url(../imgs/bg4.jpg);
+		background-image: url(imgs/bg4.jpg);
 		background-size: cover;
 	}
 
 	.section5 {
-		background-image: url(../imgs/yeosu.PNG);
+		background-image: url(imgs/yeosu.PNG);
 		background-size: cover;
 	}
 	
@@ -191,9 +191,9 @@
     	</div>
  	 </div>
  	 <div style="position: fixed; bottom: 5px; right: 5px;">
- 	 <a href="#0"><img src="../imgs/top.png" style="width: 80px;height: 80px;"></a>
+ 	 <a href="#0"><img src="imgs/top.png" style="width: 80px;height: 80px;"></a>
  	 </div>
-	<script src="../js/full-page-scroll.js"></script>
+	<script src="js/full-page-scroll.js"></script>
 	<% session.setAttribute("name", "session");%>
 	<script type="text/javascript">
 		alert("<%=(String)session.getAttribute("name")%>");
