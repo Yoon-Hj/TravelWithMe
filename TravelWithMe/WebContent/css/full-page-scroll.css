@@ -1,3 +1,10 @@
+
+@font-face{
+	font-family:'함초롬돋움';
+	url('/fonts/HANDotumB.ttf') format('truetype');
+	src:local(※), url('/fonts/HANDotumB.ttf') format('ttf');
+}
+
 body, html {
 	margin: 0;
 	padding: 0;
