@@ -97,4 +97,8 @@ public class BoardController {
 		return mav;
 	}
 	
+	@RequestMapping("test.do")
+	public void Test() {
+		b_bsvc.test();
+	}
 }

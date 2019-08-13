@@ -21,6 +21,7 @@ public interface IBoardDao {
 	public void updateAccomBoard(AccomBoard accomboard);
 	public void updateAccom(AccomBoard accomboard);
 	public List<AccomBoard> selectAccomListByPage(HashMap<String,Object> pagedata);
+	public int getAccomCountByKeyword(HashMap<String, Object> param);
 	
 	//가이드게시글에서 사용하는 DAO
 	public List<GuideBoard> selectGuideListByRcnt();

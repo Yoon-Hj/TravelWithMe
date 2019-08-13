@@ -93,11 +93,50 @@
 	where rn between #{offset} and #{offset} + #{perpage} - 1
 </select>
 
-<!-- 키워드로 검색된 게시글 갯수 조회하기 -->
+<!-- 키워드 검색을 위해 필요한 sql문 -->
+<sql id="andor">
+	<choose>
+		<when test="chk == 1">
+			or
+		</when>
+		<otherwise>
+			and
+		</otherwise>
+	</choose>
+</sql>
+<sql id="chk">
+	<choose>
+		<when test="chk == 1">
+			1=0
+		</when>
+		<otherwise>
+			1=1
+		</otherwise>
+	</choose>
+</sql>
 
+<!-- 키워드로 검색된 동행게시글 갯수 조회하기 -->
+<select id="getAccomCountByKeyword" parameterType="java.util.HashMap" resultType="int">
+	select count(*) from (select b.bnum, b.btitle, b.bcontent, b.breadcount, b.mid, a.likecode, a.aarea, a.astartdate, a.afinishdate
+		 from board b, accompany a
+		 where b.bnum = a.bnum
+		 and b.cdel = 0
+		 order by b.bnum desc)
+	where <include refid="chk"/>
+	<if test="type==1 or type==3"> <include refid="andor"/> btitle like '%${keyword}%' </if>
+	<if test="type==2 or type==3"> <include refid="andor"/> bcontent like '%${keyword}%' </if>
+	<if test="type==4"> <include refid="andor"/> mid like '%${keyword}%' </if>
+	<if test="type==5"> <include refid="andor"/> aarea like '%${keyword}%' </if>
+	<if test="startdate != null"> <include refid="andor"/> <![CDATA[ astartdate >= #{startdate} and afinishdate <= #{finishdate} ]]> </if>
+	<if test="likecode != null"> <include refid="andor"/> likecode = '#{likecode}' </if>
+</select>
 <!-- 키워드로 동행게시글 조회하기 -->
 
+<!-- 키워드로 검색된 가이드게시글 갯수 조회하기 -->
+
 <!-- 키워드로 가이드게시글 조회하기 -->
+
+<!-- 키워드로 검색된 커뮤니티게시글 갯수 조회하기 -->
 
 <!-- 키워드로 커뮤니티게시글 조회하기 -->
 

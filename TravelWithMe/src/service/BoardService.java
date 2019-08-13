@@ -110,4 +110,11 @@ public class BoardService {
 		result.put("totalBoard", cnt);
 		return result;
 	}
+	
+	public void test() {
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("chk", 1);
+		param.put("likecode", "L1");
+		System.out.println(b_bdao.getAccomCountByKeyword(param));
+	}
 }

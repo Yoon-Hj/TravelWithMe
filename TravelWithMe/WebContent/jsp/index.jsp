@@ -190,6 +190,10 @@
       		</div>
     	</div>
  	 </div>
+ 	 
+ 	 <div style="position: fixed;bottom: 5px;right: 5px;">
+ 	 <a href="#0"><img src="../imgs/top.png" style="width: 80px;height: 80px;"></a>
+	 </div>
 	
 	<script src="../js/full-page-scroll.js"></script>
 	
