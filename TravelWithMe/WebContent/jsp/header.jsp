@@ -104,10 +104,10 @@
 	        <!-- Modal body -->
 	        <div class="modal-body" style="text-align: center">
 	         	 <label for="id" style="margin-right: 45px"><b>ID</b></label>
-				 <input type="text" placeholder="Enter id" name="id" required><br>
+				 <input type="text" placeholder="Enter id" name="id" id="loginId" required><br>
 				
 				 <label for="pww"><b>Password</b></label>
-				 <input type="password" placeholder="Enter Password" name="pw" required><br><br>
+				 <input type="password" placeholder="Enter Password" name="pw" id="loginPw" required><br><br>
 				 
 				  <button type="button" class="btn btn-success" id="login">Login</button>
 	        </div>

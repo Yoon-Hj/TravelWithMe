@@ -20,6 +20,8 @@ $(document).ready(function(){
 		var id = $('#loginId').val();
 		var pw = $('#loginPw').val();
 		
+		alert(id);
+		alert(pw);
 //		$.ajax({
 //			url : "login.do",
 //			data : {
