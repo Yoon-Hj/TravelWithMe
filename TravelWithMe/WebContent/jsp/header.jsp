@@ -44,6 +44,7 @@
 	
 	.canClick:hover, .canClick:focus {
 	  color: #f1f1f1;
+	  text-decoration: none;
 	}
 	
 	.overlay .closebtn {
@@ -115,7 +116,7 @@
 	 
 	 <!-- 리모콘바 --> 
 	  <div id="myNav" class="overlay">
-	 	 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+	 	 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="text-decoration: none;">&times;</a>
 	 	 <div class="overlay-content">
 		 <table style="margin-left: 50px;">
 			<tr>

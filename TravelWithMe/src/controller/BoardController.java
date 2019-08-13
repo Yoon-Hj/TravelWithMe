@@ -1,5 +1,6 @@
 package controller;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,5 +96,10 @@ public class BoardController {
 		mav.setViewName("viewDetail");
 		
 		return mav;
+	}
+	
+	@RequestMapping("test.do")
+	public void Test() {
+		b_bsvc.test();
 	}
 }
