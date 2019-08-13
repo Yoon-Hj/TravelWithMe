@@ -19,8 +19,8 @@ public interface IMemberDao {
 	
 	//마이페이지
 	public Member selectMemInfo(String mid);
-	public List<Notice> selectNoticeById(String mid);
-	public List<Register> selectRegisterById(String mid);
+	public List<HashMap<String, String>> selectNoticeById(String mid);
+	public List<HashMap<String, String>> selectRegisterById(String mid);
 	
 	//아이디, 비밀번호 찾기
 	public String selectId(HashMap<String, Object> params);

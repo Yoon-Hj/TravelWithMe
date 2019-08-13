@@ -1,12 +1,14 @@
 package service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.IBoardDao;
 import dao.IMemberDao;
+import model.Register;
 
 @Service
 public class MemberService {
@@ -57,10 +59,16 @@ public class MemberService {
 		
 		returnVal.put("memberInfo", m_mdao.selectMemInfo(mid));
 		returnVal.put("notice", m_mdao.selectNoticeById(mid));
-//		returnVal.put("register", m_mdao.selectRegisterById(mid));
+		returnVal.put("register", m_mdao.selectRegisterById(mid));
 		
 		System.out.println(returnVal.get("memberInfo"));
-		System.out.println(returnVal.get("notice"));
+		for(HashMap<String, String> d : (List<HashMap<String, String>>)returnVal.get("notice")) {
+			System.out.println(d);
+		}
+		for(HashMap<String, String> r : (List<HashMap<String, String>>)returnVal.get("register")) {
+			System.out.println(r);
+		}
+		
 		
 //		return returnVal;
 	}
