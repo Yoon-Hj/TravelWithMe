@@ -58,7 +58,6 @@ public class MemberController {
 	
 	@RequestMapping("logout.do")
 	public void logout(HttpSession session) {
-		System.out.println("로그아웃 한다.");
 		System.out.println(session.getAttribute("user"));
 		session.invalidate();
 	}
