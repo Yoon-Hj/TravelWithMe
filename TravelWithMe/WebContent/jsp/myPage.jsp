@@ -8,6 +8,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-<h1>마이페이지 왔다 시바랑ㄴ란ㅇㄹ</h1>
+<h1>MY PAGE</h1><HR>
+
 </body>
 </html>

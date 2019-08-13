@@ -52,7 +52,7 @@ $(document).ready(function(){
 	}
 
 	function onMessage(evt) {
-		$('#out').html(evt.data);
+		$('#myNotice').html(evt.data);
 	}
 
 	function onError(evt) {
@@ -72,5 +72,7 @@ $(document).ready(function(){
 		history.go(0);
 	});
 
-
+	$('#myPage').on('click', function(){
+		location.href="myPage.do";
+	});
 });

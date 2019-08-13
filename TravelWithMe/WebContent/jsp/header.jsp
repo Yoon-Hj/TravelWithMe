@@ -78,7 +78,7 @@
 	   	</c:when>
 	   	
 	   	<c:when test="${user==admin}">
-	   		<input type="button" value="LOGOUT" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
+	   		<input type="button" value="LOGOUT" id="logout" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
 	   		<input type="button" value="ADMIN PAGE" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
 
 	   		<span style="font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span>
@@ -86,10 +86,10 @@
 	   	
 	   	<c:otherwise>
 		   		<a style="font-family: 함초롬돋움; font-weight: bold; margin-left: 830px;">${user}님</a>
-				<a href="#" style="color: #969696; margin-left: 10px">Messages<span class="badge" style="color: black; font-size: 20px">5</span></a>
+				<a href="#" style="color: #969696; margin-left: 10px" id="myNotice"><span class="badge" style="color: black; font-size: 20px">5</span></a>
 		
-				<input type="button" value="LOGOUT" style="margin-left: 10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
-			   	<input type="button" value="MY PAGE" style="margin-left: 10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
+				<input type="button" value="LOGOUT" id="logout" style="margin-left: 10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
+			   	<input type="button" value="MY PAGE" id="myPage" style="margin-left: 10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
 	
 			  	<span style="font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span>
 	   	</c:otherwise>	

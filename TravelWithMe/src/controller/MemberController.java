@@ -67,11 +67,12 @@ public class MemberController {
 	public ModelAndView mypage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String mid = (String)session.getAttribute("user");
+		System.out.println(mid);
 //		String mid = "test1";
 		mav.addAllObjects(m_msvc.getMyInfo(mid));
 //		mav.addObject("myBoard", m_bsvc.getMyBoard(mid));
 		mav.setViewName("myPage");
-		m_msvc.getMyInfo(mid);
+//		m_msvc.getMyInfo(mid);
 		
 		return mav;
 	}
