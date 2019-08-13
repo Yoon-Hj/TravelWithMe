@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="headerTest.jsp"></jsp:include>
+<jsp:include page="header.jsp"></jsp:include>
 
 <hr>
 <h1>무슨 페이지임.</h1>

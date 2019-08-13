@@ -10,6 +10,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="js/webSocket.js?v=<%=System.currentTimeMillis() %>"></script>
 <title>Travel With Me</title>
 <style>
 	.overlay {
@@ -103,12 +104,12 @@
 	        <!-- Modal body -->
 	        <div class="modal-body" style="text-align: center">
 	         	 <label for="id" style="margin-right: 45px"><b>ID</b></label>
-				 <input type="text" placeholder="Enter id" name="id" required><br>
+				 <input type="text" placeholder="Enter id" name="id" id="loginId" required><br>
 				
 				 <label for="pww"><b>Password</b></label>
-				 <input type="password" placeholder="Enter Password" name="pw" required><br><br>
+				 <input type="password" placeholder="Enter Password" name="pw" id="loginPw" required><br><br>
 				 
-				  <button type="submit" class="btn btn-success">Login</button>
+				  <button type="button" class="btn btn-success" id="login">Login</button>
 	        </div>
 	       </div>
 	     </div>

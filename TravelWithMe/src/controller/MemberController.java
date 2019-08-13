@@ -25,8 +25,8 @@ public class MemberController {
 	@Autowired
 	private AdminService m_asvc;
 	
-	
-	
+	@RequestMapping("index.do")
+	public void index() {}
 	
 	
 	
@@ -75,4 +75,9 @@ public class MemberController {
 		
 		return mav;
 	}
+	
+	
+	
+	
+	
 }
