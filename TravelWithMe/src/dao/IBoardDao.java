@@ -55,4 +55,7 @@ public interface IBoardDao {
 	public void insertPolicy(HashMap<String, Object> policy);
 	public void deletePolicy(int bnum);
 	public int getBoardCount(HashMap<String, Object> bkind);
+
+	public int test();
+
 }

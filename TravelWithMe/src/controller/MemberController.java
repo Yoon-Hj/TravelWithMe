@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
@@ -31,8 +33,35 @@ public class MemberController {
 	
 	
 	
+	@RequestMapping("hjTest.do")
+	public void qw() {}
 	
+	@RequestMapping("headerTest.do")
+	public void t() {}
 	
+	@RequestMapping("login.do")
+	public @ResponseBody String login_test(HttpSession session,
+			String mid, String mpw) {
+		String val = null; 
+		
+		int result = m_msvc.login(mid, mpw);
+		if(result == 1) {
+			session.setAttribute("user", mid);
+			val = mid;
+		}else if(result == 2) {
+			val = "2";
+		}else if(result == 3)
+			val = "3";
+		
+		return val;
+	}
+	
+	@RequestMapping("logout.do")
+	public void logout(HttpSession session) {
+		System.out.println("로그아웃 한다.");
+		System.out.println(session.getAttribute("user"));
+		session.invalidate();
+	}
 	
 	
 	@RequestMapping("mypage.do")

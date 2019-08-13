@@ -21,6 +21,19 @@ public class MemberService {
 
 	
 	
+	public int login(String mid, String mpw) {
+		String checkPw = m_mdao.selectPw(mid);
+		int result = 2;		// 존재하지 않는 ID
+		if(checkPw != null) {
+			if(checkPw.equals(mpw)) {
+				result = 1;	// 로그인 성공
+			}else
+				result = 3; // 아이디 또는 비밀번호 틀림
+		}
+		
+		return result;
+	}
+	
 	public void testMethod(String mid) {
 		System.out.println("서비스에서 받은 mid : " + mid);
 //		System.out.println(m_mdao.selectMemInfo(mid));
