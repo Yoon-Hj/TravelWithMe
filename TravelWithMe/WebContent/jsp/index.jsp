@@ -165,7 +165,7 @@
 			</div>
 		</section>
 	</div>
-
+	
 	<!-- The Modal -->
 	<div class="modal fade" id="useguideModal">
     	<div class="modal-dialog">
@@ -195,8 +195,10 @@
  	 <div style="position: fixed; bottom: 23px; right: 10px;">
  	 	<a href="#0"><img src="imgs/top.png" style="width: 60px;height: 60px;"></a>
  	 </div>
+ 	 
 	<script src="js/full-page-scroll.js"></script>
 	<% session.setAttribute("name", "session");%>
+	
 	<script type="text/javascript">
 		alert("<%=(String)session.getAttribute("name")%>");
 		alert("그니까 이건 된다는거잖아");
@@ -209,7 +211,6 @@
 			animateFunction: 'ease'
 		});
 	</script>
-	
 	
 </body>
 
