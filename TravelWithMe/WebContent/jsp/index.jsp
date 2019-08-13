@@ -95,7 +95,7 @@
 		
 				<input type="button" class="btn btn-outline-success"
 						value="서비스 이용 가이드" data-toggle="modal" data-target="#useguideModal"
-						style="float: right; margin-right: 50px; width: 200px; border-width: 3px; font-family: 배달의민족 도현; font-size: 15px; color: white;">
+						style="float: right; margin-right: 80px; width: 200px; border-width: 3px; font-family: 배달의민족 도현; font-size: 15px; color: white;">
 			</div>	
 		  </section>
 		
@@ -170,30 +170,30 @@
 	<div class="modal fade" id="useguideModal">
     	<div class="modal-dialog">
       		<div class="modal-content">
-      
-	        <!-- Modal Header -->
-	        <div class="modal-header">
-	          <h3 class="modal-title" style="font-family: 배달의민족 도현">서비스 이용 가이드</h3>
-				<button type="button" class="close" data-dismiss="modal">×</button>
-	        </div>
-        
-	        <!-- Modal body -->
-	        <div class="modal-body">
-	          해당 서비스를 효율적으로 이용하기 위한 가이드입니다.<br>
-	          1. 신뢰지수<br>
-	          
-			  2. 가이드등급<br>
-	        </div>
-        
-	        <!-- Modal footer -->
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-success" data-dismiss="modal">확인</button>
-	        </div>
+		        <!-- Modal Header -->
+		        <div class="modal-header">
+		          <h3 class="modal-title" style="font-family: 배달의민족 도현">서비스 이용 가이드</h3>
+					<button type="button" class="close" data-dismiss="modal">×</button>
+		        </div>
+	        
+		        <!-- Modal body -->
+		        <div class="modal-body">
+		          해당 서비스를 효율적으로 이용하기 위한 가이드입니다.<br>
+		          1. 신뢰지수<br>
+		          
+				  2. 가이드등급<br>
+		        </div>
+	        
+		        <!-- Modal footer -->
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-success" data-dismiss="modal">확인</button>
+		        </div>
       		</div>
     	</div>
  	 </div>
- 	 <div style="position: fixed; bottom: 5px; right: 5px;">
- 	 <a href="#0"><img src="../imgs/top.png" style="width: 80px;height: 80px;"></a>
+ 	 
+ 	 <div style="position: fixed; bottom: 23px; right: 10px;">
+ 	 	<a href="#0"><img src="../imgs/top.png" style="width: 60px;height: 60px;"></a>
  	 </div>
 	
 	<script src="../js/full-page-scroll.js"></script>
