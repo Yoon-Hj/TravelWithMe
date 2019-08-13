@@ -193,11 +193,13 @@
  	 <div style="position: fixed; bottom: 5px; right: 5px;">
  	 <a href="#0"><img src="../imgs/top.png" style="width: 80px;height: 80px;"></a>
  	 </div>
-	
+	<% session.setAttribute("name", "session");%>
 	<script src="../js/full-page-scroll.js"></script>
 	
 	<script type="text/javascript">
+		alert("<%=(String)session.getAttribute("name")%>");
 		alert("그니까 이건 된다는거잖아");
+		location.href="../index.do";
 		new fullScroll({
 			mainElement: 'main',
 			displayDots: false,

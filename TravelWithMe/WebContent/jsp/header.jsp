@@ -10,6 +10,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="js/webSocket.js?v=<%=System.currentTimeMillis() %>"></script>
 <title>Travel With Me</title>
 <style>
 	.overlay {
@@ -108,7 +109,7 @@
 				 <label for="pww"><b>Password</b></label>
 				 <input type="password" placeholder="Enter Password" name="pw" required><br><br>
 				 
-				  <button type="submit" class="btn btn-success">Login</button>
+				  <button type="button" class="btn btn-success" id="login">Login</button>
 	        </div>
 	       </div>
 	     </div>

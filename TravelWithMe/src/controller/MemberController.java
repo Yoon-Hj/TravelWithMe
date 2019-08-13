@@ -89,8 +89,9 @@ public class MemberController {
 		System.out.println("../index.do");
 	}
 	@RequestMapping("jsp/index.do")
-	public void main2() {
+	public String main2() {
 		System.out.println("jsp/index.do");
+		return "../index";
 	}
 	
 	
