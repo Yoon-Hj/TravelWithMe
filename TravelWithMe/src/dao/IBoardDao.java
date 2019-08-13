@@ -20,6 +20,8 @@ public interface IBoardDao {
 	public void insertAccom(AccomBoard accomboard);
 	public void updateAccomBoard(AccomBoard accomboard);
 	public void updateAccom(AccomBoard accomboard);
+	public List<AccomBoard> selectAccomListByPage(HashMap<String,Object> pagedata);
+	public int getAccomCountByKeyword(HashMap<String, Object> param);
 	
 	//가이드게시글에서 사용하는 DAO
 	public List<GuideBoard> selectGuideListByRcnt();
@@ -33,13 +35,15 @@ public interface IBoardDao {
 	public void updateGuideBoard(GuideBoard guideboard);
 	public void updateGuide(GuideBoard guideboard);
 	public void deleteGuideSche(String scode);
-	
+	public List<GuideBoard> selectGuideListByPage(HashMap<String,Object> pagedata);
+  	
 	//커뮤니티게시글에서 사용한는 DAO
 	public CommuBoard selectOneComm(int bnum);
 	public void insertCommBoard(CommuBoard commuboard);
 	public void insertComm(CommuBoard commuboard);
 	public void updateCommBoard(CommuBoard commuboard);
 	public void updateComm(CommuBoard commuboard);
+	public List<CommuBoard> selectCommListByPage(HashMap<String,Object> pagedata);
 
 	//게시글에서 공동으로 사용하는 DAO
 	public HashMap<String, Object> selectPolicyByBnum(int bnum);
@@ -54,5 +58,8 @@ public interface IBoardDao {
 	public void deleteComment(int cnum);
 	public void insertPolicy(HashMap<String, Object> policy);
 	public void deletePolicy(int bnum);
-	public int getBoardCount(String bkind);
+	public int getBoardCount(HashMap<String, Object> bkind);
+
+	public int test();
+
 }
