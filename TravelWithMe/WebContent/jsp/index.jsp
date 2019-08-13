@@ -197,6 +197,7 @@
 	<script src="../js/full-page-scroll.js"></script>
 	
 	<script type="text/javascript">
+		alert("그니까 이건 된다는거잖아");
 		new fullScroll({
 			mainElement: 'main',
 			displayDots: false,

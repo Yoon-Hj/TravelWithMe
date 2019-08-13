@@ -75,4 +75,24 @@ public class MemberController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("index.do")
+	public void main() {
+		System.out.println("index.do");
+	}
+//	@RequestMapping("index.do")
+//	public String main() {
+//		return "redirect:jsp/index.jsp#0";
+//	}
+	@RequestMapping("../index.do")
+	public void main1() {
+		System.out.println("../index.do");
+	}
+	@RequestMapping("jsp/index.do")
+	public void main2() {
+		System.out.println("jsp/index.do");
+	}
+	
+	
+	
 }
