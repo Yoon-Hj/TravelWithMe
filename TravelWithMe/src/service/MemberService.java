@@ -17,11 +17,8 @@ public class MemberService {
 	@Autowired
 	private SHA256 sha;
 	
-	
-
-	
-	
 	public int login(String mid, String mpw) {
+		//	암호화 적용 전,  암호화 적용후 지우고 아래부분 사용할 것
 		String checkPw = m_mdao.selectPw(mid);
 		int result = 2;		// 존재하지 않는 ID
 		if(checkPw != null) {
@@ -31,6 +28,16 @@ public class MemberService {
 				result = 3; // 아이디 또는 비밀번호 틀림
 		}
 		
+		//	암호화 적용 후
+//		String checkPw = m_mdao.selectPw(mid);
+//		String input_pw = sha.sha256(mpw);
+//		int result = 2;		// 존재하지 않는 ID
+//		if(checkPw != null) {
+//			if(checkPw.equals(input_pw)) {
+//				result = 1;	// 로그인 성공
+//			}else
+//				result = 3; // 아이디 또는 비밀번호 틀림
+//		}
 		return result;
 	}
 	
@@ -43,15 +50,52 @@ public class MemberService {
 		
 		System.out.println("서비스 종료한다.");
 	}
-	
-	public HashMap<String, Object> getMyInfo(String mid) {
+	// 마이페이지 작업
+//	public HashMap<String, Object> getMyInfo(String mid) {
+	public void getMyInfo(String mid) {
 		HashMap<String, Object> returnVal = new HashMap<String, Object>();
 		
 		returnVal.put("memberInfo", m_mdao.selectMemInfo(mid));
-		returnVal.put("notice", m_mdao.selectNoticeById(mid));
-		returnVal.put("register", m_mdao.selectRegisterById(mid));
+//		returnVal.put("notice", m_mdao.selectNoticeById(mid));
+//		returnVal.put("register", m_mdao.selectRegisterById(mid));
 		
-		return returnVal;
-
+		System.out.println(returnVal.get("memberInfo"));
+		
+//		return returnVal;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

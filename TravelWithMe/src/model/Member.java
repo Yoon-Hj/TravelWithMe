@@ -5,7 +5,7 @@ import java.util.Date;
 public class Member {
 	private String mid;
 	private String mpw;
-	private String manme;
+	private String mname;
 	private Date mbirth;
 	private String mcontact;
 	private String mgender;
@@ -24,11 +24,11 @@ public class Member {
 	public void setMpw(String mpw) {
 		this.mpw = mpw;
 	}
-	public String getManme() {
-		return manme;
+	public String getMname() {
+		return mname;
 	}
-	public void setManme(String manme) {
-		this.manme = manme;
+	public void setMname(String mname) {
+		this.mname = mname;
 	}
 	public Date getMbirth() {
 		return mbirth;
@@ -60,11 +60,10 @@ public class Member {
 	public void setMguidepoint(int mguidepoint) {
 		this.mguidepoint = mguidepoint;
 	}
+	
 	@Override
 	public String toString() {
-		return "Member [mid=" + mid + ", mpw=" + mpw + ", manme=" + manme + ", mbirth=" + mbirth + ", mcontact="
+		return "Member [mid=" + mid + ", mpw=" + mpw + ", mname=" + mname + ", mbirth=" + mbirth + ", mcontact="
 				+ mcontact + ", mgender=" + mgender + ", mpoint=" + mpoint + ", mguidepoint=" + mguidepoint + "]";
 	}
-	
-	
 }

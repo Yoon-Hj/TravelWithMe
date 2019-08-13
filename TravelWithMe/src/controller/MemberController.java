@@ -66,12 +66,12 @@ public class MemberController {
 	@RequestMapping("mypage.do")
 	public ModelAndView mypage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		String mid = (String)session.getAttribute("user");
-		
+//		String mid = (String)session.getAttribute("user");
+		String mid = "test1";
 //		mav.addAllObjects(m_msvc.getMyInfo(mid));
 //		mav.addObject("myBoard", m_bsvc.getMyBoard(mid));
 		
-		m_msvc.testMethod(mid);
+		m_msvc.getMyInfo(mid);
 		
 		return mav;
 	}
