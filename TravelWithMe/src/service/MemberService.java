@@ -20,7 +20,7 @@ public class MemberService {
 	
 	public int checkId(String user_id) {
         
-		int rev=0;
+		int rev;
 		if(m_mdao.selectOneId(user_id) == null) {
 			rev=0;
 		}

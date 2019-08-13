@@ -25,13 +25,22 @@ public class MemberController {
 	private AdminService m_asvc;
 	
 	
+	
+	@RequestMapping("joinForm.do")
+	public void joinForm() {}
+	
 	@RequestMapping(value = "checkId.do", method = RequestMethod.GET)
-	public int checkId(@RequestParam("userId") String user_id) {
-		return m_msvc.checkId(user_id);
+	public @ResponseBody String checkId(@RequestParam("id") String user_id) {
+		
+		return "" + m_msvc.checkId(user_id);
 
 	}
 	
-	
+    @RequestMapping("joinMember.do")
+    public String joinMember(String user_id) {
+		return null;
+    	
+    }
 	
 	
 	
