@@ -48,7 +48,6 @@ public class BoardController {
 	
 	@RequestMapping("apiKeywordSearch.do")
 	public ModelAndView apiKeywordSearch(@RequestParam(defaultValue="1")String page, String keyword) {
-		System.out.println("컨트롤러 왔음");
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addAllObjects(b_bsvc.apiTest(page, keyword));
@@ -64,12 +63,10 @@ public class BoardController {
 			@RequestParam(defaultValue="") String eventEndDate) {
 		ModelAndView mav = new ModelAndView();
 		
-		HashMap<String, Object> result = b_bsvc.festivalSearch(page, area, eventStartDate, eventEndDate);
-		result.put("eventStartDate", eventStartDate);
-		result.put("eventEndDate", eventEndDate);
-		result.put("area", area);
-		
-		mav.addAllObjects(result);
+		mav.addObject("eventStartDate", eventStartDate);
+		mav.addObject("eventEndDate", eventEndDate);
+		mav.addObject("area", area);
+		mav.addAllObjects(b_bsvc.festivalSearch(page, area, eventStartDate, eventEndDate));
 		mav.setViewName("festivalSearch");
 		
 		return mav;
@@ -80,10 +77,9 @@ public class BoardController {
 			@RequestParam(defaultValue="1")String page,
 			String areacode) {
 		ModelAndView mav = new ModelAndView();
-		HashMap<String, Object> result = b_bsvc.areaSearch(page, areacode);
-		result.put("selectedArea", areacode);
 		
-		mav.addAllObjects(result);
+		mav.addObject("selectedArea", areacode);
+		mav.addAllObjects(b_bsvc.areaSearch(page, areacode));
 		mav.setViewName("areaSearch");
 		
 		return mav;
