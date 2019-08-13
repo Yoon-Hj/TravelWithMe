@@ -56,10 +56,11 @@ public class MemberService {
 		HashMap<String, Object> returnVal = new HashMap<String, Object>();
 		
 		returnVal.put("memberInfo", m_mdao.selectMemInfo(mid));
-//		returnVal.put("notice", m_mdao.selectNoticeById(mid));
+		returnVal.put("notice", m_mdao.selectNoticeById(mid));
 //		returnVal.put("register", m_mdao.selectRegisterById(mid));
 		
 		System.out.println(returnVal.get("memberInfo"));
+		System.out.println(returnVal.get("notice"));
 		
 //		return returnVal;
 	}
