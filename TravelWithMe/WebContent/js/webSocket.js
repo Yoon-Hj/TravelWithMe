@@ -5,7 +5,6 @@ $(document).ready(function(){
 	
 	var user = $('#user').val();
 	if(user != ""){
-		alert("유저명 : " + user);
 		websocket = new WebSocket(wsUri);
 		websocket.onopen = function(evt) {
 			onOpen(evt)
