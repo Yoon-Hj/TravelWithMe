@@ -67,33 +67,35 @@
 	body{
 		text-align: center;
 	}
-	</style>
+
+</style>
 </head>
 
 <jsp:include page="header.jsp"></jsp:include>
 
 <body>
+
 	<div id="main" class="scroll-container">
-		
+	
 		<!-- 1쪽 -->
 		<section class="section1">
 		
-		<jsp:include page="mainHeader.jsp"></jsp:include>
+			<jsp:include page="mainHeader.jsp"></jsp:include>
 
-			<div>
-				<h2 style="font-size: 45px">새로운 만남ㆍ새로운 인연과 함께 여행을 시작해보세요!</h2>	
-				<br><br>
-				
+			<div style="margin-bottom: 250px;">
+				<h2 style="font-size: 45px">새로운 만남ㆍ새로운 인연과 함께 여행을 시작해보세요!</h2>
+				<br>	
 				<div style="display: inline">
-					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" 
+					<input class="form-control mr-sm-2" type="search" placeholder="Quick Search" aria-label="Search" 
 							style="margin-left: 200px; width: 700px; height: 60px; float: left;">
 					<input type="button" class="btn btn-danger" value="SEARCH" 
-							style="width: 150px; height: 60px; margin-right: 150px; font-weight: bold; font-family: 배달의민족 주아; font-size: 20px">
+							style="width: 150px; height: 60px; margin-right: 150px; font-weight: bold; font-family: 배달의민족 도현; font-size: 20px">
 				</div>
-				<br><br><br>
-				<input type="button" class="btn btn-danger" 
+				<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		
+				<input type="button" class="btn btn-outline-success"
 						value="서비스 이용 가이드" data-toggle="modal" data-target="#useguideModal"
-						style="float: right; margin-right: 180px; width: 300px; border-width: 3px; font-family: 배달의민족 도현; font-size: 20px; background-color: transparent;">
+						style="float: right; margin-right: 50px; width: 200px; border-width: 3px; font-family: 배달의민족 도현; font-size: 15px; color: white;">
 			</div>	
 		  </section>
 		
@@ -112,7 +114,7 @@
 				
 				<h2 style="font-size: 45px">함께할 여행 친구들을 직접 모아보세요</h2>
 				<br>
-				<input type="button" class="btn btn-danger btn-lg btn-block" 
+				<input type="button" class="btn btn-outline-danger" 
 						value="Travel with Me 글 작성" 
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">
 			</div>
@@ -163,7 +165,7 @@
 			</div>
 		</section>
 	</div>
-	
+
 	<!-- The Modal -->
 	<div class="modal fade" id="useguideModal">
     	<div class="modal-dialog">
@@ -171,7 +173,7 @@
       
 	        <!-- Modal Header -->
 	        <div class="modal-header">
-	          <h3 class="modal-title" style="font-family: 배달의민족 주아">서비스 이용 가이드</h3>
+	          <h3 class="modal-title" style="font-family: 배달의민족 도현">서비스 이용 가이드</h3>
 				<button type="button" class="close" data-dismiss="modal">×</button>
 	        </div>
         
