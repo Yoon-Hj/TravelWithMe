@@ -15,13 +15,14 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import dao.IBoardDao;
+import dao.IMemberDao;
 
 public class SocketHandler extends TextWebSocketHandler implements InitializingBean {
 	private final Logger logger = LogManager.getLogger(getClass());
 	private Set<WebSocketSession> sessionSet = new HashSet<WebSocketSession>();
 
 	@Autowired
-	private IBoardDao testDao; 
+	private IMemberDao web_dao;
 	
 	
 	public SocketHandler (){
@@ -50,7 +51,7 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 		this.logger.info("add session!");
 		
 		sessionSet.add(session);
-		new Thread(new SessionThread(session)).start();
+		
 	}
 
 	@Override
@@ -58,6 +59,8 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 			WebSocketMessage<?> message) throws Exception {
 		super.handleMessage(session, message);
 		this.logger.info("receive message:"+message.toString());
+		
+		new Thread(new SessionThread(session, (String)message.getPayload())).start();
 		System.out.println("메시지를 받은거임.");
 	}
 	@Override
@@ -98,9 +101,11 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 	
 	class SessionThread implements Runnable{
 		WebSocketSession s;
+		String mid;
 		
-		public SessionThread(WebSocketSession s) {
+		public SessionThread(WebSocketSession s, String mid) {
 			this.s = s;
+			this.mid = mid;
 		}
 
 		@Override
@@ -109,8 +114,9 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 			int i = 0;
 			while (true){
 				try {
-					int cnt = testDao.test();
-					sendMessage (i++ + "번째 데이터 수 :  "+ cnt);
+					int cnt = web_dao.getMyNoticeCount(mid);
+					System.out.println(mid);
+					sendMessage (i++ + "알림 수 :  "+ cnt);
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();

@@ -68,7 +68,7 @@
 </style>
 </head>
 <body>
-
+<input type="hidden" id="user" value="${user }">
 	<c:choose>
 		<c:when test="${user==null}">
 	   		<input type="button" value="LOGIN" data-toggle="modal" data-target="#loginForm" style="margin-left:1080px; background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
@@ -85,7 +85,7 @@
 	   	<c:otherwise>
 	   		<p>${user}님</p>
 		   		<span id="out" style="color:red;font-size:10px">?</span>
-				<button type="button">LOGOUT</button>
+				<button type="button" id="logout">LOGOUT</button>
 		   		<button type="button">MY PAGE</button>
 		   		<span style="font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span>
 	   	</c:otherwise>	

@@ -115,4 +115,9 @@
 		delete from member where mid = #{mid}
 	</delete>
 	
+	
+	<!-- 회원 ID -->
+	<select id="getMyNoticeCount" parameterType="String" resultType="int">
+		select count(*) from notice where mid = #{mid} and noticestatus = 0
+	</select>
 </mapper>

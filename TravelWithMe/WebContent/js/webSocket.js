@@ -1,9 +1,11 @@
 $(document).ready(function(){
-	var wsUri = "ws://70.12.109.53:80/TravelWithMe/websocket/echo.do";
+//	var wsUri = "ws://70.12.109.53:80/TravelWithMe/websocket/echo.do";
+	var wsUri = "ws://localhost/TravelWithMe/websocket/echo.do";
 	var websocket = null;
 	
 	var user = $('#user').val();
 	if(user != ""){
+		alert("유저명 : " + user);
 		websocket = new WebSocket(wsUri);
 		websocket.onopen = function(evt) {
 			onOpen(evt)
@@ -26,8 +28,8 @@ $(document).ready(function(){
 			$.ajax({
 				url : "login.do",
 				data : {
-					mid : $('#loginId').val(),
-					mpw : $('#loginPw').val()
+					mid : id,
+					mpw : pw
 				},
 				type : "post",
 				success : function(data) {
@@ -46,7 +48,7 @@ $(document).ready(function(){
 
 
 	function onOpen(evt) {
-		websocket.send(textID.value);
+		websocket.send(user);
 	}
 
 	function onMessage(evt) {
