@@ -30,10 +30,10 @@
 <body>
 
 	<div id="mainHeader" style="top: 30px; margin-left: 470px">
-		<a style="color: #FAFAFA; padding-right: 30px" href="#0">Main</a>
-		<a style="color: #FAFAFA; padding-right: 30px" href="#1">Travel with Me</a>
-		<a style="color: #FAFAFA; padding-right: 30px" href="#2">Travel with Guide</a>
-		<a style="color: #FAFAFA; padding-right: 30px" href="#3">Attraction Info</a>
+		<a style="color: #FAFAFA; padding-right: 30px; text-decoration: none;" href="#0">Main</a>
+		<a style="color: #FAFAFA; padding-right: 30px; text-decoration: none;" href="#1">Travel with Me</a>
+		<a style="color: #FAFAFA; padding-right: 30px; text-decoration: none;" href="#2">Travel with Guide</a>
+		<a style="color: #FAFAFA; padding-right: 30px; text-decoration: none;" href="#3">Attraction Info</a>
 		<a style="color: #FAFAFA" href="#4">Community</a>
 	</div>
 	
