@@ -77,13 +77,14 @@
 	   	</c:when>
 	   	
 	   	<c:when test="${user==admin}">
-	   		<button type="button">LOGOUT</button>
+	   		<button type="button" id="logout">LOGOUT</button>
 	   		<button type="button">ADMIN PAGE</button>
 	   		<span style="font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span>
 	   	</c:when>
 	   	
 	   	<c:otherwise>
 	   		<p>${user}님</p>
+		   		<span id="out" style="color:red;font-size:10px">?</span>
 				<button type="button">LOGOUT</button>
 		   		<button type="button">MY PAGE</button>
 		   		<span style="font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span>
