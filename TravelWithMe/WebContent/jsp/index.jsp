@@ -197,11 +197,8 @@
  	 </div>
  	 
 	<script src="js/full-page-scroll.js"></script>
-	<% session.setAttribute("name", "session");%>
 	
 	<script type="text/javascript">
-		alert("<%=(String)session.getAttribute("name")%>");
-		alert("그니까 이건 된다는거잖아");
 		//location.href="../index.do";
 		new fullScroll({
 			mainElement: 'main',

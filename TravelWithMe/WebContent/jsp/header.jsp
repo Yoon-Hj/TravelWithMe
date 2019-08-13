@@ -77,8 +77,10 @@
 	   	</c:when>
 	   	
 	   	<c:when test="${user==admin}">
+	   	
 	   		<input type="button" value="LOGOUT" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
 	   		<input type="button" value="ADMIN PAGE" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
+
 	   		<span style="font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span>
 	   	</c:when>
 	   	
@@ -86,6 +88,7 @@
 	   		<p>${user}님</p>
 				<input type="button" value="LOGOUT" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
 		   		<input type="button" value="MY PAGE" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
+
 		   		<span style="font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span>
 	   	</c:otherwise>	
 	 </c:choose>
