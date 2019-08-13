@@ -13,6 +13,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <style type="text/css">
+
 	.section1 {
 		background-image: url(../imgs/korea.jpg);
 		background-size: cover;
@@ -56,7 +57,7 @@
 		font-style: normal;
 		color: #fff;
 	}
-
+	
 	h2{
 		font-family: '함초롬돋움';
 		color: #fff;
@@ -75,11 +76,12 @@
 	<div id="main" class="scroll-container">
 		
 		<!-- 1쪽 -->
-		<section class="section1">	
-		<jsp:include page="mainHeader.jsp"></jsp:include>
+		<section class="section1">
 		
+		<jsp:include page="mainHeader.jsp"></jsp:include>
+
 			<div>
-				<h2>새로운 만남ㆍ새로운 인연과 함께 여행을 시작해보세요!</h2>	
+				<h2 style="font-size: 45px">새로운 만남ㆍ새로운 인연과 함께 여행을 시작해보세요!</h2>	
 				<br><br>
 				
 				<div style="display: inline">
@@ -100,7 +102,7 @@
 		
 		<jsp:include page="mainHeader.jsp"></jsp:include>
 			<div>
-				<h2>나와 비슷한 취향의 여행 친구들을 찾아보세요</h2>
+				<h2 style="font-size: 45px">나와 비슷한 취향의 여행 친구들을 찾아보세요</h2>
 				<br>
 				<input type="button" class="btn btn-danger btn-lg btn-block" 
 						value="Travel with Me 목록 보기" 
@@ -108,7 +110,7 @@
 				
 				<br><br><br><br><br>
 				
-				<h2>함께할 여행 친구들을 직접 모아보세요</h2>
+				<h2 style="font-size: 45px">함께할 여행 친구들을 직접 모아보세요</h2>
 				<br>
 				<input type="button" class="btn btn-danger btn-lg btn-block" 
 						value="Travel with Me 글 작성" 
@@ -121,7 +123,7 @@
 			<jsp:include page="mainHeader.jsp"></jsp:include>
 			
 			<div>
-				<h2>가이드를 만나 더 풍요로운 여행을 즐겨보세요</h2>
+				<h2 style="font-size: 45px">가이드를 만나 더 풍요로운 여행을 즐겨보세요</h2>
 				<br>
 				<input type="button" class="btn btn-danger btn-lg btn-block" 
 						value="Travel with Guide 목록 보기" 
@@ -129,7 +131,7 @@
 			
 				<br><br><br><br><br>
 			
-				<h2>나만의 투어를 계획하여 직접 가이드가 되어보세요</h2>
+				<h2 style="font-size: 45px">나만의 투어를 계획하여 직접 가이드가 되어보세요</h2>
 				<br>
 				<input type="button" class="btn btn-danger btn-lg btn-block" 
 						value="Travel with Guide 글 작성" 
@@ -141,7 +143,7 @@
 			<jsp:include page="mainHeader.jsp"></jsp:include>
 			
 			<div>
-				<h2>여행 지역의 관광지와 여행 시기의 축제를 확인해보세요</h2>
+				<h2 style="font-size: 45px">여행 지역의 관광지와 여행 시기의 축제를 확인해보세요</h2>
 				<br>
 				<input type="button" class="btn btn-danger btn-lg btn-block" 
 						value="Attraction Info 목록 보기" 
@@ -153,7 +155,7 @@
 			<jsp:include page="mainHeader.jsp"></jsp:include>
 			
 			<div>
-				<h2>궁금한 것은 질문하고, 여행후기도 공유해보세요</h2>
+				<h2 style="font-size: 45px">궁금한 것은 질문하고, 여행후기도 공유해보세요</h2>
 				<br>
 				<input type="button" class="btn btn-danger btn-lg btn-block" 
 						value="Community 목록 보기" 
@@ -189,10 +191,6 @@
       		</div>
     	</div>
  	 </div>
- 	 
- 	 <div style="position: fixed;bottom: 5px;right: 5px;">
- 	 <a href="#0"><img src="../imgs/top.png" style="width: 80px;height: 80px;"></a>
-	 </div>
 	
 	<script src="../js/full-page-scroll.js"></script>
 	
@@ -205,6 +203,7 @@
 			animateFunction: 'ease'
 		});
 	</script>
+	
 	
 </body>
 
