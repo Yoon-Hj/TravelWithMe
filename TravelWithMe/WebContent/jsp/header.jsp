@@ -136,7 +136,7 @@
 		   			<a class="canClick" href="#">글작성</a>
 				</td>
 				<td>
-					<a class="canClick" href="#">Attraction Info</a>
+					<a class="canClick" href="attractionInfo.do">Attraction Info</a>
 					<a>&nbsp;</a>
 					<a>&nbsp;</a>
 				</td>

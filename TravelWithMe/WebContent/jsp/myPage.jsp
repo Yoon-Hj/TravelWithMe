@@ -24,10 +24,10 @@
 		width:500px;
 		height:30%;
 	}
-	.myInfo > div {
+	.myInfo > .inInfo {
 		margin-bottom:0;
 		margin-left:auto;
-		margin-right:auto;
+		width : 250px;
 	}
 	.myNews{
 		margin-top:20px;
@@ -36,11 +36,21 @@
 		width:500px;
 		height:500px;
 	}
+	.myNews > .inNews{
+		margin-bottom:0;
+		margin-left:auto;
+		width : 80px;
+	}
 	.myBoards{
 		margin-top:20px;
 		margin-left:10%;
 		width:500px;
 		height:400px;
+	}
+	.myBoards > .inBoards{
+		margin-bottom:0;
+		margin-left:auto;
+		width : 80px;
 	}
 	.myRegister{
 		margin-top:20px;
@@ -49,10 +59,10 @@
 		width:500px;
 		height:400px;
 	}
-	.info > th, td{
-		width:100px;
-		text-align : center;
-		height:40px;
+	.myRegister > .inRegister{
+		margin-bottom:0;
+		margin-left:auto;
+		width : 80px;
 	}
 	.news > td{
 		width:200px;
@@ -74,7 +84,7 @@
 
 <div class="myInfo">
 <h4>MY INFO</h4>
-<table class="info">
+<table id="info">
 	<tr>
 		<th>아이디</th>
 		<td>${memberInfo.mid }</td>
@@ -100,7 +110,7 @@
 		</c:choose></td>
 	</tr> --%>
 </table><BR>
-<div>
+<div class="inInfo">
 <button>회원정보 수정</button>
 <button>회원탈퇴</button>
 </div>
@@ -124,6 +134,9 @@
 	</tr>
 </c:forEach>
 </table>
+<div class="inNews">
+<button>더보기</button>
+</div>
 </div>
 
 <div class="myBoards">
@@ -142,7 +155,9 @@
 	</tr>
 </c:forEach>
 </table>
-
+<div class="inBoards">
+<button>더보기</button>
+</div>
 </div>
 
 <div class="myRegister">
@@ -155,11 +170,17 @@
 			<c:when test="${r.BKIND == 'A' }">[Travel with Me]</c:when>
 			<c:when test="${r.BKIND == 'G' }">[Travel with Guide]</c:when>
 		</c:choose>
-		${r.BTITLE }<BR><button>신청 취소</button>
+		${r.BTITLE }<BR>
+		<div style="width:100px;margin-left:auto;">
+		<button>신청 취소</button>
+		</div>
 		</td>
 	</tr>
 </c:forEach>
 </table>
+<div class="inRegister">
+<button>더보기</button>
+</div>
 </div>
 
 

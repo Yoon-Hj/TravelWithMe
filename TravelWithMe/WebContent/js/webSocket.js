@@ -37,7 +37,6 @@ $(document).ready(function(){
 					}else if(data == '3'){
 						alert("ID 또는 비밀번호를 확인해주세요.");
 					}else{
-						alert(data);
 						history.go(0);
 					}
 				}
