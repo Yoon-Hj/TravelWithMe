@@ -13,7 +13,7 @@
 $(document).ready(function(){
 
 $("#mid").blur(function() {
-	// id = "id_reg" / name = "userId"
+	
 	var mid = $('#mid').val();
 	$.ajax({
 		url : 'checkId.do?id='+ mid,
@@ -23,13 +23,13 @@ $("#mid").blur(function() {
 				// 1 : 아이디가 중복되는 문구
 				$("#id_check").text("중복된 아이디입니다.");
 				$("#id_check").css("color", "red");
-				$("#reg_submit").attr("disabled", true);
+				
 			} 
 		
 		else if(data == 0){
 			$("#id_check").text("사용가능한 아이디입니다.");
 			$("#id_check").css("color", "green");
-			$("#reg_submit").attr("disabled", true);
+		;
 		}
 		
 		else {
@@ -37,19 +37,19 @@ $("#mid").blur(function() {
 				if(idJ.test(mid)){
 					// 0 : 아이디 길이 / 문자열 검사
 					$("#id_check").text("");
-					$("#reg_submit").attr("disabled", false);
+			
 		
 				} else if(mid == ""){
 					
 					$('#id_check').text('아이디를 입력해주세요 :)');
 					$('#id_check').css('color', 'red');
-					$("#reg_submit").attr("disabled", true);				
+								
 					
 				} else {
 					
 					$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다 :) :)");
 					$('#id_check').css('color', 'red');
-					$("#reg_submit").attr("disabled", true);
+					
 				}
 				
 			}
@@ -71,19 +71,28 @@ $(document).ready(function(){
 		if(mpw != mpw_check){
 			$('#pwd_check').text('비밀번호가 일치하지 않습니다.)');
 			$('#pwd_check').css('color', 'red');
-			$("#reg_submit").attr("disabled", true);
+		
 		}
 		else if(mpw == mpw_check){
 			$('#pwd_check').text('비밀번호가 일치합니다.)');
 			$('#pwd_check').css('color', 'green');
-			$("#reg_submit").attr("disabled", true);
+		
 		};
 	});
 	
 	
+	
+	
 });
 
+
+
+//Get the modal
+//var modal = document.getElementById("myModal");
+var modal = $('#myModal');
 function validate() {
+	
+
 	
 	var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
     var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/);
@@ -103,33 +112,33 @@ function validate() {
 	
 	if($("#mpw_check").val() == ""){
         alert("비밀번호 확인을 입력하세요.");
-        $("#user_pwdcheck").focus();
+        $("#mpw_check").focus();
         return false;
       }
-	if($("#user_name").val() == ""){
+	if($("#mname").val() == ""){
         alert("이름을 입력하세요.");
-        $("#user_name").focus();
+        $("#mname").focus();
         return false;
       }
 	
-	if($("#vconn").val() == ""){
+	if($("#mcontact").val() == ""){
         alert("대표 연락처를 입력하세요.");
-        $("#vconn").focus();
+        $("#mcontact").focus();
         return false;
       }
-	if($("#date").val() == ""){
+	if($("#mbirth").val() == ""){
         alert("날짜를 입력하세요.");
-        $("#date").focus();
+        $("#mbirth").focus();
         return false;
       }
-	if($("#sex").val() == ""){
+	if($("#mgender").val() == ""){
         alert("성별을 입력하세요.");
-        $("#sex").focus();
+        $("#mgender").focus();
         return false;
       }
 	
     //이름의 유효성 검사
-    if(!getCheck.test($("#user_id").val())){
+    if(!getCheck.test($("#mid").val())){
       alert("ID형식에 맞춰서 입력하세요");
       $("#mid").val("");
       $("#mid").focus();
@@ -137,32 +146,41 @@ function validate() {
     }
 
     //비밀번호
-    if(!getCheck.test($("#user_pwd").val())) {
+    if(!getCheck.test($("#mpw").val())) {
     alert("형식에 맞춰서 PW를 입력하세요");
-    $("#user_pwd").val("");
-    $("#user_pwd").focus();
+    $("#mpw").val("");
+    $("#mpw").focus();
     return false;
     }
 
     //아이디랑 비밀번호랑 같은지
-    if ($("#mid").val()==($("#user_pwd").val())) {
+    if ($("#mid").val()==($("#mpw").val())) {
     alert("비밀번호가 ID와 동일합니다.");
     $("#mid").val("");
     $("#mid").focus();
   }
 
     //비밀번호 똑같은지
-    if($("#user_pwd").val() != ($("#user_pwdcheck").val())){ 
+    if($("#mpw").val() != ($("#mpw_check").val())){ 
     alert("비밀번호가 일치하지 않습니다.");
-    $("#user_pwd").val("");
-    $("#user_pwdcheck").val("");
-    $("#user_pwd").focus();
+    $("#mpw").val("");
+    $("#mpw_check").val("");
+    $("#mpw").focus();
     return false;
    }
 	
+	//modalBlock();
+	$('#myModal').css("display", "block");
 	
+   
 	return true;
 	
+}
+
+
+function test(){
+	
+	$('#myModal').css("display", "none");
 }
 
 
@@ -206,21 +224,21 @@ function validate() {
 		
 
 			<div>
-				<input type="password" class="form-control" id="user_pwd"
-					name="user_pwd" placeholder="비밀번호" maxlength="12">
+				<input type="password" class="form-control" id="mpw"
+					name="mpw" placeholder="비밀번호" maxlength="12">
 				<div class="check_font" id="pwd_check1"></div>
 			</div>
 
 			<div>
-				<input type="password" class="form-control" id="user_pwdcheck"
-					name="user_pwdcheck" placeholder="비밀번호 확인">
+				<input type="password" class="form-control" id="mpw_check"
+					name="mpw_check" placeholder="비밀번호 확인">
 				<div class="check_font" id="pwd_check"></div>
 			</div>
 
         
 			<div>
-				<input type="text" class="form-control" id="user_name"
-					name="user_name" placeholder="성명">
+				<input type="text" class="form-control" id="mname"
+					name="mname" placeholder="성명">
 				<div class="check_font" id="name_check"></div>
 			</div>
 
@@ -243,7 +261,7 @@ function validate() {
                 <tr>
 					<td>
 						<div style="width: 200px;">
-							<input type="text" name="vconn" id="vconn">
+							<input type="text" name="mcontact" id="mcontact">
 						</div>
 					</td>
 				</tr>
@@ -254,30 +272,33 @@ function validate() {
 
 				<tr>
 					<td>생년월일</td>
-					<td><input type="date" id="date" name="date"></td>
+					<td><input type="date" id="mbirth" name="mbirth2"></td>
 				</tr>
 
 				<tr>
 					<td>성별</td>
-					<td><input type="radio" id="sex" name="sex" checked="checked"
-						value="male" /> 남자 <input type="radio" name="sex" value="female" />
+					<td>
+					<input type="radio" id="mgender" name="mgender" checked="checked"
+						value="male" /> 남자 
+						<input type="radio" name="mgender" value="female" />
 						여자</td>
 						
 				</tr>
 
                	<tr>
-               	<td><input type="button" value="다음으로" id="nextChoice" onclick="validate()">
+               	<td><input type="button" value="다음으로" onclick="validate()" id="nextChoice" >
                	</td>
                	</tr>
 			</table>	
 		
 
 <!-- The Modal -->
-<div id="myModal" class="modal">
+<div id="myModal" class="modal" style="display:none">
 
   <!-- Modal content -->
   <div class="modal-content">
-    <span class="close">&times;</span>
+    <!-- <span class="close" id ="close"></span> -->
+    <button type="button" id="close" onclick="test()">&times;</button>
 <table>
 <tr>
 <td>  <h1>당신의 여행 취향은?</h1> </td>
@@ -295,13 +316,13 @@ function validate() {
 <tr>
 <td>
 						<div name="likecheck">
-<input type="checkbox" name="like" value="shop" />쇼핑 
-<input type="checkbox" name="like" onClick="count_ck(this);" value="taste" />맛집
-<input type="checkbox" name="like" onClick="count_ck(this);" value="alcohol" />주류
-<input type="checkbox" name="like" onClick="count_ck(this);" value="picture" />사진
-<input type="checkbox" name="like" onClick="count_ck(this);" value="history" />역사(유적지 및 박물관)
-<input type="checkbox" name="like" onClick="count_ck(this);" value="festival" />축제
-<input type="checkbox" name="like" onClick="count_ck(this);" value="experience" />체험
+<input type="checkbox" name="likecode" onClick="count_ck(this);" value="shop" />쇼핑 
+<input type="checkbox" name="likecode" onClick="count_ck(this);" value="taste" />맛집
+<input type="checkbox" name="likecode" onClick="count_ck(this);" value="alcohol" />주류
+<input type="checkbox" name="likecode" onClick="count_ck(this);" value="picture" />사진
+<input type="checkbox" name="likecode" onClick="count_ck(this);" value="history" />역사(유적지 및 박물관)
+<input type="checkbox" name="likecode" onClick="count_ck(this);" value="festival" />축제
+<input type="checkbox" name="likecode" onClick="count_ck(this);" value="experience" />체험
 						</div>
 </td>
 </tr>
@@ -314,33 +335,6 @@ function validate() {
 </div>
 </div>
 	</form>
-<script>
-//Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("nextChoice");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
 
 
 
@@ -348,7 +342,7 @@ window.onclick = function(event) {
 
 function count_ck(obj){
 
-	var chkbox = document.getElementsByName("like");
+	var chkbox = document.getElementsByName("likecode");
 
 	var chkCnt = 0;
 
@@ -371,8 +365,8 @@ function count_ck(obj){
 		return false;
 
 	}
-
 }
+
 
 </script>
 

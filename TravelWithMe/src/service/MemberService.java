@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import dao.IBoardDao;
 import dao.IMemberDao;
+import model.Member;
+import model.Mempick;
 import model.Register;
 
 @Service
@@ -84,6 +86,30 @@ public class MemberService {
 		
 		
 //		return returnVal;
+		
+		
+		
+		
+	}
+
+	public void joinMember(Member member, String[] likecode) {
+		// TODO Auto-generated method stub
+		
+		HashMap<String, Object> pick = new HashMap<String, Object>();
+		
+		 for(String code : likecode){
+		   	 
+	       pick.put("mid", member.getMid());
+	       pick.put("likecode", code);
+	       Mempick mempick = new Mempick(pick, code);
+	         mempick.setMid(mid);
+	         mempick.setLikecode(code);
+	         MemberDao.insertMempick(mempick);
+	    }
+		
+		
+		
+		
 	}
 	
 	
