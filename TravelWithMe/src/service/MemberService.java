@@ -93,6 +93,7 @@ public class MemberService {
 	}
 	
 	public List<HashMap<String, String>> getMoreNotice(String mid){
+		m_mdao.selectAllNoticeById(mid);
 		return null;
 	}
 
