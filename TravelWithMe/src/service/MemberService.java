@@ -101,23 +101,23 @@ public class MemberService {
         member.setMpw(a);
         m_mdao.insertMember(member);
        
-//       String id = null;
-//       String like = null;
-//	   Mempick mempick = new Mempick(id,like);
-//	   if(likecode != null) {
-//		for(String code : likecode){
-//	
-//			mempick.setMid(member.getMid());
-//			mempick.setLikecode(code);
-//			m_mdao.insertMempick(mempick);
-//		}
-//	}
-//	   else if(likecode == null) {
-//		   mempick.setMid(member.getMid());
-//			mempick.setLikecode("null");
-//			m_mdao.insertMempick(mempick);
-//			System.out.println(likecode);
-//	   }
+       String id = null;
+       String like = null;
+	   Mempick mempick = new Mempick(id,like);
+	   if(likecode != null) {
+		for(String code : likecode){
+	
+			mempick.setMid(member.getMid());
+			mempick.setLikecode(code);
+			m_mdao.insertMempick(mempick);
+		}
+	}
+	   else if(likecode == null) {
+		   mempick.setMid(member.getMid());
+			mempick.setLikecode("null");
+			m_mdao.insertMempick(mempick);
+			System.out.println(likecode);
+	   }
 	}
 	
 	
