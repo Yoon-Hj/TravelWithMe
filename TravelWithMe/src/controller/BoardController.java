@@ -79,4 +79,6 @@ public class BoardController {
 		return mav;
 	}
 	
+	@RequestMapping("guideWriteForm.do")
+	public void guideWriteForm() {}
 }
