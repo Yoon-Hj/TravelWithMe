@@ -127,19 +127,89 @@
 	<if test="type==2 or type==3"> <include refid="andor"/> bcontent like '%${keyword}%' </if>
 	<if test="type==4"> <include refid="andor"/> mid like '%${keyword}%' </if>
 	<if test="type==5"> <include refid="andor"/> aarea like '%${keyword}%' </if>
-	<if test="startdate != null"> <include refid="andor"/> <![CDATA[ astartdate >= #{startdate} and afinishdate <= #{finishdate} ]]> </if>
-	<if test="likecode != null"> <include refid="andor"/> likecode = '#{likecode}' </if>
+	<if test="startdate != null"> <include refid="andor"/> <![CDATA[ astartdate >= #{startdate} and afinishdate < #{finishdate} ]]> </if>
+	<if test="likecode != null"> <include refid="andor"/> likecode = #{likecode} </if>
 </select>
+
 <!-- 키워드로 동행게시글 조회하기 -->
+<select id="selectAccomBoardByKeyword" parameterType="java.util.HashMap" resultType="accomBoard">
+	select * from (select rownum as rn ,e.* from 
+	(select * from (select b.bnum, b.btitle, b.bcontent, b.breadcount, b.mid, a.likecode, a.aarea, a.astartdate, a.afinishdate
+		 from board b, accompany a
+		 where b.bnum = a.bnum
+		 and b.cdel = 0
+		 order by b.bnum desc)
+	where <include refid="chk"/>
+	<if test="type==1 or type==3"> <include refid="andor"/> btitle like '%${keyword}%' </if>
+	<if test="type==2 or type==3"> <include refid="andor"/> bcontent like '%${keyword}%' </if>
+	<if test="type==4"> <include refid="andor"/> mid like '%${keyword}%' </if>
+	<if test="type==5"> <include refid="andor"/> aarea like '%${keyword}%' </if>
+	<if test="startdate != null"> <include refid="andor"/> <![CDATA[ astartdate >= #{startdate} and afinishdate < #{finishdate} ]]> </if>
+	<if test="likecode != null"> <include refid="andor"/> likecode = #{likecode} </if>) e) 
+	where rn between #{offset} and #{offset} + #{perpage} - 1
+</select>
 
 <!-- 키워드로 검색된 가이드게시글 갯수 조회하기 -->
+<select id="getGuideCountByKeyword" parameterType="java.util.HashMap" resultType="int">
+	select count(*) from 
+	(select b.bnum, b.btitle, b.bcontent, b.breadcount, b.mid, g.garea ,g.gstartdate, g.gfinishdate, g. gthema, p.photopath
+	    from guide g, board b left join (select bnum, photopath from photo where porder = 1) p
+	    on b.bnum = p.bnum
+		where b.bnum = g.bnum
+		and b.cdel = 0
+		order by b.bnum desc)
+	where <include refid="chk"/>
+	<if test="type==1 or type==3"> <include refid="andor"/> btitle like '%${keyword}%' </if>
+	<if test="type==2 or type==3"> <include refid="andor"/> bcontent like '%${keyword}%' </if>
+	<if test="type==4"> <include refid="andor"/> mid like '%${keyword}%' </if>
+	<if test="type==5"> <include refid="andor"/> garea like '%${keyword}%' </if>
+	<if test="type==6"> <include refid="andor"/> gthema like '%${keyword}%' </if>
+	<if test="startdate != null"> <include refid="andor"/> <![CDATA[ gstartdate >= #{startdate} and gfinishdate < #{finishdate} ]]> </if>
+</select>
 
 <!-- 키워드로 가이드게시글 조회하기 -->
+<select id="selectGuideBoardByKeyword" parameterType="java.util.HashMap" resultType="guideBoard">
+	select * from (select rownum as rn ,e.* from 
+	(select * from (select b.bnum, b.btitle, b.bcontent, b.breadcount, b.mid, g.garea ,g.gstartdate, g.gfinishdate, g. gthema, p.photopath
+	    from guide g, board b left join (select bnum, photopath from photo where porder = 1) p
+	    on b.bnum = p.bnum
+		where b.bnum = g.bnum
+		and b.cdel = 0
+		order by b.bnum desc)
+	where <include refid="chk"/>
+	<if test="type==1 or type==3"> <include refid="andor"/> btitle like '%${keyword}%' </if>
+	<if test="type==2 or type==3"> <include refid="andor"/> bcontent like '%${keyword}%' </if>
+	<if test="type==4"> <include refid="andor"/> mid like '%${keyword}%' </if>
+	<if test="type==5"> <include refid="andor"/> garea like '%${keyword}%' </if>
+	<if test="type==6"> <include refid="andor"/> gthema like '%${keyword}%' </if>
+	<if test="startdate != null"> <include refid="andor"/> <![CDATA[ gstartdate >= #{startdate} and gfinishdate < #{finishdate} ]]> </if>) e) 
+	where rn between #{offset} and #{offset} + #{perpage} - 1
+</select>
 
 <!-- 키워드로 검색된 커뮤니티게시글 갯수 조회하기 -->
+<select id="getCommuCountByKeyword" parameterType="java.util.HashMap" resultType="int">
+	select count(*) from 
+	(select b.bwritedate, b.bnum, b.bcontent, b.btitle, b.breadcount, b.mid, comm.commukind 
+	    from board b, community comm where b.bnum = comm.bnum and b.cdel=0 order by b.bnum desc)
+	where 1=0
+	<if test="type==1 or type==3"> or btitle like '%${keyword}%' </if>
+	<if test="type==2 or type==3"> or bcontent like '%${keyword}%' </if>
+	<if test="type==4"> or mid like '%${keyword}%' </if>
+</select>
 
 <!-- 키워드로 커뮤니티게시글 조회하기 -->
+<select id="selectCommuBoardByKeyword" parameterType="java.util.HashMap" resultType="commuBoard">
+	select * from (select rownum as rn ,e.* from 
+	(select * from (select b.bwritedate, b.bnum, b.btitle, b.bcontent, b.breadcount, b.mid, comm.commukind 
+	    from board b, community comm where b.bnum = comm.bnum and b.cdel=0 order by b.bnum desc)) e) 
+	where rn between #{offset} and #{offset} + #{perpage} - 1
+</select>
 
+<!-- 메인에서 검색한 키워드로 전체 게시글 조회하기 -->
+<select id="selectQuickSearch" parameterType="String" resultType="java.util.HashMap">
+	select * from board	where (btitle like '%${value}%' or bcontent like '%${value}%')
+	and cdel=0
+</select>
 
 <!-- 게시글 번호로 동행게시글 내용 읽어오기 -->
 <select id="selectOneAccom" parameterType="int" resultType="accomBoard">
@@ -347,26 +417,5 @@
 
 
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

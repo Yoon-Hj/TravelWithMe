@@ -4,6 +4,8 @@ import java.awt.List;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,8 @@ public class MemberController {
 	@Autowired
 	private AdminService m_asvc;
 	
+	@RequestMapping("index.do")
+	public void index() {}
 	
 	
 	@RequestMapping("joinForm.do")
@@ -54,13 +58,6 @@ public class MemberController {
     	
     }
 	
-	
-	@RequestMapping("hjTest.do")
-	public void qw() {}
-	
-	@RequestMapping("headerTest.do")
-	public void t() {}
-	
 	@RequestMapping("login.do")
 	public @ResponseBody String login_test(HttpSession session,
 			String mid, String mpw) {
@@ -85,16 +82,20 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping("mypage.do")
+	@RequestMapping("myPage.do")
 	public ModelAndView mypage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-//		String mid = (String)session.getAttribute("user");
-		String mid = "test1";
-//		mav.addAllObjects(m_msvc.getMyInfo(mid));
-//		mav.addObject("myBoard", m_bsvc.getMyBoard(mid));
+		String mid = (String)session.getAttribute("user");
 		
-		m_msvc.getMyInfo(mid);
+		mav.addAllObjects(m_msvc.getMyInfo(mid));
+		mav.addObject("myBoard", m_bsvc.getMyBoard(mid));
+//		for(HashMap<String, Object> a : (List<HashMap<String, Object>>)m_bsvc.getMyBoard(mid)) {
+//			System.out.println(a);
+//		}
+		mav.setViewName("myPage");
 		
 		return mav;
 	}
+	
+	
 }

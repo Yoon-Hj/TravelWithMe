@@ -10,6 +10,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="js/webSocket.js?v=<%=System.currentTimeMillis() %>"></script>
 <title>Travel With Me</title>
 <style>
 	.overlay {
@@ -61,54 +62,58 @@
 	  font-size: 40px;
 	  top: 15px;
 	  right: 35px;
-	  }
-	
-	}
+	  }  
+   }
 </style>
 </head>
 <body>
-
+<input type="hidden" id="user" value="${user }">
 	<c:choose>
 		<c:when test="${user==null}">
-	   		<input type="button" value="LOGIN" data-toggle="modal" data-target="#loginForm" style="margin-left:1080px; background-color: transparent; border: 0px; font-size: 20px; font-family: 배달의민족 주아;">
-	   		<input type="button" value="JOIN" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 20px; font-family: 배달의민족 주아;">
+	   		<input type="button" value="LOGIN" data-toggle="modal" data-target="#loginForm" style="margin-left:1080px; background-color: transparent; border: 0px; font-size: 17px; font-family: D2Coding; font-weight: bold;">
+	   		<input type="button" value="JOIN" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding; font-weight: bold;">
+	   		
 	   		<span style="margin-left:10px; font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span> 
 	   	</c:when>
 	   	
 	   	<c:when test="${user==admin}">
-	   		<button type="button">LOGOUT</button>
-	   		<button type="button">ADMIN PAGE</button>
+
+	   		<input type="button" value="LOGOUT" id="logout" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding; font-weight: bold;">
+	   		<input type="button" value="ADMIN PAGE" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding; font-weight: bold;">
+
 	   		<span style="font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span>
 	   	</c:when>
-	   	
+	 
 	   	<c:otherwise>
-	   		<p>${user}님</p>
-				<button type="button">LOGOUT</button>
-		   		<button type="button">MY PAGE</button>
-		   		<span style="font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span>
+		   		<a style="font-family: D2Coding; margin-left: 905px; font-size: 17px;">${user}님</a>
+				<a href="#" style="color: #969696; margin-left: 7px; font-family: D2Coding; font-size: 17px;" id="myNotice">Messages<span class="badge" style="color: black; font-size: 18px">5</span></a>
+
+				<input type="button" value="LOGOUT" id="logout" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
+			   	<input type="button" value="MY PAGE" id="myPage" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
+
+			  	<span style="font-size:30px; color: black; margin-left: 5px; cursor:pointer" onclick="openNav()">&#9776;</span>
 	   	</c:otherwise>	
 	 </c:choose>
   
-  
-	<!-- 로그인 모달 -->
+    <!-- 로그인 모달 -->
 	  <div class="modal fade" id="loginForm">
 		<div class="modal-dialog modal-sm">
 	      <div class="modal-content">
 	        <!-- Modal Header -->
 	        <div class="modal-header">
-	          <h3 class="modal-title" style="font-family: 배달의민족 주아">LOGIN</h3>
+	          <h3 class="modal-title" style="font-family: 배달의민족 도현">LOGIN</h3>
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
 	        </div>
 	        
 	        <!-- Modal body -->
 	        <div class="modal-body" style="text-align: center">
 	         	 <label for="id" style="margin-right: 45px"><b>ID</b></label>
-				 <input type="text" placeholder="Enter id" name="id" required><br>
+				 <input type="text" placeholder="Enter id" name="id" id="loginId" required><br>
 				
 				 <label for="pww"><b>Password</b></label>
-				 <input type="password" placeholder="Enter Password" name="pw" required><br><br>
+				 <input type="password" placeholder="Enter Password" name="pw" id="loginPw" required><br><br>
 				 
-				  <button type="submit" class="btn btn-success">Login</button>
+				  <button type="button" class="btn btn-success" id="login">Login</button>
 	        </div>
 	       </div>
 	     </div>
@@ -131,7 +136,7 @@
 		   			<a class="canClick" href="#">글작성</a>
 				</td>
 				<td>
-					<a class="canClick" href="#">Attraction Info</a>
+					<a class="canClick" href="attractionInfo.do">Attraction Info</a>
 					<a>&nbsp;</a>
 					<a>&nbsp;</a>
 				</td>
@@ -154,6 +159,6 @@
 	  document.getElementById("myNav").style.height = "0%";
 	}
 	</script>  
-	  
+	
 </body>
 </html>

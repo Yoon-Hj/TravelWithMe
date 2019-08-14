@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../css/full-page-scroll.css">
+<link rel="stylesheet" type="text/css" href="css/full-page-scroll.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -15,28 +15,28 @@
 <style type="text/css">
 
 	.section1 {
-		background-image: url(../imgs/korea.jpg);
+		background-image: url(imgs/korea.jpg);
 		background-size: cover;
 	}
 
 	.section2 {
-		background-image: url(../imgs/jeju.jpg);
+		background-image: url(imgs/jeju.jpg);
 		background-size: cover;
 		margin-top: -40px;
 	}
 
 	.section3 {
-		background-image: url(../imgs/night.jpg);
+		background-image: url(imgs/night.jpg);
 		background-size: cover;
 	}
 
 	.section4 {
-		background-image: url(../imgs/bg4.jpg);
+		background-image: url(imgs/bg4.jpg);
 		background-size: cover;
 	}
 
 	.section5 {
-		background-image: url(../imgs/yeosu.PNG);
+		background-image: url(imgs/yeosu.PNG);
 		background-size: cover;
 	}
 	
@@ -67,33 +67,34 @@
 	body{
 		text-align: center;
 	}
-	</style>
+
+</style>
 </head>
 
 <jsp:include page="header.jsp"></jsp:include>
 
 <body>
 	<div id="main" class="scroll-container">
-		
+	
 		<!-- 1쪽 -->
 		<section class="section1">
 		
-		<jsp:include page="mainHeader.jsp"></jsp:include>
+			<jsp:include page="mainHeader.jsp"></jsp:include>
 
-			<div>
-				<h2 style="font-size: 45px">새로운 만남ㆍ새로운 인연과 함께 여행을 시작해보세요!</h2>	
-				<br><br>
-				
+			<div style="margin-bottom: 250px;">
+				<h2 style="font-size: 45px">새로운 만남ㆍ새로운 인연과 함께 여행을 시작해보세요!</h2>
+				<br>	
 				<div style="display: inline">
-					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" 
+					<input class="form-control mr-sm-2" type="search" placeholder="Quick Search" aria-label="Search" 
 							style="margin-left: 200px; width: 700px; height: 60px; float: left;">
 					<input type="button" class="btn btn-danger" value="SEARCH" 
-							style="width: 150px; height: 60px; margin-right: 150px; font-weight: bold; font-family: 배달의민족 주아; font-size: 20px">
+							style="width: 150px; height: 60px; margin-right: 150px; font-weight: bold; font-family: 배달의민족 도현; font-size: 20px">
 				</div>
-				<br><br><br>
-				<input type="button" class="btn btn-danger" 
+				<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		
+				<input type="button" class="btn btn-outline-success"
 						value="서비스 이용 가이드" data-toggle="modal" data-target="#useguideModal"
-						style="float: right; margin-right: 180px; width: 300px; border-width: 3px; font-family: 배달의민족 도현; font-size: 20px; background-color: transparent;">
+						style="float: right; margin-right: 80px; width: 200px; border-width: 3px; font-family: 배달의민족 도현; font-size: 15px; color: white;">
 			</div>	
 		  </section>
 		
@@ -112,7 +113,7 @@
 				
 				<h2 style="font-size: 45px">함께할 여행 친구들을 직접 모아보세요</h2>
 				<br>
-				<input type="button" class="btn btn-danger btn-lg btn-block" 
+				<input type="button" class="btn btn-outline-danger" 
 						value="Travel with Me 글 작성" 
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">
 			</div>
@@ -168,35 +169,36 @@
 	<div class="modal fade" id="useguideModal">
     	<div class="modal-dialog">
       		<div class="modal-content">
-      
-	        <!-- Modal Header -->
-	        <div class="modal-header">
-	          <h3 class="modal-title" style="font-family: 배달의민족 주아">서비스 이용 가이드</h3>
-				<button type="button" class="close" data-dismiss="modal">×</button>
-	        </div>
-        
-	        <!-- Modal body -->
-	        <div class="modal-body">
-	          해당 서비스를 효율적으로 이용하기 위한 가이드입니다.<br>
-	          1. 신뢰지수<br>
-	          
-			  2. 가이드등급<br>
-	        </div>
-        
-	        <!-- Modal footer -->
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-success" data-dismiss="modal">확인</button>
-	        </div>
+		        <!-- Modal Header -->
+		        <div class="modal-header">
+		          <h3 class="modal-title" style="font-family: 배달의민족 도현">서비스 이용 가이드</h3>
+					<button type="button" class="close" data-dismiss="modal">×</button>
+		        </div>
+	        
+		        <!-- Modal body -->
+		        <div class="modal-body">
+		          해당 서비스를 효율적으로 이용하기 위한 가이드입니다.<br>
+		          1. 신뢰지수<br>
+		          
+				  2. 가이드등급<br>
+		        </div>
+	        
+		        <!-- Modal footer -->
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-success" data-dismiss="modal">확인</button>
+		        </div>
       		</div>
     	</div>
  	 </div>
- 	 <div style="position: fixed; bottom: 5px; right: 5px;">
- 	 <a href="#0"><img src="../imgs/top.png" style="width: 80px;height: 80px;"></a>
+ 	 
+ 	 <div style="position: fixed; bottom: 23px; right: 10px;">
+ 	 	<a href="#0"><img src="imgs/top.png" style="width: 60px;height: 60px;"></a>
  	 </div>
-	
-	<script src="../js/full-page-scroll.js"></script>
+ 	 
+	<script src="js/full-page-scroll.js"></script>
 	
 	<script type="text/javascript">
+		//location.href="../index.do";
 		new fullScroll({
 			mainElement: 'main',
 			displayDots: false,
@@ -205,7 +207,6 @@
 			animateFunction: 'ease'
 		});
 	</script>
-	
 	
 </body>
 

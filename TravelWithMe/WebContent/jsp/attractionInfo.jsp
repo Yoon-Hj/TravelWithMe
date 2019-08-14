@@ -10,7 +10,8 @@
 <script src="js/attraction.js?v=<%=System.currentTimeMillis() %>"></script>
 </head>
 <body>
-<h1>시작 페이지다.</h1><hr>
+<jsp:include page="header.jsp"></jsp:include>
+<h1>ATTRACTION INFO</h1><hr>
 <h3>키워드 검색</h3>
 <form action="apiKeywordSearch.do">
 <input type="text" name="keyword" required>

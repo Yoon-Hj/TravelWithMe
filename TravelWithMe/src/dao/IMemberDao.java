@@ -52,4 +52,7 @@ public interface IMemberDao {
 	//회원 탈퇴
 	public void deleteMember(String mid);
 	
+	
+	//회원 안읽은 알림수 구하기
+	public int getMyNoticeCount(String mid);
 }
