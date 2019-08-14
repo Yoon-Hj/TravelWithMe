@@ -85,7 +85,7 @@
 		<selectKey resultType="int" keyProperty="nid" order="BEFORE">
 			select notice_seq.nextval from dual		
 		</selectKey>
-			insert into notice values ('N'||${mid}, #{nkcode}, #{bnum}, #{mid}, default, default)
+			insert into notice values ('N'||${nid}, #{nkcode}, #{bnum}, #{mid}, default, default)
 	</insert>
 	
 	<!-- 아이디로 연락처 조회 -->

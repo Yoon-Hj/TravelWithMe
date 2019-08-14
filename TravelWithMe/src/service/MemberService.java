@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import dao.IBoardDao;
 import dao.IMemberDao;
 import model.Member;
 import model.Mempick;
+import model.Notice;
 import model.Register;
 
 @Service
@@ -121,4 +123,43 @@ public class MemberService {
 	}
 	
 	
+	public List<Notice> getMoreNotice(String mid){
+		return m_mdao.selectAllNoticeById(mid);
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
