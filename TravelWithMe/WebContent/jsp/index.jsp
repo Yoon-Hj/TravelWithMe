@@ -169,6 +169,7 @@
 	<div class="modal fade" id="useguideModal">
     	<div class="modal-dialog">
       		<div class="modal-content">
+      		
 		        <!-- Modal Header -->
 		        <div class="modal-header">
 		          <h3 class="modal-title" style="font-family: 배달의민족 도현">서비스 이용 가이드</h3>
@@ -187,6 +188,7 @@
 		        <div class="modal-footer">
 		          <button type="button" class="btn btn-success" data-dismiss="modal">확인</button>
 		        </div>
+		        
       		</div>
     	</div>
  	 </div>

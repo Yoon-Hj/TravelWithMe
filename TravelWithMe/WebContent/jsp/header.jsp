@@ -72,7 +72,7 @@
 		<c:when test="${user==null}">
 	   		<input type="button" value="LOGIN" data-toggle="modal" data-target="#loginForm" style="margin-left:1100px; background-color: transparent; border: 0px; font-size: 17px; font-family: D2Coding;">
 	   		<input type="button" value="JOIN" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
-	   		
+
 	   		<span style="margin-left:10px; font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span> 
 	   	</c:when>
 	   	
@@ -158,6 +158,12 @@
 	function closeNav() {
 	  document.getElementById("myNav").style.height = "0%";
 	}
+	
+	function joinForm(){
+		location.href="joinForm.do";
+	}
+	
+	
 	</script>  
 	
 </body>

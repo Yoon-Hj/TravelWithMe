@@ -67,7 +67,7 @@
 	
 	<!-- 회원 추가 -->
 	<insert id="insertMember" parameterType="member">
-		insert into values member (#{mid}, #{mpw}, #{mname}, #{mbirth}, #{mcontact}, #{mgender}, default, default)	
+		insert into member values (#{mid}, #{mpw}, #{mname}, #{mbirth}, #{mcontact}, #{mgender}, default, default)	
 	</insert>
 	
 	<!-- 회원 아이디 추가 -->
@@ -77,7 +77,7 @@
 	
 	<!-- 회원 여행취향 추가 -->
 	<insert id="insertMempick" parameterType="mempick">
-		insert into values mempick (#{mid}, #{likecode})
+		insert into mempick values (#{mid}, #{likecode})
 	</insert>
 	
 	<!-- 알림내역 추가 -->
@@ -85,7 +85,7 @@
 		<selectKey resultType="int" keyProperty="nid" order="BEFORE">
 			select notice_seq.nextval from dual		
 		</selectKey>
-			insert into notice values ('N'||${mid}, #{nkcode}, #{bnum}, #{mid}, default, default)
+			insert into notice values ('N'||${nid}, #{nkcode}, #{bnum}, #{mid}, default, default)
 	</insert>
 	
 	<!-- 아이디로 연락처 조회 -->

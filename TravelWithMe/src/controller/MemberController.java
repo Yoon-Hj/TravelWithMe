@@ -2,11 +2,13 @@ package controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import model.Member;
+import model.Notice;
 import service.AdminService;
 import service.BoardService;
 import service.MemberService;
@@ -74,8 +77,20 @@ public class MemberController {
 		return mav;
 	}
 	
+	@RequestMapping("moreNotice.do")
+	public @ResponseBody List<Notice> moreNotice(HttpSession session){
+		String mid = (String)session.getAttribute("user");
+		return m_msvc.getMoreNotice(mid);
+	}
+	
 	@RequestMapping("joinForm.do")
-	public void joinForm() {}
+	public void joinForm() {
+		
+		//여기서 넘겨 joinform.jsp로
+		
+		
+		
+	}
 	
 	@RequestMapping(value = "checkId.do", method = RequestMethod.GET)
 	public @ResponseBody String checkId(@RequestParam("id") String user_id) {
@@ -86,15 +101,21 @@ public class MemberController {
 	
     @RequestMapping("joinMember.do")
     public String joinMember(Member member, String mbirth2, String likecode[]) {
-		//System.out.println(member);
-		//System.out.println(mbirth2);
-		//System.out.println(likecode[0]);
-		//System.out.println(likecode[1]);
-		//System.out.println(likecode[2]);
+//		System.out.println(member);
+//		System.out.println(mbirth2);
+//		System.out.println(likecode[0]);
+//		System.out.println(likecode[1]);
+//		System.out.println(likecode[2]);
+     System.out.println(likecode);
+  	  m_msvc.joinMember(member, likecode, mbirth2);
     	
-//    	m_msvc.joinMember(member,likecode);
-    	
-    	return null;
+  	  return "redirect:index.do";
     	
     }
+    
+    
+    
+    
+    
+    
 }
