@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import dao.IBoardDao;
 import dao.IMemberDao;
 import model.Member;
 import model.Mempick;
+import model.Notice;
 import model.Register;
 
 @Service
@@ -91,26 +93,29 @@ public class MemberService {
 		return rev;
 
 	}
-	
-	public List<HashMap<String, String>> getMoreNotice(String mid){
-		m_mdao.selectAllNoticeById(mid);
-		return null;
+
+	public List<Notice> getMoreNotice(String mid){
+		for(Notice b: m_mdao.selectAllNoticeById(mid)) {
+			System.out.println(b);
+		}
+		
+		return m_mdao.selectAllNoticeById(mid);
 	}
 
-//	public void joinMember(Member member, String[] likecode) {
-//		// TODO Auto-generated method stub
-//
-//		HashMap<String, Object> pick = new HashMap<String, Object>();
-//
-//		for(String code : likecode){
-//
-//			pick.put("mid", member.getMid());
-//			pick.put("likecode", code);
-//			Mempick mempick = new Mempick(pick, code);
-//			mempick.setMid(mid);
-//			mempick.setLikecode(code);
-//			MemberDao.insertMempick(mempick);
-//		}
+	//	public void joinMember(Member member, String[] likecode) {
+	//		// TODO Auto-generated method stub
+	//
+	//		HashMap<String, Object> pick = new HashMap<String, Object>();
+	//
+	//		for(String code : likecode){
+	//
+	//			pick.put("mid", member.getMid());
+	//			pick.put("likecode", code);
+	//			Mempick mempick = new Mempick(pick, code);
+	//			mempick.setMid(mid);
+	//			mempick.setLikecode(code);
+	//			MemberDao.insertMempick(mempick);
+	//		}
 
 
 
@@ -146,4 +151,4 @@ public class MemberService {
 
 
 
-	}
+}

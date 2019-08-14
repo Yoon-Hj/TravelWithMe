@@ -2,11 +2,13 @@ package controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -75,11 +77,46 @@ public class MemberController {
 	}
 	
 	@RequestMapping("moreNotice.do")
-	public @ResponseBody List<HashMap<String, String>> moreNotice(HttpSession session){
+	public @ResponseBody HashMap<String, Object> moreNotice(HttpSession session){
 		String mid = (String)session.getAttribute("user");
-		System.out.println(mid);
+		
+//		List<HashMap<String, String>> noticeList = m_msvc.getMoreNotice(mid);
+//		List<JSONObject> json_noticeList = new ArrayList<JSONObject>();
+//		for(int i = 0; i < noticeList.size(); i++) {
+//			JSONObject q = new JSONObject();
+//			q.put("nkcode", noticeList.get(i).get("NKCODE"));
+//			q.put("nkreason", noticeList.get(i).get("NKREASON"));
+//			json_noticeList.add(q);
+//		}
+//		
+//		JSONObject w = new JSONObject();
+//		w.put("result", json_noticeList);
+//		System.out.println(w);
+		HashMap<String, Object> a = new HashMap<String, Object>();
 		m_msvc.getMoreNotice(mid);
-		return null;
+//		System.out.println(qq.size());
+		
+//		a.put("result", qq);
+//		a.put("result", "dddd");
+//		ArrayList<HashMap<String, Object>> qqq = (ArrayList<HashMap<String,Object>>)qq;
+		
+		List<HashMap<String, Object>> d = new ArrayList<HashMap<String, Object>>();
+		for(int i = 0; i < 4; i++) {
+			HashMap<String, Object> www = new HashMap<String, Object>();
+			www.put("a", "a");
+			www.put("b", "b");
+			d.add(www);
+		}
+		
+		
+		
+		a.put("w", d);
+//		a.put("qqq", qqq);
+//		a.put("result", m_msvc.getMoreNotice(mid));
+		
+		
+		System.out.println("이걸 보내긴 하ㅡㄴ거임");
+		return a;
 	}
 	
 	@RequestMapping("joinForm.do")

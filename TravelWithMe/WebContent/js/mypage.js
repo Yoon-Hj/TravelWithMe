@@ -35,3 +35,50 @@ function openNewsModal() {
 function closeNewsModal() {
   document.getElementById("newsModal").style.height = "0%";
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function t(){
+	alert("그니까 이게 되긴 하는거임");
+	$.ajax({
+		url : "moreNotice.do",
+		type : "post",
+//		dataType : "json",
+		success : function(data) {
+			alert("뭔가를 받아오긴 하니.");
+			alert(data);
+//			alert(data.qqq);
+			alert(data.w);
+			alert(data.w[0]);
+			alert(data.w[0].a);
+//			alert(data.result[0].NKREASON);
+//			alert(data.result);
+			
+//			for(var i in data.result){
+//				alert(data.result[i].nkcode);
+//			}
+//			alert(data.one);
+//			alert(data.result);
+//			alert(data.result.one);
+		},
+		error : function(){
+			alert("ASdjadf");
+		}
+	});
+}
+
+
+
