@@ -67,17 +67,13 @@ public class MemberController {
 		
 		mav.addAllObjects(m_msvc.getMyInfo(mid));
 		mav.addObject("myBoard", m_bsvc.getMyBoard(mid));
-		for(HashMap<String, Object> a : (List<HashMap<String, Object>>)m_bsvc.getMyBoard(mid)) {
-			System.out.println(a);
-		}
+//		for(HashMap<String, Object> a : (List<HashMap<String, Object>>)m_bsvc.getMyBoard(mid)) {
+//			System.out.println(a);
+//		}
 		mav.setViewName("myPage");
-		
 		
 		return mav;
 	}
-	
-	
-	
 	
 	
 }

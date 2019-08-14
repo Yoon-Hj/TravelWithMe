@@ -61,9 +61,9 @@ public class MemberService {
 		returnVal.put("register", m_mdao.selectRegisterById(mid));
 		
 //		System.out.println(returnVal.get("notice"));
-//		for(HashMap<String, String> a: (List<HashMap<String, String>>)returnVal.get("notice")) {
-//			System.out.println(a);
-//		}
+		for(HashMap<String, String> a: (List<HashMap<String, String>>)returnVal.get("notice")) {
+			System.out.println(a);
+		}
 //		for(HashMap<String, String> b: (List<HashMap<String, String>>)returnVal.get("register")) {
 //			System.out.println(b);
 //		}

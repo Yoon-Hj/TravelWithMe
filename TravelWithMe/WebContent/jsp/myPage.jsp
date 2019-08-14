@@ -75,6 +75,8 @@
 	
 </style>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="js/mypage.js?v=<%=System.currentTimeMillis() %>"></script>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
@@ -135,7 +137,9 @@
 </c:forEach>
 </table>
 <div class="inNews">
-<button>더보기</button>
+<input type="button" value="더보기" data-toggle="modal" data-target="#moreNewsForm" style="background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
+<!-- <span style="font-size:15px; color: black; cursor:pointer" onclick="openNewsModal()">더보기</span> -->
+<!-- <button id="moreNews">더보기</button> -->
 </div>
 </div>
 
@@ -156,7 +160,7 @@
 </c:forEach>
 </table>
 <div class="inBoards">
-<button>더보기</button>
+<button id="moreBoards">더보기</button>
 </div>
 </div>
 
@@ -172,20 +176,69 @@
 		</c:choose>
 		${r.BTITLE }<BR>
 		<div style="width:100px;margin-left:auto;">
-		<button>신청 취소</button>
+		<button class="cancelRegister" value="${r.RID }">신청 취소</button>
 		</div>
 		</td>
 	</tr>
 </c:forEach>
 </table>
 <div class="inRegister">
-<button>더보기</button>
+<button id="moreRegister">더보기</button>
 </div>
 </div>
 
-
-
-
 </div>
+
+
+
+<!--
+ <div id="newsModal" class="overlay">
+	 	 <a href="javascript:void(0)" class="closebtn" onclick="closeNewsModal()" style="text-decoration: none;">&times;</a>
+	 	 <div class="overlay-content">
+			뭔가 켜지긴 했음..
+	  </div>
+	</div>
+  -->
+
+	  <div class="modal fade" id="moreNewsForm">
+		<div class="modal-dialog modal-dialog-scrollable">
+	      <div class="modal-content">
+	        <!-- Modal Header -->
+	        <div class="modal-header">
+	          <h3 class="modal-title" style="font-family: 배달의민족 도현">알림내역</h3>
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+	        
+	        <!-- Modal body -->
+	        <div class="modal-body" style="text-align: center">
+	        	<table>
+	        		<tr>
+	        			<td></td>
+	        			<td></td>
+	        		</tr>
+	        	</table>
+	        </div>
+	        
+	        
+		        <!-- Modal footer -->
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-success" data-dismiss="modal">확인</button>
+		        </div>
+	       </div>
+	     </div>
+	  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
