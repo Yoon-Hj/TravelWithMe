@@ -189,15 +189,7 @@
 
 
 
-<!--
- <div id="newsModal" class="overlay">
-	 	 <a href="javascript:void(0)" class="closebtn" onclick="closeNewsModal()" style="text-decoration: none;">&times;</a>
-	 	 <div class="overlay-content">
-			뭔가 켜지긴 했음..
-	  </div>
-	</div>
-  -->
-
+		<!-- 알림내역 더보기 -->	
 	  <div class="modal fade" id="moreNewsForm">
 		<div class="modal-dialog modal-dialog-scrollable">
 	      <div class="modal-content">
@@ -221,7 +213,27 @@
 	     </div>
 	  </div>
 
-
+		<!-- 가이드 평가하기 -->
+	  <div class="modal fade" id="evGuideModal">
+		<div class="modal-dialog modal-dialog-scrollable">
+	      <div class="modal-content">
+	        <!-- Modal Header -->
+	        <div class="modal-header">
+	          <h3 class="modal-title" style="font-family: 배달의민족 도현">가이드 평가</h3>
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+	        
+	        <!-- Modal body -->
+	        <div class="modal-body" style="text-align: center">
+	        	별점 평가할 그 것들을 넣어
+	        </div>
+		        <!-- Modal footer -->
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-success" data-dismiss="modal">확인</button>
+		        </div>
+	       </div>
+	     </div>
+	  </div>
 
 
 

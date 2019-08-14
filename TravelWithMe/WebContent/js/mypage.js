@@ -44,6 +44,26 @@ $(document).ready(function(){
 		});
 	});
 	
+	function evGuide(){
+		
+	};
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	$(document).on('click', '.noticeDetail', function(){
 		var delrow = $(this).closest("tr").find("input:eq(0)").val().split("/");
 		var bnum = delrow[0];
