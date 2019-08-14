@@ -20,10 +20,13 @@ $(document).ready(function(){
 						}else{
 							type = "[Travel with Guide]";
 						}
-						type2 = 1;
+						type2 = 0;
 					}else{
 						type = "[참석여부 및 별점평가]";
-						type2 = 2;
+						if(code[1] == "1")
+							type2 = 1;
+						else
+							type2 = 2;
 					}
 					table += "<tr>";
 					table += "<td>" + "<input type='hidden'  value='" + nlist[i].bnum + "/" + type2 + "'>" + "</td>"
@@ -42,21 +45,17 @@ $(document).ready(function(){
 	});
 	
 	$(document).on('click', '.noticeDetail', function(){
-		var delrow = $(this).closest("tr").find("input:eq(0)").val();
-		alert(delrow);
-//		var a = $(this).val();
-//		alert(a);
-//		$.ajax({
-//			url : "test.do",
-//			data : {
-//				va : this.value
-//			},
-//			type : "post",
-//			success : function(){
-//				alert("삭제되었습니다.");
-//			}
-//		});
-//		alert("끄읕");
+		var delrow = $(this).closest("tr").find("input:eq(0)").val().split("/");
+		var bnum = delrow[0];
+		var type = delrow[1];
+		
+		if(type == "0"){
+			alert("게시글 화면으로 이동해.");
+		}else if(type == "1"){
+			alert("별점평가 화면을 띄워");
+		}else if(type == "2"){
+			alert("참석여부 화면을 띄워");
+		}
 	});
 	
 	$('#moreBoards').on('click', function(){
@@ -80,37 +79,6 @@ $(document).ready(function(){
 
 
 
-
-function moreNews(){
-	alert("알림 더보기 연결 됨.");
-};
-
-function openNewsModal() {
-	  document.getElementById("newsModal").style.height = "100%";
-};
-	
-function closeNewsModal() {
-  document.getElementById("newsModal").style.height = "0%";
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function t(){
-	
-}
 
 
 
