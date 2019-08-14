@@ -1,0 +1,170 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	h1{
+		margin:10%;
+	}
+	div{
+		border:solid 1px;
+	}
+	
+	.row{
+		grid-template-columns:auto auto auto;
+	}
+	
+	.myInfo{
+		margin-top:20px;
+		margin-left:10%;
+		width:500px;
+		height:30%;
+	}
+	.myInfo > div {
+		margin-bottom:0;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	.myNews{
+		margin-top:20px;
+		margin-left:auto;
+		margin-right:10%;
+		width:500px;
+		height:500px;
+	}
+	.myBoards{
+		margin-top:20px;
+		margin-left:10%;
+		width:500px;
+		height:400px;
+	}
+	.myRegister{
+		margin-top:20px;
+		margin-left:auto;
+		margin-right:10%;
+		width:500px;
+		height:400px;
+	}
+	.info > th, td{
+		width:100px;
+		text-align : center;
+		height:40px;
+	}
+	.news > td{
+		width:200px;
+		height:80px;
+		font-color:red;
+	}
+	.myRegi{
+		text-align:left;"
+	}
+	
+</style>
+
+</head>
+<body>
+<jsp:include page="header.jsp"></jsp:include>
+<h1>MY PAGE</h1><HR>
+<div class="row">
+
+
+<div class="myInfo">
+<h4>MY INFO</h4>
+<table class="info">
+	<tr>
+		<th>아이디</th>
+		<td>${memberInfo.mid }</td>
+	</tr>
+	<tr>
+		<th>성명</th>
+		<td>${memberInfo.mname}</td>
+	</tr>
+	<tr>
+		<th>연락처</th>
+		<td>${memberInfo.mcontact}</td>
+	</tr>
+<%-- 	<tr>
+		<th>신뢰지수</th>
+		<th>가이드 포인트</th>
+	</tr>
+	<tr>
+		<td>${memberInfo.mpoint}</td>
+		<td>
+		<c:choose>
+			<c:when test="${memberInfo.mguidepoint != '0'}">${memberInfo.mguidepoint}</c:when>
+			<c:otherwise>아직 가이드경험이 없습니다.</c:otherwise>
+		</c:choose></td>
+	</tr> --%>
+</table><BR>
+<div>
+<button>회원정보 수정</button>
+<button>회원탈퇴</button>
+</div>
+</div>
+
+
+
+<div class="myNews">
+<h4>알림내역</h4>
+<table class="news" style="width:300px">
+<c:forEach var="n" items="${notice }">
+	<tr>
+		<td style="height:70px">
+		<c:choose>
+			<c:when test="${n.BKIND == 'A' }">[Travel with Me]</c:when>
+			<c:when test="${n.BKIND == 'G' }">[Travel with Guide]</c:when>
+			<c:when test="${n.BKIND == 'C' }">[Community]</c:when>
+		</c:choose>
+		${n.BTITLE }<BR>
+		${n.NKREASON }</td>
+	</tr>
+</c:forEach>
+</table>
+</div>
+
+<div class="myBoards">
+<h4>내가 작성한 글</h4>
+<table>
+<c:forEach var="b" items="${myBoard }">
+	<tr>
+		<td style="width:400px">
+		<c:choose>
+			<c:when test="${b.BKIND == 'A' }">[Travel with Me]</c:when>
+			<c:when test="${b.BKIND == 'G' }">[Travel with Guide]</c:when>
+			<c:when test="${b.BKIND == 'C' }">[Community]</c:when>
+		</c:choose>
+		${b.BTITLE }
+		</td>
+	</tr>
+</c:forEach>
+</table>
+
+</div>
+
+<div class="myRegister">
+<h4>신청내역</h4>
+<table class="myRegi">
+<c:forEach var="r" items="${register }">
+	<tr>
+		<td style="width:400px;height:60px;">
+		<c:choose>
+			<c:when test="${r.BKIND == 'A' }">[Travel with Me]</c:when>
+			<c:when test="${r.BKIND == 'G' }">[Travel with Guide]</c:when>
+		</c:choose>
+		${r.BTITLE }<BR><button>신청 취소</button>
+		</td>
+	</tr>
+</c:forEach>
+</table>
+</div>
+
+
+
+
+</div>
+</body>
+</html>

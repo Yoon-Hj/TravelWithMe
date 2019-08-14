@@ -74,7 +74,6 @@
 <jsp:include page="header.jsp"></jsp:include>
 
 <body>
-
 	<div id="main" class="scroll-container">
 	
 		<!-- 1쪽 -->

@@ -62,13 +62,12 @@
 	  font-size: 40px;
 	  top: 15px;
 	  right: 35px;
-	  }
-	  
+	  }  
    }
 </style>
 </head>
 <body>
-
+<input type="hidden" id="user" value="${user }">
 	<c:choose>
 		<c:when test="${user==null}">
 	   		<input type="button" value="LOGIN" data-toggle="modal" data-target="#loginForm" style="margin-left:1080px; background-color: transparent; border: 0px; font-size: 17px; font-family: D2Coding; font-weight: bold;">
@@ -78,7 +77,8 @@
 	   	</c:when>
 	   	
 	   	<c:when test="${user==admin}">
-	   		<input type="button" value="LOGOUT" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding; font-weight: bold;">
+
+	   		<input type="button" value="LOGOUT" id="logout" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding; font-weight: bold;">
 	   		<input type="button" value="ADMIN PAGE" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding; font-weight: bold;">
 
 	   		<span style="font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span>
@@ -86,11 +86,11 @@
 	 
 	   	<c:otherwise>
 		   		<a style="font-family: D2Coding; margin-left: 905px; font-size: 17px;">${user}님</a>
-				<a href="#" style="color: #969696; margin-left: 7px; font-family: D2Coding; font-size: 17px;">Messages<span class="badge" style="color: black; font-size: 18px">5</span></a>
-		
-				<input type="button" value="LOGOUT" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
-			   	<input type="button" value="MY PAGE" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
-	
+				<a href="#" style="color: #969696; margin-left: 7px; font-family: D2Coding; font-size: 17px;" id="myNotice">Messages<span class="badge" style="color: black; font-size: 18px">5</span></a>
+
+				<input type="button" value="LOGOUT" id="logout" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
+			   	<input type="button" value="MY PAGE" id="myPage" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
+
 			  	<span style="font-size:30px; color: black; margin-left: 5px; cursor:pointer" onclick="openNav()">&#9776;</span>
 	   	</c:otherwise>	
 	 </c:choose>
@@ -159,6 +159,6 @@
 	  document.getElementById("myNav").style.height = "0%";
 	}
 	</script>  
-	  
+	
 </body>
 </html>

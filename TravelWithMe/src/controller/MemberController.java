@@ -3,6 +3,8 @@ package controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,15 +65,18 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping("mypage.do")
+	@RequestMapping("myPage.do")
 	public ModelAndView mypage(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-//		String mid = (String)session.getAttribute("user");
-		String mid = "test1";
-//		mav.addAllObjects(m_msvc.getMyInfo(mid));
-//		mav.addObject("myBoard", m_bsvc.getMyBoard(mid));
+		String mid = (String)session.getAttribute("user");
 		
-		m_msvc.getMyInfo(mid);
+		mav.addAllObjects(m_msvc.getMyInfo(mid));
+		mav.addObject("myBoard", m_bsvc.getMyBoard(mid));
+		for(HashMap<String, Object> a : (List<HashMap<String, Object>>)m_bsvc.getMyBoard(mid)) {
+			System.out.println(a);
+		}
+		mav.setViewName("myPage");
+		
 		
 		return mav;
 	}

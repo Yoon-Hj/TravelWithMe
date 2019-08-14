@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	var wsUri = "ws://70.12.109.53:80/TravelWithMe/websocket/echo.do";
+//	var wsUri = "ws://70.12.109.53:80/TravelWithMe/websocket/echo.do";
+	var wsUri = "ws://localhost/TravelWithMe/websocket/echo.do";
 	var websocket = null;
 	
 	var user = $('#user').val();
@@ -26,8 +27,8 @@ $(document).ready(function(){
 			$.ajax({
 				url : "login.do",
 				data : {
-					mid : $('#loginId').val(),
-					mpw : $('#loginPw').val()
+					mid : id,
+					mpw : pw
 				},
 				type : "post",
 				success : function(data) {
@@ -46,11 +47,11 @@ $(document).ready(function(){
 
 
 	function onOpen(evt) {
-		websocket.send(textID.value);
+		websocket.send(user);
 	}
 
 	function onMessage(evt) {
-		$('#out').html(evt.data);
+		$('#myNotice').html(evt.data);
 	}
 
 	function onError(evt) {
@@ -70,5 +71,7 @@ $(document).ready(function(){
 		history.go(0);
 	});
 
-
+	$('#myPage').on('click', function(){
+		location.href="myPage.do";
+	});
 });

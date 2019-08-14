@@ -53,24 +53,21 @@ public class MemberService {
 		System.out.println("서비스 종료한다.");
 	}
 	// 마이페이지 작업
-//	public HashMap<String, Object> getMyInfo(String mid) {
-	public void getMyInfo(String mid) {
+	public HashMap<String, Object> getMyInfo(String mid) {
 		HashMap<String, Object> returnVal = new HashMap<String, Object>();
 		
 		returnVal.put("memberInfo", m_mdao.selectMemInfo(mid));
 		returnVal.put("notice", m_mdao.selectNoticeById(mid));
 		returnVal.put("register", m_mdao.selectRegisterById(mid));
 		
-		System.out.println(returnVal.get("memberInfo"));
-		for(HashMap<String, String> d : (List<HashMap<String, String>>)returnVal.get("notice")) {
-			System.out.println(d);
-		}
-		for(HashMap<String, String> r : (List<HashMap<String, String>>)returnVal.get("register")) {
-			System.out.println(r);
-		}
-		
-		
-//		return returnVal;
+//		System.out.println(returnVal.get("notice"));
+//		for(HashMap<String, String> a: (List<HashMap<String, String>>)returnVal.get("notice")) {
+//			System.out.println(a);
+//		}
+//		for(HashMap<String, String> b: (List<HashMap<String, String>>)returnVal.get("register")) {
+//			System.out.println(b);
+//		}
+		return returnVal;
 	}
 	
 	
