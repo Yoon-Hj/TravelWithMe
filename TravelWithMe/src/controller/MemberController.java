@@ -74,6 +74,12 @@ public class MemberController {
 		return mav;
 	}
 	
+	@RequestMapping("moreNotice.do")
+	public @ResponseBody List<HashMap<String, String>> moreNotice(){
+		
+		return null;
+	}
+	
 	@RequestMapping("joinForm.do")
 	public void joinForm() {}
 	

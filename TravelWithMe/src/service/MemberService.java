@@ -91,6 +91,10 @@ public class MemberService {
 		return rev;
 
 	}
+	
+	public List<HashMap<String, String>> getMoreNotice(String mid){
+		return null;
+	}
 
 //	public void joinMember(Member member, String[] likecode) {
 //		// TODO Auto-generated method stub
