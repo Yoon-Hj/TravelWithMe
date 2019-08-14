@@ -133,7 +133,7 @@
 				<td>
 				 	<a style="color: #818181;">Travel with Guide</a>
 				 	<a class="canClick" href="#">목록보기</a>
-		   			<a class="canClick" href="#">글작성</a>
+		   			<a class="canClick" href="guideWriteForm.do">글작성</a>
 				</td>
 				<td>
 					<a class="canClick" href="attractionInfo.do">Attraction Info</a>
