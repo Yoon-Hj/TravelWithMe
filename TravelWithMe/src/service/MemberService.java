@@ -95,10 +95,6 @@ public class MemberService {
 	}
 
 	public List<Notice> getMoreNotice(String mid){
-		for(Notice b: m_mdao.selectAllNoticeById(mid)) {
-			System.out.println(b);
-		}
-		
 		return m_mdao.selectAllNoticeById(mid);
 	}
 

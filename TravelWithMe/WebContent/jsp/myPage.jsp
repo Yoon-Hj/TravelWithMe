@@ -10,9 +10,6 @@
 	h1{
 		margin:10%;
 	}
-	div{
-		border:solid 1px;
-	}
 	
 	.row{
 		grid-template-columns:auto auto auto;
@@ -137,7 +134,8 @@
 </c:forEach>
 </table>
 <div class="inNews">
-<input type="button" onclick="t()" value="더보기" data-toggle="modal" data-target="#moreNewsForm" style="background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
+<input type="button" id="moreNews" value="더보기" data-toggle="modal" data-target="#moreNewsForm" style="background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
+<!-- <input type="button" onclick="t()" value="더보기" data-toggle="modal" data-target="#moreNewsForm" style="background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;"> -->
 <!-- <span style="font-size:15px; color: black; cursor:pointer" onclick="openNewsModal()">더보기</span> -->
 <!-- <button id="moreNews">더보기</button> -->
 </div>
@@ -211,15 +209,10 @@
 	        
 	        <!-- Modal body -->
 	        <div class="modal-body" style="text-align: center">
-	        	<table>
-	        		<tr>
-	        			<td></td>
-	        			<td></td>
-	        		</tr>
+	        	<table id="allNews">
+	        		<tbody></tbody>
 	        	</table>
 	        </div>
-	        
-	        
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
 		          <button type="button" class="btn btn-success" data-dismiss="modal">확인</button>
