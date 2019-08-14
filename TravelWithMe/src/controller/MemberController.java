@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.List;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -34,29 +33,7 @@ public class MemberController {
 	public void index() {}
 	
 	
-	@RequestMapping("joinForm.do")
-	public void joinForm() {}
 	
-	@RequestMapping(value = "checkId.do", method = RequestMethod.GET)
-	public @ResponseBody String checkId(@RequestParam("id") String user_id) {
-		
-		return "" + m_msvc.checkId(user_id);
-
-	}
-	
-    @RequestMapping("joinMember.do")
-    public String joinMember(Member member, String mbirth2, String likecode[]) {
-		//System.out.println(member);
-		//System.out.println(mbirth2);
-		//System.out.println(likecode[0]);
-		//System.out.println(likecode[1]);
-		//System.out.println(likecode[2]);
-    	
-    	m_msvc.joinMember(member,likecode);
-    	
-    	return null;
-    	
-    }
 	
 	@RequestMapping("login.do")
 	public @ResponseBody String login_test(HttpSession session,
@@ -97,5 +74,27 @@ public class MemberController {
 		return mav;
 	}
 	
+	@RequestMapping("joinForm.do")
+	public void joinForm() {}
 	
+	@RequestMapping(value = "checkId.do", method = RequestMethod.GET)
+	public @ResponseBody String checkId(@RequestParam("id") String user_id) {
+		
+		return "" + m_msvc.checkId(user_id);
+
+	}
+	
+    @RequestMapping("joinMember.do")
+    public String joinMember(Member member, String mbirth2, String likecode[]) {
+		//System.out.println(member);
+		//System.out.println(mbirth2);
+		//System.out.println(likecode[0]);
+		//System.out.println(likecode[1]);
+		//System.out.println(likecode[2]);
+    	
+//    	m_msvc.joinMember(member,likecode);
+    	
+    	return null;
+    	
+    }
 }
