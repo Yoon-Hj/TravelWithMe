@@ -34,7 +34,7 @@ public interface IMemberDao {
 	public void insertMempick(Mempick mempick);
 	
 	//알림내역
-	public List<Notice> selectAllNoticeById(String mid);
+	public List<HashMap<String, String>> selectAllNoticeById(String mid);
 	public void insertNotice(Notice notice);
 	
 	//신청내역

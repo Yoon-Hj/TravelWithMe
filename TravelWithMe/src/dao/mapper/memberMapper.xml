@@ -23,7 +23,7 @@
 	</select>
 	
 	<!-- 아이디로 알림내역 조회 -->
-	<select id="selectAllNoticeById" parameterType="String" resultType="notice">
+	<select id="selectAllNoticeById" parameterType="String" resultType="java.util.HashMap">
 		select b1.bkind, b1.btitle, b2.* from board b1, (select a1.*, a2.nkreason from notice a1, noticekind a2
         where a1.nkcode = a2.nkcode order by a1.noticetime desc) b2 where b1.bnum = b2.bnum and b2.mid = #{mid}
 	</select>

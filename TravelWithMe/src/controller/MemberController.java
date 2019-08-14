@@ -75,8 +75,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("moreNotice.do")
-	public @ResponseBody List<HashMap<String, String>> moreNotice(){
-		
+	public @ResponseBody List<HashMap<String, String>> moreNotice(HttpSession session){
+		String mid = (String)session.getAttribute("user");
+		System.out.println(mid);
+		m_msvc.getMoreNotice(mid);
 		return null;
 	}
 	
