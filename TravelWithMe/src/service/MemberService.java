@@ -92,53 +92,33 @@ public class MemberService {
 
 	}
 
-//	public void joinMember(Member member, String[] likecode) {
-//		// TODO Auto-generated method stub
-//
-//		HashMap<String, Object> pick = new HashMap<String, Object>();
-//
+	public void joinMember(Member member, String[] likecode, String mbirth2) {
+		// TODO Auto-generated method stub
+		String  birth = mbirth2; // 형식을 지켜야 함
+		java.sql.Date mbirth = java.sql.Date.valueOf(birth);
+        member.setMbirth(mbirth);
+        String a = sha.sha256(member.getMpw());
+        member.setMpw(a);
+        m_mdao.insertMember(member);
+       
+//       String id = null;
+//       String like = null;
+//	   Mempick mempick = new Mempick(id,like);
+//	   if(likecode != null) {
 //		for(String code : likecode){
-//
-//			pick.put("mid", member.getMid());
-//			pick.put("likecode", code);
-//			Mempick mempick = new Mempick(pick, code);
-//			mempick.setMid(mid);
+//	
+//			mempick.setMid(member.getMid());
 //			mempick.setLikecode(code);
-//			MemberDao.insertMempick(mempick);
+//			m_mdao.insertMempick(mempick);
 //		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//	}
+//	   else if(likecode == null) {
+//		   mempick.setMid(member.getMid());
+//			mempick.setLikecode("null");
+//			m_mdao.insertMempick(mempick);
+//			System.out.println(likecode);
+//	   }
+	}
+	
+	
 	}
