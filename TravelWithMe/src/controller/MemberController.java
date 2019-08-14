@@ -10,10 +10,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.Member;
 import service.AdminService;
 import service.BoardService;
 import service.MemberService;
@@ -29,9 +31,6 @@ public class MemberController {
 	
 	@RequestMapping("index.do")
 	public void index() {}
-	
-	
-	
 	
 	
 	
@@ -75,5 +74,27 @@ public class MemberController {
 		return mav;
 	}
 	
+	@RequestMapping("joinForm.do")
+	public void joinForm() {}
 	
+	@RequestMapping(value = "checkId.do", method = RequestMethod.GET)
+	public @ResponseBody String checkId(@RequestParam("id") String user_id) {
+		
+		return "" + m_msvc.checkId(user_id);
+
+	}
+	
+    @RequestMapping("joinMember.do")
+    public String joinMember(Member member, String mbirth2, String likecode[]) {
+		//System.out.println(member);
+		//System.out.println(mbirth2);
+		//System.out.println(likecode[0]);
+		//System.out.println(likecode[1]);
+		//System.out.println(likecode[2]);
+    	
+//    	m_msvc.joinMember(member,likecode);
+    	
+    	return null;
+    	
+    }
 }
