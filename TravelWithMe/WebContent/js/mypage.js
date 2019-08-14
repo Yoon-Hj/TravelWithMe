@@ -1,10 +1,13 @@
 $(document).ready(function(){
 	$('#moreNews').on('click', function(){
+		$('.starRev').hide();
+		$('.modal-body').show();
 		$( '#allNews > tbody').empty();
 		$.ajax({
 			url : "moreNotice.do",
 			type : "post",
 			success : function(data) {
+				alert("다시 받아왔음");
 				var nlist = data;
 				var table = "";
 				for(var i in nlist){
@@ -43,10 +46,15 @@ $(document).ready(function(){
 			}
 		});
 	});
+//	data-toggle="modal" data-target="#moreNewsForm"
 	
 	function evGuide(){
-		
+		$('.modal-body').hide();
+		$('.starRev').show();
 	};
+//	function evGuide(){
+//		$('.test').show();
+//	};
 	
 	
 	
@@ -71,8 +79,10 @@ $(document).ready(function(){
 		
 		if(type == "0"){
 			alert("게시글 화면으로 이동해.");
+			evGuide();
 		}else if(type == "1"){
 			alert("별점평가 화면을 띄워");
+			evGuide();
 		}else if(type == "2"){
 			alert("참석여부 화면을 띄워");
 		}
@@ -94,6 +104,30 @@ $(document).ready(function(){
 	
 	
 
+	
+	
+	
+	
+	$('.starRev span').click(function(){
+		  $(this).parent().children('span').removeClass('on');
+		  $(this).addClass('on').prevAll('span').addClass('on');
+		  var point = $(this).html();
+		  var gPoint = $('#gPoint');
+		  gPoint.val(point);
+		  alert(gPoint.val());
+		  return false;
+		});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 });
 
