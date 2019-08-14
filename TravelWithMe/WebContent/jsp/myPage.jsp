@@ -70,8 +70,26 @@
 		text-align:left;"
 	}
 	
+	
+	
+	
+	
+	
+	
+	.starR{
+	  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+	  background-size: auto 100%;
+	  width: 30px;
+	  height: 30px;
+	  display: inline-block;
+	  text-indent: -9999px;
+	  cursor: pointer;
+	}
+	.starR.on{background-position:0 0;}
+	
+	
+	
 </style>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="js/mypage.js?v=<%=System.currentTimeMillis() %>"></script>
 </head>
@@ -200,11 +218,19 @@
 	        </div>
 	        
 	        <!-- Modal body -->
-	        <div class="modal-body" style="text-align: center">
+	        <div class="modal-body" style="text-align: center" id="tt">
 	        	<table id="allNews">
 	        		<tbody></tbody>
 	        	</table>
 	        </div>
+	        <div class="starRev" style="display:none">
+				<span class="starR on" value="1">1</span>
+				<span class="starR">2</span>
+				<span class="starR">3</span>
+				<span class="starR">4</span>
+				<span class="starR">5</span>
+				<input type="hidden" value="a" id="gPoint">
+			</div>
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
 		          <button type="button" class="btn btn-success" data-dismiss="modal">확인</button>
@@ -213,27 +239,6 @@
 	     </div>
 	  </div>
 
-		<!-- 가이드 평가하기 -->
-	  <div class="modal fade" id="evGuideModal">
-		<div class="modal-dialog modal-dialog-scrollable">
-	      <div class="modal-content">
-	        <!-- Modal Header -->
-	        <div class="modal-header">
-	          <h3 class="modal-title" style="font-family: 배달의민족 도현">가이드 평가</h3>
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        </div>
-	        
-	        <!-- Modal body -->
-	        <div class="modal-body" style="text-align: center">
-	        	별점 평가할 그 것들을 넣어
-	        </div>
-		        <!-- Modal footer -->
-		        <div class="modal-footer">
-		          <button type="button" class="btn btn-success" data-dismiss="modal">확인</button>
-		        </div>
-	       </div>
-	     </div>
-	  </div>
 
 
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang='en'>
 <head>
@@ -225,7 +226,8 @@ function test(){
 
 <body>
 	<h1 class="title">SIGN UP</h1>
-
+<h1>${codeList[0].likecode }</h1>
+<h1>${codeList[0].likename }</h1>
 
 	<form name="join"action="joinMember.do" method="post">
 
@@ -335,15 +337,12 @@ function test(){
 <tr>
 <td>
 
+
 <div name="likecheck">
-<input type="checkbox" name="likecode" onClick="count_ck(this);" value="L1" />쇼핑 
-<input type="checkbox" name="likecode" onClick="count_ck(this);" value="L2" />맛집
-<input type="checkbox" name="likecode" onClick="count_ck(this);" value="L3" />주류
-<input type="checkbox" name="likecode" onClick="count_ck(this);" value="L4" />사진
-<input type="checkbox" name="likecode" onClick="count_ck(this);" value="L5" />역사(유적지 및 박물관)
-<input type="checkbox" name="likecode" onClick="count_ck(this);" value="L6" />축제
-<input type="checkbox" name="likecode" onClick="count_ck(this);" value="L7" />체험
-						</div>
+<c:forEach var="codelike" items="${codeList}">
+<input type="checkbox" name="likecode" onClick="count_ck(this)" value="${codelike.likecode}" /> ${codelike.likename}
+</c:forEach>
+</div>
 </td>
 </tr>
 
