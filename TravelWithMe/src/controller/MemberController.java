@@ -83,14 +83,6 @@ public class MemberController {
 		return m_msvc.getMoreNotice(mid);
 	}
 	
-	@RequestMapping("joinForm.do")
-	public void joinForm() {
-		
-		//여기서 넘겨 joinform.jsp로
-		
-		
-		
-	}
 	
 	@RequestMapping(value = "checkId.do", method = RequestMethod.GET)
 	public @ResponseBody String checkId(@RequestParam("id") String user_id) {
@@ -113,7 +105,19 @@ public class MemberController {
     	
     }
     
-    
+    @RequestMapping("joinForm.do")
+	public ModelAndView joinForm() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("codeList", m_asvc.getLikecode());
+		mav.setViewName("joinForm");
+		System.out.println(m_asvc.getLikecode());
+		return mav;
+		
+		//여기서 넘겨 joinform.jsp로
+		
+		
+		
+	}
     
     
     

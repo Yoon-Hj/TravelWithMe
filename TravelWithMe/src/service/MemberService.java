@@ -122,42 +122,12 @@ public class MemberService {
 	   }
 	}
 	
-	
+
 	public List<Notice> getMoreNotice(String mid){
 		return m_mdao.selectAllNoticeById(mid);
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
 
 
 
