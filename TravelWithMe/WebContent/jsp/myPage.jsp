@@ -223,17 +223,22 @@
 	        		<tbody></tbody>
 	        	</table>
 	        </div>
-	        <div class="starRev" style="display:none">
+	        <div class="starRev" style="display:none;text-align:center">
+	        	<div>
+	        		<h1>가이드 평가</h1>
+	        		<h3 id="guideTitle"></h3>
+	        	</div>
 				<span class="starR on" value="1">1</span>
 				<span class="starR">2</span>
 				<span class="starR">3</span>
 				<span class="starR">4</span>
 				<span class="starR">5</span>
 				<input type="hidden" value="a" id="gPoint">
+				<input type="hidden" value="a" id="guideBnum">
 			</div>
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" class="btn btn-success" data-dismiss="modal">확인</button>
+		          <button type="button" id="evGuide" class="btn btn-success" data-dismiss="modal">확인</button>
 		        </div>
 	       </div>
 	     </div>

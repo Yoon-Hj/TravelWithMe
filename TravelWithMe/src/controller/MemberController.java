@@ -114,12 +114,12 @@ public class MemberController {
 		return mav;
 		
 		//여기서 넘겨 joinform.jsp로
-		
-		
-		
 	}
     
-    
+    @RequestMapping("evGuide.do")
+    public void evGuide(String bnum, String gPoint) {
+    	
+    }
     
     
 }

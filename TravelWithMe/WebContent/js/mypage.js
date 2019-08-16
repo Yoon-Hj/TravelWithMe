@@ -7,7 +7,6 @@ $(document).ready(function(){
 			url : "moreNotice.do",
 			type : "post",
 			success : function(data) {
-				alert("다시 받아왔음");
 				var nlist = data;
 				var table = "";
 				for(var i in nlist){
@@ -32,7 +31,7 @@ $(document).ready(function(){
 							type2 = 2;
 					}
 					table += "<tr>";
-					table += "<td>" + "<input type='hidden'  value='" + nlist[i].bnum + "/" + type2 + "'>" + "</td>"
+					table += "<td>" + "<input type='hidden'  value='" + nlist[i].bnum + "/" + type2 + "/" + nlist[i].btitle + "'>" + "</td>"
 					table += "<td style='width:400px'><p class='noticeDetail'>" + type + nlist[i].btitle + "<br>";
 					table += nlist[i].nkreason + "</p></td>";
 					table += "";
@@ -48,7 +47,9 @@ $(document).ready(function(){
 	});
 //	data-toggle="modal" data-target="#moreNewsForm"
 	
-	function evGuide(){
+	function evGuide(title, bnum){
+		$('#guideTitle').html("'" + title + "'" + " 어땠나요?");
+		$('#guideBnum').val(bnum);
 		$('.modal-body').hide();
 		$('.starRev').show();
 	};
@@ -76,13 +77,14 @@ $(document).ready(function(){
 		var delrow = $(this).closest("tr").find("input:eq(0)").val().split("/");
 		var bnum = delrow[0];
 		var type = delrow[1];
+		var title = delrow[2];
 		
 		if(type == "0"){
 			alert("게시글 화면으로 이동해.");
-			evGuide();
+			evGuide(title, bnum);
 		}else if(type == "1"){
 			alert("별점평가 화면을 띄워");
-			evGuide();
+			evGuide(title, bnum);
 		}else if(type == "2"){
 			alert("참석여부 화면을 띄워");
 		}
@@ -107,7 +109,7 @@ $(document).ready(function(){
 	
 	
 	
-	
+	// 별 누를때마다 점수 바뀌기
 	$('.starRev span').click(function(){
 		  $(this).parent().children('span').removeClass('on');
 		  $(this).addClass('on').prevAll('span').addClass('on');
@@ -117,8 +119,20 @@ $(document).ready(function(){
 		  alert(gPoint.val());
 		  return false;
 		});
-	
-	
+	// 평가 완료후 컨트롤러로 보내기.
+	$('#evGuide').on('click', function(){
+		$.ajax({
+			url : "evGuide.do",
+			type : "post",
+			data : {
+				
+			},
+			success : function() {},
+			error : function(){
+				alert("?? 에러임; ");
+			}
+		});
+	});
 	
 	
 	
