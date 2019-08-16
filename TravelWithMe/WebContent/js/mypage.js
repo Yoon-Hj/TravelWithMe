@@ -78,7 +78,7 @@ $(document).ready(function(){
 		var bnum = delrow[0];
 		var type = delrow[1];
 		var title = delrow[2];
-		
+		alert(delrow);
 		if(type == "0"){
 			alert("게시글 화면으로 이동해.");
 			evGuide(title, bnum);

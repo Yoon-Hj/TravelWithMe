@@ -127,7 +127,7 @@ public class MemberService {
 		return m_mdao.selectAllNoticeById(mid);
 	}
 
-	public void addGuidePoint(String bnum, String gPoint) throws Exception {
+	public void addGuidePoint(String bnum, String gPoint, String mid) throws Exception {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		int parseBnum = Integer.parseInt(bnum);
 		int parsePoint = Integer.parseInt(gPoint);
@@ -137,8 +137,10 @@ public class MemberService {
 			if(parsePoint >= 3 && parsePoint <= 5) {
 				params.put("bnum", parseBnum);
 				params.put("gpoint", parsePoint);
+				params.put("mid", mid);
 				m_mdao.updateGuidePoint(params);
 			}
+			m_mdao.updateEvalStatus(params);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -147,6 +149,7 @@ public class MemberService {
 	}
 
 
+	
 
 
 }

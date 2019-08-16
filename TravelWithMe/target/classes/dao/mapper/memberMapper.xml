@@ -121,11 +121,15 @@
 		select count(*) from notice where mid = #{mid} and noticestatus = 0
 	</select>
 	
-	
+	<!-- 가이드포인트 변경 -->
 	<update id="updateGuidePoint" parameterType="java.util.HashMap">
 		update member set mguidepoint = mguidepoint + ${gpoint}
 		where mid = (select mid from member natural join board where bnum = #{bnum})
 	</update>
 	
+	<!-- 가이드 평가 여부 변경 -->
+	<update id="updateEvalStatus" parameterType="java.util.HashMap">
+		update register set evalstatus = 1 where bnum = #{bnum} and mid = #{mid}
+	</update>
 	
 </mapper>
