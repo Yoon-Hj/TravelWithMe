@@ -127,7 +127,24 @@ public class MemberService {
 		return m_mdao.selectAllNoticeById(mid);
 	}
 
-	
+	public void addGuidePoint(String bnum, String gPoint) throws Exception {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		int parseBnum = Integer.parseInt(bnum);
+		int parsePoint = Integer.parseInt(gPoint);
+		
+		System.out.println("서비스에서 포인트 값 : " + parsePoint);
+		try {
+			if(parsePoint >= 3 && parsePoint <= 5) {
+				params.put("bnum", parseBnum);
+				params.put("gpoint", parsePoint);
+				m_mdao.updateGuidePoint(params);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Exception();
+		}
+	}
 
 
 

@@ -55,4 +55,7 @@ public interface IMemberDao {
 	
 	//회원 안읽은 알림수 구하기
 	public int getMyNoticeCount(String mid);
+	
+	//가이드포인트 업데이트
+	public void updateGuidePoint(HashMap<String, Object> params);
 }

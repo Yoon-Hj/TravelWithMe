@@ -120,4 +120,12 @@
 	<select id="getMyNoticeCount" parameterType="String" resultType="int">
 		select count(*) from notice where mid = #{mid} and noticestatus = 0
 	</select>
+	
+	
+	<update id="updateGuidePoint" parameterType="java.util.HashMap">
+		update member set mguidepoint = mguidepoint + ${gpoint}
+		where mid = (select mid from member natural join board where bnum = #{bnum})
+	</update>
+	
+	
 </mapper>
