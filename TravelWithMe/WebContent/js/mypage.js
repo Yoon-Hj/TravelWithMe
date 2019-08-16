@@ -81,7 +81,7 @@ $(document).ready(function(){
 		alert(delrow);
 		if(type == "0"){
 			alert("게시글 화면으로 이동해.");
-			evGuide(title, bnum);
+//			evGuide(title, bnum);
 		}else if(type == "1"){
 			alert("별점평가 화면을 띄워");
 			evGuide(title, bnum);

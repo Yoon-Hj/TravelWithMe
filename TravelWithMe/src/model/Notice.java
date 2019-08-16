@@ -15,6 +15,7 @@ public class Notice {
 	private String nkreason;
 	private String btitle;
 	private String bkind;
+	private int evalstatus;	// 평가여부
 	
 	public String getNid() {
 		return nid;
@@ -70,11 +71,17 @@ public class Notice {
 	public void setBkind(String bkind) {
 		this.bkind = bkind;
 	}
-	
+	public int getEvalstatus() {
+		return evalstatus;
+	}
+	public void setEvalstatus(int evalstatus) {
+		this.evalstatus = evalstatus;
+	}
 	@Override
 	public String toString() {
 		return "Notice [nid=" + nid + ", nkcode=" + nkcode + ", bnum=" + bnum + ", mid=" + mid + ", noticetime="
 				+ noticetime + ", noticestatus=" + noticestatus + ", nkreason=" + nkreason + ", btitle=" + btitle
-				+ ", bkind=" + bkind + "]";
+				+ ", bkind=" + bkind + ", evalstatus=" + evalstatus + "]";
 	}
+	
 }
