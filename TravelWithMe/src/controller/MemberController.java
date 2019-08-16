@@ -118,6 +118,11 @@ public class MemberController {
     
     @RequestMapping("evGuide.do")
     public void evGuide(String bnum, String gPoint) throws Exception {
+    	System.out.println(bnum);
+    	System.out.println(gPoint);
+    	System.out.println("======================");
+//    	m_msvc.addGuidePoint("12", "4");
+    	
     	m_msvc.addGuidePoint(bnum, gPoint);
     	System.out.println("서비스 다녀왔음");
     }

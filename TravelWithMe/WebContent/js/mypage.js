@@ -125,13 +125,13 @@ $(document).ready(function(){
 			url : "evGuide.do",
 			type : "post",
 			data : {
-				
+				bnum : $('#guideBnum').val(),
+				gPoint : $('#gPoint').val()
 			},
 			success : function() {},
-			error : function(){
-				alert("?? 에러임; ");
-			}
+			error : function(){}
 		});
+		alert("별점 평가가 완료되었습니다.");
 	});
 	
 	
