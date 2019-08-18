@@ -129,7 +129,7 @@
 	
 	<!-- 가이드 평가 여부 변경 -->
 	<update id="updateEvalStatus" parameterType="java.util.HashMap">
-		update register set evalstatus = 1 where bnum = #{bnum} and mid = #{mid}
+		update notice set evalstatus = 1 where bnum = #{bnum} and mid = #{mid}
 	</update>
 	
 </mapper>

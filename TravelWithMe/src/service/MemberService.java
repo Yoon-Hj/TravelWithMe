@@ -124,6 +124,10 @@ public class MemberService {
 	
 
 	public List<Notice> getMoreNotice(String mid){
+		System.out.println("-----------------------------");
+		for(Notice n : m_mdao.selectAllNoticeById(mid)) {
+			System.out.println(n);
+		}
 		return m_mdao.selectAllNoticeById(mid);
 	}
 
@@ -134,10 +138,10 @@ public class MemberService {
 		
 		System.out.println("서비스에서 포인트 값 : " + parsePoint);
 		try {
+			params.put("bnum", parseBnum);
+			params.put("mid", mid);
 			if(parsePoint >= 3 && parsePoint <= 5) {
-				params.put("bnum", parseBnum);
 				params.put("gpoint", parsePoint);
-				params.put("mid", mid);
 				m_mdao.updateGuidePoint(params);
 			}
 			m_mdao.updateEvalStatus(params);
