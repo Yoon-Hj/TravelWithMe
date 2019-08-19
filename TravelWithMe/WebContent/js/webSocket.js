@@ -78,4 +78,13 @@ $(document).ready(function(){
 	$('#myPage').on('click', function(){
 		location.href="myPage.do";
 	});
+	
+	$('#find').on('click', function(){
+		location.href="findForm.do";
+	});
+	
+	
+	
+	
+	
 });

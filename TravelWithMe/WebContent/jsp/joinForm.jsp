@@ -226,8 +226,6 @@ function test(){
 
 <body>
 	<h1 class="title">SIGN UP</h1>
-<h1>${codeList[0].likecode }</h1>
-<h1>${codeList[0].likename }</h1>
 
 	<form name="join"action="joinMember.do" method="post">
 
@@ -320,7 +318,7 @@ function test(){
      <!-- Modal Header -->
 		        <div class="modal-header">
 		          <h3 class="modal-title" style="font-family: 배달의민족 도현">당신의 여행 취향은?</h3>
-					<button type="button" class="close" data-dismiss="modal">×</button>
+			
 		        </div>
 <table>
 

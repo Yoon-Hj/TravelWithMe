@@ -165,6 +165,13 @@ public class MemberService {
 		m_mdao.updateNoticestatus(nid);
 	}
 
+	public String findId(String id, String mail) {
+		String result = m_mdao.selectId(id,mail);
+		if(result == null) {
+			result="입력하신 내용과 일치하는 정보가 없습니다.";
+		}
+		return result;
+	}
 	
 
 

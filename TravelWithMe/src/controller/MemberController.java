@@ -134,4 +134,22 @@ public class MemberController {
     	m_msvc.readNotice(nid);
     }
     
+    @RequestMapping("findForm.do")
+    public void findForm() {
+		
+		}
+    
+    @RequestMapping("findID.do")
+    public String findID(String findName1,String findMail1) {
+		
+    	return null;
+		}
+	
+    @RequestMapping("findPW,do")
+    public String findPW() {
+		return null;
+		}
+    
+    
+    
 }
