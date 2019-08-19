@@ -152,6 +152,10 @@ public class MemberService {
 		}
 	}
 
+	public void readNotice(String nid) {
+		System.out.println("서비스에서 받은 nid : " + nid);
+		m_mdao.updateNoticestatus(nid);
+	}
 
 	
 
