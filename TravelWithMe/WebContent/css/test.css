@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+.writeFormBtn {
+  display: block;
+  width: 100%;
+  border: none;
+  padding: 14px 18px;
+  background-color: white;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  font-family: 함초롬돋움;
+  font-size: 20px;
+  color : black;
+  opacity: 0.6
+ }
+  
+
+.writeFormBtn:hover{
+	background-color: rgb(181, 195, 200);
+	color: white;
+	opacity: 1;
+}
+
+.writeFormDiv table{
+	width : 100%;
+}
+
+.writeFormDiv td{
+	width: 30%;
+}
+
+#basicInfo table, #detailInfo table, #preview table{
+	margin: auto;
+	width : 70%;
+}
+
+.InfoTd{
+	font-family : 한초롬돋움;
+	font-size: 20px;
+	padding: 10px;
+	width: 200px;
+
+}
+
+.nextA {
+  text-decoration: none;
+  background-color : rgb(181, 195, 200);
+  display: inline-block;
+  padding: 8px 16px;
+  float: right;
+  margin-bottom: 30px;
+}
+
+.nextA:hover{
+  background-color: #f1f1f1;
+  color: black;
+  cursor: pointer;
+}
+
+.previousA {
+  text-decoration: none;
+  background-color : rgb(181, 195, 200);
+  display: inline-block;
+  padding: 8px 16px;
+  float: left;
+  margin-bottom: 30px;
+}
+
+.previousA:hover{
+  background-color: #f1f1f1;
+  color: black;
+  cursor: pointer;
+}
+
+.NoBootStrap{
+	width:200px;
+	border: 1px solid #ccc; 
+	border-radius: 4px; 
+	padding: 5px; 
+	color: #787878; 
+}

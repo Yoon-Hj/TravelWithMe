@@ -143,6 +143,13 @@ public class MemberService {
 		}
 		return m_mdao.selectAllNoticeById(mid);
 	}
+	
+	public List<Register> getMoreRegister(String mid){
+		System.out.println("-----------------------------");
+		for(Register r : m_mdao.selectAllRegisterById(mid))
+			System.out.println(r);
+		return m_mdao.selectAllRegisterById(mid);
+	}
 
 	public void addGuidePoint(String bnum, String gPoint, String mid) throws Exception {
 		HashMap<String, Object> params = new HashMap<String, Object>();

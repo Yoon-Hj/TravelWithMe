@@ -206,7 +206,14 @@ $(document).ready(function(){
 	
 	
 	
-	
+	$('.contentsRow').each( function() {
+		$(this).css('cursor', 'pointer');
+		$(this).hover(function(){
+			$(this).css('text-decoration','underline');
+		}, function(){
+			$(this).css('text-decoration','none');
+		});
+	});
 	
 	
 	
