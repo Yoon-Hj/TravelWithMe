@@ -23,7 +23,7 @@ public interface IMemberDao {
 	public List<HashMap<String, String>> selectRegisterById(String mid);
 	
 	//아이디, 비밀번호 찾기
-	public String selectId(HashMap<String, Object> params);
+	public String selectId(String id,String email);
 	public String selectOneMem(HashMap<String, Object> params);
 	public void updatePw(HashMap<String, Object> params);
 	
@@ -60,4 +60,7 @@ public interface IMemberDao {
 	public void updateGuidePoint(HashMap<String, Object> params);
 	//평가여부 업데이트
 	public void updateEvalStatus(HashMap<String, Object> params);
+	//알림 읽음
+	public void updateNoticestatus(String nid);
+	
 }

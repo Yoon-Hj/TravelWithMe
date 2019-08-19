@@ -26,7 +26,9 @@ public class MemberService {
 
 
 
-	public int login(String mid, String mpw) {
+	public HashMap<String, Object> login(String mid, String mpw) {
+		HashMap<String, Object> returnVal = new HashMap<String, Object>();
+		
 		//	암호화 적용 전,  암호화 적용후 지우고 아래부분 사용할 것
 		String checkPw = m_mdao.selectPw(mid);
 		int result = 2;		// 존재하지 않는 ID
@@ -47,7 +49,10 @@ public class MemberService {
 		//			}else
 		//				result = 3; // 아이디 또는 비밀번호 틀림
 		//		}
-		return result;
+		
+		returnVal.put("picklist", m_mdao.selectLikecodeById(mid));
+		returnVal.put("result", result);
+		return returnVal;
 	}
 
 	public void testMethod(String mid) {
@@ -94,37 +99,56 @@ public class MemberService {
 
 	}
 
-	public void joinMember(Member member, String[] likecode, String mbirth2) {
+	//회원가입
+	public void joinMember(Member member, String[] likecode, String mbirth2) throws Exception {
 		// TODO Auto-generated method stub
-		String  birth = mbirth2; // 형식을 지켜야 함
-		java.sql.Date mbirth = java.sql.Date.valueOf(birth);
-        member.setMbirth(mbirth);
-        String a = sha.sha256(member.getMpw());
-        member.setMpw(a);
-        m_mdao.insertMember(member);
-       
-       String id = null;
-       String like = null;
-	   Mempick mempick = new Mempick(id,like);
-	   if(likecode != null) {
-		for(String code : likecode){
-	
-			mempick.setMid(member.getMid());
-			mempick.setLikecode(code);
-			m_mdao.insertMempick(mempick);
+		try {
+			String  birth = mbirth2; // 형식을 지켜야 함
+			java.sql.Date mbirth = java.sql.Date.valueOf(birth);
+			member.setMbirth(mbirth);
+			String a = sha.sha256(member.getMpw());
+			member.setMpw(a);
+			m_mdao.insertMember(member);
+			m_mdao.insertUsedid(member.getMid());
+			
+			String id = null;
+			String like = null;
+			Mempick mempick = new Mempick(id,like);
+			if(likecode != null) {
+				for(String code : likecode){
+					
+					mempick.setMid(member.getMid());
+					mempick.setLikecode(code);
+					m_mdao.insertMempick(mempick);
+				}
+			}
+			else if(likecode == null) {
+				mempick.setMid(member.getMid());
+				mempick.setLikecode("null");
+				m_mdao.insertMempick(mempick);
+				System.out.println(likecode);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Exception();
 		}
-	}
-	   else if(likecode == null) {
-		   mempick.setMid(member.getMid());
-			mempick.setLikecode("null");
-			m_mdao.insertMempick(mempick);
-			System.out.println(likecode);
-	   }
 	}
 	
 
 	public List<Notice> getMoreNotice(String mid){
+		System.out.println("-----------------------------");
+		for(Notice n : m_mdao.selectAllNoticeById(mid)) {
+			System.out.println(n);
+		}
 		return m_mdao.selectAllNoticeById(mid);
+	}
+	
+	public List<Register> getMoreRegister(String mid){
+		System.out.println("-----------------------------");
+		for(Register r : m_mdao.selectAllRegisterById(mid))
+			System.out.println(r);
+		return m_mdao.selectAllRegisterById(mid);
 	}
 
 	public void addGuidePoint(String bnum, String gPoint, String mid) throws Exception {
@@ -134,10 +158,10 @@ public class MemberService {
 		
 		System.out.println("서비스에서 포인트 값 : " + parsePoint);
 		try {
+			params.put("bnum", parseBnum);
+			params.put("mid", mid);
 			if(parsePoint >= 3 && parsePoint <= 5) {
-				params.put("bnum", parseBnum);
 				params.put("gpoint", parsePoint);
-				params.put("mid", mid);
 				m_mdao.updateGuidePoint(params);
 			}
 			m_mdao.updateEvalStatus(params);
@@ -148,7 +172,16 @@ public class MemberService {
 		}
 	}
 
+	public void readNotice(String nid) {
+		System.out.println("서비스에서 받은 nid : " + nid);
+		m_mdao.updateNoticestatus(nid);
+	}
 
+	public String findId(String id, String mail) {
+		String result = m_mdao.selectId(id,mail);
+		
+		return result;
+	}
 	
 
 

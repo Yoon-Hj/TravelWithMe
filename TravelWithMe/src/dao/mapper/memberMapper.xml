@@ -46,7 +46,7 @@
 	</select>
 	
 	<!-- 아이디 찾기 -->
-	<select id="selectId" parameterType="java.util.HashMap" resultType="String">
+	<select id="selectId" parameterType="String" resultType="String">
 		select mid from member where mname = #{mname} and mcontact = #{mcontact}
 	</select>
 	
@@ -129,7 +129,11 @@
 	
 	<!-- 가이드 평가 여부 변경 -->
 	<update id="updateEvalStatus" parameterType="java.util.HashMap">
-		update register set evalstatus = 1 where bnum = #{bnum} and mid = #{mid}
+		update notice set evalstatus = 1 where bnum = #{bnum} and mid = #{mid}
 	</update>
 	
+	<!-- 알림 읽음으로 변경 -->
+	<update id="updateNoticestatus" parameterType="String">
+		update notice set noticestatus = 1 where nid = #{nid}
+	</update>
 </mapper>

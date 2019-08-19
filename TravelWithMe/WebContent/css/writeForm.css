@@ -30,9 +30,9 @@
 	width: 30%;
 }
 
-#basicInfo table{
+#basicInfo table, #detailInfo table, #preview table{
 	margin: auto;
-	width : 70;
+	width : 70%;
 }
 
 .InfoTd{
@@ -41,4 +41,42 @@
 	padding: 10px;
 	width: 200px;
 
+}
+
+.nextA {
+  text-decoration: none;
+  background-color : rgb(181, 195, 200);
+  display: inline-block;
+  padding: 8px 16px;
+  float: right;
+  margin-bottom: 30px;
+}
+
+.nextA:hover{
+  background-color: #f1f1f1;
+  color: black;
+  cursor: pointer;
+}
+
+.previousA {
+  text-decoration: none;
+  background-color : rgb(181, 195, 200);
+  display: inline-block;
+  padding: 8px 16px;
+  float: left;
+  margin-bottom: 30px;
+}
+
+.previousA:hover{
+  background-color: #f1f1f1;
+  color: black;
+  cursor: pointer;
+}
+
+.NoBootStrap{
+	width:200px;
+	border: 1px solid #ccc; 
+	border-radius: 4px; 
+	padding: 5px; 
+	color: #787878; 
 }
