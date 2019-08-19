@@ -21,13 +21,26 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
 </script>
 <script>
+$(document).ready(function(){
+$("#findid").click(function() {
+	
+	var name = $('#').val();
+	$.ajax({
+		url : 'checkId.do?id='+ mid,
+		type : 'get',
+		success : function(data) {
+			if (data == 1) {
+				// 1 : 아이디가 중복되는 문구
+				$("#id_check").text("중복된 아이디입니다.");
+				$("#id_check").css("color", "red");
+				
+			} 
 
 </script>
 
 <body>
 <h1 class="title">FIND ID</h1>
 
-<form name="join"action="findID.do" method="post">
 
 <div>
 	<input type="text" class="form-control" id="findName1" name="findName1"
@@ -39,9 +52,9 @@
 					placeholder="email" maxlength="12">
 </div>
 
-<input class="btn btn-success" type="submit" value="FIND ID">
+<input class="btn btn-success" type="button" id="findid" value="FIND ID">
 
-</form>
+
 
 <h1 class="title">FIND PW</h1>
 

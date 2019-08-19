@@ -144,7 +144,7 @@ public class MemberController {
     public ModelAndView findID(String findName1,String findMail1) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("id", m_msvc.findId(findName1, findMail1));
-       // mav.setView(view);
+        //mav.setView(view);
 		return mav;
     	
 		}
