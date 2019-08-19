@@ -25,7 +25,19 @@ $(document).ready(function(){
 			url : "moreRegister.do",
 			type : "post",
 			success : function(data) {
-				
+				var rlist = data;
+				var table = "";
+				for(var i in rlist){
+					var type = rlist[i].bkind;
+					if(type == "A")
+						type = "[Travel with Me]";
+					else
+						type = "[Travel with Guide]";
+					table += "<tr>";
+					table += "<td>" + "</td>";
+					table += "</tr>";
+					
+				}
 			},
 			error : function(){}
 		});
