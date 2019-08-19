@@ -131,7 +131,6 @@ public class BoardService {
 		}else {
 			likecode = null;
 		}
-		System.out.println(likecode);
 		return b_bdao.selectAccomListByLike(likecode);
 	}
 	
