@@ -15,7 +15,7 @@ $(document).ready(function(){
 					var type2 = "";
 					var evalStatus = nlist[i].evalstatus;
 					if(type == "PM" || type == "PP" || type == "PR"){
-						type = "[포인트 ?????]";
+						type = "[포인트 변동???]";
 						type2 = 0;
 					}else if(type == "RG" || type == "RC"){
 						if(nlist[i].bkind == "A"){
@@ -42,7 +42,7 @@ $(document).ready(function(){
 					table += "<tr>";
 					table += "<td>" + "<input type='hidden'  value='" + nlist[i].bnum + "/" + type2 + "/" + nlist[i].btitle + "'>" + "</td>"
 					table += "<td>" + "<input type='hidden' value='" + nlist[i].nid + "/" + nlist[i].noticestatus + "'/>" + "</td>";
-					table += "<td style='width:400px;font-color:red'><p class='noticeDetail' style='font-color:red'>" + type + nlist[i].btitle + "<br>";
+					table += "<td><p class='noticeDetail' style='font-color:red'>" + type + nlist[i].btitle + "<br>";
 					table += nlist[i].nkreason + "</p></td>";
 					table += "";
 					table += "</tr>";
@@ -69,6 +69,12 @@ $(document).ready(function(){
 			var row = $(this).closest("tr").find("input:eq(1)").val().split("/");
 			if(row[1] == "1")
 				$(this).css('color', 'gray');
+			$(this).css('cursor', 'pointer');
+			$(this).hover(function(){
+				$(this).css('text-decoration','underline');
+			}, function(){
+				$(this).css('text-decoration','none');
+			});
 		 });
 	};
 	
@@ -95,6 +101,7 @@ $(document).ready(function(){
 		var rowColor = $(this).closest("tr").find("input:eq(1)").val().split("/");
 		if(rowColor[1] == "0"){
 			$(this).css('color', 'gray');
+			$(this).css('cursor', 'pointer');
 			$.ajax({
 				url : "readNotice.do",
 				type : "post",
@@ -119,7 +126,7 @@ $(document).ready(function(){
 	});
 	
 	$('#moreBoards').on('click', function(){
-		alert("게시판 더보기 임.");
+		alert("게시판 더보기 페이지로 이동해");
 	});
 	$('#moreRegister').on('click', function(){
 		alert("신청목록 더보기 임.");

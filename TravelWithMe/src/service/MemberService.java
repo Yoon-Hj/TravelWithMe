@@ -26,7 +26,9 @@ public class MemberService {
 
 
 
-	public int login(String mid, String mpw) {
+	public HashMap<String, Object> login(String mid, String mpw) {
+		HashMap<String, Object> returnVal = new HashMap<String, Object>();
+		
 		//	암호화 적용 전,  암호화 적용후 지우고 아래부분 사용할 것
 		String checkPw = m_mdao.selectPw(mid);
 		int result = 2;		// 존재하지 않는 ID
@@ -47,7 +49,10 @@ public class MemberService {
 		//			}else
 		//				result = 3; // 아이디 또는 비밀번호 틀림
 		//		}
-		return result;
+		
+		returnVal.put("picklist", m_mdao.selectLikecodeById(mid));
+		returnVal.put("result", result);
+		return returnVal;
 	}
 
 	public void testMethod(String mid) {

@@ -42,10 +42,11 @@ public class MemberController {
 	public @ResponseBody String login_test(HttpSession session,
 			String mid, String mpw) {
 		String val = null; 
-		
-		int result = m_msvc.login(mid, mpw);
+		HashMap<String, Object> resultMap = m_msvc.login(mid, mpw);
+		int result = (int)resultMap.get("result");
 		if(result == 1) {
 			session.setAttribute("user", mid);
+			session.setAttribute("picklist", resultMap.get("picklist"));
 			val = mid;
 		}else if(result == 2) {
 			val = "2";
