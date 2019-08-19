@@ -152,10 +152,7 @@
 </c:forEach>
 </table>
 <div class="inNews">
-<input type="button" id="moreNews" value="더보기" data-toggle="modal" data-target="#moreNewsForm" style="background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
-<!-- <input type="button" onclick="t()" value="더보기" data-toggle="modal" data-target="#moreNewsForm" style="background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;"> -->
-<!-- <span style="font-size:15px; color: black; cursor:pointer" onclick="openNewsModal()">더보기</span> -->
-<!-- <button id="moreNews">더보기</button> -->
+<input type="button" class="moreNews" value="더보기" data-toggle="modal" data-target="#moreNewsForm" style="background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
 </div>
 </div>
 
@@ -199,7 +196,7 @@
 </c:forEach>
 </table>
 <div class="inRegister">
-<button id="moreRegister">더보기</button>
+<input type="button" id="moreRegister" value="더보기" data-toggle="modal" data-target="#moreRegiForm" style="background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
 </div>
 </div>
 
@@ -207,35 +204,24 @@
 
 
 
-		<!-- 알림내역 더보기 -->	
-	  <div class="modal fade" id="moreNewsForm">
+
+
+		<!-- 신청내역 더보기 -->	
+	  <div class="modal fade" id="moreRegiForm">
 		<div class="modal-dialog modal-dialog-scrollable">
 	      <div class="modal-content">
 	        <!-- Modal Header -->
 	        <div class="modal-header">
-	          <h3 class="modal-title" style="font-family: 배달의민족 도현">알림내역</h3>
+	          <h3 class="modal-title" style="font-family: 배달의민족 도현">신청내역</h3>
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
 	        </div>
 	        
 	        <!-- Modal body -->
 	        <div class="modal-body" style="text-align: center">
-	        	<table id="allNews" style="font-color:red">
-	        		<tbody></tbody>
+	        	<table id="allRegis">
+	        		<tbody class="regisRow"></tbody>
 	        	</table>
 	        </div>
-	        <div class="starRev" style="display:none;text-align:center">
-	        	<div>
-	        		<h1>가이드 평가</h1>
-	        		<h3 id="guideTitle"></h3>
-	        	</div>
-				<span class="starR on" value="1">1</span>
-				<span class="starR">2</span>
-				<span class="starR">3</span>
-				<span class="starR">4</span>
-				<span class="starR">5</span>
-				<input type="hidden" value="a" id="gPoint">
-				<input type="hidden" value="a" id="guideBnum">
-			</div>
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
 		          <button type="button" id="evGuide" class="btn btn-success" data-dismiss="modal">확인</button>
@@ -243,11 +229,6 @@
 	       </div>
 	     </div>
 	  </div>
-
-
-
-
-
 
 
 

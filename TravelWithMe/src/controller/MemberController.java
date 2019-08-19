@@ -135,6 +135,12 @@ public class MemberController {
     	m_msvc.readNotice(nid);
     }
     
+    @RequestMapping("moreRegister.do")
+    public @ResponseBody String moreRegister() {
+    	
+    	return "";
+    }
+    
     @RequestMapping("findForm.do")
     public void findForm() {
 		

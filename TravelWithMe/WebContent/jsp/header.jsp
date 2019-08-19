@@ -10,7 +10,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="js/webSocket.js?v=<%=System.currentTimeMillis() %>"></script>
+  <script src="js/header.js?v=<%=System.currentTimeMillis() %>"></script>
 <title>Travel With Me</title>
 <style>
 	.overlay {
@@ -86,7 +86,7 @@
 	 
 	   	<c:otherwise>
 		   		<a style="font-family: D2Coding; margin-left: 905px; font-size: 17px;">${user}님</a>
-				<a href="#" style="color: #969696; margin-left: 7px; font-family: D2Coding; font-size: 17px;" id="myNotice">Messages<span class="badge" style="color: black; font-size: 18px">5</span></a>
+				<a href="#" style="color: #969696; margin-left: 7px; font-family: D2Coding; font-size: 17px;" data-toggle="modal" data-target="#moreNewsForm" class="moreNews">Messages<span class="badge" style="color: black; font-size: 18px">5</span></a>
 
 				<input type="button" value="LOGOUT" id="logout" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
 			   	<input type="button" value="MY PAGE" id="myPage" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
@@ -151,6 +151,46 @@
 		</table>
 	  </div>
 	</div>
+	
+	
+			<!-- 알림내역 더보기 -->	
+	  <div class="modal fade" id="moreNewsForm">
+		<div class="modal-dialog modal-dialog-scrollable">
+	      <div class="modal-content">
+	        <!-- Modal Header -->
+	        <div class="modal-header">
+	          <h3 class="modal-title" style="font-family: 배달의민족 도현">알림내역</h3>
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+	        
+	        <!-- Modal body -->
+	        <div class="modal-body" style="text-align: center">
+	        	<table id="allNews">
+	        		<tbody class="newsRow"></tbody>
+	        	</table>
+	        </div>
+	        <div class="starRev" style="display:none;text-align:center">
+	        	<div>
+	        		<h1>가이드 평가</h1>
+	        		<h3 id="guideTitle"></h3>
+	        	</div>
+				<span class="starR on" value="1">1</span>
+				<span class="starR">2</span>
+				<span class="starR">3</span>
+				<span class="starR">4</span>
+				<span class="starR">5</span>
+				<input type="hidden" value="a" id="gPoint">
+				<input type="hidden" value="a" id="guideBnum">
+			</div>
+		        <!-- Modal footer -->
+		        <div class="modal-footer">
+		          <button type="button" id="evGuide" class="btn btn-success" data-dismiss="modal">확인</button>
+		        </div>
+	       </div>
+	     </div>
+	  </div>
+	
+	
 
 	<script>
 	function openNav() {
