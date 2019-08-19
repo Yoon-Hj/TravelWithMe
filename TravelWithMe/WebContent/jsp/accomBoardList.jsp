@@ -143,7 +143,7 @@
 			<div class="row">
 			<c:forEach var="b" items="${recommList}" varStatus="status">
 			  <div class="column">
-				<a href="accomView.do?"><img src="imgs/gangwon.PNG" style="width:100%"></a>
+				<a href="readBoard.do?bnum=${b.bnum}&bkind=A"><img src="imgs/gangwon.PNG" style="width:100%"></a>
 				<div class="content">
 					<p><fmt:formatDate value="${b.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${b.afinishdate}" pattern="yyyy-MM-dd"/>
 					<br>[${b.aarea}] ${b.btitle}<br>${b.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${b.breadcount}</p>

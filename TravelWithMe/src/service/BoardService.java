@@ -10,6 +10,7 @@ import dao.IAdminDao;
 import dao.IBoardDao;
 import dao.IMemberDao;
 import model.AccomBoard;
+import model.Comments;
 import model.Preference;
 
 @Service
@@ -120,7 +121,6 @@ public class BoardService {
 	
 	
 	
-	
 	//동행게시물 추천 4개 불러오기
 	public List<AccomBoard> getAccomBoardList(List<String> picklist) {
 		String likecode;
@@ -128,7 +128,6 @@ public class BoardService {
 	        double randomValue = Math.random();
 	        int ran = (int)(randomValue * picklist.size()) -1;
 	        likecode = picklist.get(ran);
-	        System.out.println(likecode);
 		}else {
 			likecode = null;
 		}
@@ -142,14 +141,29 @@ public class BoardService {
 	}
 	
 	//해당 게시글 내용 조회
-	public void getBoardContent(int bnum, String bkind) {
+	public HashMap<String, Object> getBoardContent(int bnum, String bkind) {
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		if(bkind == "A") {
+			result.put("accomView", b_bdao.selectOneAccom(bnum));
+			result.put("policy", b_bdao.selectPolicyByBnum(bnum));
+		}
+		else if(bkind == "G") {
 			
 		}
+		else if(bkind == "C") {
+			
+		}
+		return result;
 	}
 	
 	//해당 게시글의 댓글 조회
+	public List<Comments> readComment(int bnum) {
+		return b_bdao.selectCommentList(bnum);
+	}
 	
 	//해당 게시글의 신청내역 조회
+	public List<HashMap<String, Object>> getRegisterListByNum(int bnum){
+		return b_bdao.selectRegisterListByBnum(bnum);
+	}
 	
 }
