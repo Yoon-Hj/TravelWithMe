@@ -21,7 +21,7 @@
 	from (select b.bnum, b.btitle, b.breadcount, b.mid, a.aarea, a.astartdate, a.afinishdate
 	         from board b, (select * from accompany
 	                                where astartdate > sysdate
-	                               <if test="likecode != null">and likecode = #{likecode}</if>) a
+	                               <if test="value != null">and likecode = #{value}</if>) a
 	         where b.bnum = a.bnum
 	         and b.cdel = 0
 	         order by b.breadcount desc) a

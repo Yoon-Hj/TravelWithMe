@@ -128,11 +128,11 @@ public class BoardService {
 	        double randomValue = Math.random();
 	        int ran = (int)(randomValue * picklist.size()) -1;
 	        likecode = picklist.get(ran);
-	        System.out.println(likecode);
+	        System.out.println("서비스에서 넘길 값 : " + likecode);
 		}else {
 			likecode = null;
 		}
-		System.out.println(likecode);
+		System.out.println("서비스에서 넘길 값 : " + likecode);
 		return b_bdao.selectAccomListByLike(likecode);
 	}
 	
