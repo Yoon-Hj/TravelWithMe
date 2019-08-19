@@ -22,20 +22,46 @@
 </script>
 <script>
 $(document).ready(function(){
-$("#findid").click(function() {
+$("#findid").on('click',function() {
 	
-	var name = $('#').val();
+	var name = $('#findName1').val();
+	var mail = $('#findMail1').val();
+	
+	if(name == "" || mail == ""){
+		alert("빈칸을 입력해주세요.");
+	}
+	eles{
 	$.ajax({
-		url : 'checkId.do?id='+ mid,
-		type : 'get',
+		url : 'findId.do',
+		data : {
+			name : name,
+			mail : mail
+		},
+		
+		type : 'post',
 		success : function(data) {
-			if (data == 1) {
-				// 1 : 아이디가 중복되는 문구
+			if (data == null) {
+				alert("입력하신 내용과 일치하는 정보가 없습니다.");
+				
+				} 
+			
+			else{
 				$("#id_check").text("중복된 아이디입니다.");
 				$("#id_check").css("color", "red");
-				
-			} 
+			}
+			}
+		});
+	}
+});
 
+	
+			
+				
+			
+			
+			
+			
+			
 </script>
 
 <body>

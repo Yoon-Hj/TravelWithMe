@@ -146,14 +146,17 @@ public class MemberController {
 		
 		}
     
-    @RequestMapping("findID.do")
-    public ModelAndView findID(String findName1,String findMail1) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("id", m_msvc.findId(findName1, findMail1));
-        //mav.setView(view);
-		return mav;
+    @RequestMapping(value = "findID.do", method = RequestMethod.POST)
+    public @ResponseBody String findID(@RequestParam("name") String findName1,@RequestParam("mail") String findMail1) {
+	
+    	System.out.println(findName1);
+		String result = m_msvc.findId(findName1, findMail1);
+        
+		return "" + result;
     	
 		}
+   
+   
 	
     @RequestMapping("findPW,do")
     public String findPW() {
