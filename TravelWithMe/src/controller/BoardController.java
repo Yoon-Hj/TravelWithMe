@@ -2,6 +2,9 @@ package controller;
 
 import java.lang.ProcessBuilder.Redirect;
 import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -81,4 +84,19 @@ public class BoardController {
 	
 	@RequestMapping("guideWriteForm.do")
 	public void guideWriteForm() {}
+	
+	
+	
+	
+	@RequestMapping("accomBoardList.do")
+	public ModelAndView accomBoardList(HttpSession session, @RequestParam(defaultValue="1") int page) {
+		ModelAndView mav = new ModelAndView();
+		List<String> picklist = (List<String>) session.getAttribute("picklist");
+		String bkind = "A";
+		mav.addObject("recommList", b_bsvc.getAccomBoardList(picklist));
+		mav.addAllObjects(b_bsvc.getBoardListByPage(page, bkind));
+		mav.addObject("likeList", b_asvc.getLikecode());
+		mav.setViewName("accomBoardList");
+		return mav;
+	}
 }
