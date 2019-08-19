@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import model.Member;
 import model.Notice;
+import model.Register;
 import service.AdminService;
 import service.BoardService;
 import service.MemberService;
@@ -124,7 +125,6 @@ public class MemberController {
     	System.out.println(gPoint);
     	System.out.println(mid);
     	System.out.println("======================");
-//    	m_msvc.addGuidePoint("12", "4");
     	
     	m_msvc.addGuidePoint(bnum, gPoint, mid);
     	System.out.println("서비스 다녀왔음");
@@ -136,9 +136,9 @@ public class MemberController {
     }
     
     @RequestMapping("moreRegister.do")
-    public @ResponseBody String moreRegister() {
-    	
-    	return "";
+    public @ResponseBody List<Register> moreRegister(HttpSession session) {
+    	String mid = (String)session.getAttribute("user");
+    	return m_msvc.getMoreRegister(mid);
     }
     
     @RequestMapping("findForm.do")
