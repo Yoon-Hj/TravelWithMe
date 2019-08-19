@@ -135,4 +135,9 @@ public class MemberController {
     	m_msvc.readNotice(nid);
     }
     
+    @RequestMapping("moreRegister.do")
+    public @ResponseBody String moreRegister() {
+    	
+    	return "";
+    }
 }

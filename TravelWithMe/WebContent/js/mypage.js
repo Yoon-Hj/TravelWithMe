@@ -133,10 +133,9 @@ $(document).ready(function(){
 		$.ajax({
 			url : "moreRegister.do",
 			type : "post",
-			data : {
-				nid : rowColor[0]
+			success : function(data) {
+				
 			},
-			success : function() {},
 			error : function(){}
 		});
 	});
