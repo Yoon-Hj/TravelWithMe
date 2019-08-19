@@ -35,7 +35,7 @@
 <div id="basicInfo" style="font-family: 함초롬돋움">
 	<h3>
 		&nbsp;&nbsp;기본정보
-		<a style="color: #b3b3b3; font-size: 15px;">&nbsp;투어의 기본정보를 작성하세요(필수)</a>
+		<a style="color : #b3b3b3; font-size: 15px;">&nbsp;투어의 기본정보를 작성하세요(필수)</a>
 	</h3>
 	
 	<br>
@@ -48,9 +48,10 @@
 		<tr>
 			<td class="InfoTd">날짜</td>
 			<td>
-				<input type="date" name="gstartdate" id="gstartdate" max="2030-12-31" style="width: 200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">
+				<a style="color: #b3b3b3; font-size: 15px;">시작날짜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종료날짜</a><br>
+				<input type="date" name="gstartdate" id="gstartdate" max="2030-12-31" class="NoBootStrap">
 				~
-				<input type="date" name="gfinishdate" id="gfinishdate" max = "2030-12-31" style="width: 200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">
+				<input type="date" name="gfinishdate" id="gfinishdate" max = "2030-12-31" class="NoBootStrap">
 				<br>
 				<a style="color: #b3b3b3; font-size: 15px;">※가이드 투어는 최대 3일까지 등록 가능합니다.</a>
 			</td>
@@ -66,13 +67,13 @@
 			<td class="InfoTd">출발장소 및 시간</td>
 			<td>
 				<input type="text" style="width:390px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">
-				<input type="time" style="width:205px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">
+				<input type="time" class="NoBootStrap" id="departtime">
 			</td>
 		</tr>
 		<tr>
 			<td class="InfoTd">지역</td>
 			<td>
-				<select name="garea">
+				<select name="garea" class="custom-select" style="width: 185px;">
 				  <option value="서울특별시">서울특별시</option>
 				  <option value="경기도">경기도</option>
 				  <option value="강원도">강원도</option>
@@ -84,12 +85,12 @@
 				  <option value="경상남도">경상남도</option>
 				  <option value="제주도">제주도</option> 				  
 				</select>
-				<input type="text" style="width:390px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">
+				<input type="text" style="width:405px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">
 			</td>
 		</tr>
 		<tr>
 			<td class="InfoTd">인원</td>
-			<td><input type="number" min="1" style="width:100px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">명</td>
+			<td><input type="number" min="1" value="1" style="width:100px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">명</td>
 		</tr>
 	</table>
 	
@@ -133,7 +134,7 @@
 		<tr>
 			<td class="InfoTd">테마</td>
 			<td>
-				<input type="text" style="width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">
+				<input type="text" class="NoBootStrap" id="gthema">
 			</td>
 		</tr>
 	</table>
