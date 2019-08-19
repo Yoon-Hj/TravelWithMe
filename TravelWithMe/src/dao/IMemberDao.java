@@ -62,4 +62,5 @@ public interface IMemberDao {
 	public void updateEvalStatus(HashMap<String, Object> params);
 	//알림 읽음
 	public void updateNoticestatus(String nid);
+	
 }
