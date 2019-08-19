@@ -100,9 +100,15 @@ public class BoardController {
 		return mav;
 	}
 	
-	@RequestMapping("accomView.do")
+	@RequestMapping("readBoard.do")
 	public ModelAndView readBoard(int bnum, String bkind) {
 		ModelAndView mav = new ModelAndView();
+		mav.addAllObjects(b_bsvc.getBoardContent(bnum, bkind));
+		mav.addObject("commentList", b_bsvc.readComment(bnum));
+		mav.addObject("registerList", b_bsvc.getRegisterListByNum(bnum));
+		if(bkind == "A") {
+			mav.setViewName("accomView");
+		}
 		
 		return mav;
 	}
