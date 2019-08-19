@@ -94,33 +94,40 @@ public class MemberService {
 
 	}
 
-	public void joinMember(Member member, String[] likecode, String mbirth2) {
+	//회원가입
+	public void joinMember(Member member, String[] likecode, String mbirth2) throws Exception {
 		// TODO Auto-generated method stub
-		String  birth = mbirth2; // 형식을 지켜야 함
-		java.sql.Date mbirth = java.sql.Date.valueOf(birth);
-        member.setMbirth(mbirth);
-        String a = sha.sha256(member.getMpw());
-        member.setMpw(a);
-        m_mdao.insertMember(member);
-        m_mdao.insertUsedid(member.getMid());
-        
-       String id = null;
-       String like = null;
-	   Mempick mempick = new Mempick(id,like);
-	   if(likecode != null) {
-		for(String code : likecode){
-	
-			mempick.setMid(member.getMid());
-			mempick.setLikecode(code);
-			m_mdao.insertMempick(mempick);
+		try {
+			String  birth = mbirth2; // 형식을 지켜야 함
+			java.sql.Date mbirth = java.sql.Date.valueOf(birth);
+			member.setMbirth(mbirth);
+			String a = sha.sha256(member.getMpw());
+			member.setMpw(a);
+			m_mdao.insertMember(member);
+			m_mdao.insertUsedid(member.getMid());
+			
+			String id = null;
+			String like = null;
+			Mempick mempick = new Mempick(id,like);
+			if(likecode != null) {
+				for(String code : likecode){
+					
+					mempick.setMid(member.getMid());
+					mempick.setLikecode(code);
+					m_mdao.insertMempick(mempick);
+				}
+			}
+			else if(likecode == null) {
+				mempick.setMid(member.getMid());
+				mempick.setLikecode("null");
+				m_mdao.insertMempick(mempick);
+				System.out.println(likecode);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Exception();
 		}
-	}
-	   else if(likecode == null) {
-		   mempick.setMid(member.getMid());
-			mempick.setLikecode("null");
-			m_mdao.insertMempick(mempick);
-			System.out.println(likecode);
-	   }
 	}
 	
 

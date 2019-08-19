@@ -92,7 +92,7 @@ public class MemberController {
 	}
 	
     @RequestMapping("joinMember.do")
-    public String joinMember(Member member, String mbirth2, String likecode[]) {
+    public String joinMember(Member member, String mbirth2, String likecode[]) throws Exception {
 //		System.out.println(member);
 //		System.out.println(mbirth2);
 //		System.out.println(likecode[0]);
