@@ -93,7 +93,6 @@ $(document).ready(function(){
 		var type = row[1];
 		var title = row[2];
 		var rowColor = $(this).closest("tr").find("input:eq(1)").val().split("/");
-		alert(row);
 		if(rowColor[1] == "0"){
 			$(this).css('color', 'gray');
 			$.ajax({
