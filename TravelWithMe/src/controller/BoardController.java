@@ -99,4 +99,11 @@ public class BoardController {
 		mav.setViewName("accomBoardList");
 		return mav;
 	}
+	
+	@RequestMapping("accomView.do")
+	public ModelAndView readBoard(int bnum, String bkind) {
+		ModelAndView mav = new ModelAndView();
+		
+		return mav;
+	}
 }

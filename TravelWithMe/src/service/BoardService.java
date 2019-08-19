@@ -132,13 +132,24 @@ public class BoardService {
 		}else {
 			likecode = null;
 		}
+		System.out.println(likecode);
 		return b_bdao.selectAccomListByLike(likecode);
 	}
 	
-	//동행게시판으로 이동시 취향리스트 불러오기
+	//동행게시판으로 이동시 취향리스트 조회
 	public List<Preference> getLikecode(){
 		return b_adao.selectLikeList();
 	}
 	
+	//해당 게시글 내용 조회
+	public void getBoardContent(int bnum, String bkind) {
+		if(bkind == "A") {
+			
+		}
+	}
+	
+	//해당 게시글의 댓글 조회
+	
+	//해당 게시글의 신청내역 조회
 	
 }
