@@ -102,7 +102,8 @@ public class MemberService {
         String a = sha.sha256(member.getMpw());
         member.setMpw(a);
         m_mdao.insertMember(member);
-       
+        m_mdao.insertUsedid(member.getMid());
+        
        String id = null;
        String like = null;
 	   Mempick mempick = new Mempick(id,like);
