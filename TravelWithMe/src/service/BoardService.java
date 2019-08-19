@@ -6,8 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dao.IAdminDao;
 import dao.IBoardDao;
 import dao.IMemberDao;
+import model.AccomBoard;
+import model.Preference;
 
 @Service
 public class BoardService {
@@ -15,6 +18,8 @@ public class BoardService {
 	private IMemberDao b_mdao;
 	@Autowired
 	private IBoardDao b_bdao;
+	@Autowired
+	private IAdminDao b_adao;
 	@Autowired
 	private UseAPI API;
 	
@@ -74,10 +79,11 @@ public class BoardService {
 	}
 	
 	//페이징 데이터를 통해 게시물 리스트 가져오기
-	public HashMap<String, Object> getBoardListByPage(int page,int perpage,String bkind) {
+	public HashMap<String, Object> getBoardListByPage(int page,String bkind) {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		
+		int perpage = 8;
 		int offset = getOffset(page, perpage);
 		int cnt = 0;
 		params.put("offset",offset);
@@ -110,5 +116,40 @@ public class BoardService {
 		result.put("totalBoard", cnt);
 		return result;
 	}
+	
+	
+	
+	
+	
+	//동행게시물 추천 4개 불러오기
+	public List<AccomBoard> getAccomBoardList(List<String> picklist) {
+		String likecode;
+		if(picklist != null) {
+	        double randomValue = Math.random();
+	        int ran = (int)(randomValue * picklist.size()) -1;
+	        likecode = picklist.get(ran);
+	        System.out.println("서비스에서 넘길 값 : " + likecode);
+		}else {
+			likecode = null;
+		}
+		System.out.println("서비스에서 넘길 값 : " + likecode);
+		return b_bdao.selectAccomListByLike(likecode);
+	}
+	
+	//동행게시판으로 이동시 취향리스트 조회
+	public List<Preference> getLikecode(){
+		return b_adao.selectLikeList();
+	}
+	
+	//해당 게시글 내용 조회
+	public void getBoardContent(int bnum, String bkind) {
+		if(bkind == "A") {
+			
+		}
+	}
+	
+	//해당 게시글의 댓글 조회
+	
+	//해당 게시글의 신청내역 조회
 	
 }

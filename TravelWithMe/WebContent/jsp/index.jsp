@@ -106,7 +106,7 @@
 				<h2 style="font-size: 45px">나와 비슷한 취향의 여행 친구들을 찾아보세요</h2>
 				<br>
 				<input type="button" class="btn btn-danger btn-lg btn-block" 
-						value="Travel with Me 목록 보기" 
+						value="Travel with Me 목록 보기" onclick="location.href='accomBoardList.do'"
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">
 				
 				<br><br><br><br><br>

@@ -80,10 +80,7 @@ public class MemberService {
 		for(HashMap<String, String> r : (List<HashMap<String, String>>)returnVal.get("register")) {
 			System.out.println(r);
 		}
-
-		//		for(HashMap<String, String> b: (List<HashMap<String, String>>)returnVal.get("register")) {
-		//			System.out.println(b);
-		//		}
+		
 		return returnVal;
 
 	}

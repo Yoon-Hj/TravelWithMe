@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,7 +80,7 @@
 </head>
 <body>
 
-	<script>
+	<script type="text/javascript">
 		$(document).ready(function(){
 		  $('[data-toggle="tooltip"]').tooltip();   
 		});
@@ -91,7 +92,7 @@
 	<hr>
 	
 	<div class="container">
-		<a href="#" data-toggle="tooltip" data-placement="bottom" title="글 작성하기" 
+		<a href="accomWriteForm.do" data-toggle="tooltip" data-placement="bottom" title="글 작성하기" 
 			style="text-decoration: none; color: #787878; font-family: 함초롬돋움;">
 			원하는 동행글이 없으신가요? 직접 동행글을 작성해보세요.</a>
 		<br><br>
@@ -124,9 +125,10 @@
 			<tr>
 				<td style="text-align: center">여행취향</td>
 				<td>
-					<!-- likelist 순회 -->
 					<select name="like" class="custom-select" style="width: 130px">
-					<option value="1" >취향명</option>	
+						<c:forEach var="like" items="${likeList}" varStatus="status">
+							<option value="${like.likecode}" >${like.likename}</option>	
+						</c:forEach>
 					</select>
 				</td>
 			</tr>
@@ -137,108 +139,60 @@
 		<!-- 추천 4개 조회 -->
 		<div style="margin-top: 50px">
 		<h4 style="font-family: 함초롬돋움; margin-bottom: 15px;">추천여행</h4>
-			<div class="row">
-			
-			  <div class="column">
-				<a href="#"><img src="../imgs/gangwon.PNG" style="width:100%"></a>
-				<div class="content"><p>2019.07.13 ~ 2019.07.15<br>[속초] 동행 구해요~<br>test1 &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; 10</p></div>
-			  </div>
 		
+			<div class="row">
+			<c:forEach var="b" items="${recommList}" varStatus="status">
 			  <div class="column">
-			    <a href="#"><img src="../imgs/gangwon.PNG" style="width:100%"></a>
-			    <div class="content"><p>2019.07.13 ~ 2019.07.15<br>[속초] 동행 구해요~<br>test1 &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp;10</p></div>
+				<a href="accomView.do?"><img src="imgs/gangwon.PNG" style="width:100%"></a>
+				<div class="content">
+					<p><fmt:formatDate value="${b.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${b.afinishdate}" pattern="yyyy-MM-dd"/>
+					<br>[${b.aarea}] ${b.btitle}<br>${b.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${b.breadcount}</p>
+				</div>
 			  </div>
-			  
-			  <div class="column">
-			    <a href="#"><img src="../imgs/gangwon.PNG" style="width:100%"></a>
-			    <div class="content"><p>2019.07.13 ~ 2019.07.15<br>[속초] 동행 구해요~<br>test1 &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp;10</p></div>
-			  </div>
-			  
-			  <div class="column">
-			    <a href="#"><img src="../imgs/gangwon.PNG" style="width:100%"></a>
-			    <div class="content"><p>2019.07.13 ~ 2019.07.15<br>[속초] 동행 구해요~<br>test1 &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp;10</p></div>
-			  </div>
-			  
+			</c:forEach>
 			</div>
+			
 		</div>
 
 		<!-- 전체 리스트 조회 -->
 		<div style="margin-top: 60px">
 		<h4 style="font-family: 함초롬돋움; margin-bottom: 15px;">전체여행</h4>
+		
 			<div class="row">
-			
+			<c:forEach var="a" items="${boardList}" varStatus="status">
 			  <div class="column">
-				<a href="#"><img src="../imgs/gangwon.PNG" style="width:100%"></a>
-				<div class="content"><p>2019.07.13 ~ 2019.07.15<br>[속초] 동행 구해요~<br>test1 &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp;10</p></div>
+				<a href="#"><img src="imgs/gangwon.PNG" style="width:100%"></a>
+				<div class="content">
+					<p><fmt:formatDate value="${a.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${a.afinishdate}" pattern="yyyy-MM-dd"/>
+					<br>[${a.aarea}] ${a.btitle}<br>${a.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${a.breadcount}</p>
+				</div>
 			  </div>
-		
-			  <div class="column">
-			    <a href="#"><img src="../imgs/gangwon.PNG" style="width:100%"></a>
-			    <div class="content"><p>2019.07.13 ~ 2019.07.15<br>[속초] 동행 구해요~<br>test1 &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp;10</p></div>
-			  </div>
-			  
-			  <div class="column">
-			    <a href="#"><img src="../imgs/gangwon.PNG" style="width:100%"></a>
-			    <div class="content"><p>2019.07.13 ~ 2019.07.15<br>[속초] 동행 구해요~<br>test1 &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp;10</p></div>
-			  </div>
-			  
-			  <div class="column">
-			    <a href="#"><img src="../imgs/gangwon.PNG" style="width:100%"></a>
-			    <div class="content"><p>2019.07.13 ~ 2019.07.15<br>[속초] 동행 구해요~<br>test1 &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp;10</p></div>
-			  </div>
-			  
+			</c:forEach>
 			</div>
 			
-			<div class="row" style="margin-top: 15px;">
-			
-			  <div class="column">
-				<a href="#"><img src="../imgs/gangwon.PNG" style="width:100%"></a>
-				<div class="content"><p>2019.07.13 ~ 2019.07.15<br>[속초] 동행 구해요~<br>test1 &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp;10</p></div>
-			  </div>
-		
-			  <div class="column">
-			    <a href="#"><img src="../imgs/gangwon.PNG" style="width:100%"></a>
-			    <div class="content"><p>2019.07.13 ~ 2019.07.15<br>[속초] 동행 구해요~<br>test1 &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp;10</p></div>
-			  </div>
-			  
-			  <div class="column">
-			    <a href="#"><img src="../imgs/gangwon.PNG" style="width:100%"></a>
-			    <div class="content"><p>2019.07.13 ~ 2019.07.15<br>[속초] 동행 구해요~<br>test1 &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp;10</p></div>
-			  </div>
-			  
-			  <div class="column">
-			    <a href="#"><img src="../imgs/gangwon.PNG" style="width:100%"></a>
-			    <div class="content"><p>2019.07.13 ~ 2019.07.15<br>[속초] 동행 구해요~<br>test1 &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp;10</p></div>
-			  </div>
-			  
-			</div>
 		</div>
 	</div>
-	
-	<div class="pagination" style="margin-top: 25px; margin-left: 400px">
-		<c:if test="${ startPage != 1}">
-			<!-- 
-			<input type="button" value="처음으로" class="btn" onclick="location.href='boardList.do?page=1'">
-			<input type="button" value="이전" class="btn" onclick="location.href='boardList.do?page=${startPage-1}'"> -->
-			<a href="accomBoard.do?page=1'">&laquo;</a>
+
+	<div class="pagination" style="margin-top: 25px; margin-left: 400px; text-align: center;">
+		<c:if test="${ start != 1}">
+			<a href="accomBoardList.do?page=1'">&laquo;</a>
+			<a href="accomBoardList.do?page=${start-1}'">&#8249;</a> 
 		</c:if>
 		
-		<c:forEach var="i" begin="${ startPage }" end="${ endPage }" varStatus="status">
+		<c:forEach var="i" begin="${ start }" end="${ end }" varStatus="status">
 			<c:choose>
-				<c:when test="${ currentPage == status.index }">
+				<c:when test="${ current == status.index }">
 					<a class="active">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="accomBoard.do?page=${i}<c:if test="${ keyword != null }">&keyword=${keyword}&type=${type}</c:if>" style="font-size: 17px">${i}</a>
+					<a href="accomBoardList.do?page=${i}<c:if test="${ keyword != null }">&keyword=${keyword}&type=${type}</c:if>" style="font-size: 17px">${i}</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-		
-		<c:if test="${ endPage != lastPage }">
-			<a href="accomBoard.do?page=${lastPage}'">&raquo;</a>
-			<!-- 
-			<input type="button" value="다음" class="btn" onclick="location.href='boardList.do?page=${endPage+1}'">
-			<input type="button" value="마지막으로" class="btn" onclick="location.href='boardList.do?page=${lastPage}'"> -->
+			
+		<c:if test="${ end != last }">
+			<a href="accomBoardList.do?page=${end+1}'">&#8250;</a> 
+			<a href="accomBoardList.do?page=${last}'">&raquo;</a>
 		</c:if>
 	</div>
 			
