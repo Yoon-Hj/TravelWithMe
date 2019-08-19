@@ -219,7 +219,7 @@
 	        
 	        <!-- Modal body -->
 	        <div class="modal-body" style="text-align: center" id="tt">
-	        	<table id="allNews">
+	        	<table id="allNews" style="font-color:red">
 	        		<tbody></tbody>
 	        	</table>
 	        </div>

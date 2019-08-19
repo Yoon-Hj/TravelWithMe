@@ -129,5 +129,9 @@ public class MemberController {
     	System.out.println("서비스 다녀왔음");
     }
     
+    @ RequestMapping("readNotice.do")
+    public void readNotice(String nid) {
+    	m_msvc.readNotice(nid);
+    }
     
 }

@@ -43,7 +43,7 @@ $(document).ready(function(){
 			});
 		}
 	});
-
+	
 
 	function onOpen(evt) {
 		websocket.send(user);
@@ -69,6 +69,11 @@ $(document).ready(function(){
 		websocket.close();
 		history.go(0);
 	});
+	
+	$('#joinForm').on('click', function(){
+		location.href="joinForm.do";
+	});
+	
 
 	$('#myPage').on('click', function(){
 		location.href="myPage.do";
