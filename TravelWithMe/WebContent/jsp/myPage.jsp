@@ -199,7 +199,7 @@
 </c:forEach>
 </table>
 <div class="inRegister">
-<button id="moreRegister">더보기</button>
+<input type="button" id="moreRegister" value="더보기" data-toggle="modal" data-target="#moreRegiForm" style="background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
 </div>
 </div>
 
@@ -219,8 +219,8 @@
 	        
 	        <!-- Modal body -->
 	        <div class="modal-body" style="text-align: center">
-	        	<table id="allNews" style="font-color:red">
-	        		<tbody></tbody>
+	        	<table id="allNews">
+	        		<tbody class="newsRow"></tbody>
 	        	</table>
 	        </div>
 	        <div class="starRev" style="display:none;text-align:center">
@@ -244,10 +244,29 @@
 	     </div>
 	  </div>
 
-
-
-
-
+		<!-- 알림내역 더보기 -->	
+	  <div class="modal fade" id="moreRegiForm">
+		<div class="modal-dialog modal-dialog-scrollable">
+	      <div class="modal-content">
+	        <!-- Modal Header -->
+	        <div class="modal-header">
+	          <h3 class="modal-title" style="font-family: 배달의민족 도현">신청내역</h3>
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+	        
+	        <!-- Modal body -->
+	        <div class="modal-body" style="text-align: center">
+	        	<table id="allRegis">
+	        		<tbody class="regisRow"></tbody>
+	        	</table>
+	        </div>
+		        <!-- Modal footer -->
+		        <div class="modal-footer">
+		          <button type="button" id="evGuide" class="btn btn-success" data-dismiss="modal">확인</button>
+		        </div>
+	       </div>
+	     </div>
+	  </div>
 
 
 
