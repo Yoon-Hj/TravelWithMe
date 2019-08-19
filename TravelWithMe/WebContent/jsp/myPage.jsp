@@ -176,7 +176,7 @@
 </c:forEach>
 </table>
 <div class="inBoards">
-<button id="moreBoards">더보기</button>
+<input type="button" id="moreBoards" value="더보기" style="background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
 </div>
 </div>
 
@@ -218,7 +218,7 @@
 	        </div>
 	        
 	        <!-- Modal body -->
-	        <div class="modal-body" style="text-align: center" id="tt">
+	        <div class="modal-body" style="text-align: center">
 	        	<table id="allNews" style="font-color:red">
 	        		<tbody></tbody>
 	        	</table>
@@ -243,6 +243,21 @@
 	       </div>
 	     </div>
 	  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
