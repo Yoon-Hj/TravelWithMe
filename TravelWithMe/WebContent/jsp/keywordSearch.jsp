@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<h1>아버지! 날 보고있다면 정답을 알려줘</h1><HR>
+<h1>키워드 검색</h1><HR>
 <form action="apiKeywordSearch.do">
 <input type="text" name="keyword" id="keyword"
 value="<c:if test="${keyword != null}">${keyword}</c:if>" required>

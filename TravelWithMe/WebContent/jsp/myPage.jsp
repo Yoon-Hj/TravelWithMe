@@ -141,13 +141,14 @@
 <c:forEach var="n" items="${notice }">
 	<tr>
 		<td style="height:70px">
+		<a class="contentsRow">
 		<c:choose>
 			<c:when test="${n.BKIND == 'A' }">[Travel with Me]</c:when>
 			<c:when test="${n.BKIND == 'G' }">[Travel with Guide]</c:when>
 			<c:when test="${n.BKIND == 'C' }">[Community]</c:when>
 		</c:choose>
 		${n.BTITLE }<BR>
-		${n.NKREASON }</td>
+		${n.NKREASON }</a></td>
 	</tr>
 </c:forEach>
 </table>
@@ -162,12 +163,13 @@
 <c:forEach var="b" items="${myBoard }">
 	<tr>
 		<td style="width:400px">
+		<a class="contentsRow">
 		<c:choose>
 			<c:when test="${b.BKIND == 'A' }">[Travel with Me]</c:when>
 			<c:when test="${b.BKIND == 'G' }">[Travel with Guide]</c:when>
 			<c:when test="${b.BKIND == 'C' }">[Community]</c:when>
 		</c:choose>
-		${b.BTITLE }
+		${b.BTITLE }</a>
 		</td>
 	</tr>
 </c:forEach>
@@ -183,11 +185,12 @@
 <c:forEach var="r" items="${register }">
 	<tr>
 		<td style="width:400px;height:60px;">
+		<a class="contentsRow">
 		<c:choose>
 			<c:when test="${r.BKIND == 'A' }">[Travel with Me]</c:when>
 			<c:when test="${r.BKIND == 'G' }">[Travel with Guide]</c:when>
 		</c:choose>
-		${r.BTITLE }<BR>
+		${r.BTITLE }</a><BR>
 		<div style="width:100px;margin-left:auto;">
 		<button class="cancelRegister" value="${r.RID }">신청 취소</button>
 		</div>

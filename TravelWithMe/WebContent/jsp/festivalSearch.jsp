@@ -11,7 +11,7 @@
 <script src="js/attraction.js?v=<%=System.currentTimeMillis() %>"></script>
 </head>
 <body>
-<h1>아버지! 날 보고있다면 정답을 알려줘</h1><HR>
+<h1>축제검색</h1><HR>
 <form action="festivalSearch.do">
 <input type="date" name="eventStartDate" id="sDate" value="${eventStartDate }" required>
 <input type="date" name="eventEndDate" id="eDate" value="${eventEndDate }">

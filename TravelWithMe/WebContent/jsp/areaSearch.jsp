@@ -11,7 +11,7 @@
 <script src="js/attraction.js?v=<%=System.currentTimeMillis() %>"></script>
 </head>
 <body>
-<h1>아버지! 날 보고있다면 정답을 알려줘</h1><HR>
+<h1>지역검색</h1><HR>
 
 <c:choose><c:when test="${selectedArea == 1 }">
 <button class="areaBtn" value="1" disabled>서울</button></c:when>
