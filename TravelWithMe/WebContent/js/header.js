@@ -84,7 +84,9 @@ $(document).ready(function(){
 		location.href="myPage.do";
 	});
 	
-	
+	$('#find').on('click', function(){
+		location.href="findForm.do";
+	});
 	
 	
 	

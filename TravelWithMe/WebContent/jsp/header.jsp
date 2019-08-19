@@ -114,6 +114,8 @@
 				 <input type="password" placeholder="Enter Password" name="pw" id="loginPw" required><br><br>
 				 
 				  <button type="button" class="btn btn-success" id="login">Login</button>
+				   <button type="button" class="btn btn-success" id="find">Find ID/PW</button>
+				   
 	        </div>
 	       </div>
 	     </div>

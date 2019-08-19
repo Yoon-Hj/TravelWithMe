@@ -93,7 +93,7 @@ public class MemberController {
 	}
 	
     @RequestMapping("joinMember.do")
-    public String joinMember(Member member, String mbirth2, String likecode[]) {
+    public String joinMember(Member member, String mbirth2, String likecode[]) throws Exception {
 //		System.out.println(member);
 //		System.out.println(mbirth2);
 //		System.out.println(likecode[0]);
@@ -140,4 +140,26 @@ public class MemberController {
     	
     	return "";
     }
+    
+    @RequestMapping("findForm.do")
+    public void findForm() {
+		
+		}
+    
+    @RequestMapping("findID.do")
+    public ModelAndView findID(String findName1,String findMail1) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("id", m_msvc.findId(findName1, findMail1));
+       // mav.setView(view);
+		return mav;
+    	
+		}
+	
+    @RequestMapping("findPW,do")
+    public String findPW() {
+		return null;
+		}
+    
+    
+    
 }
