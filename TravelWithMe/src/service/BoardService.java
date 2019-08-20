@@ -1,7 +1,11 @@
 package service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -123,11 +127,15 @@ public class BoardService {
 	
 	//동행게시물 추천 4개 불러오기
 	public List<AccomBoard> getAccomBoardList(List<String> picklist) {
-		String likecode;
+		String likecode = null;
+		if(picklist == null)
+			System.out.println("널임");
 		if(picklist != null) {
-	        double randomValue = Math.random();
-	        int ran = (int)(randomValue * picklist.size()) -1;
-	        likecode = picklist.get(ran);
+			if(!picklist.isEmpty()) {
+				double randomValue = Math.random();
+				int ran = (int)(randomValue * picklist.size()) -1;
+				likecode = picklist.get(ran);
+			}
 		}else {
 			likecode = null;
 		}
@@ -138,6 +146,41 @@ public class BoardService {
 	public List<Preference> getLikecode(){
 		return b_adao.selectLikeList();
 	}
+	
+	//동행게시판 검색
+	public HashMap<String, Object> getAccomSearchList(int page, int type, String keyword, String sdate, String fdate, String likecode) throws ParseException {
+		Date startdate = null;
+		Date finishdate = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		if(sdate != null) startdate = sdf.parse(sdate);
+		else if (fdate != null) finishdate = sdf.parse(fdate);
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("offset", getOffset(page, 8));
+		params.put("perpage", 8);
+		params.put("type", type);
+		params.put("keyword", keyword);
+		params.put("startdate", startdate);
+		params.put("finishdate", finishdate);
+		params.put("likecode", likecode);
+		List<AccomBoard> alist = b_bdao.selectAccomBoardByKeyword(params);
+		int cnt = b_bdao.getAccomCountByKeyword(params);
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		result.put("type", type);
+		result.put("keyword", keyword);
+		result.put("startdate", startdate);
+		result.put("finishdate", finishdate);
+		result.put("likecode", likecode);
+		result.put("current", page);
+		result.put("asList", alist);
+		result.put("start", getStartpage(page));
+		result.put("end", getEndpage(page, cnt));
+		result.put("last", getLastpage(cnt));
+		result.put("totalBoard", cnt);
+		return result;
+	}
+	
 	
 	//해당 게시글 내용 조회
 	public HashMap<String, Object> getBoardContent(int bnum, String bkind) {
@@ -160,9 +203,28 @@ public class BoardService {
 		return b_bdao.selectCommentList(bnum);
 	}
 	
+	//댓글 작성
+	public int writeComment(Comments comments) {
+		return b_bdao.insertComment(comments);
+	}
+	
+	//댓글 삭제
+	public int delComment(int cnum) throws Exception {
+		int a = 0;
+		try {
+			a = b_bdao.deleteComment(cnum); 
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Exception();
+		}
+		return  a;
+	}
+	
 	//해당 게시글의 신청내역 조회
 	public List<HashMap<String, Object>> getRegisterListByNum(int bnum){
 		return b_bdao.selectRegisterListByBnum(bnum);
 	}
+	
 	
 }

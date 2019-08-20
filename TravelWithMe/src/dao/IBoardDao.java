@@ -59,9 +59,9 @@ public interface IBoardDao {
 	public int getPossibleNop(int bnum);
 	public void insertRegister(HashMap<String,Object> register);
 	public void deleteRegister(String rid);
-	public void insertComment(Comments comments);
+	public int insertComment(Comments comments);
 	public void insertRecomment(Comments comments);
-	public void deleteComment(int cnum);
+	public int deleteComment(int cnum);
 	public void insertPolicy(HashMap<String, Object> policy);
 	public void deletePolicy(int bnum);
 	public int getBoardCount(HashMap<String, Object> bkind);

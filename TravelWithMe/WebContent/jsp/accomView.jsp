@@ -79,25 +79,39 @@
 	  border-left: none;
   }
   
-  table.commtable button[type=button]{
-  	  background: white;
-  	  font-size: 13px;
-  	  color: black;
-  	  cursor: pointer;
-  	  border: none;
+  table.commtable {
+  	 border-collapse: collapse;
+ 	 border-spacing: 0;
+ 	 width: 100%;
+  	 border: 1px solid #ddd;
+  	 font-family: '함초롬돋움';
+  	 font-size: 15px;
+  }
+  
+  table.commtable th, td{
+  	 padding: 8px;
+  	 text-align: left;
+  }
+  
+  table.commtable button{
+  	border:none; 
+  	font-size: 13px; 
+  	background: white; 
+  	cursor: pointer;
   }
   
 </style>
 </head>
 <body>
+
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('.selectnop').hide();
-		$('#warningModal2').show();
+		//$('.selectnop').hide();
+		//$('#warningModal2').show();
 
 	//session의 id가 registerList에 있으면 하단에 신청 취소 버튼 표시 
 	
-	//댓글 삭제여부가 1이면, '해당 댓글은 삭제되었습니다.'(text) 로 대체
+
 	
 	//모집인원(anumofpeople) - 신청인원(registerNum) 계산해서, 현재 신청가능 인원 수에 표시
 	//모집인원이 0(무관)이면, 계산하지 않고 무관으로 출력
@@ -109,7 +123,33 @@
     //작성 버튼은 표시x, 답글작성 버튼도 표시x
 	
 	//신청인원이 0이 아닐 때, 수정 버튼 누르면 alert 표시
-	}
+		
+	
+		$('.replyBtn').on('click', function(){
+			//if($(this).closest("tr").after().html()==""){				
+				$(this).closest("tr").after("<tr><td>&#x21B3;<input type='text'></td></tr>");
+			//}
+		});
+		
+		//댓글삭제
+		//댓글 삭제여부가 1이면, '해당 댓글은 삭제되었습니다.'(text) 로 대체
+		$('.commDelBtn').on('click', function(){
+			//클릭한 삭제버튼과 가장 가까운 <tr>을 찾은 후, 그 행의 첫번째 <td>안의 text를 불러옴
+			//(삭제를 위해 보내야 할 stuid -> 첫번째 <td>안의 text값)
+			var delrow = $(this).siblings("input:hidden").val();
+			var tmp = $(this).parents("td");
+		$.ajax({
+				url : "delComment.do",
+				data : {cnum : delrow},
+				type : "get",
+				success : function(data){
+					tmp.text("해당 댓글은 삭제되었습니다.");
+				}
+			});
+		});
+	
+	});
+
 </script>
 
 	<jsp:include page="header.jsp"></jsp:include>
@@ -119,10 +159,10 @@
 	
 	<div class="container">
 	
-		<c:if test="${user}==">
-			<div style="margin-bottom: 10px;">
-				<input type="button" class="btn default" value="modify" style="border: 2px solid #B5C3C8;">
-				<input type="button" class="btn default" value="delete" style="border: 2px solid #B5C3C8;">
+		<c:if test="${user==accomBoard.mid}">
+			<div style="margin-bottom: 10px; margin-left: 850px; font-family: '배달의민족 주아';">
+				<input type="button" class="btn default" value="게시글 수정" style="border: 2px solid #B5C3C8;">
+				<input type="button" class="btn default" value="게시글 삭제" style="border: 2px solid #B5C3C8;">
 			</div>
 		</c:if>
 		
@@ -188,28 +228,30 @@
 			<!-- 작성자면 신청->신청관리 버튼 뜨도록 -->
 		</div>
 
-		<div style="margin-top: 20px; margin-left: 110px;">
+		<div style="margin-top: 20px; margin-left: 110px; margin-bottom: 20px;">
 			<form class="comment">
 				<input type="text" class="form-control" placeholder="댓글을 입력하세요." style="width: 830px">
 				<button type="submit">댓글작성</button>
 			</form>
 		</div>
 
-		<div style="margin-top: 20px; margin-bottom: 20px; margin-left: 110px; width: 80%;">
+		<div style="margin-top:20px; margin-bottom: 20px; margin-left: 110px; width: 90%;">
 			<c:forEach var="comment" items="${commentList}" varStatus="status">
-				<table class="table table-borderless" class="commtable">
-				<tbody>
+				<table class="commtable">
 					<tr>
-						<td>${comment.mid}</td>
-						<td>${comment.ccontent}</td>
-						<td><button type="button">답글</button>
-							<button type="button">댓글삭제</button></td>
+						<th width="100px;" style="text-align: center;">${comment.mid}</th>
+						<td>${comment.ccontent} &nbsp; 
+							<input type="hidden" value="${comment.cnum}">
+							<c:if test="${user==comment.mid}">
+								<button class="commDelBtn">×</button>
+							</c:if>
+						<button style="border:none; font-size: 13px; background: white; cursor: pointer;" class="replyBtn">답글</button>
+						</td>
 					</tr>
-				</tbody>
 				</table>
 			</c:forEach>
 		</div>
-		
+		 
 	</div>
 	
 	<!-- 신청모달1 -->
@@ -276,6 +318,7 @@
     	</div>
  	 </div>
 
+	<jsp:include page="footer.jsp"></jsp:include>
  	 
 </body>
 </html>
