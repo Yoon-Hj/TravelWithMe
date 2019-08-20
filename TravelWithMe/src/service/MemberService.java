@@ -75,10 +75,10 @@ public class MemberService {
 
 		//		System.out.println(returnVal.get("notice"));
 		for(HashMap<String, String> a: (List<HashMap<String, String>>)returnVal.get("notice")) {
-			System.out.println(a);
+			System.out.println("알림 : " + a);
 		}
 		for(HashMap<String, String> r : (List<HashMap<String, String>>)returnVal.get("register")) {
-			System.out.println(r);
+			System.out.println("신청 : " + r);
 		}
 		
 		return returnVal;

@@ -185,7 +185,9 @@
 			</div>
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" id="evGuide" class="btn btn-success" data-dismiss="modal">확인</button>
+		          <button type="button" id="ok" class="btn btn-success" data-dismiss="modal" style="display:none">확인</button>
+		          <button type="button" id="evGuide" class="btn btn-success" data-dismiss="modal" style="display:none">확인</button>
+		          <button type="button" id="checkAttend" class="btn btn-success" data-dismiss="modal" style="display:none">확인</button>
 		        </div>
 	       </div>
 	     </div>
@@ -201,11 +203,6 @@
 	function closeNav() {
 	  document.getElementById("myNav").style.height = "0%";
 	}
-	
-	function joinForm(){
-		location.href="joinForm.do";
-	}
-	
 	
 	</script>  
 	

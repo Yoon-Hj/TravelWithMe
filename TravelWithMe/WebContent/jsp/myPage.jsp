@@ -142,12 +142,13 @@
 	<tr>
 		<td style="height:70px">
 		<input type="hidden" value="${n.NOTICESTATUS }">
+		<input type="hidden" value="${n.BNUM }">
+		<input type="hidden" value="${n.BKIND }">
+		<input type="hidden" value="${n.NKCODE }">
+		<input type="hidden" value="${n.EVALSTATUS }">
+		<input type="hidden" value="${n.NID }">
+		<input type="hidden" value="${n.BTITLE }">
 		<a class="newsRows">
-		<c:choose>
-			<c:when test="${n.BKIND == 'A' }">[Travel with Me]</c:when>
-			<c:when test="${n.BKIND == 'G' }">[Travel with Guide]</c:when>
-			<c:when test="${n.BKIND == 'C' }">[Community]</c:when>
-		</c:choose>
 		${n.BTITLE }<BR>
 		${n.NKREASON }</a></td>
 	</tr>

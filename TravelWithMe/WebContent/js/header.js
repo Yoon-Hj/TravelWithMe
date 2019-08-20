@@ -126,6 +126,8 @@ $(document).ready(function(){
 	
 	// 알림부분
 	$('.moreNews').on('click', function(){
+		$('.btn').hide();
+		$('#ok').show();
 		$('.starRev').hide();
 		$('.modal-body').show();
 		$( '#allNews > tbody').empty();
@@ -190,6 +192,8 @@ $(document).ready(function(){
 		$('#guideBnum').val(bnum);
 		$('.modal-body').hide();
 		$('.starRev').show();
+		$('.btn').hide();
+		$('#evGuide').show();
 	};
 	
 	function noticeColor(){		// 알림 읽음 여부에 따라 글씨 색 조정
@@ -230,21 +234,11 @@ $(document).ready(function(){
 		var rowColor = $(this).closest("tr").find("input:eq(1)").val().split("/");
 		if(rowColor[1] == "0"){
 			$(this).css('color', 'gray');
-			$(this).css('cursor', 'pointer');
-			$.ajax({
-				url : "readNotice.do",
-				type : "post",
-				data : {
-					nid : rowColor[0]
-				},
-				success : function() {},
-				error : function(){}
-			});
+			readNotice(rowColor[0]);
 		}
 		if(type == "0"){
 			readBoard_header(bnum, bkind);
 		}else if(type == "1"){
-			alert("별점평가 화면을 띄워");
 			evGuide(title, bnum);
 		}else if(type == "2"){
 			alert("참석여부 화면을 띄워");
@@ -268,9 +262,9 @@ $(document).ready(function(){
 		  var point = $(this).html();
 		  var gPoint = $('#gPoint');
 		  gPoint.val(point);
-		  alert(gPoint.val());
 		  return false;
 	});
+	
 	// 평가 완료후 컨트롤러로 보내기.
 	$('#evGuide').on('click', function(){
 		var check = $('#checkEval').val();
@@ -287,6 +281,7 @@ $(document).ready(function(){
 			});
 			alert("별점 평가가 완료되었습니다.");
 			$('#checkEval').val("f");
+			history.go(0);
 		}
 	});
 	
@@ -304,9 +299,50 @@ $(document).ready(function(){
 	$('.newsRows').each( function() {
 		$(this).css('cursor', 'pointer');
 		$(this).closest("tr").find("td:eq(0)").css('height', '80px');
-		var rowColor = $(this).closest("tr").find("input:eq(0)").val();
-		if(rowColor == "1")
+		var noticeStatus = $(this).closest("tr").find("input:eq(0)").val();
+		if(noticeStatus == "1")
 			$(this).css('color', 'gray');
+		
+		
+		var bnum = $(this).closest("tr").find("input:eq(1)").val();
+		var bkind = $(this).closest("tr").find("input:eq(2)").val();
+		var codes = $(this).closest("tr").find("input:eq(3)").val().split("-");
+		var code = codes[0];
+		var evalStatus = $(this).closest("tr").find("input:eq(4)").val();
+		var nid = $(this).closest("tr").find("input:eq(5)").val();
+		var title = $(this).closest("tr").find("input:eq(6)").val();
+		var type = "";
+		var open = "";
+		
+		if(code == "PM" || code == "PP" || code == "PR"){
+			type = "[포인트 변동???]";
+			open = 0;
+		}else if(code == "RG" || code == "RC"){
+			if(bkind == "A"){
+				type = "[Travel with Me]";
+			}else{
+				type = "[Travel with Guide]";
+			}
+			open = 0;
+		}else{
+			type = "[참석여부 및 별점평가]";
+			if(codes[1] == "1")
+				if(evalStatus == "0")
+					open = 1;
+				else
+					open = 3;
+			else
+				if(evalStatus == "0")
+					open = 2;
+				else
+					open = 3;
+		}
+		
+		$(this).html(function(index, html){
+			return type + html;
+		});
+		
+		
 		
 		$(this).hover(function(){
 			$(this).css('text-decoration','underline');
@@ -314,9 +350,25 @@ $(document).ready(function(){
 			$(this).css('text-decoration','none');
 		});
 		
+		
 		$(this).on('click', function(){
-			var bnum = $(this).closest("tr").find("input:eq(0)").val();
-			var bkind = $(this).closest("tr").find("input:eq(1)").val();
+			if(noticeStatus == "0"){
+				$(this).css('color', 'gray');
+				readNotice(nid);
+			}
+			
+			if(open == "0"){
+				readBoard_header(bnum, bkind);
+			}else if(open == "1"){
+				$(this).attr('data-target', '#moreNewsForm');
+				$(this).attr('data-toggle', 'modal');
+				evGuide(title, bnum);
+			}else if(open == "2"){
+				alert("참석여부 화면을 띄워");
+			}else if(open == "3"){
+				alert("평가가 이미 완료된 항목임.");
+			}
+			
 		});
 	});
 	
@@ -325,7 +377,17 @@ $(document).ready(function(){
 	
 	
 	
-	
+	function readNotice(nid){
+		$.ajax({
+			url : "readNotice.do",
+			type : "post",
+			data : {
+				nid : nid
+			},
+			success : function() {},
+			error : function(){}
+		});
+	};
 	
 	
 	
