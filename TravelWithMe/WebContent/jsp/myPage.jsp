@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,11 +101,34 @@
 
 
 <div class="myInfo">
-<h4>MY INFO</h4>
-<table id="info">
+<h4>MY INFO</h4><BR>
+<center>
+<table id="info" style="width : 400px; height : 100px; text-align:center;">
 	<tr>
 		<th>아이디</th>
 		<td>${memberInfo.mid }</td>
+		<th rowspan="4">
+		<c:choose>
+			<c:when test="${memPoint.CNT > 0 }">
+				<c:choose>
+					<c:when test="${memPoint.GRADE == 'Gold' }">
+						<img src="imgs/gold.jpg" style="width:50px;height:50px;"/><BR>
+					</c:when>
+					<c:when test="${memPoint.GRADE == 'Silver' }">
+						<img src="imgs/silver.jpg" style="width:50px;height:50px;"/><BR>
+					</c:when>
+					<c:when test="${memPoint.GRADE == 'Bronze' }">
+						<img src="imgs/bronze.jpg" style="width:50px;height:50px;"/><BR>
+					</c:when>
+				</c:choose>
+					가이드 포인트  ${memberInfo.mguidepoint}점<BR>
+					가이드 횟수 ${memPoint.CNT }회
+			</c:when>
+			<c:otherwise>
+				아직 가이드경험이 없습니다.
+			</c:otherwise>
+		</c:choose>
+		</th>
 	</tr>
 	<tr>
 		<th>성명</th>
@@ -114,25 +138,21 @@
 		<th>연락처</th>
 		<td>${memberInfo.mcontact}</td>
 	</tr>
-<%-- 	<tr>
-		<th>신뢰지수</th>
-		<th>가이드 포인트</th>
-	</tr>
 	<tr>
-		<td>${memberInfo.mpoint}</td>
+		<th>
+			신뢰지수<BR>
+		</th>
 		<td>
-		<c:choose>
-			<c:when test="${memberInfo.mguidepoint != '0'}">${memberInfo.mguidepoint}</c:when>
-			<c:otherwise>아직 가이드경험이 없습니다.</c:otherwise>
-		</c:choose></td>
-	</tr> --%>
+			${memberInfo.mpoint } / 100 점
+		</td>
+	</tr>
 </table><BR>
+</center>
 <div class="inInfo">
 <button>회원정보 수정</button>
 <button>회원탈퇴</button>
 </div>
 </div>
-
 
 <!-- 스크립트는 header.js에 있다. -->
 <div class="myNews">
@@ -154,9 +174,11 @@
 	</tr>
 </c:forEach>
 </table>
+<c:if test="${fn:length(notice) == 5}">
 <div class="inNews">
 <input type="button" class="moreNews" value="더보기" data-toggle="modal" data-target="#moreNewsForm" style="background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
 </div>
+</c:if>
 </div>
 
 <div class="myBoards">
@@ -203,9 +225,11 @@
 	</tr>
 </c:forEach>
 </table>
+<c:if test="${fn:length(register) == 5}">
 <div class="inRegister">
 <input type="button" id="moreRegister" value="더보기" data-toggle="modal" data-target="#moreRegiForm" style="background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
 </div>
+</c:if>
 </div>
 
 </div>

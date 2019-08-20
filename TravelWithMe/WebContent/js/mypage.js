@@ -101,7 +101,7 @@ $(document).ready(function(){
 	
 	
 	function readBoard(bnum, bkind){
-		alert(bnum + " " + bkind + " readBoard.do 요청을 보내자.");
+		location.href = "readBoard.do?bnum=" + bnum + "&bkind=" + bkind;
 	};
 	
 	
