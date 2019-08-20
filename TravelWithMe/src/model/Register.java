@@ -13,6 +13,7 @@ public class Register {
 	// 윤현준이 추가한거
 	private String bkind;
 	private String btitle;
+	private String mname;
 	
 	public String getRid() {
 		return rid;
@@ -62,10 +63,16 @@ public class Register {
 	public void setBtitle(String btitle) {
 		this.btitle = btitle;
 	}
-	
+	public String getMname() {
+		return mname;
+	}
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
 	@Override
 	public String toString() {
 		return "Register [rid=" + rid + ", bnum=" + bnum + ", mid=" + mid + ", rdate=" + rdate + ", rnop=" + rnop
-				+ ", attendstatus=" + attendstatus + ", bkind=" + bkind + ", btitle=" + btitle + "]";
+				+ ", attendstatus=" + attendstatus + ", bkind=" + bkind + ", btitle=" + btitle + ", mname=" + mname
+				+ "]";
 	}
 }

@@ -136,4 +136,10 @@
 	<update id="updateNoticestatus" parameterType="String">
 		update notice set noticestatus = 1 where nid = #{nid}
 	</update>
+	
+	<!-- 신청인원 불러오기-->
+	<select id="selectRegisterByBnum" parameterType="int" resultType="java.util.HashMap">
+		select rid, m.mid, mname from member m, register r
+		where m.mid = r.mid and bnum = #{bnum}
+	</select>
 </mapper>

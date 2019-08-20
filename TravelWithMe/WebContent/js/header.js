@@ -392,9 +392,30 @@ $(document).ready(function(){
 	
 	
 	
+	function checkAttendanceModal(bnum){
+		
+	};
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	function readBoard_header(bnum, bkind){
 		alert(bnum + " " + bkind + " readBoard.do 요청해.");
 	}
+	
+	
+	
+	
 	
 	
 	
