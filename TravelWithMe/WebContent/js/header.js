@@ -393,9 +393,10 @@ $(document).ready(function(){
 	
 	$('.close').on('click', function(){
 		$('#checkEval').val("f");
+		$('#pw').val("");
 	});
 	
-	
+
 	
 	
 	
@@ -546,7 +547,7 @@ $(document).ready(function(){
 	
 	
 	
-	
+
 	
 	
 

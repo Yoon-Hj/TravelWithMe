@@ -96,10 +96,13 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+<%
+response.setHeader("cache-control","no-store");
+response.setHeader("expires","0");
+response.setHeader("pragma","no-cache");
+%>
 <h1>MY PAGE</h1><HR>
 <div class="row">
-
-
 <div class="myInfo">
 <h4>MY INFO</h4><BR>
 <center>
@@ -112,13 +115,13 @@
 			<c:when test="${memPoint.CNT > 0 }">
 				<c:choose>
 					<c:when test="${memPoint.GRADE == 'Gold' }">
-						<img src="imgs/gold.jpg" style="width:50px;height:50px;"/><BR>
+						<img src="imgs/gold.jpg" style="width:70px;height:70px;"/><BR>
 					</c:when>
 					<c:when test="${memPoint.GRADE == 'Silver' }">
-						<img src="imgs/silver.jpg" style="width:50px;height:50px;"/><BR>
+						<img src="imgs/silver.jpg" style="width:70px;height:70px;"/><BR>
 					</c:when>
 					<c:when test="${memPoint.GRADE == 'Bronze' }">
-						<img src="imgs/bronze.jpg" style="width:50px;height:50px;"/><BR>
+						<img src="imgs/bronze.jpg" style="width:70px;height:70px;"/><BR>
 					</c:when>
 				</c:choose>
 					가이드 포인트  ${memberInfo.mguidepoint}점<BR>
@@ -149,8 +152,8 @@
 </table><BR>
 </center>
 <div class="inInfo">
-<button>회원정보 수정</button>
-<button>회원탈퇴</button>
+<input type="button" id="reviseForm" value="회원정보 수정" data-toggle="modal" data-target="#meminfoReviseForm" style="background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
+<input type="button" id="withdrawal" value="회원탈퇴"style="background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
 </div>
 </div>
 
@@ -265,6 +268,32 @@
 
 
 
+	<!-- 회원정보 수정모달 -->	
+	  <div class="modal fade" id="meminfoReviseForm">
+		<div class="modal-dialog modal-dialog-scrollable">
+	      <div class="modal-content">
+	        <!-- Modal Header -->
+	        <div class="modal-header">
+	          <h3 class="modal-title" style="font-family: 배달의민족 도현">회원정보 수정</h3>
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+	        
+	        <!-- Modal body -->
+	        <div class="modal-body" style="text-align: center">
+	        	<h3></h3>
+	        </div>
+	        <div id="checkPw" style="display:none; text-align:center;">
+	        	<h5>비밀번호를 입력하세요</h5><br>
+	        	<input type="password" id="pw"/>
+	        </div>
+		        <!-- Modal footer -->
+		        <div class="modal-footer">
+		          <button type="button" id="ok" class="btn btn-success" data-dismiss="modal">확인</button>
+		          <button type="button" id="checkPass" class="btn btn-success">확인</button>
+		        </div>
+	       </div>
+	     </div>
+	  </div>
 
 
 

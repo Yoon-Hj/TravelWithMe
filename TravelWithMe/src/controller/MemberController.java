@@ -69,6 +69,13 @@ public class MemberController {
 		return m_msvc.getUserPoint(mid);
 	}
 	
+	@RequestMapping("withdrawalUser.do")
+	public String withdrawalUser(HttpSession session) {
+		String mid = (String)session.getAttribute("user");
+		m_msvc.withdrawalUser(mid);
+		session.invalidate();
+		return "index";
+	}
 	
 	@RequestMapping("myPage.do")
 	public ModelAndView mypage(HttpSession session) {

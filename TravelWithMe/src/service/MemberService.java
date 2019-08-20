@@ -30,25 +30,25 @@ public class MemberService {
 		HashMap<String, Object> returnVal = new HashMap<String, Object>();
 		
 		//	암호화 적용 전,  암호화 적용후 지우고 아래부분 사용할 것
-		String checkPw = m_mdao.selectPw(mid);
-		int result = 2;		// 존재하지 않는 ID
-		if(checkPw != null) {
-			if(checkPw.equals(mpw)) {
-				result = 1;	// 로그인 성공
-			}else
-				result = 3; // 아이디 또는 비밀번호 틀림
-		}
+//		String checkPw = m_mdao.selectPw(mid);
+//		int result = 2;		// 존재하지 않는 ID
+//		if(checkPw != null) {
+//			if(checkPw.equals(mpw)) {
+//				result = 1;	// 로그인 성공
+//			}else
+//				result = 3; // 아이디 또는 비밀번호 틀림
+//		}
 
 		//	암호화 적용 후
-		//		String checkPw = m_mdao.selectPw(mid);
-		//		String input_pw = sha.sha256(mpw);
-		//		int result = 2;		// 존재하지 않는 ID
-		//		if(checkPw != null) {
-		//			if(checkPw.equals(input_pw)) {
-		//				result = 1;	// 로그인 성공
-		//			}else
-		//				result = 3; // 아이디 또는 비밀번호 틀림
-		//		}
+				String checkPw = m_mdao.selectPw(mid);
+				String input_pw = sha.sha256(mpw);
+				int result = 2;		// 존재하지 않는 ID
+				if(checkPw != null) {
+					if(checkPw.equals(input_pw)) {
+						result = 1;	// 로그인 성공
+					}else
+						result = 3; // 아이디 또는 비밀번호 틀림
+				}
 		
 		returnVal.put("picklist", m_mdao.selectLikecodeById(mid));
 		returnVal.put("result", result);
@@ -126,6 +126,10 @@ public class MemberService {
 			e.printStackTrace();
 			throw new Exception();
 		}
+	}
+	
+	public void withdrawalUser(String mid){
+		m_mdao.deleteMember(mid);
 	}
 	
 

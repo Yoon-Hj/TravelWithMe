@@ -104,10 +104,40 @@ $(document).ready(function(){
 		location.href = "readBoard.do?bnum=" + bnum + "&bkind=" + bkind;
 	};
 	
-	
-	
-	
 
+	
+	
+	$('#reviseForm').on('click', function(){
+		$('.modal-body').hide();
+		$('#checkPw').show();
+	});
+	
+	$('#withdrawal').on('click', function(){
+//		if(confirm("정말 탈퇴하시겠습니까?") == true)
+//		location.href="withdrawalUser.do";
+	});
+
+	$('.modal').on('hidden.bs.modal', function(){
+		$('#pw').val("");
+	});
+	
+	$('#checkPass').on('click', function(){
+		var pw = $('#pw').val();
+		$.ajax({
+			url : "checkPassword.do",
+			type : "post",
+			data : {
+				mpw : pw
+			},
+			success : function(){
+				
+			},
+			error : function(){}
+		});
+		alert("다녀왔다.");
+	});
+	
+	
 });
 
 
