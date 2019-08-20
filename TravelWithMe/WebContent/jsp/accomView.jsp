@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,6 +79,14 @@
 	  border-left: none;
   }
   
+  table.commtable button[type=button]{
+  	  background: white;
+  	  font-size: 13px;
+  	  color: black;
+  	  cursor: pointer;
+  	  border: none;
+  }
+  
 </style>
 </head>
 <body>
@@ -115,55 +125,64 @@
 				<input type="button" class="btn default" value="delete" style="border: 2px solid #B5C3C8;">
 			</div>
 		</c:if>
-	
+		
 		<div class="card" style="font-family: '함초롬돋움';">
 			<table class="viewCard"; style="border: none;">
 				<tr>
 					<th>작성자</th>
-					<td>test1</td>
+					<td>${accomBoard.mid}</td>
 				</tr>
 				<tr>
 					<th>제목</th>
-					<td>동행구해요~</td>
+					<td>${accomBoard.btitle}</td>
 				</tr>
 				<tr>
 					<th>날짜</th>
-					<td>2019.0713 ~ 2019.07.15</td>
+					<td><fmt:formatDate value="${accomBoard.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${accomBoard.astartdate}" pattern="yyyy-MM-dd"/></td>
 				</tr>
 				<tr>
 					<th>출발장소 및 시간</th>
-					<td>서울역 10:00</td>
+					<td>${accomBoard.adepartplace} ${accomBoard.adeparttime}시</td>
 				</tr>
 				<tr>
 					<th>지역</th>
-					<td>경상남도 부산</td>
+					<td>${accomBoard.aarea}</td>
 				</tr>
 				<tr>
 					<th>모집인원</th>
-					<td>5명</td>
+					<td>${accomBoard.anop}명</td>
 				</tr>
 				<tr>
 					<th>취향</th>
-					<td><b>1.여행테마</b> &nbsp; 쇼핑 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>2.선호 이동수단</b> &nbsp; 도보</td>
+					<td>1. 여행테마 - ${accomBoard.likename} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. 선호 이동수단 - ${accomBoard.atransport}</td>
 				</tr>
 				<tr>
 					<th>필수여행지</th>
-					<td>해운대</td>
+					<td>${accomBoard.acourse}</td>
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td>즐겁게 여행 다녀올 동행자 구해요!</td>
+					<td>${accomBoard.bcontent}</td>
 				</tr>
 				<tr>
 					<th>주요정책</th>
-					<td>여행 시작일 기준 <b style="color:#CD1039">1일전까지 연락이 되지 않는 분</b>은 작성자 임의로 신청취소를 진행할 수 있습니다.<br>
-						<b style="color:#CD1039">신뢰지수 50점 이하</b>의 회원은 작성자 임의로 신청취소를 진행할 수 있습니다.</td>
+					<td>
+						<c:choose>
+							<c:when test="${fn:length(policy) != 0}">
+							<c:forEach var="p" items="${policy}" varStatus="status">
+							<c:if test="${p.pcode==2}">여행 시작일 기준 <b style="color:#CD1039">${p.pvalue}일 전까지 연락이 되지 않는 분</b>은 작성자 임의로 신청취소를 진행할 수 있습니다.<br></c:if>
+							<c:if test="${p.pcode==3}"><b style="color:#CD1039">신뢰지수 ${p.pvalue}점 이하</b>의 회원은 작성자 임의로 신청취소를 진행할 수 있습니다.<br></c:if>
+							</c:forEach>
+							</c:when>
+							<c:otherwise>공지된 출발장소 및 시간에 모인 인원과 동행을 진행하며, 특별 제제사항은 없습니다.</c:otherwise>
+						</c:choose>
+					</td>
 				</tr>
 			</table>
 		</div>
 		
 		<div style="display: flex; margin-top: 10px; margin-left: 110px; font-family: '배달의민족 주아'">
-			<p><input type="button" class="btn default" value="목록으로" style="border: 2px solid #B5C3C8;"></p>
+			<p><input type="button" class="btn default" value="목록으로" style="border: 2px solid #B5C3C8;" onclick="location.href='accomBoardList.do'"></p>
 			<p style="float: right; margin-left: 630px;">현재 신청 가능 인원 수 3명 &nbsp;&nbsp;
 			<input type="button" class="btn default" value="신청" data-toggle="modal" data-target="#warningModal1" style="border: 2px solid #B5C3C8;"></p>
 			<!-- 작성자면 신청->신청관리 버튼 뜨도록 -->
@@ -175,16 +194,18 @@
 				<button type="submit">댓글작성</button>
 			</form>
 		</div>
-		
-		<div style="margin-top: 20px;">
+
+		<div style="margin-top: 20px; margin-bottom: 20px; margin-left: 110px; width: 80%;">
 			<c:forEach var="comment" items="${commentList}" varStatus="status">
-				<table>
+				<table class="table table-borderless" class="commtable">
+				<tbody>
 					<tr>
 						<td>${comment.mid}</td>
 						<td>${comment.ccontent}</td>
-						<td><button type="button">답글</button></td>
-						<td><button type="button">댓글삭제</button></td>
+						<td><button type="button">답글</button>
+							<button type="button">댓글삭제</button></td>
 					</tr>
+				</tbody>
 				</table>
 			</c:forEach>
 		</div>
