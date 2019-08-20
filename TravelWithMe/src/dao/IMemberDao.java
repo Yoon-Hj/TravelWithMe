@@ -62,5 +62,7 @@ public interface IMemberDao {
 	public void updateEvalStatus(HashMap<String, Object> params);
 	//알림 읽음
 	public void updateNoticestatus(String nid);
+	//신청자 목록 불러오기
+	public List<Register> selectRegisterByBnum(int bnum);
 	
 }

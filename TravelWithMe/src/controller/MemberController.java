@@ -141,6 +141,14 @@ public class MemberController {
     	return m_msvc.getMoreRegister(mid);
     }
     
+    @RequestMapping("")
+    public @ResponseBody List<Register> d(String bnum){
+    	for(Register a : m_msvc.getRegisterList(bnum)) {
+    		System.out.println("신청자 목록 : " + a);
+    	}
+    	return m_msvc.getRegisterList(bnum);
+    }
+    
     @RequestMapping("findForm.do")
     public void findForm() {
 		

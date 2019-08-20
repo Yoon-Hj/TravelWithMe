@@ -147,6 +147,11 @@ public class MemberService {
 			System.out.println(r);
 		return m_mdao.selectAllRegisterById(mid);
 	}
+	
+	public List<Register> getRegisterList(String bnum){
+		int parseBnum = Integer.parseInt(bnum);
+		return m_mdao.selectRegisterByBnum(parseBnum);
+	}
 
 	public void addGuidePoint(String bnum, String gPoint, String mid) throws Exception {
 		HashMap<String, Object> params = new HashMap<String, Object>();

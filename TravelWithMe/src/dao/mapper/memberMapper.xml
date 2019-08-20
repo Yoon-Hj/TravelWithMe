@@ -138,7 +138,7 @@
 	</update>
 	
 	<!-- 신청인원 불러오기-->
-	<select id="selectRegisterByBnum" parameterType="int" resultType="java.util.HashMap">
+	<select id="selectRegisterByBnum" parameterType="int" resultType="register">
 		select rid, m.mid, mname from member m, register r
 		where m.mid = r.mid and bnum = #{bnum}
 	</select>
