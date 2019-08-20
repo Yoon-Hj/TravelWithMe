@@ -134,14 +134,15 @@
 </div>
 
 
-
+<!-- 스크립트는 header.js에 있다. -->
 <div class="myNews">
 <h4>알림내역</h4>
 <table class="news" style="width:300px">
 <c:forEach var="n" items="${notice }">
 	<tr>
 		<td style="height:70px">
-		<a class="contentsRow">
+		<input type="hidden" value="${n.NOTICESTATUS }">
+		<a class="newsRows">
 		<c:choose>
 			<c:when test="${n.BKIND == 'A' }">[Travel with Me]</c:when>
 			<c:when test="${n.BKIND == 'G' }">[Travel with Guide]</c:when>
@@ -162,8 +163,10 @@
 <table>
 <c:forEach var="b" items="${myBoard }">
 	<tr>
-		<td style="width:400px">
-		<a class="contentsRow">
+		<td style="width:400px;height:40px;">
+		<a class="boardsRow">
+		<input type="hidden" value="${b.BNUM }"/>
+		<input type="hidden" value="${b.BKIND }"/>
 		<c:choose>
 			<c:when test="${b.BKIND == 'A' }">[Travel with Me]</c:when>
 			<c:when test="${b.BKIND == 'G' }">[Travel with Guide]</c:when>
@@ -184,15 +187,16 @@
 <table class="myRegi">
 <c:forEach var="r" items="${register }">
 	<tr>
-		<td style="width:400px;height:60px;">
-		<a class="contentsRow">
+		<td style="width:400px;height:40px;">
+		<a class="regisRow">
+		<input type="hidden" value="${r.BNUM }"/>
+		<input type="hidden" value="${r.BKIND }"/>
 		<c:choose>
 			<c:when test="${r.BKIND == 'A' }">[Travel with Me]</c:when>
 			<c:when test="${r.BKIND == 'G' }">[Travel with Guide]</c:when>
 		</c:choose>
-		${r.BTITLE }</a><BR>
+		${r.BTITLE }</a>
 		<div style="width:100px;margin-left:auto;">
-		<button class="cancelRegister" value="${r.RID }">신청 취소</button>
 		</div>
 		</td>
 	</tr>
@@ -209,7 +213,8 @@
 
 
 
-		<!-- 신청내역 더보기 -->	
+
+	<!-- 신청내역 더보기 -->	
 	  <div class="modal fade" id="moreRegiForm">
 		<div class="modal-dialog modal-dialog-scrollable">
 	      <div class="modal-content">
@@ -222,7 +227,7 @@
 	        <!-- Modal body -->
 	        <div class="modal-body" style="text-align: center">
 	        	<table id="allRegis">
-	        		<tbody class="regisRow"></tbody>
+	        		<tbody class="regisRows"></tbody>
 	        	</table>
 	        </div>
 		        <!-- Modal footer -->
@@ -232,13 +237,6 @@
 	       </div>
 	     </div>
 	  </div>
-
-
-
-
-
-
-
 
 
 
