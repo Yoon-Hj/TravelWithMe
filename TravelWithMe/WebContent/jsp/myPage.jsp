@@ -137,17 +137,18 @@
 <!-- 스크립트는 header.js에 있다. -->
 <div class="myNews">
 <h4>알림내역</h4>
-<table class="news" style="width:300px">
+<table class="news" style="width:500px">
 <c:forEach var="n" items="${notice }">
 	<tr>
-		<td style="height:70px">
+		<td style="height:70px;width:500px">
 		<input type="hidden" value="${n.NOTICESTATUS }">
+		<input type="hidden" value="${n.BNUM }">
+		<input type="hidden" value="${n.BKIND }">
+		<input type="hidden" value="${n.NKCODE }">
+		<input type="hidden" value="${n.EVALSTATUS }">
+		<input type="hidden" value="${n.NID }">
+		<input type="hidden" value="${n.BTITLE }">
 		<a class="newsRows">
-		<c:choose>
-			<c:when test="${n.BKIND == 'A' }">[Travel with Me]</c:when>
-			<c:when test="${n.BKIND == 'G' }">[Travel with Guide]</c:when>
-			<c:when test="${n.BKIND == 'C' }">[Community]</c:when>
-		</c:choose>
 		${n.BTITLE }<BR>
 		${n.NKREASON }</a></td>
 	</tr>
