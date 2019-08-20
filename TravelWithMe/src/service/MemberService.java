@@ -75,10 +75,10 @@ public class MemberService {
 
 		//		System.out.println(returnVal.get("notice"));
 		for(HashMap<String, String> a: (List<HashMap<String, String>>)returnVal.get("notice")) {
-			System.out.println(a);
+			System.out.println("알림 : " + a);
 		}
 		for(HashMap<String, String> r : (List<HashMap<String, String>>)returnVal.get("register")) {
-			System.out.println(r);
+			System.out.println("신청 : " + r);
 		}
 		
 		return returnVal;
@@ -147,8 +147,13 @@ public class MemberService {
 			System.out.println(r);
 		return m_mdao.selectAllRegisterById(mid);
 	}
+	
+	public List<Register> getRegisterList(String bnum){
+		int parseBnum = Integer.parseInt(bnum);
+		return m_mdao.selectRegisterByBnum(parseBnum);
+	}
 
-	public void addGuidePoint(String bnum, String gPoint, String mid) throws Exception {
+	public void addGuidePoint(String bnum, String gPoint, String nid) throws Exception {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		int parseBnum = Integer.parseInt(bnum);
 		int parsePoint = Integer.parseInt(gPoint);
@@ -156,12 +161,12 @@ public class MemberService {
 		System.out.println("서비스에서 포인트 값 : " + parsePoint);
 		try {
 			params.put("bnum", parseBnum);
-			params.put("mid", mid);
 			if(parsePoint >= 3 && parsePoint <= 5) {
 				params.put("gpoint", parsePoint);
 				m_mdao.updateGuidePoint(params);
 			}
-			m_mdao.updateEvalStatus(params);
+			System.out.println(nid);
+			m_mdao.updateEvalStatus(nid);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -170,8 +175,22 @@ public class MemberService {
 	}
 
 	public void readNotice(String nid) {
-		System.out.println("서비스에서 받은 nid : " + nid);
 		m_mdao.updateNoticestatus(nid);
+	}
+	
+	public void checkAttendance(String[] attendance, String nid) throws Exception {
+		try {
+			if(attendance != null) {
+				for(int i = 0; i < attendance.length; i++) {
+					m_mdao.updateAttendStatusByRid(attendance[i]);
+				}
+			}
+			m_mdao.updateEvalStatus(nid);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Exception();
+		}
 	}
 
 	public String findId(String id, String mail) {

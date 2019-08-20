@@ -23,6 +23,7 @@ public class AccomBoard {
 	private String likecode;
 	private String atransport;
 	private String acourse;
+	private String likename;
 	
 	public int getBnum() {
 		return bnum;
@@ -132,13 +133,19 @@ public class AccomBoard {
 	public void setAcourse(String acourse) {
 		this.acourse = acourse;
 	}
+	public String getLikename() {
+		return likename;
+	}
+	public void setLikename(String likename) {
+		this.likename = likename;
+	}
 	@Override
 	public String toString() {
 		return "AccomBoard [bnum=" + bnum + ", bkind=" + bkind + ", mid=" + mid + ", bwritedate=" + bwritedate
 				+ ", btitle=" + btitle + ", bcontent=" + bcontent + ", breadcount=" + breadcount + ", cdel=" + cdel
 				+ ", aarea=" + aarea + ", astartdate=" + astartdate + ", afinishdate=" + afinishdate + ", atime="
 				+ atime + ", adepartplace=" + adepartplace + ", adeparttime=" + adeparttime + ", anop=" + anop
-				+ ", likecode=" + likecode + ", atransport=" + atransport + ", acourse=" + acourse + "]";
+				+ ", likecode=" + likecode + ", atransport=" + atransport + ", acourse=" + acourse + ", likename="
+				+ likename + "]";
 	}
-	
 }

@@ -64,6 +64,9 @@
 	  right: 35px;
 	  }  
    }
+   .btn{
+   	display:none;
+   }
 </style>
 </head>
 <body>
@@ -171,8 +174,8 @@
 	        </div>
 	        <div class="starRev" style="display:none;text-align:center">
 	        	<div>
-	        		<h1>가이드 평가</h1>
-	        		<h3 id="guideTitle"></h3>
+	        		<h3>가이드 평가</h3>
+	        		<h5 id="guideTitle"></h5>
 	        	</div>
 				<span class="starR on" value="1">1</span>
 				<span class="starR">2</span>
@@ -181,11 +184,29 @@
 				<span class="starR">5</span>
 				<input type="hidden" value="a" id="gPoint">
 				<input type="hidden" value="a" id="guideBnum">
+				<input type="hidden" value="a" id="g_noticeId">
 				<input type="hidden" value="f" id="checkEval">
+			</div>
+			<div class="attendanceModal" style="display:none;text-align:center">
+				<div>
+	        		<h3>참석여부 체크</h3>
+	        		<h5>참석하지 않은 신청자의 아이디를 선택해주세요.</h5><br>
+	        		<center>
+	        		<table id="registers" style="text-align:left">
+	        		<tbody class="registersRow"></tbody>
+	        		</table>
+	        		</center><br>
+	        		<input type="hidden" value="a" id="noticeId">
+	        	</div>
+	        	
 			</div>
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
+		          <button type="button" id="ok" class="btn btn-success" data-dismiss="modal">확인</button>
 		          <button type="button" id="evGuide" class="btn btn-success" data-dismiss="modal">확인</button>
+		          <button type="button" id="checkAttend" class="btn btn-success" data-dismiss="modal">확인</button>
+		          <button type="button" id="back" class="btn btn-secondary" >이전</button>
+		          <input type="hidden" id="chk" value="f">
 		        </div>
 	       </div>
 	     </div>
@@ -201,11 +222,6 @@
 	function closeNav() {
 	  document.getElementById("myNav").style.height = "0%";
 	}
-	
-	function joinForm(){
-		location.href="joinForm.do";
-	}
-	
 	
 	</script>  
 	

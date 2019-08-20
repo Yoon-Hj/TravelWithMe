@@ -6,6 +6,7 @@ public class Mempick {
 	private String likecode;
 	
 	public Mempick(String mid, String likecode) {
+		super();
 		this.mid = mid;
 		this.likecode = likecode;
 	}

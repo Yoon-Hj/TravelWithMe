@@ -3,6 +3,7 @@ package model;
 import java.util.Date;
 
 public class Comments {
+	
 	private int cnum;
 	private int cgrid;
 	private int bnum;
@@ -10,7 +11,6 @@ public class Comments {
 	private String ccontent;
 	private Date cwritedate;
 	private int cdel;
-	
 	
 	@Override
 	public String toString() {
@@ -59,6 +59,5 @@ public class Comments {
 	public void setCdel(int cdel) {
 		this.cdel = cdel;
 	}
-	
 	
 }

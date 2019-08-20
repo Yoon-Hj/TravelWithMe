@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.Policy;
 import service.AdminService;
 import service.BoardService;
 import service.MemberService;
@@ -100,9 +101,16 @@ public class BoardController {
 		return mav;
 	}
 	
-	@RequestMapping("accomView.do")
+	@RequestMapping("readBoard.do")
 	public ModelAndView readBoard(int bnum, String bkind) {
 		ModelAndView mav = new ModelAndView();
+		mav.addAllObjects(b_bsvc.getBoardContent(bnum, bkind));
+		mav.addObject("commentList", b_bsvc.readComment(bnum));
+		mav.addObject("registerList", b_bsvc.getRegisterListByNum(bnum));
+		if(bkind.equals("A")) {
+			mav.setViewName("accomView");
+		}
+		
 		
 		return mav;
 	}
