@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	// 웹소켓 부분
-	var wsUri = "ws://70.12.109.65:80/TravelWithMe/websocket/echo.do";
-//	var wsUri = "ws://localhost/TravelWithMe/websocket/echo.do";
+//	var wsUri = "ws://70.12.109.65:80/TravelWithMe/websocket/echo.do";
+	var wsUri = "ws://localhost/TravelWithMe/websocket/echo.do";
 	var websocket = null;
 	
 	var user = $('#user').val();
@@ -166,7 +166,8 @@ $(document).ready(function(){
 						}
 					}
 					table += "<tr>";
-					table += "<td>" + "<input type='hidden'  value='" + nlist[i].bnum + "/" + type2 + "/" + nlist[i].btitle + "'>" + "</td>"
+					table += "<td>" + "<input type='hidden'  value='" + nlist[i].bnum + "/" + type2 + "/"
+					+ nlist[i].btitle + "/" + nlist[i].bkind +  "'>" + "</td>"
 					table += "<td>" + "<input type='hidden' value='" + nlist[i].nid + "/" + nlist[i].noticestatus + "'/>" + "</td>";
 					table += "<td><p class='noticeDetail' style='font-color:red'>" + type + nlist[i].btitle + "<br>";
 					table += nlist[i].nkreason + "</p></td>";
@@ -184,6 +185,7 @@ $(document).ready(function(){
 	});
 	
 	function evGuide(title, bnum){
+		$('#checkEval').val("t");
 		$('#guideTitle').html("'" + title + "'" + " 어땠나요?");
 		$('#guideBnum').val(bnum);
 		$('.modal-body').hide();
@@ -206,14 +208,7 @@ $(document).ready(function(){
 	
 	
 	
-	$('.contentsRow').each( function() {
-		$(this).css('cursor', 'pointer');
-		$(this).hover(function(){
-			$(this).css('text-decoration','underline');
-		}, function(){
-			$(this).css('text-decoration','none');
-		});
-	});
+
 	
 	
 	
@@ -231,6 +226,7 @@ $(document).ready(function(){
 		var bnum = row[0];
 		var type = row[1];
 		var title = row[2];
+		var bkind = row[3];
 		var rowColor = $(this).closest("tr").find("input:eq(1)").val().split("/");
 		if(rowColor[1] == "0"){
 			$(this).css('color', 'gray');
@@ -246,8 +242,7 @@ $(document).ready(function(){
 			});
 		}
 		if(type == "0"){
-			alert("게시글 화면으로 이동해.");
-			evGuide(title, bnum);
+			readBoard_header(bnum, bkind);
 		}else if(type == "1"){
 			alert("별점평가 화면을 띄워");
 			evGuide(title, bnum);
@@ -278,23 +273,66 @@ $(document).ready(function(){
 	});
 	// 평가 완료후 컨트롤러로 보내기.
 	$('#evGuide').on('click', function(){
-		$.ajax({
-			url : "evGuide.do",
-			type : "post",
-			data : {
-				bnum : $('#guideBnum').val(),
-				gPoint : $('#gPoint').val()
-			},
-			success : function() {},
-			error : function(){}
-		});
-		alert("별점 평가가 완료되었습니다.");
+		var check = $('#checkEval').val();
+		if(check == "t"){
+			$.ajax({
+				url : "evGuide.do",
+				type : "post",
+				data : {
+					bnum : $('#guideBnum').val(),
+					gPoint : $('#gPoint').val()
+				},
+				success : function() {},
+				error : function(){}
+			});
+			alert("별점 평가가 완료되었습니다.");
+			$('#checkEval').val("f");
+		}
+	});
+	
+	
+	
+	$('.close').on('click', function(){
+		$('#checkEval').val("f");
 	});
 	
 	
 	
 	
 	
+	
+	$('.newsRows').each( function() {
+		$(this).css('cursor', 'pointer');
+		$(this).closest("tr").find("td:eq(0)").css('height', '80px');
+		var rowColor = $(this).closest("tr").find("input:eq(0)").val();
+		if(rowColor == "1")
+			$(this).css('color', 'gray');
+		
+		$(this).hover(function(){
+			$(this).css('text-decoration','underline');
+		}, function(){
+			$(this).css('text-decoration','none');
+		});
+		
+		$(this).on('click', function(){
+			var bnum = $(this).closest("tr").find("input:eq(0)").val();
+			var bkind = $(this).closest("tr").find("input:eq(1)").val();
+		});
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	function readBoard_header(bnum, bkind){
+		alert(bnum + " " + bkind + " readBoard.do 요청해.");
+	}
 	
 	
 	

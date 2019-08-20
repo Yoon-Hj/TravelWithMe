@@ -181,6 +181,7 @@
 				<span class="starR">5</span>
 				<input type="hidden" value="a" id="gPoint">
 				<input type="hidden" value="a" id="guideBnum">
+				<input type="hidden" value="f" id="checkEval">
 			</div>
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
