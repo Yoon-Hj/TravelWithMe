@@ -175,12 +175,20 @@ public class MemberService {
 		m_mdao.updateNoticestatus(nid);
 	}
 
-	public String findId(String id, String mail) {
-		String result = m_mdao.selectId(id,mail);
+	public String findId(Member member) {
+		
+
+		String result = m_mdao.selectId(member);
 		
 		return result;
 	}
 	
 
+	public String findPw(Member member) {
+		
+		String result = m_mdao.selectPw(member);
+		return result;
+		
+	}
 
 }

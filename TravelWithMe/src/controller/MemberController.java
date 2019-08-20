@@ -149,17 +149,31 @@ public class MemberController {
     @RequestMapping(value = "findID.do", method = RequestMethod.GET)
     public @ResponseBody String findID(@RequestParam("name") String findName1,@RequestParam("mail") String findMail1) {
 	
-    	System.out.println(findName1);
-        System.out.println(m_msvc.findId(findName1, findMail1));
-		 return "" + m_msvc.findId(findName1, findMail1);
+    	Member member = new Member();
+    	//System.out.println(findName1);
+    	member.setMname(findName1);
+    	member.setMcontact(findMail1);
+    
+    	String result = m_msvc.findId(member);
+		System.out.println(m_msvc.findId(member));
+		return result;
+    	
+      
+		
     	
 		}
    
    
 	
-    @RequestMapping("findPW,do")
-    public String findPW() {
-		return null;
+    @RequestMapping(value="findPw.do", method = RequestMethod.GET)
+    public @ResponseBody String findPW(@RequestParam("id") String id,@RequestParam("name") String name, @RequestParam("mail") String mail) {
+		
+    	Member member = new Member();
+        member.setMid(id);
+        member.setMname(name);
+        member.setMcontact(mail);
+    	String result = m_msvc.findPw(member);
+        return result;
 		}
     
     
