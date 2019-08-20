@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.Policy;
 import service.AdminService;
 import service.BoardService;
 import service.MemberService;
@@ -106,9 +107,10 @@ public class BoardController {
 		mav.addAllObjects(b_bsvc.getBoardContent(bnum, bkind));
 		mav.addObject("commentList", b_bsvc.readComment(bnum));
 		mav.addObject("registerList", b_bsvc.getRegisterListByNum(bnum));
-		if(bkind == "A") {
+		if(bkind.equals("A")) {
 			mav.setViewName("accomView");
 		}
+		
 		
 		return mav;
 	}

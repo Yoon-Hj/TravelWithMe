@@ -153,7 +153,7 @@
 			</div>
 			
 		</div>
-
+		
 		<!-- 전체 리스트 조회 -->
 		<div style="margin-top: 60px">
 		<h4 style="font-family: 함초롬돋움; margin-bottom: 15px;">전체여행</h4>
@@ -161,7 +161,7 @@
 			<div class="row">
 			<c:forEach var="a" items="${boardList}" varStatus="status">
 			  <div class="column">
-				<a href="#"><img src="imgs/gangwon.PNG" style="width:100%"></a>
+				<a href="readBoard.do?bnum=${a.bnum}&bkind=A"><img src="imgs/gangwon.PNG" style="width:100%"></a>
 				<div class="content">
 					<p><fmt:formatDate value="${a.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${a.afinishdate}" pattern="yyyy-MM-dd"/>
 					<br>[${a.aarea}] ${a.btitle}<br>${a.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${a.breadcount}</p>
@@ -175,8 +175,8 @@
 
 	<div class="pagination" style="margin-top: 25px; margin-left: 400px; text-align: center;">
 		<c:if test="${ start != 1}">
-			<a href="accomBoardList.do?page=1'">&laquo;</a>
-			<a href="accomBoardList.do?page=${start-1}'">&#8249;</a> 
+			<a href="accomBoardList.do?page=1">&laquo;</a>
+			<a href="accomBoardList.do?page=${start-1}">&#8249;</a> 
 		</c:if>
 		
 		<c:forEach var="i" begin="${ start }" end="${ end }" varStatus="status">
@@ -191,8 +191,8 @@
 		</c:forEach>
 			
 		<c:if test="${ end != last }">
-			<a href="accomBoardList.do?page=${end+1}'">&#8250;</a> 
-			<a href="accomBoardList.do?page=${last}'">&raquo;</a>
+			<a href="accomBoardList.do?page=${end+1}">&#8250;</a> 
+			<a href="accomBoardList.do?page=${last}">&raquo;</a>
 		</c:if>
 	</div>
 			

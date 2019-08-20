@@ -213,12 +213,13 @@
 
 <!-- 게시글 번호로 동행게시글 내용 읽어오기 -->
 <select id="selectOneAccom" parameterType="int" resultType="accomBoard">
-	select * from board NATURAL JOIN accompany where bnum = #{bnum}
+	select * from board NATURAL JOIN (select a.*, likename from accompany a, preference p 
+	where a.likecode = p.likecode) where bnum = #{bnum}
 </select>
 
 <!-- 게시글 번호로 게시글 정책 읽어오기 -->
-<select id="selectPolicyByBnum" parameterType="int" resultType="java.util.HashMap">
-	 select * from policy where bnum = #{bum}
+<select id="selectPolicyByBnum" parameterType="int" resultType="policy">
+	 select * from policy where bnum = #{bnum}
 </select>
 
 <!-- 게시글 번호로 게시글 댓글 읽어오기 -->
@@ -228,7 +229,7 @@
 
 <!-- 게시글 번호로 게시글 신청자 받아오기 -->
 <select id="selectRegisterListByBnum" parameterType="int" resultType="java.util.HashMap">
-	select mid, rnop, rid from register whrere bnum = #{bnum}
+	select mid, rnop, rid from register where bnum = #{bnum}
 </select>
 
 <!-- 게시글 번호로 동행게시글 현재 신청가능 인원 수 조회하기  -->

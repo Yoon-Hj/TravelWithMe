@@ -142,14 +142,14 @@ public class BoardService {
 	//해당 게시글 내용 조회
 	public HashMap<String, Object> getBoardContent(int bnum, String bkind) {
 		HashMap<String, Object> result = new HashMap<String, Object>();
-		if(bkind == "A") {
-			result.put("accomView", b_bdao.selectOneAccom(bnum));
+		if(bkind.equals("A")) {
+			result.put("accomBoard", b_bdao.selectOneAccom(bnum));
 			result.put("policy", b_bdao.selectPolicyByBnum(bnum));
 		}
-		else if(bkind == "G") {
+		else if(bkind.equals("G")) {
 			
 		}
-		else if(bkind == "C") {
+		else if(bkind.equals("C")) {
 			
 		}
 		return result;
