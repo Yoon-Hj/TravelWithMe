@@ -7,20 +7,14 @@
   padding: 14px 18px;
   background-color: white;
   font-size: 16px;
-  cursor: pointer;
+  cursor: default;
   text-align: center;
   font-family: 함초롬돋움;
   font-size: 20px;
   color : black;
   opacity: 0.6
  }
-  
 
-.writeFormBtn:hover{
-	background-color: rgb(181, 195, 200);
-	color: white;
-	opacity: 1;
-}
 
 .writeFormDiv table{
 	width : 100%;
@@ -80,3 +74,25 @@
 	padding: 5px; 
 	color: #787878; 
 }
+
+#photoUpload { 
+  background-color: white;
+  border: 3px solid rgb(232, 212, 212);
+  color: black;
+  padding: 5px 5px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+input[type="file"] {
+	/* 파일 필드 숨기기 */ 
+	position: absolute; 
+	width: 1px; 
+	height: 1px; 
+	padding: 0; 
+	margin: -1px; 
+	overflow: hidden; 
+	clip:rect(0,0,0,0); 
+	border: 0; 
+}
+

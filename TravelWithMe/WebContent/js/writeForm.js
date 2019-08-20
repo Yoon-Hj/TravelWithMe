@@ -21,9 +21,12 @@ $(function(){
 		var minDate = $("#gstartdate").val();
 		$("#gfinishdate").attr('min',minDate);
 		var startDate = minDate.split('-')[2];
-		startDate = Number(startDate)+2;
-		var maxDate =  minDate.split('-')[0]+"-"+ minDate.split('-')[1]+"-"+startDate;
+		var valueEndDate = Number(startDate)-1;
+		var FinishDateMaxDate = Number(startDate)+2;
+		var maxDate =  minDate.split('-')[0]+"-"+ minDate.split('-')[1]+"-"+FinishDateMaxDate;
+		var endDate =  minDate.split('-')[0]+"-"+ minDate.split('-')[1]+"-"+valueEndDate;
 		$("#gfinishdate").attr('max',maxDate);
+		$("#genddate").attr('value',endDate);
 	});
 	
 	$("#gfinishdate").click(function(){
@@ -79,24 +82,24 @@ $(function(){
 	});
 	
 	//출발시간 제한
-	$("#departtime").focusout(function(){
+	$("#gdeparttime").focusout(function(){
 		if($("#gstartdate").val()==""){
 			$("#gtimeLabel").remove();
 			alert("시작날짜를 먼저 선택해주세요");		
 		}
 		else{
 			var timeForOneDay = $(':radio[name="gtime"]:checked').val();
-			var test = $("#departtime").val();
+			var test = $("#gdeparttime").val();
 			if(timeForOneDay=='오전') {
 				if(test>'12:00') {
 					alert('선택할 수 없는 시간대입니다. 다시 확인하세요.');
-					$("#departtime").val("");
+					$("#gdeparttime").val("");
 				}
 			}
 			else if(timeForOneDay=='오후') {
 				if(test<'12:00') {
 					alert('선택할 수 없는 시간대입니다. 다시 확인하세요.');
-					$("#departtime").val("");
+					$("#gdeparttime").val("");
 				}
 			}
 		}
@@ -112,18 +115,115 @@ $(function(){
 				alert("테마는 최대 3개까지 작성가능합니다");
 				$("#gthema").val("");	
 			}else{
-				$("#gthema").after("<a class='sharpThema'>&nbsp;#"+$("#gthema").val()+"</a>");
+				$("#gthema").after("<a class='sharpThema' style='cursor: pointer;'>&nbsp;#"+$("#gthema").val()+"</a>");
 				$("#gthema").val("");				
 			}
 		}			
 	
 	});
 	
+	//가이드 테마 삭제하기
 	$(document).on('click','.sharpThema',function(){
-		alert('삭제어떻게하지?');
+		var a = $(this).text();
+		  if (confirm("'"+a+"' 테마를 삭제하시겠습니까?") == true){   
+		      $(this).remove();
+		  }else{   
+		      return;
+		  }
+			
+	});
+	
+	//사진 첨부버튼 누르기
+	$("#photoUpload").click(function(){
+		$("#photo").trigger("click");
+	});
+	
+	//사진미리보기
+	$("#photo").on("change",function(e){
+		sel_files=[];
+		$(".imgs_wrap").empty();
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		var index = 0;
+		filesArr.forEach(function(f){
+			if(index<=9){
+				sel_files.push(f);				
+				var reader = new FileReader();
+				reader.onload=function(e){
+					var html = "<a onclick='deleteImageAction("+index+")' id='img_id_"+index+"'><img style='width:100px;height:100px;margin-top:5px;' src='"+e.target.result+"' class='selProductFile' title='Click to remove'>&nbsp;</a>";
+					$(".imgs_wrap").append(html);
+										
+				}
+				reader.readAsDataURL(f);
+			}
+			index++;
+		});
+		if(index > 9)
+			alert("사진은 최대 10장만 업로드 가능합니다. 초과된 사진은 자동으로 삭제합니다.");
+	});
+	
+	//정책 1번클릭시 2번,3번 풀리기
+	$("#pcode1").click(function(){
+		$("#pcode2").prop("checked",false);
+		$("#pcode3").prop("checked",false);
+	});
+	$("#pcode2").click(function(){
+		$("#pcode1").prop("checked",false);
+	});
+	$("#pcode3").click(function(){
+		$("#pcode1").prop("checked",false);
 	});
 
+	
+	//basic에서 detail로 넘어갈 때 제한사항
+	$("#basicTodetail").click(function(){
+		var flag = false;
+		
+		//정책 제한하기
+		var x = $("input:checkbox[name=pcode]:checked").length;
+		if(x==0) flag=false;
+		else{
+			$('input:checkbox[name=pcode]:checked').each(function(){
+				var t = $(this).val();
+				if(t==2){
+					if($("#pvalue2").val()=="") flag=false;
+				}
+				if(t==3){
+					if($("#pvalue3").val()=="") flag=false;
+				}
+				
+			});			
+		}
+		
+		if($("#gtitle").val()!="" && $("#gstartdate").val()!="" && $("#gfinishdate").val()!=""
+			&& $("#genddate").val()!="" && $("#gdepartplace").val()!="" && $("#gdeparttime").val()!=""
+			&& $("#garea1").val()!="" && $("#garea2").val()!="" && $("#gnop").val()!="")
+		{
+			flag=true;
+		}
+		
+		if(!flag){
+			alert("필수작성 사항을 기입해주세요");			
+		}else{
+			openDetailInfo();
+			flag=false;
+		}
+	
+	});
+
+
 });
+
+//사진 담을 배열
+var sel_files=[];
+
+//사진삭제하기
+function deleteImageAction(index){
+	sel_files.splice(index,1);
+	var img_id = "#img_id_"+index;
+	$(img_id).remove();
+}
+
 
 function setTimeMinMax(){
 	var timeForOneDay = $(':radio[name="gtime"]:checked').val();

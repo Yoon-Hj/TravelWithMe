@@ -7,6 +7,7 @@
 <title>Travel With Me</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/font.css">
@@ -23,9 +24,9 @@
 <div class="writeFormDiv">
 	<table>
 		<tr>
-			<td><button class="writeFormBtn" onclick="openBasicInfo()" id="basicBtn">기본정보</button></td>
-			<td><button class="writeFormBtn" onclick="openDetailInfo()" id="detailBtn">세부사항</button></td>
-			<td><button class="writeFormBtn" onclick="openPreview()" id="previewBtn">미리보기</button></td>
+			<td><p class="writeFormBtn" id="basicBtn">기본정보</p></td>
+			<td><p class="writeFormBtn" id="detailBtn">세부사항</p></td>
+			<td><p class="writeFormBtn" id="previewBtn">미리보기</p></td>
 		</tr>
 	</table>
 </div>
@@ -43,7 +44,7 @@
 	<table>
 		<tr>
 			<td class="InfoTd">제목</td>
-			<td><input type="text" class="form-control" style="width: 600px" name="btitle"></td>
+			<td><input type="text" id="btitle" name="btitle" class="form-control" style="width: 600px" name="btitle"></td>
 		</tr>
 		<tr>
 			<td class="InfoTd">날짜</td>
@@ -60,20 +61,20 @@
 			<td class="InfoTd">모집 마감날짜</td>
 			<td>
 				<input type="date" name="genddate" id="genddate" class="form-control" style="width: 200px">
-				<a style="color: #b3b3b3; font-size: 15px;">※모집 마감날짜를 작성하지 않으면 여행 출발 1일전에 여행모집 자동마감합니다.</a>
+				<a style="color: #b3b3b3; font-size: 15px;">※모집 마감날짜를 따로 작성하지 않으면 여행 출발 1일전에 여행모집 자동마감합니다.</a>
 			</td>
 		</tr>
 		<tr>
 			<td class="InfoTd">출발장소 및 시간</td>
 			<td>
-				<input type="text" style="width:390px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">
-				<input type="time" class="NoBootStrap" id="departtime">
+				<input type="text" id="gdepartplace" name="gdepartplace" style="width:390px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">
+				<input type="time" class="NoBootStrap" id="gdeparttime" name="gdeparttime">
 			</td>
 		</tr>
 		<tr>
 			<td class="InfoTd">지역</td>
 			<td>
-				<select name="garea" class="custom-select" style="width: 185px;">
+				<select id="garea1" name="garea1" class="custom-select" style="width: 185px;">
 				  <option value="서울특별시">서울특별시</option>
 				  <option value="경기도">경기도</option>
 				  <option value="강원도">강원도</option>
@@ -85,12 +86,12 @@
 				  <option value="경상남도">경상남도</option>
 				  <option value="제주도">제주도</option> 				  
 				</select>
-				<input type="text" style="width:405px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">
+				<input type="text" id="garea2" name="garea2" style="width:405px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">
 			</td>
 		</tr>
 		<tr>
 			<td class="InfoTd">인원</td>
-			<td><input type="number" min="1" value="1" style="width:100px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">명</td>
+			<td><input id="gnop" name="gnop" type="number" min="1" value="1" style="width:100px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">명</td>
 		</tr>
 	</table>
 	
@@ -107,20 +108,20 @@
 		<tr>
 			<td class="InfoTd">주요 정책</td>
 			<td>
-				<input type="checkbox" name="pcode" value="1">
+				<input type="checkbox" id="pcode1" name="pcode" value="1">
 				1. 공지된 미팅장소 및 시간에 모인 인원과 가이드 투어를 진행하며<br> 특별한 제제사항은 없습니다.<br><br>
-				<input type="checkbox" name="pcode" value="2">
-				2. 여행 시작일 기준 <input type="number" min="0" style="width:50px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">일
+				<input type="checkbox" id="pcode2" name="pcode" value="2">
+				2. 여행 시작일 기준 <input id="pvalue2" name="pvalue" type="number" min="0" style="width:50px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">일
 				전까지 연락이 되지 않는 분은<br> 작성자 임의로 신청거절을 진행할 수 있습니다.<br><br>
-				<input type="checkbox" name="pcode" value="3">
-				3. 신뢰지수 <input type="number" max="100" min="0" style="width:70px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">점
+				<input type="checkbox" id="pcode3" name="pcode" value="3">
+				3. 신뢰지수 <input id="pvalue3" name="pvalue" type="number" max="100" min="0" style="width:70px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">점
 				이하의 회원은 작성자 임의로 신청거절을 진행할 수 있습니다.<br>
 				<a style="color: #b3b3b3; font-size: 15px;">※2번,3번 중복선택 가능</a>
 			</td>
 		</tr>
 	</table>
 	
-	<a class="nextA" id="basicTodetail" onclick="openDetailInfo()">Next &raquo;</a>
+	<a class="nextA" id="basicTodetail">Next &raquo;</a>
 </div>
 <div id="detailInfo" style="font-family: 함초롬돋움">
 	<h3>
@@ -134,7 +135,8 @@
 		<tr>
 			<td class="InfoTd">테마</td>
 			<td>
-				<input type="text" class="NoBootStrap" id="gthema">
+				<input type="text" class="NoBootStrap" id="gthema"><br>
+				<a style="color: #b3b3b3; font-size: 15px;">※테마삭제를 원하시면 작성된 테마를 클릭하세요</a>
 			</td>
 		</tr>
 	</table>
@@ -190,7 +192,16 @@
 		<tr>
 			<td class="InfoTd">첨부</td>
 			<td>
-				<input type="file" multiple="multiple">
+				<label id="photoUpload"><i class="fa fa-folder"></i>&nbsp;첨부하기</label>
+				<input type="file" id="photo" name="photo" multiple>
+				<br>
+				<a style="color: #b3b3b3; font-size: 15px;">※사진삭제를 원하시면 해당사진을 클릭하세요</a>
+				<br>
+				<div>
+					<div class="imgs_wrap" id="imgs_wrap">
+						<img id="img"/>
+					</div>
+				</div>
 			</td>
 		</tr>
 	</table>
@@ -250,8 +261,8 @@
 		</tr>
 	</table>
 
-	<a class="previousA" onclick="openDetailInfo()">&laquo; 이전</a>
-	<a class="nextA" onclick="">완료</a>
+	<a class="previousA" onclick="openDetailInfo()">&laquo; Previous</a>
+	<a class="nextA" onclick="">Submit</a>
 </div>
 </div>
 </body>
