@@ -128,8 +128,6 @@ public class BoardService {
 	//동행게시물 추천 4개 불러오기
 	public List<AccomBoard> getAccomBoardList(List<String> picklist) {
 		String likecode = null;
-		if(picklist == null)
-			System.out.println("널임");
 		if(picklist != null) {
 			if(!picklist.isEmpty()) {
 				double randomValue = Math.random();

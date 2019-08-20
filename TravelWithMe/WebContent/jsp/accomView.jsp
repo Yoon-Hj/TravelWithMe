@@ -134,18 +134,20 @@
 		//댓글삭제
 		//댓글 삭제여부가 1이면, '해당 댓글은 삭제되었습니다.'(text) 로 대체
 		$('.commDelBtn').on('click', function(){
-			//클릭한 삭제버튼과 가장 가까운 <tr>을 찾은 후, 그 행의 첫번째 <td>안의 text를 불러옴
-			//(삭제를 위해 보내야 할 stuid -> 첫번째 <td>안의 text값)
-			var delrow = $(this).siblings("input:hidden").val();
-			var tmp = $(this).parents("td");
-		$.ajax({
-				url : "delComment.do",
-				data : {cnum : delrow},
-				type : "get",
-				success : function(data){
-					tmp.text("해당 댓글은 삭제되었습니다.");
-				}
-			});
+			  if (confirm("해당 댓글을 삭제하시겠습니까?") == true){   
+				var delrow = $(this).siblings("input:hidden").val();
+				var tmp = $(this).parents("td");
+			  $.ajax({
+					url : "delComment.do",
+					data : {cnum : delrow},
+					type : "get",
+					success : function(data){
+						tmp.text("해당 댓글은 삭제되었습니다.");
+					}
+			  });
+			  }else{   
+			      return;
+			  }
 		});
 	
 	});
