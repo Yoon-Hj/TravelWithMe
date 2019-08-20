@@ -119,14 +119,12 @@ public class MemberController {
 	}
     
     @RequestMapping("evGuide.do")
-    public void evGuide(HttpSession session, String bnum, String gPoint) throws Exception {
-    	String mid = (String)session.getAttribute("user");
+    public void evGuide(String bnum, String gPoint, String nid) throws Exception {
     	System.out.println(bnum);
     	System.out.println(gPoint);
-    	System.out.println(mid);
     	System.out.println("======================");
     	
-    	m_msvc.addGuidePoint(bnum, gPoint, mid);
+    	m_msvc.addGuidePoint(bnum, gPoint, nid);
     	System.out.println("서비스 다녀왔음");
     }
     
@@ -150,8 +148,8 @@ public class MemberController {
     }
     
     @RequestMapping("checkAttendance.do")
-    public void checkAttendance(String[] attendance) {
-    	m_msvc.checkAttendance(attendance);
+    public void checkAttendance(String[] attendance, String nid) throws Exception {
+    	m_msvc.checkAttendance(attendance, nid);
     }
     
     @RequestMapping("findForm.do")

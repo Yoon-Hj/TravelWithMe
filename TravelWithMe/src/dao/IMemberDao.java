@@ -59,7 +59,7 @@ public interface IMemberDao {
 	//가이드포인트 업데이트
 	public void updateGuidePoint(HashMap<String, Object> params);
 	//평가여부 업데이트
-	public void updateEvalStatus(HashMap<String, Object> params);
+	public void updateEvalStatus(String nid);
 	//알림 읽음
 	public void updateNoticestatus(String nid);
 	//신청자 목록 불러오기

@@ -188,10 +188,11 @@ $(document).ready(function(){
 		});
 	});
 	
-	function evGuide(title, bnum){
+	function evGuide(title, bnum, nid){
 		$('#checkEval').val("t");
 		$('#guideTitle').html("'" + title + "'" + "<br>" + " 어땠나요?");
 		$('#guideBnum').val(bnum);
+		$('#g_noticeId').val(nid);
 		$('.modal-body').hide();
 		$('.attendanceModal').hide();
 		$('.starRev').show();
@@ -218,7 +219,7 @@ $(document).ready(function(){
 	
 	
 
-	function checkAttendanceModal(bnum){
+	function checkAttendanceModal(bnum, nid){
 		$('.modal-body').hide();
 		$('#evGuide').hide();
 		$('.starRev').hide();
@@ -227,6 +228,7 @@ $(document).ready(function(){
 		$('#checkAttend').show();
 		if($('#chk').val() == "t")
 			$('#back').show();
+		$('#noticeId').val(nid);
 		$( '#registers > tbody').empty();
 		
 		$.ajax({
@@ -284,19 +286,22 @@ $(document).ready(function(){
 		var type = row[1];
 		var title = row[2];
 		var bkind = row[3];
-		var rowColor = $(this).closest("tr").find("input:eq(1)").val().split("/");
-		if(rowColor[1] == "0"){
+		var val = $(this).closest("tr").find("input:eq(1)").val().split("/");
+		var nid = val[0];
+		rowColor = val[1];
+		if(rowColor == "0"){
 			$(this).css('color', 'gray');
-			readNotice(rowColor[0]);
+			readNotice(nid);
 		}
 		if(type == "0"){
 			readBoard_header(bnum, bkind);
 		}else if(type == "1"){
-			evGuide(title, bnum);
+			evGuide(title, bnum, nid);
 		}else if(type == "2"){
-			checkAttendanceModal(bnum);
+			checkAttendanceModal(bnum, nid);
 		}else if(type == "3"){
-			alert("평가가 이미 완료된 항목임.");
+			if(confirm("이미 평가/체크 완료된 항목입니다.\n게시글로 이동하시겠습니까?"))
+				readBoard_header(bnum, bkind);
 		}
 	});
 	
@@ -327,7 +332,8 @@ $(document).ready(function(){
 				type : "post",
 				data : {
 					bnum : $('#guideBnum').val(),
-					gPoint : $('#gPoint').val()
+					gPoint : $('#gPoint').val(),
+					nid : $('#g_noticeId').val()
 				},
 				success : function() {},
 				error : function(){}
@@ -416,14 +422,15 @@ $(document).ready(function(){
 				$(this).attr('data-target', '#moreNewsForm');
 				$(this).attr('data-toggle', 'modal');
 				$('#chk').val("f");
-				evGuide(title, bnum);
+				evGuide(title, bnum, nid);
 			}else if(open == "2"){
 				$(this).attr('data-target', '#moreNewsForm');
 				$(this).attr('data-toggle', 'modal');
 				$('#chk').val("f");
-				checkAttendanceModal(bnum);
+				checkAttendanceModal(bnum, nid);
 			}else if(open == "3"){
-				alert("평가가 이미 완료된 항목임.");
+				if(confirm("이미 평가/체크 완료된 항목입니다.\n게시글로 이동하시겠습니까?"))
+					readBoard_header(bnum, bkind);
 			}
 			
 		});
@@ -434,6 +441,8 @@ $(document).ready(function(){
 	
 	
 	$('#checkAttend').on('click', function(){
+		var nid = $('#noticeId').val();
+		
 		var array = new Array();
 		var cnt = 0;
 		$('input:checkbox[id="attendance"]:not(:checked)').each(function(){
@@ -447,7 +456,8 @@ $(document).ready(function(){
 			type : "post",
 			traditional : true,
 			data : {
-				attendance : array
+				attendance : array,
+				nid : nid
 			},
 			success : function(){},
 			error : function(){}

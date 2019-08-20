@@ -127,9 +127,9 @@
 		where mid = (select mid from member natural join board where bnum = #{bnum})
 	</update>
 	
-	<!-- 가이드 평가 여부 변경 -->
-	<update id="updateEvalStatus" parameterType="java.util.HashMap">
-		update notice set evalstatus = 1 where bnum = #{bnum} and mid = #{mid}
+	<!-- 가이드 평가 / 불참자 체크 여부 변경 -->
+	<update id="updateEvalStatus" parameterType="String">
+		update notice set evalstatus = 1 where nid = #{nid}
 	</update>
 	
 	<!-- 알림 읽음으로 변경 -->
