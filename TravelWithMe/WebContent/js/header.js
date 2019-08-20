@@ -126,9 +126,11 @@ $(document).ready(function(){
 	
 	// 알림부분
 	$('.moreNews').on('click', function(){
+		$('#chk').val("t");
 		$('.btn').hide();
 		$('#ok').show();
 		$('.starRev').hide();
+		$('.attendanceModal').hide();
 		$('.modal-body').show();
 		$( '#allNews > tbody').empty();
 		$.ajax({
@@ -188,12 +190,15 @@ $(document).ready(function(){
 	
 	function evGuide(title, bnum){
 		$('#checkEval').val("t");
-		$('#guideTitle').html("'" + title + "'" + " 어땠나요?");
+		$('#guideTitle').html("'" + title + "'" + "<br>" + " 어땠나요?");
 		$('#guideBnum').val(bnum);
 		$('.modal-body').hide();
+		$('.attendanceModal').hide();
 		$('.starRev').show();
 		$('.btn').hide();
 		$('#evGuide').show();
+		if($('#chk').val() == "t")
+			$('#back').show();
 	};
 	
 	function noticeColor(){		// 알림 읽음 여부에 따라 글씨 색 조정
@@ -213,11 +218,59 @@ $(document).ready(function(){
 	
 	
 
+	function checkAttendanceModal(bnum){
+		$('.modal-body').hide();
+		$('#evGuide').hide();
+		$('.starRev').hide();
+		$('.btn').hide();
+		$('.attendanceModal').show();
+		$('#checkAttend').show();
+		if($('#chk').val() == "t")
+			$('#back').show();
+		$( '#registers > tbody').empty();
+		
+		$.ajax({
+			url : "getRegisterList.do",
+			type : "post",
+			data : {
+				bnum : bnum
+			},
+			success : function(data) {
+				var table = "";
+				for(var i in data){
+					var rid = data[i].rid;
+					var mid = data[i].mid;
+					var mname = data[i].mname;
+					
+					if(i % 2 == 0){
+						table += "<tr><td class='aRow'>";
+						table += "<input type='checkbox' id='attendance' value='" + rid + "'> " + mid + " (" + mname + ")"; 
+						table += "</td>"; 
+					}else{
+						table += "<td class='aRow'>";
+						table += "<input type='checkbox' id='attendance' value='" + rid + "'> " + mid + " (" + mname + ")";
+						table += "</td></tr>";
+					}
+				}
+				$(".registersRow:last").append(table);
+				$('.aRow').each(function(){
+					$(this).css('width', '200px');
+				});
+			},
+			error : function(){}
+		});
+	};
 	
 	
 	
-	
-	
+	$('#back').on('click', function(){
+		$('.btn').hide();
+		$('#ok').show();
+		$('#back').show();
+		$('.starRev').hide();
+		$('.attendanceModal').hide();
+		$('.modal-body').show();
+	});
 	
 	
 	
@@ -241,7 +294,7 @@ $(document).ready(function(){
 		}else if(type == "1"){
 			evGuide(title, bnum);
 		}else if(type == "2"){
-			alert("참석여부 화면을 띄워");
+			checkAttendanceModal(bnum);
 		}else if(type == "3"){
 			alert("평가가 이미 완료된 항목임.");
 		}
@@ -362,15 +415,52 @@ $(document).ready(function(){
 			}else if(open == "1"){
 				$(this).attr('data-target', '#moreNewsForm');
 				$(this).attr('data-toggle', 'modal');
+				$('#chk').val("f");
 				evGuide(title, bnum);
 			}else if(open == "2"){
-				alert("참석여부 화면을 띄워");
+				$(this).attr('data-target', '#moreNewsForm');
+				$(this).attr('data-toggle', 'modal');
+				$('#chk').val("f");
+				checkAttendanceModal(bnum);
 			}else if(open == "3"){
 				alert("평가가 이미 완료된 항목임.");
 			}
 			
 		});
 	});
+	
+	
+
+	
+	
+	$('#checkAttend').on('click', function(){
+		var array = new Array();
+		var cnt = 0;
+		$('input:checkbox[id="attendance"]:not(:checked)').each(function(){
+			var a = $(this).val();
+			array[cnt] = a;
+			cnt++;
+		});
+		
+		$.ajax({
+			url : "checkAttendance.do",
+			type : "post",
+			traditional : true,
+			data : {
+				attendance : array
+			},
+			success : function(){},
+			error : function(){}
+		});
+		alert("참석여부 체크가 완료되었습니다.");
+		history.go(0);
+	});
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -392,9 +482,7 @@ $(document).ready(function(){
 	
 	
 	
-	function checkAttendanceModal(bnum){
-		
-	};
+	
 	
 	
 	

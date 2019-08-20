@@ -64,5 +64,6 @@ public interface IMemberDao {
 	public void updateNoticestatus(String nid);
 	//신청자 목록 불러오기
 	public List<Register> selectRegisterByBnum(int bnum);
-	
+	//참석인원 업데이트
+	public void updateAttendStatusByRid(String rid);
 }

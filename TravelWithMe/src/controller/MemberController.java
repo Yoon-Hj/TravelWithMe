@@ -141,12 +141,17 @@ public class MemberController {
     	return m_msvc.getMoreRegister(mid);
     }
     
-    @RequestMapping("")
-    public @ResponseBody List<Register> d(String bnum){
+    @RequestMapping("getRegisterList.do")
+    public @ResponseBody List<Register> getRegisterList(String bnum){
     	for(Register a : m_msvc.getRegisterList(bnum)) {
     		System.out.println("신청자 목록 : " + a);
     	}
     	return m_msvc.getRegisterList(bnum);
+    }
+    
+    @RequestMapping("checkAttendance.do")
+    public void checkAttendance(String[] attendance) {
+    	m_msvc.checkAttendance(attendance);
     }
     
     @RequestMapping("findForm.do")

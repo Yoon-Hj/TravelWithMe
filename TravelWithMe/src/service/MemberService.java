@@ -178,6 +178,15 @@ public class MemberService {
 		System.out.println("서비스에서 받은 nid : " + nid);
 		m_mdao.updateNoticestatus(nid);
 	}
+	
+	public void checkAttendance(String[] attendance) {
+		if(attendance != null) {
+			for(int i = 0; i < attendance.length; i++) {
+				m_mdao.updateAttendStatusByRid(attendance[i]);
+				System.out.println("for문 돌리는중.." + i);
+			}
+		}
+	}
 
 	public String findId(String id, String mail) {
 		String result = m_mdao.selectId(id,mail);

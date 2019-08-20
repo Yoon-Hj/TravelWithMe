@@ -142,4 +142,9 @@
 		select rid, m.mid, mname from member m, register r
 		where m.mid = r.mid and bnum = #{bnum}
 	</select>
+	
+	<!-- 불참인원 체크 -->
+	<update id="updateAttendStatusByRid" parameterType="String">
+		update register set attendstatus = 1 where rid = #{rid}
+	</update>
 </mapper>
