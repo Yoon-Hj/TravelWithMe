@@ -42,20 +42,15 @@ $("#mid").blur(function() {
 				
 			} 
 		
-		else if(data == 0){
+		else if(data == 0 && mid != ""){
 			$("#id_check").text("사용가능한 아이디입니다.");
 			$("#id_check").css("color", "green");
-		;
+		
 		}
 		
 		else {
 				
-				if(idJ.test(mid)){
-					// 0 : 아이디 길이 / 문자열 검사
-					$("#id_check").text("");
-			
-		
-				} else if(mid == ""){
+				if(mid == ""){
 					
 					$('#id_check').text('아이디를 입력해주세요.');
 					$('#id_check').css('color', 'red');
@@ -106,19 +101,38 @@ $(document).ready(function(){
 //Get the modal
 //var modal = document.getElementById("myModal");
 var modal = $('#myModal');
+
 function validate() {
 	
 
-	
+	var mid = $('#mid').val();
 	var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
     var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/);
+  
+    
+   
+	$.ajax({
+		url : 'checkId.do?id='+ mid,
+		type : 'get',
+		success : function(data) {
+			if (data == 1) {
+				// 1 : 아이디가 중복되는 문구
+				alert("아이디 중복을 확인하세요.");
+		        $("#mid").focus();
+		        
+		      }
+			return false;
+			} 
 	
-	if($("#mid").val() == ""){
+	});
+	
+	if(mid == ""){
         alert("아이디를 입력하세요.");
         $("#mid").focus();
         return false;
       }
 	
+
 	
 	if($("#mpw").val() == ""){
         alert("비밀번호를 입력하세요.");
@@ -162,7 +176,7 @@ function validate() {
     }
 
     //비밀번호
-    if(!getCheck.test($("#mpw").val())) {
+    if(!getCheck.test(mid)) {
     alert("형식에 맞춰서 PW를 입력하세요");
     $("#mpw").val("");
     $("#mpw").focus();
@@ -170,7 +184,7 @@ function validate() {
     }
 
     //아이디랑 비밀번호랑 같은지
-    if ($("#mid").val()==($("#mpw").val())) {
+    if (mid==($("#mpw").val())) {
     alert("비밀번호가 ID와 동일합니다.");
     $("#mid").val("");
     $("#mid").focus();

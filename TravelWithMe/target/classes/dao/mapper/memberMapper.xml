@@ -72,7 +72,7 @@
 	
 	<!-- 회원 아이디 추가 -->
 	<insert id="insertUsedid" parameterType="String">
-		insert into values usedid (#{usedid})
+		insert into usedid values (#{usedid})
 	</insert>
 	
 	<!-- 회원 여행취향 추가 -->

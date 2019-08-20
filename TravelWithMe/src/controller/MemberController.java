@@ -146,13 +146,12 @@ public class MemberController {
 		
 		}
     
-    @RequestMapping(value = "findID.do", method = RequestMethod.POST)
+    @RequestMapping(value = "findID.do", method = RequestMethod.GET)
     public @ResponseBody String findID(@RequestParam("name") String findName1,@RequestParam("mail") String findMail1) {
 	
     	System.out.println(findName1);
-		String result = m_msvc.findId(findName1, findMail1);
-        
-		return "" + result;
+        System.out.println(m_msvc.findId(findName1, findMail1));
+		 return "" + m_msvc.findId(findName1, findMail1);
     	
 		}
    

@@ -22,7 +22,7 @@
 </script>
 <script>
 $(document).ready(function(){
-$("#findid").on('click',function() {
+$('#findid').on('click',function(){
 	
 	var name = $('#findName1').val();
 	var mail = $('#findMail1').val();
@@ -30,15 +30,16 @@ $("#findid").on('click',function() {
 	if(name == "" || mail == ""){
 		alert("빈칸을 입력해주세요.");
 	}
-	eles{
+	
+	else{
 	$.ajax({
-		url : 'findId.do',
+		url : "findID.do",
 		data : {
 			name : name,
 			mail : mail
 		},
 		
-		type : 'post',
+		type : "get",
 		success : function(data) {
 			if (data == null) {
 				alert("입력하신 내용과 일치하는 정보가 없습니다.");
@@ -46,12 +47,13 @@ $("#findid").on('click',function() {
 				} 
 			
 			else{
-				$("#id_check").text("중복된 아이디입니다.");
-				$("#id_check").css("color", "red");
+				$("#findIdForm");
+				
 			}
 			}
 		});
 	}
+});
 });
 
 	
@@ -78,7 +80,26 @@ $("#findid").on('click',function() {
 					placeholder="email" maxlength="12">
 </div>
 
-<input class="btn btn-success" type="button" id="findid" value="FIND ID">
+<div class="modal fade" id="findIdForm">
+		<div class="modal-dialog modal-sm">
+	      <div class="modal-content">
+	        <!-- Modal Header -->
+	        <div class="modal-header">
+	          <h3 class="modal-title" style="font-family: 배달의민족 도현">LOGIN</h3>
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+	        
+	        <!-- Modal body -->
+	        <div class="modal-body" style="text-align: center">
+	         	 <label for="id" style="margin-right: 45px"><b>회원님의 ID는 아래와 같습니다.</b></label>
+				 <br>
+				   
+	        </div>
+	       </div>
+	     </div>
+	  </div>
+
+<input class="btn btn-success" type="button" id="findid" name="findid" value="FIND ID">
 
 
 

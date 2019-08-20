@@ -87,6 +87,7 @@ public class MemberService {
 		return returnVal;
 
 	}
+	
 	public int checkId(String user_id) {
 
 		int rev;
@@ -106,9 +107,9 @@ public class MemberService {
 			String  birth = mbirth2; // 형식을 지켜야 함
 			java.sql.Date mbirth = java.sql.Date.valueOf(birth);
 			member.setMbirth(mbirth);
+			m_mdao.insertMember(member);
 			String a = sha.sha256(member.getMpw());
 			member.setMpw(a);
-			m_mdao.insertMember(member);
 			m_mdao.insertUsedid(member.getMid());
 			
 			String id = null;
