@@ -72,7 +72,7 @@ public class MemberController {
 		mav.addAllObjects(m_msvc.getMyInfo(mid));
 		mav.addObject("myBoard", m_bsvc.getMyBoard(mid));
 //		for(HashMap<String, Object> a : (List<HashMap<String, Object>>)m_bsvc.getMyBoard(mid)) {
-//			System.out.println(a);
+//			System.out.println("보드 : " + a);
 //		}
 		mav.setViewName("myPage");
 		
@@ -119,14 +119,12 @@ public class MemberController {
 	}
     
     @RequestMapping("evGuide.do")
-    public void evGuide(HttpSession session, String bnum, String gPoint) throws Exception {
-    	String mid = (String)session.getAttribute("user");
+    public void evGuide(String bnum, String gPoint, String nid) throws Exception {
     	System.out.println(bnum);
     	System.out.println(gPoint);
-    	System.out.println(mid);
     	System.out.println("======================");
     	
-    	m_msvc.addGuidePoint(bnum, gPoint, mid);
+    	m_msvc.addGuidePoint(bnum, gPoint, nid);
     	System.out.println("서비스 다녀왔음");
     }
     
@@ -139,6 +137,19 @@ public class MemberController {
     public @ResponseBody List<Register> moreRegister(HttpSession session) {
     	String mid = (String)session.getAttribute("user");
     	return m_msvc.getMoreRegister(mid);
+    }
+    
+    @RequestMapping("getRegisterList.do")
+    public @ResponseBody List<Register> getRegisterList(String bnum){
+    	for(Register a : m_msvc.getRegisterList(bnum)) {
+    		System.out.println("신청자 목록 : " + a);
+    	}
+    	return m_msvc.getRegisterList(bnum);
+    }
+    
+    @RequestMapping("checkAttendance.do")
+    public void checkAttendance(String[] attendance, String nid) throws Exception {
+    	m_msvc.checkAttendance(attendance, nid);
     }
     
     @RequestMapping("findForm.do")

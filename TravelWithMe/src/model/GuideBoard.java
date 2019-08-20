@@ -14,6 +14,8 @@ public class GuideBoard {
 	private int cdel;
 	//guide
 	private String garea;
+	private String garea1;
+	private String garea2;
 	private Date gstartdate;
 	private Date gfinishdate;
 	private String gtime;

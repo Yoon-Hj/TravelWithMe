@@ -17,7 +17,7 @@
 	<meta name="keywords"  content="fullpage,jquery,demo,scroll,loop,continuous" />
 	<meta name="Resource-type" content="Document" />
     
-    <link rel="stylesheet" type="text/css" href="../css/fullpage.css" />
+    <link rel="stylesheet" type="text/css" href="css/font.css" />
 	
 <style type="text/css">
 	a{

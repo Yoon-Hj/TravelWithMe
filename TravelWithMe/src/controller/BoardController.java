@@ -1,6 +1,9 @@
 package controller;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.ProcessBuilder.Redirect;
+import java.net.URLEncoder;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,8 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.Comments;
+import model.Policy;
 import service.AdminService;
 import service.BoardService;
 import service.MemberService;
@@ -88,6 +94,9 @@ public class BoardController {
 	
 	
 	
+	
+	
+	
 	@RequestMapping("accomBoardList.do")
 	public ModelAndView accomBoardList(HttpSession session, @RequestParam(defaultValue="1") int page) {
 		ModelAndView mav = new ModelAndView();
@@ -100,10 +109,44 @@ public class BoardController {
 		return mav;
 	}
 	
-	@RequestMapping("accomView.do")
+	@RequestMapping("accomSearch.do")
+	public ModelAndView accomSearch(@RequestParam(defaultValue="1") int page,
+			@RequestParam(defaultValue="1") int type, @RequestParam(required=false) String keyword,
+			@RequestParam(required=false) String sdate, @RequestParam(required=false) String fdate, 
+			@RequestParam(required=false) String likecode) throws ParseException, UnsupportedEncodingException {
+		ModelAndView mav = new ModelAndView();
+		mav.addAllObjects(b_bsvc.getAccomSearchList(page, type, keyword, sdate, fdate, likecode));
+		mav.addObject("keyword", URLEncoder.encode(keyword, "UTF-8"));
+		mav.setViewName("accomBoardList");
+		return mav;
+	}
+	
+	@RequestMapping("readBoard.do")
 	public ModelAndView readBoard(int bnum, String bkind) {
 		ModelAndView mav = new ModelAndView();
+		mav.addAllObjects(b_bsvc.getBoardContent(bnum, bkind));
+		mav.addObject("commentList", b_bsvc.readComment(bnum));
+		mav.addObject("registerList", b_bsvc.getRegisterListByNum(bnum));
+		if(bkind.equals("A")) {
+			mav.setViewName("accomView");
+		}
+		
 		
 		return mav;
+	}
+	
+	@RequestMapping("writeComment.do")
+	public @ResponseBody int writeComment(HttpSession session, int bnum, String content) {
+		String mid = (String) session.getAttribute("user");
+		Comments c = new Comments();
+		c.setMid(mid);
+		c.setBnum(bnum);
+		c.setCcontent(content);
+		return b_bsvc.writeComment(c);
+	}
+	
+	@RequestMapping("delComment.do")
+	public @ResponseBody int delComment(int cnum) throws Exception {
+		return b_bsvc.delComment(cnum);
 	}
 }
