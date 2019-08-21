@@ -15,6 +15,7 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script type="text/javascript" src="js/writeForm.js?v=<%=System.currentTimeMillis() %>"></script>
 
+
 </head>
 <body>
 <jsp:include page="header.jsp"/>
@@ -211,6 +212,11 @@
 	<a class="nextA" id="detailToPreview">Next &raquo;</a>
 </div>
 <div id="preview" style="font-family: 함초롬돋움">
+
+	<h3>
+		&nbsp;&nbsp;미리보기
+	</h3>
+	<br>
 	<table id="previewTable">
 		<tr>
 			<td class="InfoTd">작성자</td>
@@ -220,11 +226,16 @@
 			<td class="InfoTd">제목</td>
 			<td></td>	
 		</tr>
-		<tr>
-			<td colspan="2" align="center">
+		<tr id="photoTR">
+			
+			<td style="text-align: left;">
+				<div class="slideshow-container" style="text-align: left;">
 				
+
+				</div>
 			</td>
 		</tr>
+
 		<tr>
 			<td class="InfoTd">날짜</td>
 			<td></td>

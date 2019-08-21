@@ -144,6 +144,8 @@ $(function(){
 	$("#photo").on("change",function(e){
 		sel_files=[];
 		$(".imgs_wrap").empty();
+		$(".slideshow-container").empty();
+		$("#photoTd").empty();
 		var files = e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
 		var index = 0;
@@ -151,7 +153,13 @@ $(function(){
 			if(index<10){
 				sel_files.push(f);				
 				var reader = new FileReader();
-				reader.onload=function(e){				
+				reader.onload=function(e){	
+					var slideHTML = "<div class='mySlides'>";
+					slideHTML+="<a><img src='";
+					slideHTML+=e.target.result;
+					slideHTML+="' style='width: 300px; height: 250px; margin-left: 80px;'></a></div>";
+					$(".slideshow-container").append(slideHTML);			
+					
 					var html = "<a onclick='deleteImageAction("+index+")' id='img_id_"+index+"'><img style='width:100px;height:100px;margin-top:5px;' src='"+e.target.result+"' class='selProductFile' title='Click to remove'>&nbsp;</a>";
 					$(".imgs_wrap").append(html);			
 				}
@@ -161,6 +169,15 @@ $(function(){
 		});
 		if(index > 10)
 			alert("사진은 최대 10장만 업로드 가능합니다. 초과된 사진은 자동으로 삭제합니다.");
+		if(index!=0){
+			var prevnextBtn = "<a id='prev' style='color:white' onclick='plusSlides(-1)'>&#10094;</a>";
+			prevnextBtn += "<a id='next' style='color:white' onclick='plusSlides(1)'>&#10095;</a>";
+			$(".slideshow-container").append(prevnextBtn);
+			
+			var photoTd = "<td id='photoTd'>&nbsp;</td>";
+			$("#photoTR").prepend(photoTd);
+		}
+		
 	});
 	
 	//정책 1번클릭시 2번,3번 풀리기
@@ -549,11 +566,31 @@ function openPreview() {
 	
 	//제목
 	$("#previewTable").find("tr:eq(1)").find("td:eq(1)").text($("#btitle").val());
-
-
-	
+	showSlides(slideIndex);
 
 	
+
 	
 	
+	
+}
+
+//사진슬라이드 js
+var slideIndex = 1;
+
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = $(".mySlides");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+	  $(".slideshow-container").find("div:eq("+i+")").css("display", "none");  
+  }
+
+  $(".slideshow-container").find("div:eq("+Number(slideIndex-1)+")").css("display", "block");  
 }
