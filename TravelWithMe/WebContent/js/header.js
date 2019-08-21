@@ -150,8 +150,10 @@ $(document).ready(function(){
 	
 	
 	
-	
-	
+	// 모달 닫으면 버튼이 보이게 ..
+	$('.modal').on('hidden.bs.modal', function(){
+		$('.btn').show();
+	});
 	
 	
 	
