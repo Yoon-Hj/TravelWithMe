@@ -4,23 +4,15 @@ import java.util.HashMap;
 
 import org.json.simple.JSONObject;
 
+import service.SHA256;
+
 public class TTT {
 	public static void main(String[] args) {
-		System.out.println("??");
-		HashMap<String, String> a = new HashMap<String, String>();
-		a.put("a", "a");
-		a.put("b", "b");
-		a.put("c", "c");
-		a.put("d", "d");
+		String t = "1234";
 		
-		JSONObject j = new JSONObject();
-		
-		j.put("result", a);
-		System.out.println(a);
-		System.out.println("==========================");
-		System.out.println(j);
-		System.out.println("==========================");
-		System.out.println(j.get("result"));
-		
+		SHA256 s = new SHA256();
+		System.out.println(s.sha256(t));
+		System.out.println(s.sha256("1234"));
+		System.out.println(s.sha256("admin1234"));
 	}
 }

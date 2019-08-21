@@ -2,7 +2,7 @@
 @font-face{
 	font-family:'함초롬돋움';
 	url('/fonts/HANDotumB.ttf') format('truetype');
-	src:local(※), url('/fonts/D2Coding.ttf') format('ttf');
+	src:local(※), url('/fonts/HANDotumB.ttf') format('ttf');
 }
 
 @font-face{

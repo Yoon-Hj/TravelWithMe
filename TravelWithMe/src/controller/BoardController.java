@@ -33,6 +33,32 @@ public class BoardController {
 	
 	
 	
+	@RequestMapping("attTest.do")
+	public ModelAndView attTest(@RequestParam(defaultValue = "0") String type,
+			@RequestParam(defaultValue="1") String page, String keyword,				// 키워드 검색
+			@RequestParam(defaultValue="") String area, 								// 축제 검색
+			String eventStartDate, @RequestParam(defaultValue="")String eventEndDate,	
+			String areacode) {															// 지역 검색
+		ModelAndView mav = new ModelAndView();
+		
+		if(type.equals("0")) {
+			System.out.println("그냥 페이지로 이동함.");
+		}else if(type.equals("1")) {
+			mav.addAllObjects(b_bsvc.apiTest(page, keyword));
+		}else if(type.equals("2")) {
+			System.out.println("축제검색임");
+		}else if(type.equals("3")) {
+			System.out.println("지역 검색임");
+		}
+		
+		
+		mav.addObject("apiType", type);
+		mav.setViewName("attractionInfo");
+		
+		return mav;
+	}
+	
+	
 	
 	@RequestMapping("attractionInfo.do")
 	public void attractionInfo() {}

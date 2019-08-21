@@ -64,6 +64,9 @@
 	  right: 35px;
 	  }  
    }
+   .userId{
+   	cursor:default;'
+   }
 </style>
 </head>
 <body>
@@ -85,7 +88,7 @@
 	   	</c:when>
 	 
 	   	<c:otherwise>
-		   		<a style="font-family: D2Coding; margin-left: 905px; font-size: 17px;">${user}님</a>
+		   		<a class="userId" style="font-family: D2Coding; margin-left: 905px; font-size: 17px;" data-toggle="tooltip">${user}</a>님
 				<a href="#" style="color: #969696; margin-left: 7px; font-family: D2Coding; font-size: 17px;" data-toggle="modal" data-target="#moreNewsForm" class="moreNews">Messages<span class="badge" style="color: black; font-size: 18px">5</span></a>
 
 				<input type="button" value="LOGOUT" id="logout" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">

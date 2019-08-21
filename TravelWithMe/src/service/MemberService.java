@@ -30,41 +30,36 @@ public class MemberService {
 		HashMap<String, Object> returnVal = new HashMap<String, Object>();
 		
 		//	암호화 적용 전,  암호화 적용후 지우고 아래부분 사용할 것
-		String checkPw = m_mdao.selectPw(mid);
-		int result = 2;		// 존재하지 않는 ID
-		if(checkPw != null) {
-			if(checkPw.equals(mpw)) {
-				result = 1;	// 로그인 성공
-			}else
-				result = 3; // 아이디 또는 비밀번호 틀림
-		}
+//		String checkPw = m_mdao.selectPw(mid);
+//		int result = 2;		// 존재하지 않는 ID
+//		if(checkPw != null) {
+//			if(checkPw.equals(mpw)) {
+//				result = 1;	// 로그인 성공
+//			}else
+//				result = 3; // 아이디 또는 비밀번호 틀림
+//		}
 
 		//	암호화 적용 후
-		//		String checkPw = m_mdao.selectPw(mid);
-		//		String input_pw = sha.sha256(mpw);
-		//		int result = 2;		// 존재하지 않는 ID
-		//		if(checkPw != null) {
-		//			if(checkPw.equals(input_pw)) {
-		//				result = 1;	// 로그인 성공
-		//			}else
-		//				result = 3; // 아이디 또는 비밀번호 틀림
-		//		}
+				String checkPw = m_mdao.selectPw(mid);
+				String input_pw = sha.sha256(mpw);
+				int result = 2;		// 존재하지 않는 ID
+				if(checkPw != null) {
+					if(checkPw.equals(input_pw)) {
+						result = 1;	// 로그인 성공
+					}else
+						result = 3; // 아이디 또는 비밀번호 틀림
+				}
 		
 		returnVal.put("picklist", m_mdao.selectLikecodeById(mid));
 		returnVal.put("result", result);
 		return returnVal;
 	}
 
-	public void testMethod(String mid) {
-		System.out.println("서비스에서 받은 mid : " + mid);
-		//		System.out.println(m_mdao.selectMemInfo(mid));
-		System.out.println(sha.sha256(mid));
-		System.out.println(sha.sha256("test1234"));
-		System.out.println(sha.sha256("test12344"));
-
-		System.out.println("서비스 종료한다.");
+	// 아이디호버 작업
+	public HashMap<String, Object> getUserPoint(String mid){
+		return m_mdao.selectMemPoint(mid);
 	}
-
+	
 	// 마이페이지 작업
 	public HashMap<String, Object> getMyInfo(String mid) {
 		HashMap<String, Object> returnVal = new HashMap<String, Object>();
@@ -72,6 +67,7 @@ public class MemberService {
 		returnVal.put("memberInfo", m_mdao.selectMemInfo(mid));
 		returnVal.put("notice", m_mdao.selectNoticeById(mid));
 		returnVal.put("register", m_mdao.selectRegisterById(mid));
+		returnVal.put("memPoint", m_mdao.selectMemPoint(mid));
 
 		//		System.out.println(returnVal.get("notice"));
 		for(HashMap<String, String> a: (List<HashMap<String, String>>)returnVal.get("notice")) {
@@ -83,6 +79,48 @@ public class MemberService {
 		
 		return returnVal;
 
+	}
+	// 비밀번호 체크
+	public String checkPass(String mid, String mpw) {
+		String sha_mpw = sha.sha256(mpw);
+		String real_pw = m_mdao.selectPw(mid);
+		String result = "fail";
+		if(sha_mpw.equals(real_pw)) 
+			result = "pass";
+		return result;
+	}
+	
+	//비밀번호 변경
+	public void modifyPw(String mid, String mpw) throws Exception {
+		Member m = new Member();
+		try {
+			String sha_mpw = sha.sha256(mpw);
+			
+			m.setMid(mid);
+			m.setMpw(sha_mpw);
+			
+			m_mdao.updatePw(m);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Exception();
+		}
+	}
+	
+	//회원정보 변경
+	public void modifyMemInfo(String mid, String mname, String mcontact) throws Exception {
+		try {
+			Member m = new Member();
+			m.setMid(mid);
+			m.setMname(mname);
+			m.setMcontact(mcontact);
+			
+			m_mdao.updateMember(m);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Exception();
+		}
 	}
 	
 	public int checkId(String user_id) {
@@ -131,6 +169,10 @@ public class MemberService {
 			e.printStackTrace();
 			throw new Exception();
 		}
+	}
+	
+	public void withdrawalUser(String mid){
+		m_mdao.deleteMember(mid);
 	}
 	
 

@@ -63,6 +63,19 @@ public class MemberController {
 		session.invalidate();
 	}
 	
+	@RequestMapping("getUserPoint.do")
+	public @ResponseBody HashMap<String, Object> getUserPoint(String mid){
+		System.out.println(m_msvc.getUserPoint(mid));
+		return m_msvc.getUserPoint(mid);
+	}
+	
+	@RequestMapping("withdrawalUser.do")
+	public String withdrawalUser(HttpSession session) {
+		String mid = (String)session.getAttribute("user");
+		m_msvc.withdrawalUser(mid);
+		session.invalidate();
+		return "index";
+	}
 	
 	@RequestMapping("myPage.do")
 	public ModelAndView mypage(HttpSession session) {
@@ -77,6 +90,24 @@ public class MemberController {
 		mav.setViewName("myPage");
 		
 		return mav;
+	}
+	
+	@RequestMapping("checkPassword.do")
+	public @ResponseBody String checkPassword(HttpSession session, String mpw) {
+		String mid = (String)session.getAttribute("user");
+		return m_msvc.checkPass(mid, mpw);
+	}
+	
+	@RequestMapping("modifyPw.do")
+	public void modifyPw(HttpSession session, String mpw) throws Exception {
+		String mid = (String)session.getAttribute("user");
+		m_msvc.modifyPw(mid, mpw);
+	}
+	
+	@RequestMapping("modiMemInfo.do")
+	public void modiMemInfo(HttpSession session, String mname, String mcontact) throws Exception {
+		String mid = (String)session.getAttribute("user");
+		m_msvc.modifyMemInfo(mid, mname, mcontact);
 	}
 	
 	@RequestMapping("moreNotice.do")

@@ -32,6 +32,50 @@ $(document).ready(function(){
 	
 	
 	
+	$('.userId').hover(function(){
+		var mid = $(this).html();
+		$.ajax({
+			url : "getUserPoint.do",
+			type : "post",
+			data : {
+				mid : mid
+			},
+			success : function(data){
+				var mpoint = data.MPOINT;
+				var gpoint = data.MGUIDEPOINT;
+				var cnt = data.CNT;
+				var grade = data.GRADE;
+				var img = "";
+				if(grade == 'Gold'){
+					img = "<img class='gradeImg' src='imgs/hover_gold.jpg'/>";
+				}else if(grade == 'Silver'){
+					img = "<img class='gradeImg' src='imgs/hover_silver.jpg'/>";
+				}else if(grade == 'Bronze'){
+					img = "<img class='gradeImg' src='imgs/hover_bronze.jpg'/>";
+				}
+				$('[data-toggle="tooltip"]').tooltip(
+						{title: "<a>신뢰지수 &nbsp" + mpoint + " / 100점</a><BR>" + 
+								"<a>가이드 등급 &nbsp" + img + "</a><BR>" +
+//								"<img class='gradeImg' src='imgs/hover_gold.jpg'/>" + 
+								"<a>가이드 횟수 &nbsp" + cnt + "회</a><BR>" 
+							, 
+							html: true, placement: "bottom"
+				});
+			},
+			error : function(){}
+		});
+//		$('.gradeImg').css('width', '10px');
+//		$('.gradeImg').css('height', '10px');
+	});
+	
+	
+	
+	   
+	
+	
+	
+	
+	
 	
 	
 	
@@ -58,6 +102,8 @@ $(document).ready(function(){
 					}else{
 						history.go(0);
 					}
+					$('#loginId').val("");
+					$('#loginPw').val("");
 				}
 			});
 		}
@@ -70,7 +116,6 @@ $(document).ready(function(){
 			success : function() {
 			}
 		});
-		alert("로그아웃 한다");
 		websocket.close();
 		history.go(0);
 	});
@@ -105,8 +150,10 @@ $(document).ready(function(){
 	
 	
 	
-	
-	
+	// 모달 닫으면 버튼이 보이게 ..
+	$('.modal').on('hidden.bs.modal', function(){
+		$('.btn').show();
+	});
 	
 	
 	
@@ -348,9 +395,10 @@ $(document).ready(function(){
 	
 	$('.close').on('click', function(){
 		$('#checkEval').val("f");
+		$('#pw').val("");
 	});
 	
-	
+
 	
 	
 	
@@ -493,29 +541,15 @@ $(document).ready(function(){
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	function readBoard_header(bnum, bkind){
-		alert(bnum + " " + bkind + " readBoard.do 요청해.");
+		location.href = "readBoard.do?bnum=" + bnum + "&bkind=" + bkind;
 	}
 	
 	
 	
 	
 	
-	
+
 	
 	
 
