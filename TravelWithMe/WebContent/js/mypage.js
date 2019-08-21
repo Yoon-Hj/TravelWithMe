@@ -117,8 +117,12 @@ $(document).ready(function(){
 	});
 	
 	$('#withdrawal').on('click', function(){
-//		if(confirm("정말 탈퇴하시겠습니까?") == true)
-//		location.href="withdrawalUser.do";
+		$('.modal-body').hide();
+		$('#modiPwForm').hide();
+		$('.btn').hide();
+		$('#checkPass').show();
+		$('#checkPw').show();
+		$('#passType').val("l");
 	});
 
 	$('.modal').on('hidden.bs.modal', function(){
@@ -163,6 +167,11 @@ $(document).ready(function(){
 					}else if(type == "m"){
 						$('#modiPwForm').show();
 						$('#modiPwBtn').show();
+					}else if(type == "l"){
+						if(confirm("정말 탈퇴하시겠습니까?") == true)
+							location.href="withdrawalUser.do";
+						else
+							$(".modal").modal('hide');
 					}
 				}else{
 					alert("비밀번호가 틀렸습니다.");
@@ -274,14 +283,6 @@ $(document).ready(function(){
 			history.go(0);
 		}
 	});
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 });

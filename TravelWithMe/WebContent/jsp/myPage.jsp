@@ -155,7 +155,7 @@ response.setHeader("pragma","no-cache");
 </center>
 <div class="inInfo">
 <input type="button" id="reviseForm" value="회원정보 수정" data-toggle="modal" data-target="#meminfoReviseForm" style="background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
-<input type="button" id="withdrawal" value="회원탈퇴"style="background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
+<input type="button" id="withdrawal" value="회원탈퇴" data-toggle="modal" data-target="#meminfoReviseForm" style="background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
 </div>
 </div>
 
