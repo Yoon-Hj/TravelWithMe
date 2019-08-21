@@ -92,6 +92,24 @@ public class MemberController {
 		return mav;
 	}
 	
+	@RequestMapping("checkPassword.do")
+	public @ResponseBody String checkPassword(HttpSession session, String mpw) {
+		String mid = (String)session.getAttribute("user");
+		return m_msvc.checkPass(mid, mpw);
+	}
+	
+	@RequestMapping("modifyPw.do")
+	public void modifyPw(HttpSession session, String mpw) throws Exception {
+		String mid = (String)session.getAttribute("user");
+		m_msvc.modifyPw(mid, mpw);
+	}
+	
+	@RequestMapping("modiMemInfo.do")
+	public void modiMemInfo(HttpSession session, String mname, String mcontact) throws Exception {
+		String mid = (String)session.getAttribute("user");
+		m_msvc.modifyMemInfo(mid, mname, mcontact);
+	}
+	
 	@RequestMapping("moreNotice.do")
 	public @ResponseBody List<Notice> moreNotice(HttpSession session){
 		String mid = (String)session.getAttribute("user");

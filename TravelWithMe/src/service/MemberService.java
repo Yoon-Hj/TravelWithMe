@@ -80,6 +80,49 @@ public class MemberService {
 		return returnVal;
 
 	}
+	// 비밀번호 체크
+	public String checkPass(String mid, String mpw) {
+		String sha_mpw = sha.sha256(mpw);
+		String real_pw = m_mdao.selectPw(mid);
+		String result = "fail";
+		if(sha_mpw.equals(real_pw)) 
+			result = "pass";
+		return result;
+	}
+	
+	//비밀번호 변경
+	public void modifyPw(String mid, String mpw) throws Exception {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		try {
+			String sha_mpw = sha.sha256(mpw);
+			
+			params.put("mid", mid);
+			params.put("mpw", sha_mpw);
+			
+			m_mdao.updatePw(params);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Exception();
+		}
+	}
+	
+	//회원정보 변경
+	public void modifyMemInfo(String mid, String mname, String mcontact) throws Exception {
+		try {
+			Member m = new Member();
+			m.setMid(mid);
+			m.setMname(mname);
+			m.setMcontact(mcontact);
+			
+			m_mdao.updateMember(m);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Exception();
+		}
+	}
+	
 	public int checkId(String user_id) {
 
 		int rev;

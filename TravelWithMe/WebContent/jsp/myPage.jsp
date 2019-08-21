@@ -72,7 +72,9 @@
 	}
 	
 	
-	
+	#memInfo > th{
+		width : 200px;
+	}
 	
 	
 	
@@ -279,17 +281,59 @@ response.setHeader("pragma","no-cache");
 	        </div>
 	        
 	        <!-- Modal body -->
-	        <div class="modal-body" style="text-align: center">
-	        	<h3></h3>
+	        <div class="modal-body" style="text-align: right">
+	        	<center>
+	        	<h5>수정하고 싶은 정보를 다시 입력하세요</h5><br>
+	        	<form id="modiForm" action="">
+	        		<table id="memInfo" style="wirth:300px;">
+	        			<tr>
+	        				<th style="width:100px">아이디</th>
+	        				<td>${memberInfo.mid }</td>
+	        			</tr>
+	        			<tr>
+	        				<th style="width:100px">이름</th>
+	        				<td><input type="text" name="mname" id="name" value="${memberInfo.mname }"></td>
+	        			</tr>
+	        			<tr>
+	        				<th style="width:100px">대표 연락처</th>
+	        				<td><input type="text" name="mcontact" id="contact" value="${memberInfo.mcontact }"></td>
+	        			</tr>
+		        	</form>
+	        		</table>
+	        	</center><BR>
+	        	<input type="button" id="modiPassForm" value="비밀번호 변경" style="background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
+	        	<input type="hidden" id="storeName" value="${memberInfo.mname }">
+	        	<input type="hidden" id="storeContact" value="${memberInfo.mcontact }">
 	        </div>
 	        <div id="checkPw" style="display:none; text-align:center;">
-	        	<h5>비밀번호를 입력하세요</h5><br>
-	        	<input type="password" id="pw"/>
+	        	<BR><h4>비밀번호를 입력하세요</h4><br>
+	        	<input type="password" id="pw"/><BR><BR>
 	        </div>
+	        <div id="modiPwForm" style="display:none; text-align:center;">
+	        	<BR><h4>비밀번호 변경</h4><br>
+	        	<center>
+	        	<table>
+	        		<tr>
+	        			<th style="width:150px">비밀번호</th>
+	        			<td><input type="password" id="modiPw"/></td>
+	        		</tr>
+	        		<tr>
+	        			<th style="width:150px">비밀번호 확인</th>
+	        			<td><input type="password" id="modiPwCheck"/></td>
+	        		</tr>
+	        		<tr>
+	        			<td colspan="2"><span id="pwChk"></span></td>
+	        		</tr>
+	        	</table>
+	        	</center><BR>
+	        </div>
+	        <input type="hidden" id="passType" value="f">
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" id="ok" class="btn btn-success" data-dismiss="modal">확인</button>
+		          <button type="button" id="ok" class="btn btn-success" data-dismiss="modal" style="display:none">확인</button>
 		          <button type="button" id="checkPass" class="btn btn-success">확인</button>
+		          <button type="button" id="modiInfo" class="btn btn-info" style="display:none">수정</button>
+		          <button type="button" id="modiPwBtn" class="btn btn-info" style="display:none">수정</button>
 		        </div>
 	       </div>
 	     </div>

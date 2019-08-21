@@ -106,8 +106,7 @@
 	
 	<!-- 회원 정보 업데이트 -->
 	<update id="updateMember" parameterType="member">
-		update member set mpw = #{mpw}, mname = #{mname}, mbirth = #{mbirth}, mcontact = #{mcontact}, mgender = #{mgender}
-		where mid = #{mid}
+		update member set mname = #{mname}, mcontact = #{mcontact} where mid = #{mid}
 	</update>
 	
 	<!-- 회원 삭제 -->
