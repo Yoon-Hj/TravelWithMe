@@ -51,7 +51,7 @@ public class BoardController {
 			System.out.println("지역 검색임");
 		}
 		
-		
+		System.out.println("세팅할 타입 : " + type);
 		mav.addObject("apiType", type);
 		mav.setViewName("attractionInfo");
 		

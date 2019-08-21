@@ -38,6 +38,93 @@ $(document).ready(function(){
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	var apitype = $('#apiType').val();
+	
+	if(apitype == "0" || apitype == "1"){
+		$('#keywordFormBtn').css('background-color', '#58ACFA');
+		$('#keywordFormBtn').css('color', 'white');
+	}else if(apitype == "2"){
+		$('#festivalForm').css('background-color', '#58ACFA');
+		$('#festivalForm').css('color', 'white');
+	}else if(apitype == "3"){
+		$('#areaForm').css('background-color', '#58ACFA');
+		$('#areaForm').css('color', 'white');
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	$('#keywordFormBtn').on('click', function(){
+		$('#keywordFormBtn').css('background-color', '#58ACFA');
+		$('#keywordFormBtn').css('color', 'white');
+		$('#festivalFormBtn').css('background-color', 'white');
+		$('#festivalFormBtn').css('color', 'black');
+		$('#areaFormBtn').css('background-color', 'white');
+		$('#areaFormBtn').css('color', 'black');
+
+		$('#keywordForm').show();
+		$('#festivalForm').hide();
+		$('#areaForm').hide();
+	});
+	
+	$('#festivalFormBtn').on('click', function(){
+		$('#keywordFormBtn').css('background-color', 'white');
+		$('#keywordFormBtn').css('color', 'black');
+		$('#festivalFormBtn').css('background-color', '#58ACFA');
+		$('#festivalFormBtn').css('color', 'white');
+		$('#areaFormBtn').css('background-color', 'white');
+		$('#areaFormBtn').css('color', 'black');
+		
+		$('#festivalForm').show();
+		$('#keywordForm').hide();
+		$('#areaForm').hide();
+	});
+	
+	$('#areaFormBtn').on('click', function(){
+		$('#keywordFormBtn').css('background-color', 'white');
+		$('#keywordFormBtn').css('color', 'black');
+		$('#festivalFormBtn').css('background-color', 'white');
+		$('#festivalFormBtn').css('color', 'black');
+		$('#areaFormBtn').css('background-color', '#58ACFA');
+		$('#areaFormBtn').css('color', 'white');
+		
+		$('#areaForm').show();
+		$('#keywordForm').hide();
+		$('#festivalForm').hide();
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	$(".PageNavi").on('click', function(){
 		var page = $(this).val();
 		var type = $('#apiType').val();
@@ -55,11 +142,7 @@ $(document).ready(function(){
 	});
 	
 	
-	var apitype = $('#apiType').val();
 	
-	if(apitype == "0" || apitype == "1"){
-		
-	}
 	
 	
 	
@@ -95,13 +178,13 @@ $(document).ready(function(){
 	
 	
 	
+	function viewDetail(contentid, contenttypeid, title){
+		location.href="viewDetail.do?contentid=" + contentid + "&contenttypeid=" + contenttypeid + "&title=" + title;
+	}
 	
 	
 });
 
-function viewDetail(contentid, contenttypeid, title){
-	location.href="viewDetail.do?contentid=" + contentid + "&contenttypeid=" + contenttypeid + "&title=" + title;
-}
 
 
 
