@@ -214,10 +214,10 @@
 <div id="preview" style="font-family: 함초롬돋움">
 
 	<h3>
-		&nbsp;&nbsp;미리보기
+		&nbsp;&nbsp;가이드 게시글 미리보기
 	</h3>
 	<br>
-	<table id="previewTable">
+	<table id="previewTable" style="border:1px solid red; font-family: 함초롬돋움;">
 		<tr>
 			<td class="InfoTd">작성자</td>
 			<td><%=(String)session.getAttribute("user")%></td>
@@ -266,7 +266,13 @@
 		</tr>
 		<tr>
 			<td class="InfoTd">세부일정</td>
-			<td></td>
+			<td>
+			    <div id="canvasDiv">
+			    	<canvas id="canvas" width="600px" height="200px" style="border : 1px solid yellow">
+			
+			        </canvas>
+			    </div>
+			</td>
 		</tr>
 		<tr>
 			<td class="InfoTd">주요 정책</td>

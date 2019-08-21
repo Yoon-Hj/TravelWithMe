@@ -73,7 +73,7 @@
 
 <input type="hidden" id="user" value="${user}">
 	
-	<img src="imgs/logo.jpg" width="180px;" height="32px;" style="float: left; margin-left: 20px; margin-bottom: 20px; margin-top: 13px;" onclick="location.href='index.do'"> 
+	<img src="imgs/logo.jpg" width="180px;" height="32px;" style="float: left; margin-left: 20px; margin-bottom: 20px; margin-top: 13px; cursor: pointer;" onclick="location.href='index.do'"> 
 		
 	<c:choose>
 		<c:when test="${user==null}">

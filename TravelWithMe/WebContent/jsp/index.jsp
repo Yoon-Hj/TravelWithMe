@@ -22,7 +22,7 @@
 	.section2 {
 		background-image: url(imgs/yeosu.PNG);
 		background-size: cover;
-		margin-top: -40px;
+		margin-top: -47px;
 	}
 
 	.section3 {

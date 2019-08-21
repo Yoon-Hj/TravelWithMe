@@ -108,7 +108,7 @@ $(function(){
 
 	});
 	
-	//테마
+	//테마 엔터키
 	$("#gthema").keydown(function(key) {
 	
 		if (key.keyCode == 13) {
@@ -123,7 +123,21 @@ $(function(){
 		}			
 	
 	});
-	
+	//테마 포커스 아웃
+	$("#gthema").focusout(function(key) {
+		
+		if (key.keyCode == 13) {
+			var length = $(".sharpThema").length;
+			if(length > 2) {
+				alert("테마는 최대 3개까지 작성가능합니다");
+				$("#gthema").val("");	
+			}else{
+				$("#gthema").after("<a class='sharpThema' style='cursor: pointer;'>&nbsp;#"+$("#gthema").val()+"</a>");
+				$("#gthema").val("");				
+			}
+		}			
+		
+	});
 	//가이드 테마 삭제하기
 	$(document).on('click','.sharpThema',function(){
 		var a = $(this).text();
@@ -133,6 +147,14 @@ $(function(){
 		      return;
 		  }
 			
+	});
+	
+	//세부일정 투어내용 글자수 제한
+	$(document).on('focusout','.placeMax',function(){
+		if($(this).val().length>10){
+			alert("투어내용은 글자 수 10글자 제한입니다. 다시 작성해주세요.");
+			$(this).val("");
+		}
 	});
 	
 	//사진 첨부버튼 누르기
@@ -194,6 +216,14 @@ $(function(){
 	
 	$("#day > tbody").find(":input[type=text]").each(function(){
 		if($(this).val().length>10) alert("글자 수 10자로 제한합니다.");
+	});
+	
+	//모집인원 마이너스값 못넣게 하기
+	$("#gnop").focusout(function(){
+		if($("#gnop").val()<0){
+			alert("1명보다 적은 모집인원은 선택할 수 없습니다. 다시 선택하세요");
+			$("#gnop").val("1");
+		}
 	});
 
 	
@@ -310,33 +340,8 @@ $(function(){
 			}
 		});
 	
-		//스케쥴 담기
-		var DAY1time = new Array();
-		var DAY1place = new Array();
-		$("#day > tbody").find(".day1").find(":input[type=time]").each(function(){
-			DAY1time.push($(this).val());
-		});
-		$("#day > tbody").find(".day1").find(":input[type=text]").each(function(){
-			DAY1place.push($(this).val());
-		});
-		
-		var DAY2time = new Array();
-		var DAY2place = new Array();
-		$("#day > tbody").find(".day2").find(":input[type=time]").each(function(){
-			DAY2time.push($(this).val());
-		});
-		$("#day > tbody").find(".day2").find(":input[type=text]").each(function(){
-			DAY2place.push($(this).val());
-		});
-		
-		var DAY3time = new Array();
-		var DAY3place = new Array();
-		$("#day > tbody").find(".day3").find(":input[type=time]").each(function(){
-			DAY3time.push($(this).val());
-		});
-		$("#day > tbody").find(".day3").find(":input[type=text]").each(function(){
-			DAY3place.push($(this).val());
-		});
+		//스케쥴 담기 한번 더 해야하는지 아니면 배열 남아있는지 확인해봐!
+		//setGuideScheduleArray()
 
 		var form = $('#uploadForm')[0];
 	    var formData = new FormData(form);
@@ -384,9 +389,10 @@ $(function(){
 
 
 });
-
+//사진 담기용 배열
 var sel_files = [];
 
+//최소시간 최대시간 설정
 function setTimeMinMax(thisClass){
 	var timeForOneDay = $(':radio[name="gtime"]:checked').val();
 	var test = thisClass.val();
@@ -404,51 +410,72 @@ function setTimeMinMax(thisClass){
 	}
 }
 
+
+
+//스케쥴 + 버튼 누르기
+var pluscnt1 = 0;
+var pluscnt2 = 0;
+var pluscnt3 = 0;
 function plusDetailSche(plusBtn){
+		
+		var plusSche = "";	
+		var classDay = plusBtn.attr('class').split(" ")[1];
+		var p;
+		
+		if(classDay=='day1'){
+			pluscnt1++;
+			if(pluscnt1<8){
+				
+				plusSche +="<tr class='day1'>";
+				plusSche += "<td><input type='time' class='timeMinMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
+				plusSche += "<td><input type='text' class='placeMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
+				plusSche += "<td><button class='dayminus day1' style='cursor: pointer; width: 30px; border: none; background-color: rgb(181, 195, 200);'>-</button></td>";
+				plusSche +="</tr>";
+				
+				p = $('.day1').filter('tr:first').find("td:eq(0)").attr('rowspan');
+				p=Number(p);
+				$('.day1').filter('tr:first').find("td:eq(0)").attr('rowspan',p+1);
+				$('.day1').filter('tr:last').after(plusSche);
+			}else{
+				alert("하루 일정은 8개의 일정만 설정가능합니다.");
+			}
+			
+		}else if(classDay=='day2'){
+			pluscnt2++;
+			if(pluscnt2<8){
+				plusSche +="<tr class='day2'>";
+				plusSche += "<td><input type='time' class='timeMinMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
+				plusSche += "<td><input type='text' class='placeMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
+				plusSche += "<td><button class='dayminus day2' style='cursor: pointer; width: 30px; border: none; background-color: rgb(181, 195, 200);'>-</button></td>";
+				plusSche +="</tr>";
+				
+				p = $('.day2').filter('tr:first').find("td:eq(0)").attr('rowspan');
+				p=Number(p);
+				$('.day2').filter('tr:first').find("td:eq(0)").attr('rowspan',p+1);
+				$('.day2').filter('tr:last').after(plusSche);
+			}else{
+				alert("하루 일정은 8개의 일정만 설정가능합니다.");
+			}
+			
+		}else if(classDay=='day3'){
+			pluscnt3++;
+			if(pluscnt3<8){
+				plusSche +="<tr class='day3'>";
+				plusSche += "<td><input type='time' class='timeMinMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
+				plusSche += "<td><input type='text' class='placeMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
+				plusSche += "<td><button class='dayminus day3' style='cursor: pointer; width: 30px; border: none; background-color: rgb(181, 195, 200);'>-</button></td>";
+				plusSche +="</tr>";
+				
+				p = $('.day3').filter('tr:first').find("td:eq(0)").attr('rowspan');
+				p=Number(p);
+				$('.day3').filter('tr:first').find("td:eq(0)").attr('rowspan',p+1);
+				$('.day3').filter('tr:last').after(plusSche);
+			}else{
+				alert("하루 일정은 8개의 일정만 설정가능합니다.");
+			}
+		}
 	
-	var plusSche = "";	
-	var classDay = plusBtn.attr('class').split(" ")[1];
-	var p;
 	
-	if(classDay=='day1'){
-		
-		plusSche +="<tr class='day1'>";
-		plusSche += "<td><input type='time' class='timeMinMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
-		plusSche += "<td><input type='text' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
-		plusSche += "<td><button class='dayminus day1' style='cursor: pointer; width: 30px; border: none; background-color: rgb(181, 195, 200);'>-</button></td>";
-		plusSche +="</tr>";
-
-		p = $('.day1').filter('tr:first').find("td:eq(0)").attr('rowspan');
-		p=Number(p);
-		$('.day1').filter('tr:first').find("td:eq(0)").attr('rowspan',p+1);
-		$('.day1').filter('tr:last').after(plusSche);
-		
-	}else if(classDay=='day2'){
-		
-		plusSche +="<tr class='day2'>";
-		plusSche += "<td><input type='time' class='timeMinMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
-		plusSche += "<td><input type='text' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
-		plusSche += "<td><button class='dayminus day2' style='cursor: pointer; width: 30px; border: none; background-color: rgb(181, 195, 200);'>-</button></td>";
-		plusSche +="</tr>";
-
-		p = $('.day2').filter('tr:first').find("td:eq(0)").attr('rowspan');
-		p=Number(p);
-		$('.day2').filter('tr:first').find("td:eq(0)").attr('rowspan',p+1);
-		$('.day2').filter('tr:last').after(plusSche);
-		
-	}else if(classDay=='day3'){
-		
-		plusSche +="<tr class='day3'>";
-		plusSche += "<td><input type='time' class='timeMinMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
-		plusSche += "<td><input type='text' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
-		plusSche += "<td><button class='dayminus day3' style='cursor: pointer; width: 30px; border: none; background-color: rgb(181, 195, 200);'>-</button></td>";
-		plusSche +="</tr>";
-
-		p = $('.day3').filter('tr:first').find("td:eq(0)").attr('rowspan');
-		p=Number(p);
-		$('.day3').filter('tr:first').find("td:eq(0)").attr('rowspan',p+1);
-		$('.day3').filter('tr:last').after(plusSche);
-	}
 	
 
 	
@@ -491,7 +518,7 @@ function setDetailDay(){
 	var day = fdate[2]-sdate[2];
 	var dayHTML = "";
 	var dayHTMLinput = "<td><input type='time' class='timeMinMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
-	dayHTMLinput += "<td><input type='text' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
+	dayHTMLinput += "<td><input type='text' class='placeMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
 	var dayHTMLinputPlusBtn1 = "<td><button class='dayplus day1' style='cursor: pointer; width: 30px; border: none; background-color: rgb(181, 195, 200);'>+</button></td>";
 	var dayHTMLinputPlusBtn2 = "<td><button class='dayplus day2'style='cursor: pointer; width: 30px; border: none; background-color: rgb(181, 195, 200);'>+</button></td>";
 	var dayHTMLinputPlusBtn3 = "<td><button class='dayplus day3' style='cursor: pointer; width: 30px; border: none; background-color: rgb(181, 195, 200);'>+</button></td>";
@@ -545,6 +572,9 @@ function openBasicInfo() {
 }
 
 function openDetailInfo() {
+	pluscnt1 = 0;
+	pluscnt2 = 0;
+	pluscnt3 = 0;
 	$("#basicInfo").hide();
 	$("#detailInfo").show();
 	$("#preview").hide();
@@ -566,23 +596,88 @@ function openPreview() {
 	
 	//제목
 	$("#previewTable").find("tr:eq(1)").find("td:eq(1)").text($("#btitle").val());
+	//사진
 	showSlides(slideIndex);
-
+	//날짜
+	if($("#gstartdate").val()==$("#gfinishdate").val()){
+		$("#previewTable").find("tr:eq(3)").find("td:eq(1)").html($("#gstartdate").val()+"&nbsp;&nbsp;~&nbsp;&nbsp;"+$("#gfinishdate").val()+"&nbsp;&nbsp;"+$("#gtime").val());				
+	}else{
+		$("#previewTable").find("tr:eq(3)").find("td:eq(1)").html($("#gstartdate").val()+"&nbsp;&nbsp;~&nbsp;&nbsp;"+$("#gfinishdate").val());				
+	}
+	//모집마감날짜
+	$("#previewTable").find("tr:eq(4)").find("td:eq(1)").text($("#genddate").val());
+	//출발장소 및 시간
+	$("#previewTable").find("tr:eq(5)").find("td:eq(1)").html($("#gdepartplace").val()+"&nbsp;&nbsp;"+$("#gdeparttime").val());
+	//지역
+	$("#previewTable").find("tr:eq(6)").find("td:eq(1)").html($("#garea1").val()+"&nbsp;&nbsp;"+$("#garea2").val());
+	//인원
+	$("#previewTable").find("tr:eq(7)").find("td:eq(1)").text($("#gnop").val()+"명");
+	//테마
+	$("#previewTable").find("tr:eq(8)").find("td:eq(1)").text($(".sharpThema").text());
+	//투어소개
+	$("#previewTable").find("tr:eq(9)").find("td:eq(1)").text($("#bcontent").val());
+	//세부일정
+	setGuideScheduleArray()
+	drawCanvas();
+	
+	
+	
+	if(DAY1time.length!=0){
+		
+	}
+	if(DAY2time.length!=0){
+		
+	}
+	if(DAY3time.length!=0){
+		
+	}
+	
+	//주요 정책
 	
 
 	
+
 	
+	
+	
+}
+
+//세부일정 내역 담기
+var DAY1time = new Array();
+var DAY1place = new Array();
+var DAY2time = new Array();
+var DAY2place = new Array();
+var DAY3time = new Array();
+var DAY3place = new Array();
+function setGuideScheduleArray(){
+	$("#day > tbody").find(".day1").find(":input[type=time]").each(function(){
+		DAY1time.push($(this).val());
+	});
+	$("#day > tbody").find(".day1").find(":input[type=text]").each(function(){
+		DAY1place.push($(this).val());
+	});
+	
+	$("#day > tbody").find(".day2").find(":input[type=time]").each(function(){
+		DAY2time.push($(this).val());
+	});
+	$("#day > tbody").find(".day2").find(":input[type=text]").each(function(){
+		DAY2place.push($(this).val());
+	});
+	
+	$("#day > tbody").find(".day3").find(":input[type=time]").each(function(){
+		DAY3time.push($(this).val());
+	});
+	$("#day > tbody").find(".day3").find(":input[type=text]").each(function(){
+		DAY3place.push($(this).val());
+	});
 	
 }
 
 //사진슬라이드 js
 var slideIndex = 1;
-
-
 function plusSlides(n) {
   showSlides(slideIndex += n);
 }
-
 function showSlides(n) {
   var i;
   var slides = $(".mySlides");
@@ -593,4 +688,52 @@ function showSlides(n) {
   }
 
   $(".slideshow-container").find("div:eq("+Number(slideIndex-1)+")").css("display", "block");  
+}
+
+//canvas
+function drawCanvas(){
+	var canvas = $("#canvas")[0];
+	if(canvas==null || canvas.getContext==null) return;
+	var ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	var x = 50;
+	var y = 35;
+	
+	for(var n=0; n<DAY1time.length; n++){
+		
+		ctx.beginPath();
+		ctx.arc(x,y,10,0,2*Math.PI);
+		
+		ctx.font="bold 13px 한초롬돋움";
+		ctx.fillText(DAY1time[n],x-15,y-15);
+		if(DAY1place[n].length<=5){
+			ctx.fillText(DAY1place[n],x-25,y+30);	
+		}else if(DAY1place[n].length>5){
+			ctx.fillText(DAY1place[n],x-50,y+30);		
+		}
+		
+		if(n==DAY1time.length-1){
+			ctx.stroke();
+			break;
+		}
+		if(x<530&&y==35){
+			ctx.moveTo(x+10,y);
+			ctx.lineTo(x+150,y);
+			x+=160;
+		}else if(x==530&&y==35){
+			ctx.moveTo(x+10,y);
+			ctx.lineTo(x+75,y);
+			ctx.moveTo(x+75,y);
+			ctx.lineTo(x+75,y+80);
+			ctx.moveTo(x+75,y+80);
+			ctx.lineTo(x+10,y+80);
+			y+=80;
+		}
+		else if(x>50&&y==115){
+			ctx.moveTo(x-10,y);
+			ctx.lineTo(x-150,y);
+			x-=160;
+		}
+		ctx.stroke();
+	}
 }
