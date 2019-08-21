@@ -80,6 +80,49 @@ public class MemberService {
 		return returnVal;
 
 	}
+	// 비밀번호 체크
+	public String checkPass(String mid, String mpw) {
+		String sha_mpw = sha.sha256(mpw);
+		String real_pw = m_mdao.selectPw(mid);
+		String result = "fail";
+		if(sha_mpw.equals(real_pw)) 
+			result = "pass";
+		return result;
+	}
+	
+	//비밀번호 변경
+	public void modifyPw(String mid, String mpw) throws Exception {
+		Member m = new Member();
+		try {
+			String sha_mpw = sha.sha256(mpw);
+			
+			m.setMid(mid);
+			m.setMpw(sha_mpw);
+			
+			m_mdao.updatePw(m);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Exception();
+		}
+	}
+	
+	//회원정보 변경
+	public void modifyMemInfo(String mid, String mname, String mcontact) throws Exception {
+		try {
+			Member m = new Member();
+			m.setMid(mid);
+			m.setMname(mname);
+			m.setMcontact(mcontact);
+			
+			m_mdao.updateMember(m);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Exception();
+		}
+	}
+	
 	public int checkId(String user_id) {
 
 		int rev;
@@ -99,9 +142,9 @@ public class MemberService {
 			String  birth = mbirth2; // 형식을 지켜야 함
 			java.sql.Date mbirth = java.sql.Date.valueOf(birth);
 			member.setMbirth(mbirth);
+			m_mdao.insertMember(member);
 			String a = sha.sha256(member.getMpw());
 			member.setMpw(a);
-			m_mdao.insertMember(member);
 			m_mdao.insertUsedid(member.getMid());
 			
 			String id = null;
@@ -193,12 +236,26 @@ public class MemberService {
 		}
 	}
 
-	public String findId(String id, String mail) {
-		String result = m_mdao.selectId(id,mail);
+	public String findId(Member member) {
+		
+
+		String result = m_mdao.selectId(member);
 		
 		return result;
 	}
 	
 
+	public String findPw(Member member) {
+		
+		String result = m_mdao.selectOneMem(member);
+		return result;
+		
+	}
 
+	public void repwd(Member member) {
+		m_mdao.updatePw(member);
+		String a = sha.sha256(member.getMpw());
+		member.setMpw(a);
+	}
+	
 }

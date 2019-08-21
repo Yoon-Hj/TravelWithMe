@@ -111,11 +111,10 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			int i = 0;
 			while (true){
 				try {
 					int cnt = web_dao.getMyNoticeCount(mid);
-					sendMessage (i++ + "알림  "+ cnt);
+					sendMessage ("알림  "+ cnt);
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();

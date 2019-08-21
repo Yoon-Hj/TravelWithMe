@@ -206,6 +206,11 @@ public class BoardService {
 		return b_bdao.insertComment(comments);
 	}
 	
+	//답글 작성
+	public int writeRecomment(Comments comments) {
+		return b_bdao.insertRecomment(comments);
+	}
+	
 	//댓글 삭제
 	public int delComment(int cnum) throws Exception {
 		int a = 0;

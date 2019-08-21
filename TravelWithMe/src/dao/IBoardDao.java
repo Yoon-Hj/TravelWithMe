@@ -60,7 +60,7 @@ public interface IBoardDao {
 	public void insertRegister(HashMap<String,Object> register);
 	public void deleteRegister(String rid);
 	public int insertComment(Comments comments);
-	public void insertRecomment(Comments comments);
+	public int insertRecomment(Comments comments);
 	public int deleteComment(int cnum);
 	public void insertPolicy(HashMap<String, Object> policy);
 	public void deletePolicy(int bnum);

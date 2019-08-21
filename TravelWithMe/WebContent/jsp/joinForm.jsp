@@ -42,20 +42,15 @@ $("#mid").blur(function() {
 				
 			} 
 		
-		else if(data == 0){
+		else if(data == 0 && mid != ""){
 			$("#id_check").text("사용가능한 아이디입니다.");
 			$("#id_check").css("color", "green");
-		;
+		
 		}
 		
 		else {
 				
-				if(idJ.test(mid)){
-					// 0 : 아이디 길이 / 문자열 검사
-					$("#id_check").text("");
-			
-		
-				} else if(mid == ""){
+				if(mid == ""){
 					
 					$('#id_check').text('아이디를 입력해주세요.');
 					$('#id_check').css('color', 'red');
@@ -106,19 +101,36 @@ $(document).ready(function(){
 //Get the modal
 //var modal = document.getElementById("myModal");
 var modal = $('#myModal');
+
 function validate() {
 	
 
-	
+	var mid = $('#mid').val();
 	var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
     var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/);
+  
+    
+   
+	$.ajax({
+		url : 'checkId.do?id='+ mid,
+		type : 'get',
+		success : function(data) {
+			if (data == 1) {
+				// 1 : 아이디가 중복되는 문구
+				alert("아이디 중복을 확인하세요.");
+		        $("#mid").focus();
+		        
+		      }
+			return false;
+			} 
 	
-	if($("#mid").val() == ""){
+	});
+	
+	if(mid == ""){
         alert("아이디를 입력하세요.");
         $("#mid").focus();
         return false;
       }
-	
 	
 	if($("#mpw").val() == ""){
         alert("비밀번호를 입력하세요.");
@@ -131,11 +143,22 @@ function validate() {
         $("#mpw_check").focus();
         return false;
       }
+	
+	 //비밀번호 똑같은지
+    if($("#mpw").val() != ($("#mpw_check").val())){ 
+    alert("비밀번호가 일치하지 않습니다.");
+    $("#mpw").val("");
+    $("#mpw_check").val("");
+    $("#mpw").focus();
+    return false;
+   }
+	
 	if($("#mname").val() == ""){
         alert("이름을 입력하세요.");
         $("#mname").focus();
         return false;
       }
+	
 	
 	if($("#mcontact").val() == ""){
         alert("대표 연락처를 입력하세요.");
@@ -153,7 +176,7 @@ function validate() {
         return false;
       }
 	
-    //이름의 유효성 검사
+    //id의 유효성 검사
     if(!getCheck.test($("#mid").val())){
       alert("ID형식에 맞춰서 입력하세요");
       $("#mid").val("");
@@ -162,7 +185,7 @@ function validate() {
     }
 
     //비밀번호
-    if(!getCheck.test($("#mpw").val())) {
+    if(!getCheck.test(mid)) {
     alert("형식에 맞춰서 PW를 입력하세요");
     $("#mpw").val("");
     $("#mpw").focus();
@@ -170,20 +193,12 @@ function validate() {
     }
 
     //아이디랑 비밀번호랑 같은지
-    if ($("#mid").val()==($("#mpw").val())) {
+    if (mid==($("#mpw").val())) {
     alert("비밀번호가 ID와 동일합니다.");
     $("#mid").val("");
     $("#mid").focus();
   }
 
-    //비밀번호 똑같은지
-    if($("#mpw").val() != ($("#mpw_check").val())){ 
-    alert("비밀번호가 일치하지 않습니다.");
-    $("#mpw").val("");
-    $("#mpw_check").val("");
-    $("#mpw").focus();
-    return false;
-   }
 	
 	//modalBlock();
 	$('#myModal').css("display", "block");
@@ -207,12 +222,17 @@ function test(){
 
 </head>
 <style>
+
+
+
 .all {
-	width: 800px;
+	width: 660px;
 	position: absolute;
 	top: 15%;
 	left: 25%;
-	margin-left:;
+	background-color: #f1f1f1;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .title {
@@ -220,7 +240,17 @@ function test(){
 	position: absolute;
 	top: 0%;
 	left: 25%;
-	margin-left:;
+	margin-left:; 
+	background-color: #f1f1f1;
+}
+
+.bottom{
+
+	position: absolute;
+	top: 35%;
+	left: 25%;
+	margin-left:; 
+	background-color: #f1f1f1;
 }
 </style>
 
@@ -229,7 +259,8 @@ function test(){
 
 	<form name="join"action="joinMember.do" method="post">
 
-		<div class="all">
+	<div class="all">	
+	
 			<div>
 				<input type="text" class="form-control" id="mid" name="mid"
 					placeholder="ID" maxlength="12">
@@ -256,56 +287,61 @@ function test(){
 					name="mname" placeholder="성명">
 				<div class="check_font" id="name_check"></div>
 			</div>
+</div>
 
-			<table>
+
+
+			<div class="bottom">
+			
+				<table>
+	    
 				<tr>
-					<td><p>대표 연락처</p></td>
-					
-					<td ><input type="radio" name="contact" checked="checked" value="phone" >휴대폰 
-					</td>
-					
-					<td >
-					<input type="radio" name="contact" value="email" >email
-						</td>
-						
-						<td > <input type="radio" name="contact" value="kakao" /> 카카오 아이디</td>
-
-					<td><br> <br> <br></td>
-                 </tr>
+					<td><p style="width:400px">대표 연락처</p></td>
+	<td>			
+	<input type="radio" name="contact" checked="checked" value="phone" />
+	휴대폰 
+    
+    <input type="radio" name="contact" value="email" />email
+												
+	<input type="radio" name="contact" value="kakao" /> 카카오 아이디
+	</td>
+</tr>
+				
+		<tr>	
+   
+		<td colspan="2"><input type="text" name="mcontact" id="mcontact"></td>
+    
+	</tr>		          
                 
-                <tr>
-					<td>
-						<div style="width: 200px;">
-							<input type="text" name="mcontact" id="mcontact">
-						</div>
-					</td>
-				</tr>
+		<tr>
+		<td colspan="2"><p>※동행 및 가이드 매칭 참여시에 사용될 연락처이니 신중하게 기입바랍니다.</p></td>
+		</tr>		
 
-				<tr>
-					<td width=55%>※동행 및 가이드 매칭 참여시에 사용될 연락처이니 신중하게 기입바랍니다.</td>
-				</tr>
-
-				<tr>
-					<td><p class=".col-md-8">생년월일</p></td>
-					<td><input class=".col-md-8" type="date" id="mbirth" name="mbirth2"></td>
-				</tr>
-
-				<tr>
-					<td><p class=".col-md-8">성별</p></td>
-					<td>
-					<input class=".col-md-4" type="radio" id="mgender" name="mgender" checked="checked"
-						value="male" /> 남자 
-						<input class=".col-md-4" type="radio" name="mgender" value="female" />
-						여자</td>
+    <tr>	
+	<td><p>생년월일</p></td>
+	<td><div><input type="date" id="mbirth" name="mbirth2"></div></td>
+	</tr>
+	
+	<tr>			
+	<td><p>성별</p></td>
+				
+	<td><div><input type="radio" id="mgender" name="mgender" checked="checked"
+						value="male" /> 남자 </div></td>
 						
-				</tr>
-
-               	<tr>
-               	<td><input type="button" class=".col-md-6 .col-md-offset-3" value="다음으로" onclick="validate()" id="nextChoice" >
-               	</td>
-               	</tr>
-			</table>	
-		
+			<td>			
+	<div><input type="radio" name="mgender" value="female" />
+						여자</div></td>
+    
+    </tr>				
+             			  <tr>
+     
+     <input type="button" value="다음으로" onclick="validate()" id="nextChoice" >
+      
+     </tr> 
+    
+               	</table>
+			
+		</div>
 
 <!-- The Modal -->
 <div id="myModal" class="modal" style="display:none">
@@ -355,7 +391,7 @@ function test(){
 
 <div style="position: fixed; bottom: 23px; right: 10px;">
  	 	<a href="#0"><img src="imgs/top.png" style="width: 60px;height: 60px;"></a>
- 	 </div>
+ 	</div> 
 	</form>
 
 

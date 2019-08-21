@@ -92,6 +92,24 @@ public class MemberController {
 		return mav;
 	}
 	
+	@RequestMapping("checkPassword.do")
+	public @ResponseBody String checkPassword(HttpSession session, String mpw) {
+		String mid = (String)session.getAttribute("user");
+		return m_msvc.checkPass(mid, mpw);
+	}
+	
+	@RequestMapping("modifyPw.do")
+	public void modifyPw(HttpSession session, String mpw) throws Exception {
+		String mid = (String)session.getAttribute("user");
+		m_msvc.modifyPw(mid, mpw);
+	}
+	
+	@RequestMapping("modiMemInfo.do")
+	public void modiMemInfo(HttpSession session, String mname, String mcontact) throws Exception {
+		String mid = (String)session.getAttribute("user");
+		m_msvc.modifyMemInfo(mid, mname, mcontact);
+	}
+	
 	@RequestMapping("moreNotice.do")
 	public @ResponseBody List<Notice> moreNotice(HttpSession session){
 		String mid = (String)session.getAttribute("user");
@@ -170,23 +188,45 @@ public class MemberController {
 		
 		}
     
-    @RequestMapping(value = "findID.do", method = RequestMethod.POST)
+    @RequestMapping(value = "findID.do", method = RequestMethod.GET)
     public @ResponseBody String findID(@RequestParam("name") String findName1,@RequestParam("mail") String findMail1) {
 	
-    	System.out.println(findName1);
-		String result = m_msvc.findId(findName1, findMail1);
-        
-		return "" + result;
+    	Member member = new Member();
+    	//System.out.println(findName1);
+    	member.setMname(findName1);
+    	member.setMcontact(findMail1);
+    
+    	String result = m_msvc.findId(member);
+		System.out.println(m_msvc.findId(member));
+		return result;
+    	
+      
+		
     	
 		}
    
    
 	
-    @RequestMapping("findPW,do")
-    public String findPW() {
-		return null;
-		}
+    @RequestMapping(value="findPw.do", method = RequestMethod.GET)
+    public @ResponseBody String findPW(@RequestParam("id") String id,@RequestParam("name") String name, @RequestParam("mail") String mail) {
+		
+    	Member member = new Member();
+        member.setMid(id);
+        member.setMname(name);
+        member.setMcontact(mail);
+    	String result = m_msvc.findPw(member);
+    	
+    	System.out.println(result);
+    	
+        return result;
+    }
     
+    @RequestMapping(value="repwd.do", method = RequestMethod.GET)
+    public @ResponseBody void repwd(@RequestParam("pw") String pw, @RequestParam("id") String id) {
+    Member member = new Member();
+    member.setMpw(pw);
+    member.setMid(id);
+    m_msvc.repwd(member);
     
-    
+    }
 }

@@ -85,13 +85,14 @@
 		  $('[data-toggle="tooltip"]').tooltip();   
 		});
 	</script>
-
+	
 	<jsp:include page="header.jsp"></jsp:include>
 	
-	<h1 style="font-family: 함초롬돋움; margin-left: 30px">Travel With Me</h1>
+	<h1 style="font-family: 함초롬돋움; clear: both; margin-left: 30px;">Travel With Me</h1>
 	<hr>
 	
 	<div class="container">
+	
 		<a href="accomWriteForm.do" data-toggle="tooltip" data-placement="bottom" title="글 작성하기" 
 			style="text-decoration: none; color: #787878; font-family: 함초롬돋움;">
 			원하는 동행글이 없으신가요? 직접 동행글을 작성해보세요.</a>
@@ -195,7 +196,7 @@
 			<a href="accomBoardList.do?page=${last}">&raquo;</a>
 		</c:if>
 	</div>
-			
+
 	<jsp:include page="footer.jsp"></jsp:include>
 	
 </body>
