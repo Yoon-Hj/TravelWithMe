@@ -11,10 +11,12 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/font.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<%-- <script src="js/accomView.js?v=<%=System.currentTimeMillis() %>"></script> --%>
 <title>Travel With Me</title>
 <style type="text/css">
 
@@ -53,7 +55,7 @@
   	  background: #B5C3C8;
   }
   
-  form.comment input[type=text] {
+  form.comment #cform {
 	  padding: 5px;
 	  font-size: 17px;
 	  border: 1px solid #ccc;
@@ -63,6 +65,7 @@
 	  background: #f1f1f1;
 	  border-radius: 0px;
 	  height: 35px;
+	  margin-bottom: 20px;
   }
   
   form.comment button[type=submit] {
@@ -77,6 +80,7 @@
 	  cursor: pointer;
 	  border: 1px solid #ccc;
 	  border-left: none;
+	  margin-bottom: 20px;
   }
   
   table.commtable {
@@ -103,10 +107,10 @@
 </style>
 </head>
 <body>
-
 <script type="text/javascript">
-	$(document).ready(function(){
-		var user = "<%=(String)session.getAttribute("user")%>";
+$(document).ready(function(){
+	
+		var user = "<%=(String) session.getAttribute("user")%>";
 		if(user == "null"){
 			$('#clform').show();
 		}else{
@@ -120,14 +124,13 @@
 			if(${user == r.MID}) flag = true;
 			break;
 		}
-		
-		if(${user == accomBoard.mid}){
+	 	if(${user == accomBoard.mid}){
 			$('#rmbtn').show();
 		}else if(flag){
 			$('#rcbtn').show();
 		}else{
 			$('#rbtn').show();
-		}
+		} 
 		
 		//모집인원(anumofpeople) - 신청인원(registerNum) 계산해서, 현재 신청가능 인원 수에 표시
 		//alert(${registerList});
@@ -143,21 +146,58 @@
 			var pn = Number(${accomBoard.anop}) - rn;
 			$('#nop').text(pn);
 		}
-	
-		//session에 id가 있으면, 댓글 입력 폼 + 작성버튼 표시
-    	//id가 없으면, 댓글 폼에 placeholder="댓글을 작성하려면 로그인 해주세요"(disabled) 
-    	//작성 버튼은 표시x, 답글작성 버튼도 표시x
+		
+		if(user == "null") {
+			$('#rbtn').attr("disabled", "disabled");
+		}
 	
 	    //신청인원이 0이 아닐 때, 수정 버튼 누르면 alert 표시
 		$('#modiBtn').on('click', function(){
 			if($('#nop') != ${accomBoard.anop}) 
 				alert("신청인원이 존재하여 게시글 수정이 불가합니다.")
 		});
-		
+	
 		$('.replyBtn').on('click', function(){
-			//if($(this).closest("tr").after().html()==""){				
-				$(this).closest("tr").after("<tr><td>&#x21B3;<input type='text'></td></tr>");
-			//}
+				if(user == "null"){
+					alert("로그인이 필요한 서비스입니다.");
+				}else{
+					$('#cwf').remove();
+					$(this).closest("tr").after("<tr id='cwf'><td>&nbsp;&nbsp;</td><td colspan='2'><input type='text' class='recontent' style='width: 700px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;'><button type='submit' class='writereBtn'>답글작성</button></td></tr>");
+				}
+		});
+		
+		//댓글작성
+		$('.writecoBtn').on('click', function(){
+			var b = ${accomBoard.bnum};
+			
+			$.ajax({
+				url : "writeComment.do",
+				data : {ccontent : $('.cocontent').val(),
+					    bnum : b},
+				type : "get",
+				success : function(data){
+					history.go(0);
+				}
+			});
+		});
+		
+		//답글작성
+		$(document).on('click', '.writereBtn', function(){
+			alert("왜?");
+			var b = ${accomBoard.bnum};
+			var c = $(this).parent("td").parent("tr").siblings("tr:eq(0)").find("th:eq(0)").find("input").val();
+			alert(c);
+			$.ajax({
+				url : "writeRecomment.do",
+				data : {ccontent : $('.recontent').val(),
+					    bnum : b,
+					    cgrid : c},
+				type : "get",
+				success : function(data){
+					alert(data);
+					history.go(0);
+				}
+			});
 		});
 		
 		//댓글삭제
@@ -166,25 +206,27 @@
 			  if (confirm("해당 댓글을 삭제하시겠습니까?") == true){   
 				var delrow = $(this).siblings("input:hidden").val();
 				var tmp = $(this).parents("td");
-			  $.ajax({
-					url : "delComment.do",
-					data : {cnum : delrow},
-					type : "get",
-					success : function(data){
-						tmp.text("<span style='color: #828282; font-size: 13px;'>해당 댓글은 삭제되었습니다.</span>");
-					}
-			  });
+				  $.ajax({
+						url : "delComment.do",
+						data : {cnum : delrow},
+						type : "get",
+						success : function(data){
+							tmp.text("");
+							tmp.append("<span style='color: #828282; font-size: 13px;'>해당 댓글은 삭제되었습니다.</span>");
+						}
+				  });
 			  }else{   
 			      return;
 			  }
 		});
 	
 	});
+
 </script>
 
 	<jsp:include page="header.jsp"></jsp:include>
 	
-	<h1 style="font-family: 함초롬돋움; margin-left: 30px">Travel With Me</h1>
+	<h1 style="font-family: 함초롬돋움; clear: both; margin-left: 30px;">Travel With Me</h1>
 	<hr>
 	
 	<div class="container">
@@ -267,30 +309,43 @@
 
 		<div style="margin-top: 20px; margin-left: 110px; margin-bottom: 20px;">
 			<form class="comment">
-					<input type="text" id="cform" class="form-control" placeholder="댓글을 입력하세요." style="width: 830px; display: none;">
-					<button type="submit" id="cbtn" style="display: none;">댓글작성</button>
+					<input type="text" id="cform" class="cocontent" class="form-control" placeholder="댓글을 입력하세요." style="width: 830px; display: none;">
+					<button type="submit" id="cbtn" class="writecoBtn" style="display: none;">댓글작성</button>
 			</form>
-			<input type="text" id="clform" class="form-control" placeholder="댓글을 작성하려면 로그인 해주세요." style="width: 860px; display: none;">
+			<input type="text" id="clform" class="form-control" placeholder="댓글을 작성하려면 로그인 해주세요." style="width: 930px; height:35px; display: none;">
 		</div>
 		
 		<div style="margin-top:20px; margin-bottom: 20px; margin-left: 110px; width: 90%;">
+			<table class="commtable">
 			<c:forEach var="comment" items="${commentList}" varStatus="status">
-				<table class="commtable">
 					<tr>
-						<th width="100px;" style="text-align: center;">${comment.mid}</th>
-						<td>
-							<c:if test="${comment.cdel==0}">
-								${comment.ccontent} <input type="hidden" value="${comment.cnum}">
-								<c:if test="${user==comment.mid}">
-								<button class="commDelBtn">×</button>
-								</c:if>
+						<c:choose>
+						<c:when test="${comment.cnum==comment.cgrid}">
+							<th width="100px;" style="text-align: center; font-weight: bold;"><input type="hidden" value="${comment.cgrid}">${comment.mid}</th>
+							<td colspan="2">
+								<c:if test="${comment.cdel==0}">${comment.ccontent} 
+									<input type="hidden" value="${comment.cnum}">
+									<c:if test="${user==comment.mid}"><button class="commDelBtn">×</button></c:if>
 								<button style="border:none; font-size: 13px; background: white; cursor: pointer;" class="replyBtn">답글</button>
 							</c:if>
-							<c:if test="${comment.cdel==1}"><span style="color: #828282; font-size: 13px;">해당 댓글은 삭제되었습니다.</span></c:if> 
-						</td>
+							<c:if test="${comment.cdel==1}"><span style="color: #828282; font-size: 13px;">해당 댓글은 삭제되었습니다.</span></c:if>
+							</td>
+						</c:when>
+						<c:otherwise>
+							<td>&nbsp;&nbsp;</td>
+							<td width="90px;" style="text-align: left; font-weight: bold;"><i class="material-icons" style="font-size: 15px;">&#xe5da;&nbsp;</i>${comment.mid}</td>
+							<td width="700px;" style="text-align: left;">
+								<c:if test="${comment.cdel==0}">${comment.ccontent} 
+									<input type="hidden" value="${comment.cnum}">
+									<c:if test="${user==comment.mid}"><button class="commDelBtn">×</button></c:if>
+								</c:if>
+								<c:if test="${comment.cdel==1}"><span style="color: #828282; font-size: 13px;">해당 댓글은 삭제되었습니다.</span></c:if>
+							</td>
+						</c:otherwise>
+						</c:choose>
 					</tr>
-				</table>
 			</c:forEach>
+			</table>
 		</div>
 		 
 	</div>

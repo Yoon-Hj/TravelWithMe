@@ -162,13 +162,25 @@ public class BoardController {
 	}
 	
 	@RequestMapping("writeComment.do")
-	public @ResponseBody int writeComment(HttpSession session, int bnum, String content) {
+	public @ResponseBody int writeComment(HttpSession session, int bnum, String ccontent) {
 		String mid = (String) session.getAttribute("user");
 		Comments c = new Comments();
 		c.setMid(mid);
 		c.setBnum(bnum);
-		c.setCcontent(content);
+		c.setCcontent(ccontent);
 		return b_bsvc.writeComment(c);
+	}
+	
+	@RequestMapping("writeRecomment.do")
+	public @ResponseBody int writeRecomment(HttpSession session, int bnum, int cgrid, String ccontent) {
+		System.out.println("와?");
+		String mid = (String) session.getAttribute("user");
+		Comments c = new Comments();
+		c.setMid(mid);
+		c.setBnum(bnum);
+		c.setCgrid(cgrid);
+		c.setCcontent(ccontent);
+		return b_bsvc.writeRecomment(c);
 	}
 	
 	@RequestMapping("delComment.do")

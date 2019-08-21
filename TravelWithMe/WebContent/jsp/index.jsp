@@ -20,7 +20,7 @@
 	}
 
 	.section2 {
-		background-image: url(imgs/jeju.jpg);
+		background-image: url(imgs/yeosu.PNG);
 		background-size: cover;
 		margin-top: -40px;
 	}
@@ -36,14 +36,14 @@
 	}
 
 	.section5 {
-		background-image: url(imgs/yeosu.PNG);
+		background-image: url(imgs/je.jpg);
 		background-size: cover;
 	}
 	
 	.scroll-container{
 		height: 100%;
 	}
-			
+	
 	section div {
 		font-style: normal;
 		text-align: center;
@@ -51,7 +51,7 @@
 		top: 50%;  
 		transform: translateY(-50%);
 	}
-
+	
 	span {
 		font-size: 4em;
 		font-style: normal;
@@ -103,17 +103,17 @@
 		
 		<jsp:include page="mainHeader.jsp"></jsp:include>
 			<div>
-				<h2 style="font-size: 45px">나와 비슷한 취향의 여행 친구들을 찾아보세요</h2>
+				<h2 style="font-size: 45px;">나와 비슷한 취향의 여행 친구들을 찾아보세요</h2>
 				<br>
 				<input type="button" class="btn btn-danger btn-lg btn-block" 
 						value="Travel with Me 목록 보기" onclick="location.href='accomBoardList.do'"
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">
-				
+
 				<br><br><br><br><br>
-				
-				<h2 style="font-size: 45px">함께할 여행 친구들을 직접 모아보세요</h2>
+				 
+				<h2 style="font-size: 45px;">함께할 여행 친구들을 직접 모아보세요</h2>
 				<br>
-				<input type="button" class="btn btn-outline-danger" 
+				<input type="button" class="btn btn-danger btn-lg btn-block" 
 						value="Travel with Me 글 작성" 
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">
 			</div>

@@ -70,13 +70,19 @@
 </style>
 </head>
 <body>
-<input type="hidden" id="user" value="${user }">
+
+<input type="hidden" id="user" value="${user}">
+	
+	<img src="imgs/logo.jpg" width="180px;" height="32px;" style="float: left; margin-left: 20px; margin-bottom: 20px; margin-top: 13px;" onclick="location.href='index.do'"> 
+		
 	<c:choose>
 		<c:when test="${user==null}">
-	   		<input type="button" value="LOGIN" data-toggle="modal" data-target="#loginForm" style="margin-left:1100px; background-color: transparent; border: 0px; font-size: 17px; font-family: D2Coding;">
+	
+	   		<input type="button" value="LOGIN" data-toggle="modal" data-target="#loginForm" style="margin-left:890px; background-color: transparent; border: 0px; font-size: 17px; font-family: D2Coding;">
 	   		<input type="button" value="JOIN" id="joinForm" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
 
 	   		<span style="margin-left:10px; font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span> 
+	   
 	   	</c:when>
 	   	
 	   	<c:when test="${user=='admin'}">
@@ -86,9 +92,9 @@
 
 	   		<span style="margin-left: 5px; font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span>
 	   	</c:when>
-	 
+	   	
 	   	<c:otherwise>
-		   		<a class="userId" style="font-family: D2Coding; margin-left: 905px; font-size: 17px;" data-toggle="tooltip">${user}</a>님
+		   		<a class="userId" style="font-family: D2Coding; margin-left: 740px; font-size: 17px;" data-toggle="tooltip">${user}</a>님
 				<a href="#" style="color: #969696; margin-left: 7px; font-family: D2Coding; font-size: 17px;" data-toggle="modal" data-target="#moreNewsForm" class="moreNews">Messages<span class="badge" style="color: black; font-size: 18px">5</span></a>
 
 				<input type="button" value="LOGOUT" id="logout" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
@@ -97,7 +103,7 @@
 			  	<span style="font-size:30px; color: black; margin-left: 5px; cursor:pointer" onclick="openNav()">&#9776;</span>
 	   	</c:otherwise>	
 	 </c:choose>
-  
+	
     <!-- 로그인 모달 -->
 	  <div class="modal fade" id="loginForm">
 		<div class="modal-dialog modal-sm">
@@ -110,10 +116,10 @@
 	        
 	        <!-- Modal body -->
 	        <div class="modal-body" style="text-align: center">
-	         	 <label for="id" style="margin-right: 45px"><b>ID</b></label>
+	         	 <label for="id" style="margin-right: 60px;"><b>ID</b></label>
 				 <input type="text" placeholder="Enter id" name="id" id="loginId" required><br>
 				
-				 <label for="pww"><b>Password</b></label>
+				 <label for="pww" style="margin-right: 8px;"><b>Password</b></label>
 				 <input type="password" placeholder="Enter Password" name="pw" id="loginPw" required><br><br>
 				 
 				  <button type="button" class="btn btn-success" id="login">Login</button>
@@ -132,7 +138,7 @@
 			<tr>
 				<td>
 					<a style="color: #818181;">Travel with Me</a>
-					<a class="canClick" href="#">목록보기</a>
+					<a class="canClick" href="accomBoardList.do">목록보기</a>
 		   			<a class="canClick" href="#">글작성</a>
 				</td>
 				<td>
