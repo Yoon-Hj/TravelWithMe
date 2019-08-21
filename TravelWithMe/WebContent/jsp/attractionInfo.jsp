@@ -14,11 +14,9 @@
 	h1{
 		margin:10%;
 	}
-	div{
-		border : solid 1px;
-	}
 	#searchDiv{
-		height : 200px;
+		border : solid 1px;
+		height : 205px;
 		width : 800px;
 		grid-template-columns:auto auto auto;
 	}
@@ -42,26 +40,87 @@
 			</tr>
 			<tr>
 				<td style="height:66px">
-				<input type="button" id="festivalFormBtn" value="축제 검색" style="background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
+				<input type="button" id="festivalFormBtn" value="축제 검색" style="width : 180px;height:66px; background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
 				</td>
 			</tr>
 			<tr>
 				<td style="height:66px">
-				<input type="button" id="areaFormBtn" value="지역 검색" style="background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
+				<input type="button" id="areaFormBtn" value="지역 검색" style="width : 180px;height:66px; background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
 				</td>
 			</tr>
 		</table>
 	</div>
-	<div id="keywordForm" style="width : 616px; height : 196px; float:left;display : inline; position : relative">
-		<div class="input-group mb-3" style="position:absolute;margin:auto; width : 200px; top:50%; left:50%;">
+	<div id="keywordForm" style="width : 616px; height : 196px; display : inline;">
+		<div class="input-group mb-3" style="margin:auto; width : 200px;">
 		    	<input type="text" class="form-control" id="keyword" placeholder="Search"
 		    	value="<c:if test="${keyword != null}">${keyword}</c:if>">
 		    	<div class="input-group-append">
-		    	  <button id="searchKeyword" class="btn btn-success" type="button">Go</button>  
+		    	  <button id="searchKeyword" class="btn btn-success" type="button">검색</button>  
 		    	</div>
 		</div>
 		<input type="hidden" id="storeKeyword" value="<c:if test="${keyword != null}">${keyword}</c:if>">
 	</div>
+	
+	
+	
+	<div id="festivalForm" style="width : 616px; height : 196px; float:left;display : inline; display:none;">
+		<div class="input-group mb-3" style="margin:auto;">
+		    	<form action="festivalSearch.do">
+				<input type="date" name="eventStartDate" required>
+				<input type="date" name="eventEndDate">
+				<select name="area">
+					<option value="">선택</option>
+					<option value="1">서울</option>
+					<option value="2">인천</option>
+					<option value="3">대전</option>
+					<option value="4">대구</option>
+					<option value="5">광주</option>
+					<option value="6">부산</option>
+					<option value="7">울산</option>
+					<option value="31">경기도</option>
+					<option value="32">강원도</option>
+					<option value="33">충청북도</option>
+					<option value="34">충청남도</option>
+					<option value="35">경상북도</option>
+					<option value="36">경상남도</option>
+					<option value="37">전라북도</option>
+					<option value="38">전라남도</option>
+					<option value="39">제주도</option>
+				</select>
+				<button id="searchKeyword" class="btn btn-success" type="submit">검색</button>
+				</form>
+		</div>
+		<input type="hidden" id="storeKeyword" value="<c:if test="${keyword != null}">${keyword}</c:if>">
+	</div>
+	
+	
+	
+	
+	
+	<div id="areaForm" style="width : 616px; height : 196px; float:left;display : inline; display:none;">
+		<div class="input-group mb-3" style="margin:auto; width : 200px;">
+		    	<button class="areaBtn" value="1">서울</button>
+					<button class="areaBtn" value="31">경기도</button>
+					<button class="areaBtn" value="32">강원도</button>
+					<button class="areaBtn" value="33">충청북도</button>
+					<button class="areaBtn" value="34">충청남도</button><BR>
+					<button class="areaBtn" value="37">전라북도</button>
+					<button class="areaBtn" value="38">전라남도</button>
+					<button class="areaBtn" value="35">경상북도</button>
+					<button class="areaBtn" value="36">경상남도</button>
+					<button class="areaBtn" value="39">제주도</button>
+		</div>
+		<input type="hidden" id="storeKeyword" value="<c:if test="${keyword != null}">${keyword}</c:if>">
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </div>
 
 
@@ -152,28 +211,30 @@
 </c:forEach>
 </tr>
 </table>
+<c:if test="${apiType != '0' }">
 
-<c:if test="${startpage != 1 }">
-	<button class="PageNavi" value="1">처음</button>
-	<button class="PageNavi" value="${startpage - 1}">이전</button>
+	<c:if test="${startpage != 1 }">
+		<button class="PageNavi" value="1">처음</button>
+		<button class="PageNavi" value="${startpage - 1}">이전</button>
+	</c:if>
+	
+	<c:forEach var="i" begin="${startpage }" end="${endpage }">
+		<c:choose>
+			<c:when test="${pageNo == i }">
+				<a style="color:red">${i }</a>
+			</c:when>
+			<c:otherwise>
+				<button class="PageNavi" value="${i}">${i }</button>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+	
+	<c:if test="${endpage < lastpage }">
+		<button class="PageNavi" value="${endpage + 1}">다음</button>
+		<button class="PageNavi" value="${lastpage}">마지막</button>
+	</c:if>
+
 </c:if>
-
-<c:forEach var="i" begin="${startpage }" end="${endpage }">
-	<c:choose>
-		<c:when test="${pageNo == i }">
-			<a style="color:red">${i }</a>
-		</c:when>
-		<c:otherwise>
-			<button class="PageNavi" value="${i}">${i }</button>
-		</c:otherwise>
-	</c:choose>
-</c:forEach>
-
-<c:if test="${endpage < lastpage }">
-	<button class="PageNavi" value="${endpage + 1}">다음</button>
-	<button class="PageNavi" value="${lastpage}">마지막</button>
-</c:if>
-
 
 <h1>시작페이지 : ${startpage }</h1>
 <h1>끝페이지 : ${endpage }</h1>
@@ -181,52 +242,6 @@
 <h1>현재 페이지 : ${pageNo }</h1>
 </center>
 
-
-<HR>
-
-
-
-
-<hr>
-<h3>축제 검색</h3>
-<form action="festivalSearch.do">
-<input type="date" name="eventStartDate" required>
-<input type="date" name="eventEndDate">
-<select name="area">
-	<option value="">선택</option>
-	<option value="1">서울</option>
-	<option value="2">인천</option>
-	<option value="3">대전</option>
-	<option value="4">대구</option>
-	<option value="5">광주</option>
-	<option value="6">부산</option>
-	<option value="7">울산</option>
-	<option value="31">경기도</option>
-	<option value="32">강원도</option>
-	<option value="33">충청북도</option>
-	<option value="34">충청남도</option>
-	<option value="35">경상북도</option>
-	<option value="36">경상남도</option>
-	<option value="37">전라북도</option>
-	<option value="38">전라남도</option>
-	<option value="39">제주도</option>
-</select>
-<input type="submit" value="검색">
-</form>
-
-<hr>
-<h3>지역 검색</h3>
-
-<button class="areaBtn" value="1">서울</button>
-<button class="areaBtn" value="31">경기도</button>
-<button class="areaBtn" value="32">강원도</button>
-<button class="areaBtn" value="33">충청북도</button>
-<button class="areaBtn" value="34">충청남도</button><BR>
-<button class="areaBtn" value="37">전라북도</button>
-<button class="areaBtn" value="38">전라남도</button>
-<button class="areaBtn" value="35">경상북도</button>
-<button class="areaBtn" value="36">경상남도</button>
-<button class="areaBtn" value="39">제주도</button>
 
 </body>
 </html>
