@@ -51,12 +51,12 @@
 	</select>
 	
 	<!-- 비밀번호 찾기; 아이디 존재하는지 확인 -->
-	<select id="selectOneMem" parameterType="java.util.HashMap" resultType="String">
+	<select id="selectOneMem" parameterType="member" resultType="String">
 		select mid from member where mid = #{mid} and  mname = #{mname} and mcontact = #{mcontact}
 	</select>
 	
 	<!-- 비밀번호 재설정 -->
-	<update id="updatePw" parameterType="java.util.HashMap">
+	<update id="updatePw" parameterType="member">
 		update member set mpw = #{mpw} where mid = #{mid} 
 	</update>
 	

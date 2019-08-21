@@ -184,9 +184,18 @@ public class MemberController {
         member.setMname(name);
         member.setMcontact(mail);
     	String result = m_msvc.findPw(member);
+    	
+    	System.out.println(result);
+    	
         return result;
-		}
+    }
     
+    @RequestMapping(value="repwd.do", method = RequestMethod.GET)
+    public @ResponseBody void repwd(@RequestParam("pw") String pw, @RequestParam("id") String id) {
+    Member member = new Member();
+    member.setMpw(pw);
+    member.setMid(id);
+    m_msvc.repwd(member);
     
-    
+    }
 }

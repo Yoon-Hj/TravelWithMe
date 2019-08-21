@@ -25,8 +25,8 @@ public interface IMemberDao {
 	//아이디, 비밀번호 찾기
 	public String selectId(Member member);
 	//public String selectOneMem(HashMap<String, Object> params);
-	public String selectPw(Member member);
-	public void updatePw(HashMap<String, Object> params);
+	public String selectOneMem(Member member);
+	public void updatePw(Member member);
 	
 	//회원가입
 	public String selectOneId(String uid);

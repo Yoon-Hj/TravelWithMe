@@ -205,9 +205,15 @@ public class MemberService {
 
 	public String findPw(Member member) {
 		
-		String result = m_mdao.selectPw(member);
+		String result = m_mdao.selectOneMem(member);
 		return result;
 		
 	}
 
+	public void repwd(Member member) {
+		m_mdao.updatePw(member);
+		String a = sha.sha256(member.getMpw());
+		member.setMpw(a);
+	}
+	
 }
