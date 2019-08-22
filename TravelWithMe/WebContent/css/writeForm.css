@@ -34,6 +34,7 @@
 	font-size: 20px;
 	padding: 10px;
 	width: 200px;
+	vertical-align: top;
 
 }
 
@@ -96,3 +97,46 @@ input[type="file"] {
 	border: 0; 
 }
 
+/* 슬라이드 */
+.slideshow-container {
+  max-width: 80%;
+  position: relative;
+}
+
+#prev, #next {
+  background-color :  rgb(181, 195, 200);
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  user-select: none;
+}
+
+#next {
+  right: 0;
+}
+
+#prev:hover, #next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.mySlides {
+/*   -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s; */
+  animation-name: mySlides;
+  animation-duration: 1.5s;
+}
+
+/*canvas*/
+
+#canvasDiv {
+  max-width: 80%;
+  position: relative;
+  text-align: left;
+}

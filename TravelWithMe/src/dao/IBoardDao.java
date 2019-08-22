@@ -57,15 +57,16 @@ public interface IBoardDao {
 	public List<HashMap<String, Object>> selectRegisterListByBnum(int bnum);
 	public void deleteBoard(int bnum);
 	public int getPossibleNop(int bnum);
-	public void insertRegister(HashMap<String,Object> register);
+	public void insertRegister(HashMap<String, Object> register);
 	public void deleteRegister(String rid);
 	public int insertComment(Comments comments);
-	public void insertRecomment(Comments comments);
+	public int insertRecomment(Comments comments);
 	public int deleteComment(int cnum);
 	public void insertPolicy(HashMap<String, Object> policy);
 	public void deletePolicy(int bnum);
 	public int getBoardCount(HashMap<String, Object> bkind);
 	public List<HashMap<String, Object>> selectQuickSearch(String keyword);
+	public void updateReadCount(int bnum);
 
 	public int test();
 

@@ -6,7 +6,7 @@ public class Guideschedule {
 	
 	private String scode;
 	private int bnum;
-	private Date sdate;
+	private String sdate;
 	private String stime;
 	private String splace;
 	
@@ -28,10 +28,10 @@ public class Guideschedule {
 	public void setBnum(int bnum) {
 		this.bnum = bnum;
 	}
-	public Date getSdate() {
+	public String getSdate() {
 		return sdate;
 	}
-	public void setSdate(Date sdate) {
+	public void setSdate(String sdate) {
 		this.sdate = sdate;
 	}
 	public String getStime() {
