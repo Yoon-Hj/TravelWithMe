@@ -428,7 +428,7 @@ function plusDetailSche(plusBtn){
 				
 				plusSche +="<tr class='day1'>";
 				plusSche += "<td><input type='time' class='timeMinMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
-				plusSche += "<td><input type='text' class='placeMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
+				plusSche += "<td class='placeTd'><input type='text' class='placeMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
 				plusSche += "<td><button class='dayminus day1' style='cursor: pointer; width: 30px; border: none; background-color: rgb(181, 195, 200);'>-</button></td>";
 				plusSche +="</tr>";
 				
@@ -445,7 +445,7 @@ function plusDetailSche(plusBtn){
 			if(pluscnt2<8){
 				plusSche +="<tr class='day2'>";
 				plusSche += "<td><input type='time' class='timeMinMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
-				plusSche += "<td><input type='text' class='placeMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
+				plusSche += "<td class='placeTd'><input type='text' class='placeMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
 				plusSche += "<td><button class='dayminus day2' style='cursor: pointer; width: 30px; border: none; background-color: rgb(181, 195, 200);'>-</button></td>";
 				plusSche +="</tr>";
 				
@@ -462,7 +462,7 @@ function plusDetailSche(plusBtn){
 			if(pluscnt3<8){
 				plusSche +="<tr class='day3'>";
 				plusSche += "<td><input type='time' class='timeMinMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
-				plusSche += "<td><input type='text' class='placeMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
+				plusSche += "<td class='placeTd'><input type='text' class='placeMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
 				plusSche += "<td><button class='dayminus day3' style='cursor: pointer; width: 30px; border: none; background-color: rgb(181, 195, 200);'>-</button></td>";
 				plusSche +="</tr>";
 				
@@ -518,7 +518,7 @@ function setDetailDay(){
 	var day = fdate[2]-sdate[2];
 	var dayHTML = "";
 	var dayHTMLinput = "<td><input type='time' class='timeMinMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
-	dayHTMLinput += "<td><input type='text' class='placeMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
+	dayHTMLinput += "<td class='placeTd'><input type='text' class='placeMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
 	var dayHTMLinputPlusBtn1 = "<td><button class='dayplus day1' style='cursor: pointer; width: 30px; border: none; background-color: rgb(181, 195, 200);'>+</button></td>";
 	var dayHTMLinputPlusBtn2 = "<td><button class='dayplus day2'style='cursor: pointer; width: 30px; border: none; background-color: rgb(181, 195, 200);'>+</button></td>";
 	var dayHTMLinputPlusBtn3 = "<td><button class='dayplus day3' style='cursor: pointer; width: 30px; border: none; background-color: rgb(181, 195, 200);'>+</button></td>";
@@ -575,6 +575,10 @@ function openDetailInfo() {
 	pluscnt1 = 0;
 	pluscnt2 = 0;
 	pluscnt3 = 0;
+	DAY1Array = new Array();
+	DAY2Array = new Array();
+	DAY3Array = new Array();
+
 	$("#basicInfo").hide();
 	$("#detailInfo").show();
 	$("#preview").hide();
@@ -615,21 +619,17 @@ function openPreview() {
 	//테마
 	$("#previewTable").find("tr:eq(8)").find("td:eq(1)").text($(".sharpThema").text());
 	//투어소개
-	$("#previewTable").find("tr:eq(9)").find("td:eq(1)").text($("#bcontent").val());
+	$("#previewTable").find("tr:eq(9)").find("td:eq(1)").find("textarea").val($("#bcontent").val());
 	//세부일정
-	setGuideScheduleArray()
-	drawCanvas();
-	
-	
-	
-	if(DAY1time.length!=0){
-		
+	setGuideScheduleArray();
+	if(DAY1.length!=0){
+		drawCanvas
 	}
-	if(DAY2time.length!=0){
-		
+	if(DAY2.length!=0){
+		drawCanvas
 	}
-	if(DAY3time.length!=0){
-		
+	if(DAY3.length!=0){
+		drawCanvas
 	}
 	
 	//주요 정책
@@ -642,36 +642,50 @@ function openPreview() {
 	
 }
 
+
 //세부일정 내역 담기
-var DAY1time = new Array();
-var DAY1place = new Array();
-var DAY2time = new Array();
-var DAY2place = new Array();
-var DAY3time = new Array();
-var DAY3place = new Array();
+var DAY1Array = new Array();
+var DAY2Array = new Array();
+var DAY3Array = new Array();
 function setGuideScheduleArray(){
 	$("#day > tbody").find(".day1").find(":input[type=time]").each(function(){
-		DAY1time.push($(this).val());
-	});
-	$("#day > tbody").find(".day1").find(":input[type=text]").each(function(){
-		DAY1place.push($(this).val());
+		var DAY1 = new Object();
+		DAY1.time = $(this).val();
+		DAY1.place = $(this).parent("td").siblings("td.placeTd").find(":input[type=text]").val();
+		DAY1Array.push(DAY1);
 	});
 	
 	$("#day > tbody").find(".day2").find(":input[type=time]").each(function(){
-		DAY2time.push($(this).val());
-	});
-	$("#day > tbody").find(".day2").find(":input[type=text]").each(function(){
-		DAY2place.push($(this).val());
+		var DAY2 = new Object();
+		DAY2.time = $(this).val();
+		DAY2.place = $(this).siblings(":input[type=text]").val();
+		DAY2Array.push(DAY2);
 	});
 	
 	$("#day > tbody").find(".day3").find(":input[type=time]").each(function(){
-		DAY3time.push($(this).val());
-	});
-	$("#day > tbody").find(".day3").find(":input[type=text]").each(function(){
-		DAY3place.push($(this).val());
+		var DAY3 = new Object();
+		DAY3.time = $(this).val();
+		DAY3.place = $(this).siblings(":input[type=text]").val();
+		DAY3Array.push(DAY3);
 	});
 	
+	if(DAY1Array.length>1){
+		DAY1Array.sort(SortByTime);
+	}else if(DAY2Array.length>1){
+		DAY2Array.sort(SortByTime);
+	}else if(DAY3Array.length>1){
+		DAY3Array.sort(SortByTime);
+	}
+	
+	
 }
+
+function SortByTime(x, y){
+	var xTime = x.time;
+	var yTime = y.time; 
+	return ((xTime < yTime) ? -1 : ((xTime > yTime) ? 1 : 0));
+}
+
 
 //사진슬라이드 js
 var slideIndex = 1;
@@ -697,42 +711,49 @@ function drawCanvas(){
 	var ctx = canvas.getContext("2d");
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	var x = 50;
-	var y = 35;
+	var y = 80;
 	
-	for(var n=0; n<DAY1time.length; n++){
+	ctx.font="bold 20px 한초롬돋움";
+	ctx.fillText("DAY1",30,30);
+
+	for(var n=0; n<DAY1Array.length; n++){
 		
 		ctx.beginPath();
 		ctx.arc(x,y,10,0,2*Math.PI);
 		
+		
 		ctx.font="bold 13px 한초롬돋움";
-		ctx.fillText(DAY1time[n],x-15,y-15);
-		if(DAY1place[n].length<=5){
-			ctx.fillText(DAY1place[n],x-25,y+30);	
-		}else if(DAY1place[n].length>5){
-			ctx.fillText(DAY1place[n],x-50,y+30);		
+		ctx.fillText(DAY1Array[n].time,x-15,y-15);
+		
+		if(DAY1Array[n].place.length<=2){
+			ctx.fillText(DAY1Array[n].place,x-10,y+30);		
+		}else if(DAY1Array[n].place.length>2 && DAY1Array[n].place.length<=5){
+			ctx.fillText(DAY1Array[n].place,x-25,y+30);	
+		}else if(DAY1Array[n].place.length>5){
+			ctx.fillText(DAY1Array[n].place,x-50,y+30);		
 		}
 		
-		if(n==DAY1time.length-1){
+		if(n==DAY1Array.length-1){
 			ctx.stroke();
 			break;
 		}
-		if(x<530&&y==35){
+		if(x<500&&y==80){
 			ctx.moveTo(x+10,y);
-			ctx.lineTo(x+150,y);
-			x+=160;
-		}else if(x==530&&y==35){
+			ctx.lineTo(x+140,y);
+			x+=150;
+		}else if(x==500&&y==80){
 			ctx.moveTo(x+10,y);
-			ctx.lineTo(x+75,y);
-			ctx.moveTo(x+75,y);
-			ctx.lineTo(x+75,y+80);
-			ctx.moveTo(x+75,y+80);
+			ctx.lineTo(x+85,y);
+			ctx.moveTo(x+85,y);
+			ctx.lineTo(x+85,y+80);
+			ctx.moveTo(x+85,y+80);
 			ctx.lineTo(x+10,y+80);
 			y+=80;
 		}
-		else if(x>50&&y==115){
+		else if(x>50&&y==160){
 			ctx.moveTo(x-10,y);
-			ctx.lineTo(x-150,y);
-			x-=160;
+			ctx.lineTo(x-140,y);
+			x-=150;
 		}
 		ctx.stroke();
 	}

@@ -217,7 +217,7 @@
 		&nbsp;&nbsp;가이드 게시글 미리보기
 	</h3>
 	<br>
-	<table id="previewTable" style="border:1px solid red; font-family: 함초롬돋움;">
+	<table id="previewTable" style="font-family: 함초롬돋움;">
 		<tr>
 			<td class="InfoTd">작성자</td>
 			<td><%=(String)session.getAttribute("user")%></td>
@@ -262,13 +262,13 @@
 		</tr>
 		<tr>
 			<td class="InfoTd">투어소개</td>
-			<td></td>
+			<td><textarea rows="15px" cols="80px" style="border: none;" readonly="readonly"></textarea></td>
 		</tr>
 		<tr>
 			<td class="InfoTd">세부일정</td>
 			<td>
 			    <div id="canvasDiv">
-			    	<canvas id="canvas" width="600px" height="200px" style="border : 1px solid yellow">
+			    	<canvas id="canvas" width="600px" height="200px">
 			
 			        </canvas>
 			    </div>
