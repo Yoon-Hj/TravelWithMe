@@ -30,10 +30,10 @@
 	  padding-right: 30px;
 	  text-align: left;
 	  background-color: #f1f1f1;
+	  font-family: '나눔고딕';
   }
   
   .viewCard th{
-  	  font-size: 17px;
   	  width: 20%;
   	  padding: 5px;
   }
@@ -108,7 +108,8 @@
 </head>
 <body>
 <script type="text/javascript">
-$(document).ready(function(){
+
+	$(document).ready(function(){
 	
 		var user = "<%=(String) session.getAttribute("user")%>";
 		if(user == "null"){
@@ -120,8 +121,10 @@ $(document).ready(function(){
 		
 		//신청, 신청취소, 신청관리 버튼
 		var flag = false;
-		for(var r in ${registerList}){
-			if(${user == r.MID}) flag = true;
+		var rlist = ${registerList.size()};
+		for(var r in rlist){
+			if(${user == r.MID}) 
+				flag = true;
 			break;
 		}
 	 	if(${user == accomBoard.mid}){
@@ -135,16 +138,17 @@ $(document).ready(function(){
 		//모집인원(anumofpeople) - 신청인원(registerNum) 계산해서, 현재 신청가능 인원 수에 표시
 		//alert(${registerList});
 		if(${accomBoard.anop} == 0) {
-			$('#nop').text("무관");
+			$('.nop').text("무관");
 		}
 
 		else{
 			var rn = 0;
-			for(var i in ${registerList}){
-				rn += Number(registerList.get());
+			var rlist = ${registerList.size()};
+			for(var i in rlist){
+				rn += Number(${i.RNOP});
 			}
 			var pn = Number(${accomBoard.anop}) - rn;
-			$('#nop').text(pn);
+			$('.nop').text(pn);
 		}
 		
 		if(user == "null") {
@@ -153,7 +157,7 @@ $(document).ready(function(){
 	
 	    //신청인원이 0이 아닐 때, 수정 버튼 누르면 alert 표시
 		$('#modiBtn').on('click', function(){
-			if($('#nop') != ${accomBoard.anop}) 
+			if($('.nop') != ${accomBoard.anop}) 
 				alert("신청인원이 존재하여 게시글 수정이 불가합니다.")
 		});
 	
@@ -164,6 +168,57 @@ $(document).ready(function(){
 					$('#cwf').remove();
 					$(this).closest("tr").after("<tr id='cwf'><td>&nbsp;&nbsp;</td><td colspan='2'><input type='text' class='recontent' style='width: 700px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;'><button type='submit' class='writereBtn'>답글작성</button></td></tr>");
 				}
+		});
+		
+		//두번째 모달 나와줘
+		$(document).on('click', '#agreeBtn', function(){
+			$('#warningModal1').modal("hide");
+			$('#warningModal2').modal("show");
+			$('#registerNum').attr("max", pn);
+		});
+		
+		$('#registerNum').focusout(function(){
+		
+		});
+		
+		function check(elem){
+			var num = elem.value;
+			var remain = pn;
+			if(num > remain){
+				elem.value = remain;
+				num = elem.value;
+			}
+		}
+		
+		//세번째 모달 나와줘
+		$(document).on('click', '#regiBtn', function(){
+			$('#warningModal2').modal("hide");
+			$('#succModal').modal("show");
+		});
+		
+		//신청완료버튼 누르면
+		$(document).on('click', '#regiBtn', function(){
+			
+			var wid = $('#writeid').text();
+			var b = $('#hiddenbnum').val();
+			var rnum = $('#registerNum').val();
+			
+				  $.ajax({
+						url : "tryRegister.do",
+						data : {regId : user,
+								bnum : b,
+								nop : rnum,
+								mid : wid},
+						type : "get",
+						success : function(data){
+							if(data=="모집 인원을 초과하여 신청이 불가합니다."){
+								alert(data);
+								$('#succModal').modal("hide");
+							}else{
+								$('#contact').html(data);
+							}
+						}
+				  });
 		});
 		
 		//댓글작성
@@ -183,7 +238,6 @@ $(document).ready(function(){
 		
 		//답글작성
 		$(document).on('click', '.writereBtn', function(){
-			alert("왜?");
 			var b = ${accomBoard.bnum};
 			var c = $(this).parent("td").parent("tr").siblings("tr:eq(0)").find("th:eq(0)").find("input").val();
 			alert(c);
@@ -194,7 +248,6 @@ $(document).ready(function(){
 					    cgrid : c},
 				type : "get",
 				success : function(data){
-					alert(data);
 					history.go(0);
 				}
 			});
@@ -238,15 +291,15 @@ $(document).ready(function(){
 			</div>
 		</c:if>
 		
-		<div class="card" style="font-family: '함초롬돋움';">
+		<div class="card">
 			<table class="viewCard"; style="border: none;">
 				<tr>
 					<th>작성자</th>
-					<td>${accomBoard.mid}</td>
+					<td id="writeid">${accomBoard.mid}</td>
 				</tr>
 				<tr>
 					<th>제목</th>
-					<td>${accomBoard.btitle}</td>
+					<td>${accomBoard.btitle}<input type="hidden" id="hiddenbnum" value="${accomBoard.bnum}"></td>
 				</tr>
 				<tr>
 					<th>날짜</th>
@@ -291,7 +344,7 @@ $(document).ready(function(){
 							<c:if test="${p.pcode==3}"><b style="color:#CD1039">신뢰지수 ${p.pvalue}점 이하</b>의 회원은 작성자 임의로 신청거절을 진행할 수 있습니다.<br></c:if>
 							</c:forEach>
 							</c:when>
-							<c:otherwise>공지된 출발장소 및 시간에 모인 인원과 동행을 진행하며, 특별 제제사항은 없습니다.</c:otherwise>
+							<c:otherwise>공지된 출발장소 및 시간에 모인 인원과 동행을 진행하며, 특별한 제제사항은 없습니다.</c:otherwise>
 						</c:choose>
 					</td>
 				</tr>
@@ -300,9 +353,9 @@ $(document).ready(function(){
 		
 		<div style="display: flex; margin-top: 10px; margin-left: 110px; font-family: '배달의민족 주아'">
 			<p><input type="button" class="btn default" value="목록으로" style="border: 2px solid #B5C3C8;" onclick="location.href='accomBoardList.do'"></p>
-			<p style="float: right; margin-left: 600px;">현재 신청 가능 인원 수 <span id="nop"></span>명 &nbsp;&nbsp;
+			<p style="float: right; margin-left: 600px;">현재 신청 가능 인원 수 <span class="nop"></span>명 &nbsp;&nbsp;
 					<input type="button" id="rmbtn" class="btn default" value="신청관리" data-toggle="modal" data-target="#manageModal" style="border: 2px solid #B5C3C8; width: 80px; display:none;">
-					<input type="button" id="rcbtn" class="btn default" value="신청취소" data-toggle="modal" data-target="#manageModal" style="border: 2px solid #B5C3C8; width: 80px; display:none;">
+					<input type="button" id="rcbtn" class="btn default" value="신청취소" style="border: 2px solid #B5C3C8; width: 80px; display:none;">
 					<input type="button" id="rbtn" class="btn default" value="신청" data-toggle="modal" data-target="#warningModal1" style="border: 2px solid #B5C3C8; width: 80px; display:none;">
 			</p>
 		</div>
@@ -363,43 +416,43 @@ $(document).ready(function(){
 	        
 		        <!-- Modal body -->
 		        <div class="modal-body" style="text-align: center; font-family: '함초롬돋움';">
-		          여행 시작일 기준 <b style="color:#CD1039">1일전까지 연락이 되지 않는 분</b>은<br>
-				  작성자 임의로 신청취소를 진행할 수 있습니다.<br>
-				  <b style="color:#CD1039">신뢰지수 50점 이하</b>의 회원은 작성자 임의로 신청취소를 진행할 수 있습니다.<br>
-		          위 사항을 숙지하고 동의하시면 동행 신청을 이어 할 수 있습니다.<br>
-				  동의하시겠습니까?<br>
+		    		<c:choose>
+						<c:when test="${fn:length(policy) != 0}">
+						<c:forEach var="p" items="${policy}" varStatus="status">
+						<c:if test="${p.pcode==2}">여행 시작일 기준 <b style="color:#CD1039">${p.pvalue}일 전까지 연락이 되지 않는 분</b>은 작성자 임의로 신청거절을 진행할 수 있습니다.<br></c:if>
+						<c:if test="${p.pcode==3}"><b style="color:#CD1039">신뢰지수 ${p.pvalue}점 이하</b>의 회원은 작성자 임의로 신청거절을 진행할 수 있습니다.<br></c:if>
+						</c:forEach>
+						</c:when>
+						<c:otherwise>공지된 출발장소 및 시간에 모인 인원과 동행을 진행하며, 특별한 제제사항은 없습니다.</c:otherwise>
+					</c:choose>
 		        </div>
 	        
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-		          <button type="button" class="btn btn-success" onclick="">동의</button>
+		          <button type="button" class="btn" data-dismiss="modal" style="background-color: #FF7A85; color:white; font-family: '배달의민족 주아'">취소</button>
+		          <button type="button" class="btn" id="agreeBtn" style="background-color: #B5C3C8; color:white; font-family: '배달의민족 주아';">동의</button>
 		        </div>
 		        
       		</div>
     	</div>
  	 </div>
- 	 
  	 		        
 	<!-- 신청모달2 -->
-	<div class="selectnop" id="warningModal2" style="display: none;">
+	<div class="modal fade" id="warningModal2">
     	<div class="modal-dialog modal-dialog-centered">
       		<div class="modal-content">
       		
 		        <!-- Modal Header -->
 		        <div class="modal-header">
-		          <h3 class="modal-title" style="font-family: 배달의민족 도현">신청 가능 인원 수 : 명</h3>
+		          <h3 class="modal-title" style="font-family: 배달의민족 도현">신청 가능 인원 수 : <span class="nop"></span>명</h3>
 					<button type="button" class="close" data-dismiss="modal">×</button>
 		        </div>
 	        
 		        <!-- Modal body -->
 		        <div class="modal-body" style="text-align: center; font-family: '함초롬돋움';">
-		          신청 인원 수 :
-		          <select name="type" class="custom-select" style="width: 130px">
-				 	<option value="1" selected="selected">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-					</select>
+		          신청 인원 수 &nbsp;
+					<input type="number" id="registerNum" name="registernum" value="1" min="1" onkeyup="check(this)">명      
+					<br>
 					<br>
 					※ NoShow는 서로의 소중한 시간을 낭비하는 행위입니다.<br>
 					서로를 존중하는 성숙한 여행인이 됩시다.
@@ -407,13 +460,74 @@ $(document).ready(function(){
 	        
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#warningModal3">신청완료</button>
+		          <button type="button" class="btn" id="regiBtn" style="background-color: #B5C3C8; color:white; font-family: '배달의민족 주아';">신청완료</button>
 		        </div>
 		        
       		</div>
     	</div>
  	 </div>
 
+	<!-- 신청완료모달 -->
+	<div class="modal fade" id="succModal">
+    	<div class="modal-dialog modal-dialog-centered">
+      		<div class="modal-content">
+      		
+		        <!-- Modal Header -->
+		        <div class="modal-header">
+		          <h3 class="modal-title" style="font-family: 배달의민족 도현">신청이 완료되었습니다</h3>
+					<button type="button" class="close" data-dismiss="modal">×</button>
+		        </div>
+	        
+		        <!-- Modal body -->
+		        <div class="modal-body" style="text-align: center; font-family: '함초롬돋움';">
+		          작성자 연락처 : <span id="contact"></span><br><br>
+		          
+					※ 작성자의 NoShow는 사이트 내 관리자 이메일로 문의바랍니다.<br>
+					즐겁게 여행을 마무리할 수 있도록 서로 배려하는 여행인이 됩시다.
+		        </div>
+	        
+		        <!-- Modal footer -->
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-success" data-dismiss="modal">확인</button>
+		        </div>
+		        
+      		</div>
+    	</div>
+ 	 </div>
+ 	 
+ 	 <!-- 신청현황 모달 -->
+	<div class="modal fade" id="manageModal">
+    	<div class="modal-dialog modal-dialog-centered">
+      		<div class="modal-content">
+      		
+		        <!-- Modal Header -->
+		        <div class="modal-header">
+		          <h3 class="modal-title" style="font-family: 배달의민족 도현">신청현황</h3>
+					<button type="button" class="close" data-dismiss="modal">×</button>
+		        </div>
+	        
+		        <!-- Modal body -->
+		        <div class="modal-body" style="text-align: center; font-family: '함초롬돋움';">
+					<table>
+					<c:forEach var="r" items="${registerList}" varStatus="status">
+						<tr>
+							<td>${r.mid}</td>
+							<td>${r.mcontact}</td>
+							<td><button class="btn">거절하기</button></td>
+						</tr>
+					</c:forEach>
+					</table>
+		        </div>
+	        
+		        <!-- Modal footer -->
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-success" data-dismiss="modal">확인</button>
+		        </div>
+		        
+      		</div>
+    	</div>
+ 	 </div>
+	
 	<jsp:include page="footer.jsp"></jsp:include>
  	 
 </body>

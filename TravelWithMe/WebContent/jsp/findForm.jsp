@@ -11,20 +11,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-
-
-
-
-
 <script>
 $(document).ready(function(){
-$('#findid').on('click',function(){
+	$('#findid').on('click',function(){
 	
 	var name = $('#findName1').val();
 	var mail = $('#findMail1').val();
 	
 	if(name == "" || mail == ""){
-		alert("빈칸을 입력해주세요.");
+		alert("이름, 대표 연락처를 다시 확인해주세요.");
 	}
 	
 	else{
@@ -44,7 +39,7 @@ $('#findid').on('click',function(){
 			
 			else{
 			
-				alert("회원님의 ID는"+ data +"입니다.");
+				alert("회원님의 아이디는 "+ data +"입니다.");
 				
 			}
 			}
@@ -61,7 +56,7 @@ $(document).ready(function(){
 	        var mail = $('#findMail2').val();
 	        
 	        if(name == "" || mail == "" || id==""){
-	    		alert("빈칸을 입력해주세요.");
+	    		alert("아이디, 이름, 대표 연락처를 다시 확인해주세요.");
 	    	}
 	        
 	        else{
@@ -79,12 +74,8 @@ $(document).ready(function(){
 	        				alert("입력하신 내용과 일치하는 정보가 없습니다.");
 	        				
 	        			}
-	        			
 	        			else{
-	        				
-	        				$('#findIdForm').modal({show: true});
-	        				
-	        				
+	        				$('#findPwForm').modal({show: true});
 	        			}
 	        			
 	        		}
@@ -108,7 +99,7 @@ $(document).ready(function(){
 		var id = $('#Id').val();
 		
 		  if(pw == "" || pwc == ""){
-	    		alert("빈칸을 입력해주세요.");
+	    		alert("비밀번호를 다시 확인해주세요.");
 	    	}
 		  
 		  else if(pw == pwc){
@@ -127,7 +118,7 @@ $(document).ready(function(){
 			  });
 		 }
 		  
-		  else{alert("비밀번호와 비밀번호 확인이 같지 않습니다.")}
+		  else{alert("비밀번호가 일치하지 않습니다.")}
 		  });
 		
 });
@@ -137,70 +128,71 @@ $(document).ready(function(){
 </script>
 
 <body>
-<h1 class="title">FIND ID</h1>
+	<jsp:include page="header.jsp"></jsp:include>
 
-
-<div>
-	<input type="text" class="form-control" id="findName1" name="findName1"
-					placeholder="NAME" maxlength="12" required>
+<div class="container">
+	<div style="margin-top: 150px; margin-left: 350px; margin-bottom: 155px;">
+	
+	<h1 class="title" style="font-family: '배달의민족 도현';">FIND ID</h1>
+	
+	<div>
+		<input type="text" style="width: 400px" class="form-control" id="findName1" name="findName1"
+						placeholder="Enter Name" maxlength="12" required>
+	</div>
+	
+	<div style="margin-top: 5px;">
+	<input type="text" style="width: 400px" class="form-control" id="findMail1" name="findMail1"
+						placeholder="Enter Contact(대표연락처)" required>
+	</div>
+	
+	<input class="btn" type="button" id="findid" name="findid" value="FIND ID" 
+			style="margin-top: 5px; margin-left: 310px; background-color: #B5C3C8; color:white; font-family: '배달의민족 주아'">
+	
+	<h1 class="title" style="margin-top: 50px; font-family: '배달의민족 도현';">FIND PW</h1>
+	<div>
+		<input type="text" style="width: 400px" class="form-control" id="Id" name="Id"
+						placeholder="Enter Id" maxlength="12">
+	</div>
+	
+	<div>
+		<input type="text" style="width: 400px; margin-top: 5px;" class="form-control" id="findName2" name="findName2"
+						placeholder="Enter Name" maxlength="12">
+	</div>
+	
+	<div>
+	<input type="text" style="width: 400px; margin-top: 5px;" class="form-control" id="findMail2" name="findMail2"
+						placeholder="Enter Contact(대표연락처)">
+	</div>
+	
+	<input class="btn" type="button" id="findPw" name="findPw" value="FIND PW" 
+			style="margin-top: 5px; margin-left: 310px; background-color: #B5C3C8; color:white; font-family: '배달의민족 주아'">
+	</div>
 </div>
 
-<div>
-<input type="text" class="form-control" id="findMail1" name="findMail1"
-					placeholder="EMAIL" maxlength="12" required>
-</div>
+	<!-- 비밀번호 재설정 폼 -->
+	<div class="modal fade" id="findPwForm">
+			<div class="modal-dialog modal-dialog-centered" style="width: 80%;">
+		      <div class="modal-content">
+		        <!-- Modal Header -->
+		        <div class="modal-header">
+		          <h3 class="modal-title" style="font-family: 배달의민족 도현">비밀번호 재설정</h3>
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        </div>
 
-
-
-<input class="btn btn-success" type="button" id="findid" name="findid" value="FIND ID">
-
-
-
-<h1 class="title">FIND PW</h1>
-
-
-<div>
-	<input type="text" class="form-control" id="Id" name="Id"
-					placeholder="ID" maxlength="12">
-</div>
-
-<div>
-	<input type="text" class="form-control" id="findName2" name="findName2"
-					placeholder="NAME" maxlength="12">
-</div>
-
-<div>
-<input type="text" class="form-control" id="findMail2" name="findMail2"
-					placeholder="email" maxlength="12">
-</div>
-
-<input class="btn btn-success" type="button" id="findPw" name="findPw" value="FIND PW">
-
-<div class="modal fade" id="findIdForm">
-		<div class="modal-dialog modal-sm">
-	      <div class="modal-content">
-	        <!-- Modal Header -->
-	        <div class="modal-header">
-	          <h3 class="modal-title" style="font-family: 배달의민족 도현">비밀번호 재설정</h3>
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        </div>
-	        
-	        <!-- Modal body -->
-	        <div class="modal-body" style="text-align: center">
-	         	<label for="pw" style="margin-right: 45px"></label>
-				 <input type="password" placeholder="비밀번호" name="pw" id="pwd" required><br>
-				<label for="pwc" style="margin-right: 45px"></label>
-				 <input type="password" placeholder="비밀번호 확인" name="pwc" id="pwdc" required><br>
-				 <input type="button" name="pwdb" id="pwdb" value="OK">
-				<div>
-
-</div>
-				 <br>
-				   
-	        </div>
+		        <!-- Modal body -->
+		        <div class="modal-body" style="text-align: center;">
+		         	<label for="pw" style="margin-left:18px; margin-right: 73px; font-family: '함초롬돋움'">비밀번호</label>
+					 <input type="password" name="pw" id="pwd" style="width: 200px;" required><br>
+					<label for="pwc" style="margin-right: 55px; font-family: '함초롬돋움'">비밀번호 확인</label>
+					 <input type="password" name="pwc" id="pwdc" style="width: 200px;" required><br>
+					 <input type="button" name="pwdb" id="pwdb" value="확인" class="btn" 
+					 		style="background-color: #B5C3C8; color:white; font-family: '배달의민족 주아'; margin-left: 300px; margin-top: 7px;">
+	        	</div>
+	        	
 	       </div>
 	     </div>
 	  </div>
-
+	  
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

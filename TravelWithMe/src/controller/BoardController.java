@@ -154,7 +154,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("readBoard.do")
-	public ModelAndView readBoard(int bnum, String bkind) {
+	public ModelAndView readBoard(int bnum, String bkind) throws Exception {
 		b_bsvc.uprcnt(bnum);
 		ModelAndView mav = new ModelAndView();
 		mav.addAllObjects(b_bsvc.getBoardContent(bnum, bkind));
@@ -162,14 +162,16 @@ public class BoardController {
 		mav.addObject("registerList", b_bsvc.getRegisterListByNum(bnum));
 		if(bkind.equals("A")) {
 			mav.setViewName("accomView");
+		}else if(bkind.equals("G")) {
+			mav.setViewName("guideView");
+		}else if(bkind.equals("C")) {
+			mav.setViewName("commView");
 		}
-		
-		
 		return mav;
 	}
 	
 	@RequestMapping("writeComment.do")
-	public @ResponseBody int writeComment(HttpSession session, int bnum, String ccontent) {
+	public @ResponseBody int writeComment(HttpSession session, int bnum, String ccontent) throws Exception {
 		String mid = (String) session.getAttribute("user");
 		Comments c = new Comments();
 		c.setMid(mid);
@@ -179,7 +181,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("writeRecomment.do")
-	public @ResponseBody int writeRecomment(HttpSession session, int bnum, int cgrid, String ccontent) {
+	public @ResponseBody int writeRecomment(HttpSession session, int bnum, int cgrid, String ccontent) throws Exception {
 		System.out.println("와?");
 		String mid = (String) session.getAttribute("user");
 		Comments c = new Comments();
@@ -195,11 +197,10 @@ public class BoardController {
 		return b_bsvc.delComment(cnum);
 	}
 	
-	
-	
-	
-	
-	
+	@RequestMapping("tryRegister.do")
+	public @ResponseBody String tryRegister(String regId, int nop, int bnum, String mid) {
+		return b_bsvc.tryRegister(regId, nop, bnum, mid);
+	}
 	
 	
 	

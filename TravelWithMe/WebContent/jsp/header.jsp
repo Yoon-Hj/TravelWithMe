@@ -116,14 +116,14 @@
 	        
 	        <!-- Modal body -->
 	        <div class="modal-body" style="text-align: center">
-	         	 <label for="id" style="margin-right: 60px;"><b>ID</b></label>
+	         	 <label for="id" style="margin-left: 25px; margin-right: 37px; font-family: '함초롬돋움';"><b>ID</b></label>
 				 <input type="text" placeholder="Enter id" name="id" id="loginId" required><br>
 				
-				 <label for="pww" style="margin-right: 8px;"><b>Password</b></label>
+				 <label for="pww" style="margin-right: 8px; font-family: '함초롬돋움';"><b>Password</b></label>
 				 <input type="password" placeholder="Enter Password" name="pw" id="loginPw" required><br><br>
 				 
-				  <button type="button" class="btn btn-success" id="login">Login</button>
-				   <button type="button" class="btn btn-success" id="find">Find ID/PW</button>
+				  <button type="button" class="btn" id="login" style="background-color: #B5C3C8; color:white; font-family: '배달의민족 주아'; margin-left: 10px;">Login</button>
+				   <button type="button" class="btn" id="find" style="background-color: #B5C3C8; color:white; font-family: '배달의민족 주아'">Find ID/PW</button>
 				   
 	        </div>
 	       </div>
