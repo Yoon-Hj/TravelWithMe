@@ -83,6 +83,45 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 		  $('[data-toggle="tooltip"]').tooltip();   
+		
+			//이미지 분기
+			$('.iarea').find("input").each(function(){
+				var ar = $(this).val();
+				ar = ar.split(' ')[0];
+				
+				var iloc = $(this).parent("p").parent("div").siblings("a").find("img");
+				if(ar=="제주도"){
+					iloc.attr("src", "imgs/jeju.PNG");
+				}
+				else if(ar=="서울특별시"){
+					iloc.attr("src", "imgs/seoul.jpg");
+				}
+				else if(ar=="경기도"){
+					iloc.attr("src", "imgs/gyeonggi.jpg");
+				}
+				else if(ar=="전라북도"){
+					iloc.attr("src", "imgs/jeonbuk.PNG");
+				}
+				else if(ar=="전라남도"){
+					iloc.attr("src", "imgs/jeonnam.jpg");
+				}
+				else if(ar=="경상북도"){
+					iloc.attr("src", "imgs/gyeongbuk.jpg");
+				}
+				else if(ar=="경상남도"){
+					iloc.attr("src", "imgs/gyeongnam.jpg");
+				}
+				else if(ar=="충청북도"){
+					iloc.attr("src", "imgs/chungbuk.PNG");
+				}
+				else if(ar=="충청남도"){
+					iloc.attr("src", "imgs/chungnam.PNG");
+				}
+				else if(ar=="강원도"){
+					iloc.attr("src", "imgs/gangwon.PNG");
+				}
+			});
+						
 		});
 	</script>
 	
@@ -144,10 +183,10 @@
 			<div class="row">
 			<c:forEach var="b" items="${recommList}" varStatus="status">
 			  <div class="column">
-				<a href="readBoard.do?bnum=${b.bnum}&bkind=A"><img src="imgs/gangwon.PNG" style="width:100%"></a>
+				<a href="readBoard.do?bnum=${b.bnum}&bkind=A"><img style="width:100%;"></a>
 				<div class="content">
-					<p><fmt:formatDate value="${b.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${b.afinishdate}" pattern="yyyy-MM-dd"/>
-					<br>[${b.aarea}] ${b.btitle}<br>${b.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${b.breadcount}</p>
+					<p class="iarea"><fmt:formatDate value="${b.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${b.afinishdate}" pattern="yyyy-MM-dd"/>
+					<br><input type="hidden" value="${b.aarea}">[${b.aarea}] ${b.btitle}<br>${b.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${b.breadcount}</p>
 				</div>
 			  </div>
 			</c:forEach>
@@ -161,11 +200,11 @@
 		
 			<div class="row">
 			<c:forEach var="a" items="${boardList}" varStatus="status">
-			  <div class="column">
-				<a href="readBoard.do?bnum=${a.bnum}&bkind=A"><img src="imgs/gangwon.PNG" style="width:100%"></a>
+			  <div class="column" style="margin-bottom: 12px;">
+				<a href="readBoard.do?bnum=${a.bnum}&bkind=A"><img style="width:100%;"></a>
 				<div class="content">
-					<p><fmt:formatDate value="${a.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${a.afinishdate}" pattern="yyyy-MM-dd"/>
-					<br>[${a.aarea}] ${a.btitle}<br>${a.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${a.breadcount}</p>
+					<p class="iarea"><fmt:formatDate value="${a.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${a.afinishdate}" pattern="yyyy-MM-dd"/>
+					<br><input type="hidden" value="${a.aarea}">[${a.aarea}] ${a.btitle}<br>${a.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${a.breadcount}</p>
 				</div>
 			  </div>
 			</c:forEach>

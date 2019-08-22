@@ -17,14 +17,15 @@
 	.section1 {
 		background-image: url(imgs/korea.jpg);
 		background-size: cover;
+		margin-top: 15px;
 	}
-
+	
 	.section2 {
 		background-image: url(imgs/yeosu.PNG);
 		background-size: cover;
-		margin-top: -47px;
+		margin-top: -60px;
 	}
-
+	
 	.section3 {
 		background-image: url(imgs/night.jpg);
 		background-size: cover;

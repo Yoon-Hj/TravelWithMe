@@ -219,7 +219,7 @@ $(document).ready(function(){
 			      return;
 			  }
 		});
-	
+		
 	});
 
 </script>
@@ -287,8 +287,8 @@ $(document).ready(function(){
 						<c:choose>
 							<c:when test="${fn:length(policy) != 0}">
 							<c:forEach var="p" items="${policy}" varStatus="status">
-							<c:if test="${p.pcode==2}">여행 시작일 기준 <b style="color:#CD1039">${p.pvalue}일 전까지 연락이 되지 않는 분</b>은 작성자 임의로 신청취소를 진행할 수 있습니다.<br></c:if>
-							<c:if test="${p.pcode==3}"><b style="color:#CD1039">신뢰지수 ${p.pvalue}점 이하</b>의 회원은 작성자 임의로 신청취소를 진행할 수 있습니다.<br></c:if>
+							<c:if test="${p.pcode==2}">여행 시작일 기준 <b style="color:#CD1039">${p.pvalue}일 전까지 연락이 되지 않는 분</b>은 작성자 임의로 신청거절을 진행할 수 있습니다.<br></c:if>
+							<c:if test="${p.pcode==3}"><b style="color:#CD1039">신뢰지수 ${p.pvalue}점 이하</b>의 회원은 작성자 임의로 신청거절을 진행할 수 있습니다.<br></c:if>
 							</c:forEach>
 							</c:when>
 							<c:otherwise>공지된 출발장소 및 시간에 모인 인원과 동행을 진행하며, 특별 제제사항은 없습니다.</c:otherwise>

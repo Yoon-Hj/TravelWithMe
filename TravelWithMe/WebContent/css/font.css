@@ -8,6 +8,7 @@
 
 @font-face{
 	font-family:'D2Coding';
+	src:url('/fonts/D2Coding.ttf');
 	url('/fonts/D2Coding.ttf') format('truetype');
 	src:local(※), url('/fonts/D2Coding.ttf') format('ttf');
 }
