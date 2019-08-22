@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -211,11 +212,10 @@ public class BoardController {
 									GuideBoard guideBoard,
 									String JSPgstartdate, String JSPgfinishdate, String JSPgenddate,
 									String[] pcode, @RequestParam(required=false) String[] pvalue,
-									String[] del_photoName,
 									@RequestParam(name="photo",required=false) MultipartFile[] photo,
-									@RequestParam(required=false) String[] DAY1Array,
-									@RequestParam(required=false) String[] DAY2Array,
-									@RequestParam(required=false) String[] DAY3Array ) throws ParseException{
+									String[] DAY1time,String[] DAY1place,
+									String[] DAY2time,String[] DAY2place,
+									String[] DAY3time,String[] DAY3place ) throws ParseException{
 		System.out.println("컨트롤러 연결");
 		
 		String writeId = (String)session.getAttribute("user");
@@ -233,11 +233,13 @@ public class BoardController {
 		guideBoard.setBkind("G");
 		
 		Policy policy = new Policy();
+		List<Policy> policyList = new ArrayList<Policy>();
 		for(int i = 0; i<pcode.length;i++) {
 			policy.setPcode(Integer.parseInt(pcode[i]));
 			if(pvalue.length!=0) {
 				policy.setPvalue(Integer.parseInt(pvalue[i]));				
 			}
+			policyList.add(policy);
 		}
 		
 		
@@ -247,26 +249,40 @@ public class BoardController {
 				photoModel.put(photo[i].getOriginalFilename(),i);	
 			}
 		}
-		if(del_photoName.length!=0) {
-			for(int i = 0; i<del_photoName.length;i++) {
-				String del = del_photoName[i];
-				photoModel.remove(del);
+
+		
+		Guideschedule guideSche1 = null;
+		Guideschedule guideSche2 = null;
+		Guideschedule guideSche3 = null;
+		List<Guideschedule> DAY1guideScheList = new ArrayList<Guideschedule>();
+		List<Guideschedule> DAY2guideScheList = new ArrayList<Guideschedule>();
+		List<Guideschedule> DAY3guideScheList = new ArrayList<Guideschedule>();
+		
+		for(int i = 0; i<DAY1time.length;i++) {
+			guideSche1 = new Guideschedule();
+			guideSche1.setSdate("DAY1");
+			guideSche1.setStime(DAY1time[i]);
+			guideSche1.setSplace(DAY1place[i]);
+			DAY1guideScheList.add(guideSche1);
+		}
+		if(DAY2time.length!=0) {
+			for(int i = 0; i<DAY2time.length;i++) {
+				guideSche2 = new Guideschedule();
+				guideSche2.setSdate("DAY2");
+				guideSche2.setStime(DAY2time[i]);
+				guideSche2.setSplace(DAY2place[i]);
+				DAY2guideScheList.add(guideSche2);
 			}
 		}
-		
-		for(String v : del_photoName) {
-			System.out.println(v);
+		if(DAY3time.length!=0) {
+			for(int i = 0; i<DAY3time.length;i++) {
+				guideSche3 = new Guideschedule();
+				guideSche3.setSdate("DAY3");
+				guideSche3.setStime(DAY3time[i]);
+				guideSche3.setSplace(DAY3place[i]);
+				DAY3guideScheList.add(guideSche3);
+			}
 		}
-
-
-		
-		System.out.println(guideBoard);
-		System.out.println(policy);
-		System.out.println(DAY1Array);
-		System.out.println(DAY2Array);
-		System.out.println(DAY3Array);
-		System.out.println(photoModel);
-		
 
 	}
 }

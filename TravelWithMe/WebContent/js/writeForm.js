@@ -112,13 +112,18 @@ $(function(){
 	$("#gthema").keydown(function(key) {
 	
 		if (key.keyCode == 13 || key.keyCode == 9) {
-			var length = $(".sharpThema").length;
-			if(length > 2) {
-				alert("테마는 최대 3개까지 작성가능합니다");
-				$("#gthema").val("");	
-			}else{
-				$("#gthema").after("<a class='sharpThema' style='cursor: pointer;'>&nbsp;#"+$("#gthema").val()+"</a>");
-				$("#gthema").val("");				
+			if($("#gthema").val()=="") {
+				alert("최소 한글자 이상의 테마를 작성해주세요.");
+				$("#gthema").val("");
+			}else{				
+				var length = $(".sharpThema").length;
+				if(length > 2) {
+					alert("테마는 최대 3개까지 작성가능합니다");
+					$("#gthema").val("");	
+				}else{
+					$("#gthema").after("<a class='sharpThema' style='cursor: pointer;'>&nbsp;#"+$("#gthema").val()+"</a>");
+					$("#gthema").val("");				
+				}
 			}
 		}			
 	
@@ -154,15 +159,16 @@ $(function(){
 		$("#photo").val("");
 	});
 	
-//	var files;
+	
 	$("#photo").on("change",function(e){
 		sel_files=[];
 		$(".imgs_wrap").empty();
 		$(".slideshow-container").empty();
 		$("#photoTd").remove();
-		files = e.target.files;
+		var files = e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
 		var index = 0;
+
 		filesArr.forEach(function(f){
 			if(index<10){
 				sel_files.push(f);				
@@ -173,9 +179,10 @@ $(function(){
 					slideHTML+=e.target.result;
 					slideHTML+="' style='width: 300px; height: 250px; margin-left: 83px;'></a></div>";
 					$(".slideshow-container").append(slideHTML);			
-					//index새로 선언해서 file순서 확인한번만 더하고 안되면 시발 포기
-					var html = "<a class='deleteImage'><img style='width:100px;height:100px;margin-top:5px;' src='"+e.target.result+"' title='Click to remove'>&nbsp;</a>";
+	
+					var html = "<a><img style='width:100px;height:100px;margin-top:5px;' src='"+e.target.result+"'>&nbsp;</a>";
 					$(".imgs_wrap").append(html);
+					ti++;
 					
 				}
 				reader.readAsDataURL(f);
@@ -194,17 +201,7 @@ $(function(){
 		}
 		
 	});
-			
-	//사진삭제하기
-	$(document).on('click','.deleteImage',function(){
-		var index = $(this).index();
-		//sel_files.splice(index,1);
-		$("#imgs_wrap").find("a:eq('"+index+"')").remove();
-		$(".slideshow-container").find("div:eq('"+index+"')").remove();
-		
-	});
-	
-	
+
 	
 	//정책 1번클릭시 2번,3번 풀리기
 	$("#pcode1").click(function(){
@@ -332,7 +329,38 @@ $(function(){
 		var gtime = $("#gtime").val();
 		var form = $('#uploadForm')[0];
 	    var formData = new FormData(form);
-		
+	    
+	  //세부일정 내역 담기
+	    var DAY1time = new Array();
+	    var DAY1place = new Array();
+	    var DAY2time = new Array();
+	    var DAY2place = new Array();
+	    var DAY3time = new Array();
+	    var DAY3place = new Array();
+	   
+    	$("#day > tbody").find(".day1").find(":input[type=time]").each(function(){
+    		DAY1time.push($(this).val());
+    	});
+    	$("#day > tbody").find(".day1").find(":input[type=text]").each(function(){
+    		DAY1place.push($(this).val());
+    	});
+    	
+    	$("#day > tbody").find(".day2").find(":input[type=time]").each(function(){
+    		DAY2time.push($(this).val());
+    	});
+    	$("#day > tbody").find(".day2").find(":input[type=text]").each(function(){
+    		DAY2place.push($(this).val());
+    	});
+    	
+    	$("#day > tbody").find(".day3").find(":input[type=time]").each(function(){
+    		DAY3time.push($(this).val());
+    	});
+    	$("#day > tbody").find(".day3").find(":input[type=text]").each(function(){
+    		DAY3place.push($(this).val());
+    	});
+	    	
+	    
+
 	    formData.append("btitle" , $("#btitle").val());
 	    formData.append("JSPgstartdate" , $("#gstartdate").val());
 	    formData.append("JSPgfinishdate" , $("#gfinishdate").val());
@@ -346,13 +374,13 @@ $(function(){
 	    formData.append("pcode" , pcodeArray);
 	    formData.append("pvalue" , pvalueArray);
 	    formData.append("gthema" , $(".sharpThema").text());
-	    formData.append("DAY1Array",DAY1Array);
-	    formData.append("DAY2Array",DAY2Array);
-	    formData.append("DAY3Array",DAY3Array);
+	    formData.append("DAY1time" , DAY1time);
+	    formData.append("DAY1place" , DAY1place);
+	    formData.append("DAY2time" , DAY2time);
+	    formData.append("DAY2place" , DAY2place);
+	    formData.append("DAY3time" , DAY3time);
+	    formData.append("DAY3place" , DAY3place);
 	    formData.append("bcontent" , $("#bcontent").val());
-	    
-
-	    formData.append("del_photoName",del_photoName);
 
 	    
 		$.ajax({
@@ -377,13 +405,7 @@ $(function(){
 });
 //사진 담기용 배열
 var sel_files = [];
-var del_photoName = [];
-var files;
-function setDelIndex(delPhotoName){
-	alert(delPhotoName);
-	alert(files[delPhotoName].name);
-	//del_photoName.push(delPhotoName);
-}
+
 
 //최소시간 최대시간 설정
 function setTimeMinMax(thisClass){
@@ -803,141 +825,3 @@ function drawCanvas(d){
 		ctx.stroke();
 	}
 }
-
-
-
-var Base64 = {
-	    // private property
-	    _keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
-	 
-	    // public method for encoding
-	    encode : function (input) {
-	        var output = "";
-	        var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
-	        var i = 0;
-	 
-	        input = Base64._utf8_encode(input);
-	 
-	        while (i < input.length) {
-	 
-	            chr1 = input.charCodeAt(i++);
-	            chr2 = input.charCodeAt(i++);
-	            chr3 = input.charCodeAt(i++);
-	 
-	            enc1 = chr1 >> 2;
-	            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-	            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
-	            enc4 = chr3 & 63;
-	 
-	            if (isNaN(chr2)) {
-	                enc3 = enc4 = 64;
-	            } else if (isNaN(chr3)) {
-	                enc4 = 64;
-	            }
-	 
-	            output = output +
-	            this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
-	            this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
-	 
-	        }
-	 
-	        return output;
-	    },
-	 
-	    // public method for decoding
-	    decode : function (input) {
-	        var output = "";
-	        var chr1, chr2, chr3;
-	        var enc1, enc2, enc3, enc4;
-	        var i = 0;
-	 
-	        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-	 
-	        while (i < input.length) {
-	 
-	            enc1 = this._keyStr.indexOf(input.charAt(i++));
-	            enc2 = this._keyStr.indexOf(input.charAt(i++));
-	            enc3 = this._keyStr.indexOf(input.charAt(i++));
-	            enc4 = this._keyStr.indexOf(input.charAt(i++));
-	 
-	            chr1 = (enc1 << 2) | (enc2 >> 4);
-	            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-	            chr3 = ((enc3 & 3) << 6) | enc4;
-	 
-	            output = output + String.fromCharCode(chr1);
-	 
-	            if (enc3 != 64) {
-	                output = output + String.fromCharCode(chr2);
-	            }
-	            if (enc4 != 64) {
-	                output = output + String.fromCharCode(chr3);
-	            }
-	 
-	        }
-	 
-	        output = Base64._utf8_decode(output);
-	 
-	        return output;
-	 
-	    },
-	 
-	    // private method for UTF-8 encoding
-	    _utf8_encode : function (string) {
-	        string = string.replace(/\r\n/g,"\n");
-	        var utftext = "";
-	 
-	        for (var n = 0; n < string.length; n++) {
-	 
-	            var c = string.charCodeAt(n);
-	 
-	            if (c < 128) {
-	                utftext += String.fromCharCode(c);
-	            }
-	            else if((c > 127) && (c < 2048)) {
-	                utftext += String.fromCharCode((c >> 6) | 192);
-	                utftext += String.fromCharCode((c & 63) | 128);
-	            }
-	            else {
-	                utftext += String.fromCharCode((c >> 12) | 224);
-	                utftext += String.fromCharCode(((c >> 6) & 63) | 128);
-	                utftext += String.fromCharCode((c & 63) | 128);
-	            }
-	 
-	        }
-	 
-	        return utftext;
-	    },
-	 
-	    // private method for UTF-8 decoding
-	    _utf8_decode : function (utftext) {
-	        var string = "";
-	        var i = 0;
-	        var c = c1 = c2 = 0;
-	 
-	        while ( i < utftext.length ) {
-	 
-	            c = utftext.charCodeAt(i);
-	 
-	            if (c < 128) {
-	                string += String.fromCharCode(c);
-	                i++;
-	            }
-	            else if((c > 191) && (c < 224)) {
-	                c2 = utftext.charCodeAt(i+1);
-	                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
-	                i += 2;
-	            }
-	            else {
-	                c2 = utftext.charCodeAt(i+1);
-	                c3 = utftext.charCodeAt(i+2);
-	                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
-	                i += 3;
-	            }
-	 
-	        }
-	 
-	        return string;
-	    }
-	}
-
-
