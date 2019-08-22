@@ -65,29 +65,30 @@
 	
 	<div id="festivalForm" style="width : 616px; height : 196px; float:left;display : inline; display:none;">
 		<div class="input-group mb-3" style="margin:auto;">
-		    	<form action="festivalSearch.do">
-				<input type="date" name="eventStartDate" required>
-				<input type="date" name="eventEndDate">
-				<select name="area">
-					<option value="">선택</option>
-					<option value="1">서울</option>
-					<option value="2">인천</option>
-					<option value="3">대전</option>
-					<option value="4">대구</option>
-					<option value="5">광주</option>
-					<option value="6">부산</option>
-					<option value="7">울산</option>
-					<option value="31">경기도</option>
-					<option value="32">강원도</option>
-					<option value="33">충청북도</option>
-					<option value="34">충청남도</option>
-					<option value="35">경상북도</option>
-					<option value="36">경상남도</option>
-					<option value="37">전라북도</option>
-					<option value="38">전라남도</option>
-					<option value="39">제주도</option>
+		    	<form action="attTest.do">
+				<input type="date" name="eventStartDate" id="sDate" value="${eventStartDate }" required>
+				<input type="date" name="eventEndDate" id="eDate" value="${eventEndDate }">
+				<select name="area" id="area">
+					<option value="" <c:if test="${area == ''}">selected</c:if>>선택</option>
+					<option value="1" <c:if test="${area == 1}">selected</c:if>>서울</option>
+					<option value="2" <c:if test="${area == 2}">selected</c:if>>인천</option>
+					<option value="3" <c:if test="${area == 3}">selected</c:if>>대전</option>
+					<option value="4" <c:if test="${area == 4}">selected</c:if>>대구</option>
+					<option value="5" <c:if test="${area == 5}">selected</c:if>>광주</option>
+					<option value="6" <c:if test="${area == 6}">selected</c:if>>부산</option>
+					<option value="7" <c:if test="${area == 7}">selected</c:if>>울산</option>
+					<option value="31" <c:if test="${area == 31}">selected</c:if>>경기도</option>
+					<option value="32" <c:if test="${area == 32}">selected</c:if>>강원도</option>
+					<option value="33" <c:if test="${area == 33}">selected</c:if>>충청북도</option>
+					<option value="34" <c:if test="${area == 34}">selected</c:if>>충청남도</option>
+					<option value="35" <c:if test="${area == 35}">selected</c:if>>경상북도</option>
+					<option value="36" <c:if test="${area == 36}">selected</c:if>>경상남도</option>
+					<option value="37" <c:if test="${area == 37}">selected</c:if>>전라북도</option>
+					<option value="38" <c:if test="${area == 38}">selected</c:if>>전라남도</option>
+					<option value="39" <c:if test="${area == 39}">selected</c:if>>제주도</option>
 				</select>
 				<button id="searchKeyword" class="btn btn-success" type="submit">검색</button>
+				<input type="hidden" name="type" value="2">
 				</form>
 		</div>
 		<input type="hidden" id="storeKeyword" value="<c:if test="${keyword != null}">${keyword}</c:if>">

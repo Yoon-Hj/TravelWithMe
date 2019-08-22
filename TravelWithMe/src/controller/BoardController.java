@@ -47,6 +47,10 @@ public class BoardController {
 			mav.addAllObjects(b_bsvc.apiTest(page, keyword));
 		}else if(type.equals("2")) {
 			System.out.println("축제검색임");
+			mav.addObject("eventStartDate", eventStartDate);
+			mav.addObject("eventEndDate", eventEndDate);
+			mav.addObject("area", area);
+			mav.addAllObjects(b_bsvc.festivalSearch(page, area, eventStartDate, eventEndDate));
 		}else if(type.equals("3")) {
 			System.out.println("지역 검색임");
 		}
