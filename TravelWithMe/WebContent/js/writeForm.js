@@ -111,7 +111,7 @@ $(function(){
 	//테마 엔터키
 	$("#gthema").keydown(function(key) {
 	
-		if (key.keyCode == 13) {
+		if (key.keyCode == 13 || key.keyCode == 9) {
 			var length = $(".sharpThema").length;
 			if(length > 2) {
 				alert("테마는 최대 3개까지 작성가능합니다");
@@ -123,21 +123,7 @@ $(function(){
 		}			
 	
 	});
-	//테마 포커스 아웃
-	$("#gthema").focusout(function(key) {
-		
-		if (key.keyCode == 13) {
-			var length = $(".sharpThema").length;
-			if(length > 2) {
-				alert("테마는 최대 3개까지 작성가능합니다");
-				$("#gthema").val("");	
-			}else{
-				$("#gthema").after("<a class='sharpThema' style='cursor: pointer;'>&nbsp;#"+$("#gthema").val()+"</a>");
-				$("#gthema").val("");				
-			}
-		}			
-		
-	});
+
 	//가이드 테마 삭제하기
 	$(document).on('click','.sharpThema',function(){
 		var a = $(this).text();
@@ -162,13 +148,19 @@ $(function(){
 		$("#photo").trigger("click");
 	});
 	
+
 	//사진미리보기
+	$("#photo").click(function(){
+		$("#photo").val("");
+	});
+	
+//	var files;
 	$("#photo").on("change",function(e){
 		sel_files=[];
 		$(".imgs_wrap").empty();
 		$(".slideshow-container").empty();
-		$("#photoTd").empty();
-		var files = e.target.files;
+		$("#photoTd").remove();
+		files = e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
 		var index = 0;
 		filesArr.forEach(function(f){
@@ -179,11 +171,12 @@ $(function(){
 					var slideHTML = "<div class='mySlides'>";
 					slideHTML+="<a><img src='";
 					slideHTML+=e.target.result;
-					slideHTML+="' style='width: 300px; height: 250px; margin-left: 80px;'></a></div>";
+					slideHTML+="' style='width: 300px; height: 250px; margin-left: 83px;'></a></div>";
 					$(".slideshow-container").append(slideHTML);			
+					//index새로 선언해서 file순서 확인한번만 더하고 안되면 시발 포기
+					var html = "<a class='deleteImage'><img style='width:100px;height:100px;margin-top:5px;' src='"+e.target.result+"' title='Click to remove'>&nbsp;</a>";
+					$(".imgs_wrap").append(html);
 					
-					var html = "<a onclick='deleteImageAction("+index+")' id='img_id_"+index+"'><img style='width:100px;height:100px;margin-top:5px;' src='"+e.target.result+"' class='selProductFile' title='Click to remove'>&nbsp;</a>";
-					$(".imgs_wrap").append(html);			
 				}
 				reader.readAsDataURL(f);
 			}
@@ -201,6 +194,17 @@ $(function(){
 		}
 		
 	});
+			
+	//사진삭제하기
+	$(document).on('click','.deleteImage',function(){
+		var index = $(this).index();
+		//sel_files.splice(index,1);
+		$("#imgs_wrap").find("a:eq('"+index+"')").remove();
+		$(".slideshow-container").find("div:eq('"+index+"')").remove();
+		
+	});
+	
+	
 	
 	//정책 1번클릭시 2번,3번 풀리기
 	$("#pcode1").click(function(){
@@ -214,6 +218,7 @@ $(function(){
 		$("#pcode1").prop("checked",false);
 	});
 	
+	//가이드 세부일정 투어내용 글자수 제한
 	$("#day > tbody").find(":input[type=text]").each(function(){
 		if($(this).val().length>10) alert("글자 수 10자로 제한합니다.");
 	});
@@ -325,24 +330,6 @@ $(function(){
 	$("#submit").click(function(){
 		//gtime담기
 		var gtime = $("#gtime").val();
-		
-		//정책담기
-		var pcodeArray = new Array();
-		var pvalueArray = new Array();
-		$('input:checkbox[name=pcode]:checked').each(function(){
-			var t = $(this).val();
-			pcodeArray.push(t);
-			if(t==2){
-				pvalueArray.push($("#pvalue2").val());
-			}
-			if(t==3){
-				pvalueArray.push($("#pvalue3").val());
-			}
-		});
-	
-		//스케쥴 담기 한번 더 해야하는지 아니면 배열 남아있는지 확인해봐!
-		//setGuideScheduleArray()
-
 		var form = $('#uploadForm')[0];
 	    var formData = new FormData(form);
 		
@@ -359,18 +346,17 @@ $(function(){
 	    formData.append("pcode" , pcodeArray);
 	    formData.append("pvalue" , pvalueArray);
 	    formData.append("gthema" , $(".sharpThema").text());
-	    //생각 필요...뒤지것다
-	    formData.append("DAY1time" , DAY1time);
-	    formData.append("DAY2time" , DAY2time);
-	    formData.append("DAY3time" , DAY3time);
-	    formData.append("DAY1place" , DAY1place);
-	    formData.append("DAY2place" , DAY2place);
-	    formData.append("DAY3place" , DAY3place);
+	    formData.append("DAY1Array",DAY1Array);
+	    formData.append("DAY2Array",DAY2Array);
+	    formData.append("DAY3Array",DAY3Array);
 	    formData.append("bcontent" , $("#bcontent").val());
+	    
+
+	    formData.append("del_photoName",del_photoName);
 
 	    
 		$.ajax({
-			url : "showGuidePreview.do",
+			url : "guideWrite.do",
 			traditional : true,
             processData: false,
             contentType: false,
@@ -391,6 +377,13 @@ $(function(){
 });
 //사진 담기용 배열
 var sel_files = [];
+var del_photoName = [];
+var files;
+function setDelIndex(delPhotoName){
+	alert(delPhotoName);
+	alert(files[delPhotoName].name);
+	//del_photoName.push(delPhotoName);
+}
 
 //최소시간 최대시간 설정
 function setTimeMinMax(thisClass){
@@ -619,23 +612,47 @@ function openPreview() {
 	//테마
 	$("#previewTable").find("tr:eq(8)").find("td:eq(1)").text($(".sharpThema").text());
 	//투어소개
-	$("#previewTable").find("tr:eq(9)").find("td:eq(1)").find("textarea").val($("#bcontent").val());
+	$("#previewTable").find("tr:eq(9)").find("td:eq(1)").text($("#bcontent").val());
 	//세부일정
 	setGuideScheduleArray();
-	if(DAY1.length!=0){
-		drawCanvas
+	$("#canvasDiv").empty();
+	if(DAY1Array.length!=0){
+		var guideScheCanvasDiv1 = "<canvas id='canvas1' width='600px' height='200px'></canvas><br>";
+		$("#canvasDiv").append(guideScheCanvasDiv1);
+		drawCanvas(1);
 	}
-	if(DAY2.length!=0){
-		drawCanvas
+	if(DAY2Array.length!=0){
+		var guideScheCanvasDiv2 = "<canvas id='canvas2' width='600px' height='200px'></canvas><br>";
+			$("#canvasDiv").append(guideScheCanvasDiv2);
+		drawCanvas(2);
 	}
-	if(DAY3.length!=0){
-		drawCanvas
+	if(DAY3Array.length!=0){
+		var guideScheCanvasDiv3 = "<canvas id='canvas3' width='600px' height='200px'></canvas><br>";
+		$("#canvasDiv").append(guideScheCanvasDiv3);
+		drawCanvas(3);
 	}
 	
 	//주요 정책
-	
-
-	
+	$("#previewTable").find("tr:eq(11)").find("td:eq(1)").text("");
+	setPolicyArray();
+	var policy1 = "공지된 미팅장소 및 시간에 모인 인원과 가이드 투어를 진행하며 특별한 제제사항은 없습니다.";
+	var policy2 = "여행 시작일 기준 <b style='color:#CD1039'>";
+	var policy3 = "<b style='color:#CD1039'>신뢰지수 ";
+	for(var p = 0 ; p < pcodeArray.length; p++){
+		if(pcodeArray[p]==1){
+			$("#previewTable").find("tr:eq(11)").find("td:eq(1)").text(policy1);
+		}else if(pcodeArray[p]==2){
+			policy2 += pvalueArray[p];
+			policy2 += "일 전까지 연락이 되지 않는 분</b>은 작성자 임의로 신청거절을 진행할 수 있습니다.<br><br>";			
+			$("#previewTable").find("tr:eq(11)").find("td:eq(1)").append(policy2);
+			
+		}else if(pcodeArray[p]==3){
+			policy3 += pvalueArray[p];
+			policy3 += "점 이하</b>의 회원은 작성자 임의로 신청거절을 진행할 수 있습니다.<br><br>";
+			$("#previewTable").find("tr:eq(11)").find("td:eq(1)").append(policy3);
+			
+		}
+	}
 
 	
 	
@@ -658,14 +675,14 @@ function setGuideScheduleArray(){
 	$("#day > tbody").find(".day2").find(":input[type=time]").each(function(){
 		var DAY2 = new Object();
 		DAY2.time = $(this).val();
-		DAY2.place = $(this).siblings(":input[type=text]").val();
+		DAY2.place = $(this).parent("td").siblings("td.placeTd").find(":input[type=text]").val();
 		DAY2Array.push(DAY2);
 	});
 	
 	$("#day > tbody").find(".day3").find(":input[type=time]").each(function(){
 		var DAY3 = new Object();
 		DAY3.time = $(this).val();
-		DAY3.place = $(this).siblings(":input[type=text]").val();
+		DAY3.place = $(this).parent("td").siblings("td.placeTd").find(":input[type=text]").val();
 		DAY3Array.push(DAY3);
 	});
 	
@@ -676,14 +693,31 @@ function setGuideScheduleArray(){
 	}else if(DAY3Array.length>1){
 		DAY3Array.sort(SortByTime);
 	}
-	
-	
-}
 
+}
+//시간정렬하기
 function SortByTime(x, y){
 	var xTime = x.time;
 	var yTime = y.time; 
 	return ((xTime < yTime) ? -1 : ((xTime > yTime) ? 1 : 0));
+}
+
+//정책담기
+var pcodeArray;
+var pvalueArray;
+function setPolicyArray(){
+	pcodeArray = new Array();
+	pvalueArray = new Array();
+	$('input:checkbox[name=pcode]:checked').each(function(){
+		var t = $(this).val();
+		pcodeArray.push(t);
+		if(t==2){
+			pvalueArray.push($("#pvalue2").val());
+		}
+		if(t==3){
+			pvalueArray.push($("#pvalue3").val());
+		}
+	});	
 }
 
 
@@ -705,35 +739,46 @@ function showSlides(n) {
 }
 
 //canvas
-function drawCanvas(){
-	var canvas = $("#canvas")[0];
+function drawCanvas(d){
+	if(d==1){
+		var canvas = $("#canvas1")[0];
+		var Array = DAY1Array;
+	}else if(d==2){
+		var canvas = $("#canvas2")[0];
+		var Array = DAY2Array;
+	}else if(d==3){
+		var canvas = $("#canvas3")[0];
+		var Array = DAY3Array;
+		
+	}
+	
 	if(canvas==null || canvas.getContext==null) return;
 	var ctx = canvas.getContext("2d");
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	var x = 50;
 	var y = 80;
-	
-	ctx.font="bold 20px 한초롬돋움";
-	ctx.fillText("DAY1",30,30);
 
-	for(var n=0; n<DAY1Array.length; n++){
+	ctx.font="bold 20px 한초롬돋움";
+	ctx.fillText("DAY"+d,30,30);	
+	
+	for(var n=0; n<Array.length; n++){
 		
 		ctx.beginPath();
 		ctx.arc(x,y,10,0,2*Math.PI);
 		
 		
 		ctx.font="bold 13px 한초롬돋움";
-		ctx.fillText(DAY1Array[n].time,x-15,y-15);
+		ctx.fillText(Array[n].time,x-15,y-15);
 		
-		if(DAY1Array[n].place.length<=2){
-			ctx.fillText(DAY1Array[n].place,x-10,y+30);		
-		}else if(DAY1Array[n].place.length>2 && DAY1Array[n].place.length<=5){
-			ctx.fillText(DAY1Array[n].place,x-25,y+30);	
-		}else if(DAY1Array[n].place.length>5){
-			ctx.fillText(DAY1Array[n].place,x-50,y+30);		
+		if(Array[n].place.length<=2){
+			ctx.fillText(Array[n].place,x-10,y+30);		
+		}else if(Array[n].place.length>2 && Array[n].place.length<=5){
+			ctx.fillText(Array[n].place,x-25,y+30);	
+		}else if(Array[n].place.length>5){
+			ctx.fillText(Array[n].place,x-50,y+30);		
 		}
 		
-		if(n==DAY1Array.length-1){
+		if(n==Array.length-1){
 			ctx.stroke();
 			break;
 		}
@@ -758,3 +803,141 @@ function drawCanvas(){
 		ctx.stroke();
 	}
 }
+
+
+
+var Base64 = {
+	    // private property
+	    _keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+	 
+	    // public method for encoding
+	    encode : function (input) {
+	        var output = "";
+	        var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+	        var i = 0;
+	 
+	        input = Base64._utf8_encode(input);
+	 
+	        while (i < input.length) {
+	 
+	            chr1 = input.charCodeAt(i++);
+	            chr2 = input.charCodeAt(i++);
+	            chr3 = input.charCodeAt(i++);
+	 
+	            enc1 = chr1 >> 2;
+	            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+	            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+	            enc4 = chr3 & 63;
+	 
+	            if (isNaN(chr2)) {
+	                enc3 = enc4 = 64;
+	            } else if (isNaN(chr3)) {
+	                enc4 = 64;
+	            }
+	 
+	            output = output +
+	            this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
+	            this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+	 
+	        }
+	 
+	        return output;
+	    },
+	 
+	    // public method for decoding
+	    decode : function (input) {
+	        var output = "";
+	        var chr1, chr2, chr3;
+	        var enc1, enc2, enc3, enc4;
+	        var i = 0;
+	 
+	        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+	 
+	        while (i < input.length) {
+	 
+	            enc1 = this._keyStr.indexOf(input.charAt(i++));
+	            enc2 = this._keyStr.indexOf(input.charAt(i++));
+	            enc3 = this._keyStr.indexOf(input.charAt(i++));
+	            enc4 = this._keyStr.indexOf(input.charAt(i++));
+	 
+	            chr1 = (enc1 << 2) | (enc2 >> 4);
+	            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+	            chr3 = ((enc3 & 3) << 6) | enc4;
+	 
+	            output = output + String.fromCharCode(chr1);
+	 
+	            if (enc3 != 64) {
+	                output = output + String.fromCharCode(chr2);
+	            }
+	            if (enc4 != 64) {
+	                output = output + String.fromCharCode(chr3);
+	            }
+	 
+	        }
+	 
+	        output = Base64._utf8_decode(output);
+	 
+	        return output;
+	 
+	    },
+	 
+	    // private method for UTF-8 encoding
+	    _utf8_encode : function (string) {
+	        string = string.replace(/\r\n/g,"\n");
+	        var utftext = "";
+	 
+	        for (var n = 0; n < string.length; n++) {
+	 
+	            var c = string.charCodeAt(n);
+	 
+	            if (c < 128) {
+	                utftext += String.fromCharCode(c);
+	            }
+	            else if((c > 127) && (c < 2048)) {
+	                utftext += String.fromCharCode((c >> 6) | 192);
+	                utftext += String.fromCharCode((c & 63) | 128);
+	            }
+	            else {
+	                utftext += String.fromCharCode((c >> 12) | 224);
+	                utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+	                utftext += String.fromCharCode((c & 63) | 128);
+	            }
+	 
+	        }
+	 
+	        return utftext;
+	    },
+	 
+	    // private method for UTF-8 decoding
+	    _utf8_decode : function (utftext) {
+	        var string = "";
+	        var i = 0;
+	        var c = c1 = c2 = 0;
+	 
+	        while ( i < utftext.length ) {
+	 
+	            c = utftext.charCodeAt(i);
+	 
+	            if (c < 128) {
+	                string += String.fromCharCode(c);
+	                i++;
+	            }
+	            else if((c > 191) && (c < 224)) {
+	                c2 = utftext.charCodeAt(i+1);
+	                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+	                i += 2;
+	            }
+	            else {
+	                c2 = utftext.charCodeAt(i+1);
+	                c3 = utftext.charCodeAt(i+2);
+	                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+	                i += 3;
+	            }
+	 
+	        }
+	 
+	        return string;
+	    }
+	}
+
+

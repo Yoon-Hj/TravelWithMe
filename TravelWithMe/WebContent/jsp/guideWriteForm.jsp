@@ -39,7 +39,6 @@
 		&nbsp;&nbsp;기본정보
 		<a style="color : #b3b3b3; font-size: 15px;">&nbsp;투어의 기본정보를 작성하세요(필수)</a>
 	</h3>
-	
 	<br>
 	
 	<table>
@@ -262,15 +261,13 @@
 		</tr>
 		<tr>
 			<td class="InfoTd">투어소개</td>
-			<td><textarea rows="15px" cols="80px" style="border: none;" readonly="readonly"></textarea></td>
+			<td></td>
 		</tr>
 		<tr>
 			<td class="InfoTd">세부일정</td>
 			<td>
 			    <div id="canvasDiv">
-			    	<canvas id="canvas" width="600px" height="200px">
-			
-			        </canvas>
+
 			    </div>
 			</td>
 		</tr>

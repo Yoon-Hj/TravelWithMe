@@ -205,19 +205,17 @@ public class BoardController {
 	
 	
 	
-	@RequestMapping("showGuidePreview.do")
-	public @ResponseBody HashMap<String, Object> showGuidePreview(
+	@RequestMapping("guideWrite.do")
+	public @ResponseBody void guideWrite(
 									HttpSession session,
 									GuideBoard guideBoard,
 									String JSPgstartdate, String JSPgfinishdate, String JSPgenddate,
 									String[] pcode, @RequestParam(required=false) String[] pvalue,
+									String[] del_photoName,
 									@RequestParam(name="photo",required=false) MultipartFile[] photo,
-									@RequestParam(required=false) String[] DAY1time,
-									@RequestParam(required=false) String[] DAY2time,
-									@RequestParam(required=false) String[] DAY3time,
-									@RequestParam(required=false) String[] DAY1place,
-									@RequestParam(required=false) String[] DAY2place,
-									@RequestParam(required=false) String[] DAY3place ) throws ParseException{
+									@RequestParam(required=false) String[] DAY1Array,
+									@RequestParam(required=false) String[] DAY2Array,
+									@RequestParam(required=false) String[] DAY3Array ) throws ParseException{
 		System.out.println("컨트롤러 연결");
 		
 		String writeId = (String)session.getAttribute("user");
@@ -242,76 +240,33 @@ public class BoardController {
 			}
 		}
 		
-		Guideschedule guideSche1 = null;
-		Guideschedule guideSche2 = null;
-		Guideschedule guideSche3 = null;
-		List<Guideschedule> DAY1guideScheList = new ArrayList<Guideschedule>();
-		List<Guideschedule> DAY2guideScheList = new ArrayList<Guideschedule>();
-		List<Guideschedule> DAY3guideScheList = new ArrayList<Guideschedule>();
-		
-		for(int i = 0; i<DAY1time.length;i++) {
-			guideSche1 = new Guideschedule();
-			guideSche1.setSdate("DAY1");
-			guideSche1.setStime(DAY1time[i]);
-			guideSche1.setSplace(DAY1place[i]);
-			DAY1guideScheList.add(guideSche1);
-		}
-		if(DAY2time.length!=0) {
-			System.out.println("2번 들어오니?");
-			for(int i = 0; i<DAY2time.length;i++) {
-				guideSche2 = new Guideschedule();
-				guideSche2.setSdate("DAY2");
-				guideSche2.setStime(DAY2time[i]);
-				guideSche2.setSplace(DAY2place[i]);
-				DAY2guideScheList.add(guideSche2);
-			}
-		}
-		if(DAY3time.length!=0) {
-			for(int i = 0; i<DAY3time.length;i++) {
-				guideSche3 = new Guideschedule();
-				guideSche3.setSdate("DAY3");
-				guideSche3.setStime(DAY3time[i]);
-				guideSche3.setSplace(DAY3place[i]);
-				DAY3guideScheList.add(guideSche3);
-			}
-		}
 		
 		HashMap<Object, Object> photoModel = new HashMap<Object, Object>();
 		if(photo.length!=0) {
 			for(int i = 0; i<photo.length;i++) {
-				photoModel.put(photo[i].getOriginalFilename(), i);
+				photoModel.put(photo[i].getOriginalFilename(),i);	
 			}
+		}
+		if(del_photoName.length!=0) {
+			for(int i = 0; i<del_photoName.length;i++) {
+				String del = del_photoName[i];
+				photoModel.remove(del);
+			}
+		}
 		
+		for(String v : del_photoName) {
+			System.out.println(v);
 		}
 
-		int scheDay = 3;
-		if(DAY3guideScheList==null)scheDay-=1;
-		if(DAY2guideScheList==null)scheDay-=1;
-		
-		HashMap<String, Object> resultToPreview = new HashMap<String, Object>();
-		resultToPreview.put("scheDay", scheDay);
-		resultToPreview.put("guideBoard", guideBoard);
-		resultToPreview.put("policy", policy);
-		resultToPreview.put("photoModel", photoModel);
-		if(scheDay==3) {
-			resultToPreview.put("DAY1guideScheList", DAY1guideScheList);
-			resultToPreview.put("DAY2guideScheList", DAY2guideScheList);
-			resultToPreview.put("DAY3guideScheList", DAY3guideScheList);
-		}else if(scheDay==2) {
-			resultToPreview.put("DAY1guideScheList", DAY1guideScheList);
-			resultToPreview.put("DAY2guideScheList", DAY2guideScheList);
-		}else if(scheDay==1){
-			resultToPreview.put("DAY1guideScheList", DAY1guideScheList);
-		}
+
 		
 		System.out.println(guideBoard);
 		System.out.println(policy);
-		System.out.println(DAY1guideScheList);
-		System.out.println(DAY2guideScheList);
-		System.out.println(DAY3guideScheList);
+		System.out.println(DAY1Array);
+		System.out.println(DAY2Array);
+		System.out.println(DAY3Array);
 		System.out.println(photoModel);
 		
-		return resultToPreview;
 
 	}
 }
