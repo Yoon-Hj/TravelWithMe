@@ -179,6 +179,10 @@ public class BoardService {
 		return result;
 	}
 	
+	//해당 게시물 조회수 증가
+	public void uprcnt(int bnum) {
+		b_bdao.updateReadCount(bnum);
+	}
 	
 	//해당 게시글 내용 조회
 	public HashMap<String, Object> getBoardContent(int bnum, String bkind) {

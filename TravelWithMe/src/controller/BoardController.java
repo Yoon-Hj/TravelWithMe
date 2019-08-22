@@ -155,6 +155,7 @@ public class BoardController {
 	
 	@RequestMapping("readBoard.do")
 	public ModelAndView readBoard(int bnum, String bkind) {
+		b_bsvc.uprcnt(bnum);
 		ModelAndView mav = new ModelAndView();
 		mav.addAllObjects(b_bsvc.getBoardContent(bnum, bkind));
 		mav.addObject("commentList", b_bsvc.readComment(bnum));
