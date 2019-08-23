@@ -106,7 +106,7 @@
   
   table#mtable{
   	padding: 5px;
-  	margin-left: 30px;
+  	margin-left: 20px;
   }
   
 </style>
@@ -200,14 +200,15 @@
 		});
 		
 		//신청취소버튼 - 취소
-		/*
-		#('#rcbtn').on('click', function(){
+		$('#rcbtn').on('click', function(){
+			var b = ${accomBoard.bnum}; 
+			var hi = $('#hid').val();
 			 if (confirm("신청을 정말 취소하시겠습니까?") == true){
 				 $.ajax({
 						url : "cancelRegister.do",
 						data : {mid : user,
-								bnum : ${accomBoard.bnum},
-								rid : },
+								bnum : b,
+								rid : hi},
 						type : "get",
 						success : function(data){
 							history.go(0);
@@ -218,7 +219,6 @@
 			 }
 		});
 		
-		*/
 		//신청관리버튼 누르면 신청자들 정보 조회
 		$('#rmbtn').on('click', function(){
 			$('#mtable').empty();
@@ -237,7 +237,7 @@
 							var th = "<tr><th>아이디</th><th>이름</th><th>연락처</th><th>신청인원</th><th>거절하기</th></tr>";
 							$('#mtable').append(th);
 							for(var i=0; i < rinfo.length; i++){
-								var tHTML="<tr><td>"+rinfo[i].MID+"</td><td>"+rinfo[i].MNAME+"</td><td>"+rinfo[i].MCONTACT+"</td><td>"+n+"명</td><td>"+"<button class='btn' style='background-color: #B5C3C8; color:white; font-family: 배달의민족 주아'>거절하기</button></td></tr>";
+								var tHTML="<tr><td>"+rinfo[i].MID+"</td><td>"+rinfo[i].MNAME+"</td><td>"+rinfo[i].MCONTACT+"</td><td>"+n+"명</td><td>"+"<button class='btn' style='border: 2px solid #B5C3C8; width: 80px; font-family: 배달의민족 주아; font-size: 13px;'>거절하기</button></td></tr>";
 								$('#mtable').append(tHTML);
 						}
 					}
@@ -592,7 +592,7 @@
 		        </div>
 	        
 		        <!-- Modal body -->
-		        <div class="modal-body" style="text-align: center; font-family: '함초롬돋움';">
+		        <div class="modal-body" style="text-align: center; font-family: '나눔고딕';">
 					<table id="mtable" style="text-align:center;">
 
 					</table>
