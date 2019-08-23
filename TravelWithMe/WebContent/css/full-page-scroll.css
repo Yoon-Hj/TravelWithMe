@@ -1,22 +1,4 @@
 
-@font-face{
-	font-family:'함초롬돋움';
-	url('/fonts/HANDotumB.ttf') format('truetype');
-	src:local(※), url('/fonts/HANDotumB.ttf') format('ttf');
-}
-
-@font-face{
-	font-family:'D2Coding';
-	url('/fonts/D2Coding.ttf') format('truetype');
-	src:local(※), url('/fonts/D2Coding.ttf') format('ttf');
-}
-
-@font-face{
-	font-family:'배달의민족 도현';
-	url('/fonts/BMDOHYEON.ttf') format('truetype');
-	src:local(※), url('/fonts/BMDOHYEON.ttf') format('ttf');
-}
-
 body, html {
 	margin: 0;
 	padding: 0;
