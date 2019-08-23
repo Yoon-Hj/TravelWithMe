@@ -138,11 +138,15 @@ public class MemberController {
     }
     
     @RequestMapping("joinForm.do")
-	public ModelAndView joinForm() {
+	public ModelAndView joinForm(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("codeList", m_asvc.getLikecode());
-		mav.setViewName("joinForm");
-		System.out.println(m_asvc.getLikecode());
+		String user = (String)session.getAttribute("user");
+		if(user != null) {
+			mav.addObject("codeList", m_asvc.getLikecode());
+			mav.setViewName("joinForm");
+			System.out.println(m_asvc.getLikecode());
+		}else
+			mav.setViewName("index");
 		return mav;
 		
 		//여기서 넘겨 joinform.jsp로

@@ -149,7 +149,7 @@
 							onclick="viewDetail('${i.contentid}', '${i.contenttypeid}', '${i.title }')"/>
 						</c:when>
 						<c:otherwise>
-						<image src="imgs/noImage.jpg" style="width:160px; height:160px; cursor:pointer;"
+						<image src="imgs/noImage.gif" style="width:160px; height:160px; cursor:pointer;"
 							onclick="viewDetail('${i.contentid}', '${i.contenttypeid}', '${i.title }')"/>
 						</c:otherwise>
 					</c:choose>
@@ -174,7 +174,7 @@
 							onclick="viewDetail('${i.contentid}', '${i.contenttypeid}', '${i.title }')"/>
 						</c:when>
 						<c:otherwise>
-						<image src="imgs/noImage.jpg" style="width:160px; height:160px; cursor:pointer;"
+						<image src="imgs/noImage.gif" style="width:160px; height:160px; cursor:pointer;"
 							onclick="viewDetail('${i.contentid}', '${i.contenttypeid}', '${i.title }')"/>
 						</c:otherwise>
 					</c:choose>
@@ -197,7 +197,7 @@
 							onclick="viewDetail('${i.contentid}', '${i.contenttypeid}', '${i.title }')"/>
 						</c:when>
 						<c:otherwise>
-						<image src="imgs/noImage.jpg" style="width:160px; height:160px; cursor:pointer;"
+						<image src="imgs/noImage.gif" style="width:160px; height:160px; cursor:pointer;"
 							onclick="viewDetail('${i.contentid}', '${i.contenttypeid}', '${i.title }')"/>
 						</c:otherwise>
 					</c:choose>
