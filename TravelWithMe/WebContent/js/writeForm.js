@@ -390,7 +390,8 @@ $(function(){
 			type : "POST",
 			data : formData,
 			success : function(data){
-				alert("성공");
+				alert("가이드 게시글이 성공적으로 작성되었습니다.");
+				//가이드 게시물 목록으로 가기
 			},
 			error: function(){
 				alert("다시 시도해주세요");

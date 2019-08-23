@@ -314,7 +314,6 @@ public class BoardService {
 			
 			//스케쥴 삽입
 			int bnum = guideBoard.getBnum();
-			System.out.println("service bnum: "+bnum);
 			
 			Guideschedule guideSche1 = null;
 			Guideschedule guideSche2 = null;
