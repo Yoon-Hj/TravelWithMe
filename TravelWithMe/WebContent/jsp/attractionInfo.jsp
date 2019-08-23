@@ -237,11 +237,6 @@
 	</c:if>
 
 </c:if>
-
-<h1>시작페이지 : ${startpage }</h1>
-<h1>끝페이지 : ${endpage }</h1>
-<h1>마지막 페이지 : ${lastpage }</h1>
-<h1>현재 페이지 : ${pageNo }</h1>
 </center>
 
 
