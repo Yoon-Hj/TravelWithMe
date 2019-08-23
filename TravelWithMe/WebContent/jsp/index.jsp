@@ -152,6 +152,7 @@
 				<br>
 				<input type="button" class="btn btn-danger btn-lg btn-block" 
 						value="Attraction Info 목록 보기" 
+						onclick="location.href='attractionInfo.do'"
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">				
 			</div>
 		</section>

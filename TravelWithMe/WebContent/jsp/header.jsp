@@ -89,7 +89,7 @@
 	   	<c:when test="${user=='admin'}">
 	   	
 	   		<input type="button" value="LOGOUT" id="logout" style="margin-left:1060px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
-	   		<input type="button" value="ADMIN PAGE" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
+	   		<input type="button" value="ADMIN PAGE" onclick="location.href='adminPage.do'" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
 
 	   		<span style="margin-left: 5px; font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span>
 	   	</c:when>
