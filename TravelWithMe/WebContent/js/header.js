@@ -64,8 +64,6 @@ $(document).ready(function(){
 			},
 			error : function(){}
 		});
-//		$('.gradeImg').css('width', '10px');
-//		$('.gradeImg').css('height', '10px');
 	});
 	
 	

@@ -65,7 +65,6 @@ public class MemberController {
 	
 	@RequestMapping("getUserPoint.do")
 	public @ResponseBody HashMap<String, Object> getUserPoint(String mid){
-		System.out.println(m_msvc.getUserPoint(mid));
 		return m_msvc.getUserPoint(mid);
 	}
 	
