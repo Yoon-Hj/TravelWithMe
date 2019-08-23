@@ -2,20 +2,28 @@ package service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import dao.IAdminDao;
 import dao.IBoardDao;
 import dao.IMemberDao;
 import model.AccomBoard;
 import model.Comments;
+import model.GuideBoard;
+import model.Guideschedule;
 import model.Notice;
+import model.Policy;
 import model.Preference;
 
 @Service
@@ -274,6 +282,113 @@ public class BoardService {
 	
 	
 	//가이드 게시글 insert
-	//public void guideWrite
+	public void guideWrite(HttpSession session,
+			GuideBoard guideBoard,
+			String JSPgstartdate, String JSPgfinishdate, String JSPgenddate,
+			String[] pcode, String[] pvalue,
+			MultipartFile[] photo,
+			String[] DAY1time,String[] DAY1place,
+			String[] DAY2time,String[] DAY2place,
+			String[] DAY3time,String[] DAY3place ) throws ParseException {
+		
+		String writeId = (String)session.getAttribute("user");
+		String garea = guideBoard.getGarea1() + " " + guideBoard.getGarea2();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+		Date togstartdate = (Date)fm.parse(JSPgstartdate);
+		Date togfinishdate = (Date)fm.parse(JSPgfinishdate);
+		Date togenddate = (Date)fm.parse(JSPgenddate);
+		
+		guideBoard.setMid(writeId);
+		guideBoard.setGarea(garea);
+		guideBoard.setGstartdate(togstartdate);
+		guideBoard.setGfinishdate(togfinishdate);
+		guideBoard.setGenddate(togenddate);
+		guideBoard.setBkind("G");
+		
+		b_bdao.insertGuideBoard(guideBoard);
+		b_bdao.insertGuide(guideBoard);
+		
+		//스케쥴 삽입
+		int bnum = guideBoard.getBnum();
+		System.out.println("service bnum: "+bnum);
+		
+		Guideschedule guideSche1 = null;
+		Guideschedule guideSche2 = null;
+		Guideschedule guideSche3 = null;
+		List<Guideschedule> DAY1guideScheList = new ArrayList<Guideschedule>();
+		List<Guideschedule> DAY2guideScheList = new ArrayList<Guideschedule>();
+		List<Guideschedule> DAY3guideScheList = new ArrayList<Guideschedule>();
+		
+		for(int i = 0; i<DAY1time.length;i++) {
+			guideSche1 = new Guideschedule();
+			guideSche1.setBnum(bnum);
+			guideSche1.setSdate("DAY1");
+			guideSche1.setStime(DAY1time[i]);
+			guideSche1.setSplace(DAY1place[i]);
+			DAY1guideScheList.add(guideSche1);
+		}
+		if(DAY2time.length!=0) {
+			for(int i = 0; i<DAY2time.length;i++) {
+				guideSche2 = new Guideschedule();
+				guideSche2.setBnum(bnum);
+				guideSche2.setSdate("DAY2");
+				guideSche2.setStime(DAY2time[i]);
+				guideSche2.setSplace(DAY2place[i]);
+				DAY2guideScheList.add(guideSche2);
+			}
+		}
+		if(DAY3time.length!=0) {
+			for(int i = 0; i<DAY3time.length;i++) {
+				guideSche3 = new Guideschedule();
+				guideSche3.setBnum(bnum);
+				guideSche3.setSdate("DAY3");
+				guideSche3.setStime(DAY3time[i]);
+				guideSche3.setSplace(DAY3place[i]);
+				DAY3guideScheList.add(guideSche3);
+			}
+		}
+		
+		for(int i = 0 ; i<DAY1guideScheList.size(); i++) {
+			b_bdao.insertGuideSche(DAY1guideScheList.get(i));
+		}
+		if(DAY2guideScheList.size()!=0) {
+			for(int i = 0 ; i<DAY2guideScheList.size(); i++) {
+				b_bdao.insertGuideSche(DAY2guideScheList.get(i));
+			}
+		}
+		if(DAY3guideScheList.size()!=0) {
+			for(int i = 0 ; i<DAY3guideScheList.size(); i++) {
+				b_bdao.insertGuideSche(DAY3guideScheList.get(i));
+			}
+		}
+
+		//정책삽입
+		List<Policy> policyList = new ArrayList<Policy>();
+		for(int i = 0; i<pcode.length;i++) {
+			Policy policy = new Policy();
+			policy.setBnum(bnum);
+			policy.setPcode(Integer.parseInt(pcode[i]));
+			if(pvalue.length!=0) {
+				policy.setPvalue(Integer.parseInt(pvalue[i]));				
+			}
+			policyList.add(policy);
+		}
+		
+		for(int i = 0; i<policyList.size();i++) {
+			b_bdao.insertPolicy(policyList.get(i));
+		}
+		
+		//사진삽입
+		HashMap<Object, Object> photoModel = new HashMap<Object, Object>();
+		if(photo.length!=0) {
+			for(int i = 0; i<photo.length;i++) {
+				photoModel.put(photo[i].getOriginalFilename(),i);	
+			}
+		}
+		
+		
+		
+
+	}
 	
 }

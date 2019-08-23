@@ -298,7 +298,7 @@
 </insert>
 
 <!-- 정책테이블에 새로운 게시글의 정책 삽입 -->
-<insert id="insertPolicy" parameterType="java.util.HashMap">
+<insert id="insertPolicy" parameterType="policy">
 	insert into policy values (#{bnum}, #{pcode}, #{pvalue})
 </insert>
 
