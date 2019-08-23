@@ -43,8 +43,7 @@ public class BoardController {
 	public ModelAndView attTest(@RequestParam(defaultValue = "0") String type,
 			@RequestParam(defaultValue="1") String page, String keyword,				// 키워드 검색
 			@RequestParam(defaultValue="") String area, 								// 축제 검색
-			String eventStartDate, @RequestParam(defaultValue="")String eventEndDate,	
-			String areacode) {															// 지역 검색
+			String eventStartDate, @RequestParam(defaultValue="")String eventEndDate) {
 		ModelAndView mav = new ModelAndView();
 		
 		if(type.equals("0")) {
@@ -59,6 +58,8 @@ public class BoardController {
 			mav.addAllObjects(b_bsvc.festivalSearch(page, area, eventStartDate, eventEndDate));
 		}else if(type.equals("3")) {
 			System.out.println("지역 검색임");
+			mav.addObject("area", area);
+			mav.addAllObjects(b_bsvc.areaSearch(page, area));
 		}
 		
 		System.out.println("세팅할 타입 : " + type);

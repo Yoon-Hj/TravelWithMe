@@ -89,9 +89,11 @@
 				</select>
 				<button id="searchKeyword" class="btn btn-success" type="submit">검색</button>
 				<input type="hidden" name="type" value="2">
+				<input type="hidden" id="storeArea" value="${area}">
+				<input type="hidden" id="storeSdate" value="${eventStartDate }">
+				<input type="hidden" id="storeEdate" value="${eventEndDate }">
 				</form>
 		</div>
-		<input type="hidden" id="storeKeyword" value="<c:if test="${keyword != null}">${keyword}</c:if>">
 	</div>
 	
 	
@@ -111,7 +113,6 @@
 					<button class="areaBtn" value="36">경상남도</button>
 					<button class="areaBtn" value="39">제주도</button>
 		</div>
-		<input type="hidden" id="storeKeyword" value="<c:if test="${keyword != null}">${keyword}</c:if>">
 	</div>
 	
 	
