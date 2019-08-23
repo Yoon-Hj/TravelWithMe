@@ -1,0 +1,126 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="fonts/font.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/boardList.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<title>Travel With Me</title>
+
+</head>
+<body>	
+	<jsp:include page="header.jsp"></jsp:include>
+	
+	<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px;">Travel With Guide</h1>
+	<hr>
+	
+	<div class="container">
+	
+		<a href="guideWriteForm" data-toggle="tooltip" data-placement="bottom" title="글 작성하기" 
+			style="text-decoration: none; color: #787878; font-family: '함초롬돋움';">
+			원하는 가이드글이 없으신가요? 직접 가이드글을 작성해보세요.</a>
+		<br><br>
+
+		<div class="card" style="font-family: '함초롬돋움';">
+			 <form action="accomSearch.do">
+			 <table style="border: none;">
+			 <tr>
+			 	<td>
+				 	<select name="type" class="custom-select" style="width: 130px">
+				 	<option value="1" selected="selected">제목</option>
+						<option value="2">내용</option>
+						<option value="3">제목+내용</option>
+						<option value="4">작성자(아이디)</option>
+						<option value="5">지역</option>
+					</select>
+				</td>
+				<td><input type="text" class="form-control" name="keyword" style="width: 600px"></td>
+			 </tr>
+			 <tr>
+			 	<td style="text-align: center">여행날짜</td>
+			 	<td width="700px">
+			 		<input type="date" name="sdate" max="2030-12-31" min="2019-01-01" 
+			 				style="width: 250px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">&nbsp; ~ &nbsp;
+					<input type="date" name="fdate" max="2030-12-31" min="2019-01-01"
+							style="width: 250px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">
+				</td>
+				<td colspan="3" width=130px; style="margint-left: 20px; margin-top: 150px"><button type="submit" class="btn" style="background-color: #B5C3C8; color: white; width: 140px; height: 40px;">SEARCH&nbsp;&nbsp;<i class="fa fa-search"></i></button></td>
+			</tr>
+			</table>
+			</form>
+		</div>
+		
+		<!-- 조회순 4개 조회 -->
+		<div style="margin-top: 50px">
+		<h4 style="font-family: '함초롬돋움'; margin-bottom: 15px;">추천여행</h4>
+		
+			<div class="row">
+			<c:forEach var="b" items="${readCntList}" varStatus="status">
+			  <div class="column">
+				<a href="readBoard.do?bnum=${b.bnum}&bkind=A"><img style="width:100%; height: 100%;" src="download.do?photopath=${b.photopath}"></a>
+				<div class="content">
+					<p class="iarea"><fmt:formatDate value="${b.gstartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${b.gfinishdate}" pattern="yyyy-MM-dd"/>
+					<br>[${b.garea}] ${b.btitle}<br>${b.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${b.breadcount}</p>
+				</div>
+			  </div>
+			</c:forEach>
+			</div>
+			
+		</div>
+		
+		<!-- 전체 리스트 조회 -->
+		<div style="margin-top: 60px">
+		<h4 style="font-family: '함초롬돋움'; margin-bottom: 15px;">전체여행</h4>
+		
+			<div class="row">
+			<c:forEach var="g" items="${boardList}" varStatus="status">
+			  <div class="column" style="margin-bottom: 12px;">
+				<a href="readBoard.do?bnum=${g.bnum}&bkind=A"><img style="width:100%; height: 100%;" src="download.do?photopath=${g.photopath}"></a>
+				<div class="content">
+					<p class="iarea"><fmt:formatDate value="${g.gstartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${a.afinishdate}" pattern="yyyy-MM-dd"/>
+					<br>[${g.garea}] ${g.btitle}<br>${g.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${g.breadcount}</p>
+				</div>
+			  </div>
+			</c:forEach>
+			</div>
+			
+		</div>
+	</div>
+
+	<div class="pagination" style="margin-top: 25px; margin-left: 400px; text-align: center;">
+		<c:if test="${ start != 1}">
+			<a href="accomBoardList.do?page=1">&laquo;</a>
+			<a href="accomBoardList.do?page=${start-1}">&#8249;</a> 
+		</c:if>
+		
+		<c:forEach var="i" begin="${ start }" end="${ end }" varStatus="status">
+			<c:choose>
+				<c:when test="${ current == status.index }">
+					<a class="active">${i}</a>
+				</c:when>
+				<c:otherwise>
+					<a href="accomBoardList.do?page=${i}<c:if test="${ keyword != null }">&keyword=${keyword}&type=${type}</c:if>" style="font-size: 17px">${i}</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+			
+		<c:if test="${ end != last }">
+			<a href="accomBoardList.do?page=${end+1}">&#8250;</a> 
+			<a href="accomBoardList.do?page=${last}">&raquo;</a>
+		</c:if>
+	</div>
+
+	<jsp:include page="footer.jsp"></jsp:include>
+	
+</body>
+</html>

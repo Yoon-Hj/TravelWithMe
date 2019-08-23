@@ -414,10 +414,10 @@ public class BoardService {
 			e.printStackTrace();
 			throw new Exception();
 		}
-		
-		
-		
-
+	}
+	
+	public List<GuideBoard> getGuideBoardList() {
+		return b_bdao.selectGuideListByRcnt();
 	}
 	
 }
