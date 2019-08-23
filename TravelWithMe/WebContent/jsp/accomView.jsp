@@ -211,14 +211,18 @@
 								mid : wid},
 						type : "get",
 						success : function(data){
-							if(data=="모집 인원을 초과하여 신청이 불가합니다."){
-								alert(data);
-								$('#succModal').modal("hide");
+							if(data==""){
+								alert("모집 인원을 초과하여 신청이 불가합니다.");
+								history.go(0);
 							}else{
 								$('#contact').html(data);
 							}
 						}
 				  });
+		});
+		
+		$('#finishBtn').on('click', function(){
+			history.go(0);
 		});
 		
 		//댓글작성
@@ -353,7 +357,7 @@
 		
 		<div style="display: flex; margin-top: 10px; margin-left: 110px; font-family: '배달의민족 주아'">
 			<p><input type="button" class="btn default" value="목록으로" style="border: 2px solid #B5C3C8;" onclick="location.href='accomBoardList.do'"></p>
-			<p style="float: right; margin-left: 600px;">현재 신청 가능 인원 수 <span class="nop"></span>명 &nbsp;&nbsp;
+			<p style="float: right; margin-left: 600px;">현재 신청 가능 인원 수 <span class="nop" style="color: #F56E6E;"></span>명 &nbsp;&nbsp;
 					<input type="button" id="rmbtn" class="btn default" value="신청관리" data-toggle="modal" data-target="#manageModal" style="border: 2px solid #B5C3C8; width: 80px; display:none;">
 					<input type="button" id="rcbtn" class="btn default" value="신청취소" style="border: 2px solid #B5C3C8; width: 80px; display:none;">
 					<input type="button" id="rbtn" class="btn default" value="신청" data-toggle="modal" data-target="#warningModal1" style="border: 2px solid #B5C3C8; width: 80px; display:none;">
@@ -488,7 +492,7 @@
 	        
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" class="btn btn-success" data-dismiss="modal">확인</button>
+		          <button type="button" class="btn" id="finishBtn" data-dismiss="modal" style="background-color: #B5C3C8; color:white; font-family: '배달의민족 주아';">확인</button>
 		        </div>
 		        
       		</div>
