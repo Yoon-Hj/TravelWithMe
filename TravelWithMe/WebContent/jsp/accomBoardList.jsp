@@ -58,7 +58,7 @@
 	  height: 30%;
 	  text-align: center;
 	  font-size: 12px;
-	  font-family: 함초롬돋움;
+	  font-family: '함초롬돋움';
   }
   
   .pagination a {
@@ -127,17 +127,17 @@
 	
 	<jsp:include page="header.jsp"></jsp:include>
 	
-	<h1 style="font-family: 함초롬돋움; clear: both; margin-left: 30px;">Travel With Me</h1>
+	<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px;">Travel With Me</h1>
 	<hr>
 	
 	<div class="container">
 	
 		<a href="accomWriteForm.do" data-toggle="tooltip" data-placement="bottom" title="글 작성하기" 
-			style="text-decoration: none; color: #787878; font-family: 함초롬돋움;">
+			style="text-decoration: none; color: #787878; font-family: '함초롬돋움';">
 			원하는 동행글이 없으신가요? 직접 동행글을 작성해보세요.</a>
 		<br><br>
 
-		<div class="card" style="font-family: 함초롬돋움;">
+		<div class="card" style="font-family: '함초롬돋움';">
 			 <form action="accomSearch.do">
 			 <table style="border: none;">
 			 <tr>
@@ -178,7 +178,7 @@
 		
 		<!-- 추천 4개 조회 -->
 		<div style="margin-top: 50px">
-		<h4 style="font-family: 함초롬돋움; margin-bottom: 15px;">추천여행</h4>
+		<h4 style="font-family: '함초롬돋움'; margin-bottom: 15px;">추천여행</h4>
 		
 			<div class="row">
 			<c:forEach var="b" items="${recommList}" varStatus="status">
@@ -196,7 +196,7 @@
 		
 		<!-- 전체 리스트 조회 -->
 		<div style="margin-top: 60px">
-		<h4 style="font-family: 함초롬돋움; margin-bottom: 15px;">전체여행</h4>
+		<h4 style="font-family: '함초롬돋움'; margin-bottom: 15px;">전체여행</h4>
 		
 			<div class="row">
 			<c:forEach var="a" items="${boardList}" varStatus="status">
