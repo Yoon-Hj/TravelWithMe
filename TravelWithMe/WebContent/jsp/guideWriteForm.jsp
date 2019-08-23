@@ -39,7 +39,6 @@
 		&nbsp;&nbsp;기본정보
 		<a style="color : #b3b3b3; font-size: 15px;">&nbsp;투어의 기본정보를 작성하세요(필수)</a>
 	</h3>
-	
 	<br>
 	
 	<table>
@@ -217,7 +216,7 @@
 		&nbsp;&nbsp;가이드 게시글 미리보기
 	</h3>
 	<br>
-	<table id="previewTable" style="border:1px solid red; font-family: 함초롬돋움;">
+	<table id="previewTable" style="font-family: 함초롬돋움;">
 		<tr>
 			<td class="InfoTd">작성자</td>
 			<td><%=(String)session.getAttribute("user")%></td>
@@ -268,9 +267,7 @@
 			<td class="InfoTd">세부일정</td>
 			<td>
 			    <div id="canvasDiv">
-			    	<canvas id="canvas" width="600px" height="200px" style="border : 1px solid yellow">
-			
-			        </canvas>
+
 			    </div>
 			</td>
 		</tr>
