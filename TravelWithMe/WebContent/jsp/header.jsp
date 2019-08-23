@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="fonts/font.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -79,7 +80,7 @@
 	<c:choose>
 		<c:when test="${user==null}">
 	
-	   		<input type="button" value="LOGIN" data-toggle="modal" data-target="#loginForm" style="margin-left:890px; background-color: transparent; border: 0px; font-size: 17px; font-family: D2Coding;">
+	   		<input type="button" value="LOGIN" data-toggle="modal" data-target="#loginForm" style="margin-left:870px; background-color: transparent; border: 0px; font-size: 17px; font-family: D2Coding;">
 	   		<input type="button" value="JOIN" id="joinForm" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
 
 	   		<span style="margin-left:10px; font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span> 
@@ -95,11 +96,11 @@
 	   	</c:when>
 	   	
 	   	<c:otherwise>
-		   		<a class="userId" style="font-family: D2Coding; margin-left: 740px; font-size: 17px;" data-toggle="tooltip">${user}</a>님
-				<a href="#" style="color: #969696; margin-left: 7px; font-family: D2Coding; font-size: 17px;" data-toggle="modal" data-target="#moreNewsForm" class="moreNews">Messages<span class="badge" style="color: black; font-size: 18px">5</span></a>
+		   		<a class="userId" style="font-family: D2Coding; margin-left: 716px; font-size: 17px;" data-toggle="tooltip">${user}</a>님
+				<a href="#" style="color: black; margin-left: 7px; font-family: D2Coding; font-size: 17px;" data-toggle="modal" data-target="#moreNewsForm" class="moreNews">알림<span id="noticeCnt" class="w3-badge w3-red" style="font-size: 15px">5</span></a>
 
 				<input type="button" value="LOGOUT" id="logout" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
-			   	<input type="button" value="MY PAGE" id="myPage" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
+			   	<input type="button" value="MY PAGE" id="myPage" style="margin-left: 3px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
 
 			  	<span style="font-size:30px; color: black; margin-left: 5px; cursor:pointer" onclick="openNav()">&#9776;</span>
 	   	</c:otherwise>	

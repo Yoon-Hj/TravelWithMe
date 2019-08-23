@@ -23,7 +23,7 @@ $(document).ready(function(){
 	}
 
 	function onMessage(evt) {
-		$('.moreNews').html(evt.data);
+		$('#noticeCnt').html(evt.data);
 	}
 
 	function onError(evt) {

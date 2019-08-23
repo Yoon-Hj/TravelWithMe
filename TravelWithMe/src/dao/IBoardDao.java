@@ -9,6 +9,7 @@ import model.CommuBoard;
 import model.GuideBoard;
 import model.Guideschedule;
 import model.Policy;
+import model.Register;
 
 public interface IBoardDao {
 
@@ -54,7 +55,7 @@ public interface IBoardDao {
 	//게시글에서 공동으로 사용하는 DAO
 	public List<Policy> selectPolicyByBnum(int bnum);
 	public List<Comments> selectCommentList(int bnum);
-	public List<HashMap<String, Object>> selectRegisterListByBnum(int bnum);
+	public List<Register> selectRegisterListByBnum(int bnum);
 	public void deleteBoard(int bnum);
 	public int getPossibleNop(int bnum);
 	public void insertRegister(HashMap<String, Object> register);
