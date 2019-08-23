@@ -283,7 +283,7 @@
 
 	<jsp:include page="header.jsp"></jsp:include>
 	
-	<h1 style="font-family: 함초롬돋움; clear: both; margin-left: 30px;">Travel With Me</h1>
+	<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px;">Travel With Me</h1>
 	<hr>
 	
 	<div class="container">
@@ -414,7 +414,7 @@
       		
 		        <!-- Modal Header -->
 		        <div class="modal-header">
-		          <h3 class="modal-title" style="font-family: 배달의민족 도현">신청시 주의해야할 주요정책</h3>
+		          <h3 class="modal-title" style="font-family: '배달의민족 도현'">신청시 주의해야할 주요정책</h3>
 					<button type="button" class="close" data-dismiss="modal">×</button>
 		        </div>
 	        
@@ -448,7 +448,7 @@
       		
 		        <!-- Modal Header -->
 		        <div class="modal-header">
-		          <h3 class="modal-title" style="font-family: 배달의민족 도현">신청 가능 인원 수 : <span class="nop"></span>명</h3>
+		          <h3 class="modal-title" style="font-family: '배달의민족 도현'">신청 가능 인원 수 : <span class="nop"></span>명</h3>
 					<button type="button" class="close" data-dismiss="modal">×</button>
 		        </div>
 	        
@@ -478,7 +478,7 @@
       		
 		        <!-- Modal Header -->
 		        <div class="modal-header">
-		          <h3 class="modal-title" style="font-family: 배달의민족 도현">신청이 완료되었습니다</h3>
+		          <h3 class="modal-title" style="font-family: '배달의민족 도현'">신청이 완료되었습니다</h3>
 					<button type="button" class="close" data-dismiss="modal">×</button>
 		        </div>
 	        
@@ -506,7 +506,7 @@
       		
 		        <!-- Modal Header -->
 		        <div class="modal-header">
-		          <h3 class="modal-title" style="font-family: 배달의민족 도현">신청현황</h3>
+		          <h3 class="modal-title" style="font-family: '배달의민족 도현'">신청현황</h3>
 					<button type="button" class="close" data-dismiss="modal">×</button>
 		        </div>
 	        
