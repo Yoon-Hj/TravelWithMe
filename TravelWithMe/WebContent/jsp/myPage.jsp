@@ -117,13 +117,13 @@ response.setHeader("pragma","no-cache");
 			<c:when test="${memPoint.CNT > 0 }">
 				<c:choose>
 					<c:when test="${memPoint.GRADE == 'Gold' }">
-						<img src="imgs/gold.jpg" style="width:70px;height:70px;"/><BR>
+						<img src="imgs/gold2.jpg" style="width:70px;height:70px;"/><BR>
 					</c:when>
 					<c:when test="${memPoint.GRADE == 'Silver' }">
-						<img src="imgs/silver.jpg" style="width:70px;height:70px;"/><BR>
+						<img src="imgs/silver2.jpg" style="width:70px;height:70px;"/><BR>
 					</c:when>
 					<c:when test="${memPoint.GRADE == 'Bronze' }">
-						<img src="imgs/bronze.jpg" style="width:70px;height:70px;"/><BR>
+						<img src="imgs/bronze2.jpg" style="width:70px;height:70px;"/><BR>
 					</c:when>
 				</c:choose>
 					가이드 포인트  ${memberInfo.mguidepoint}점<BR>

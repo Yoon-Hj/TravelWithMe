@@ -228,7 +228,7 @@
 </select>
 
 <!-- 게시글 번호로 게시글 신청자 받아오기 -->
-<select id="selectRegisterListByBnum" parameterType="int" resultType="java.util.HashMap">
+<select id="selectRegisterListByBnum" parameterType="int" resultType="register">
 	select mid, rnop, rid from register where bnum = #{bnum}
 </select>
 

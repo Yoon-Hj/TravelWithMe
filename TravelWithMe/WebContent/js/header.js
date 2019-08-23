@@ -23,7 +23,7 @@ $(document).ready(function(){
 	}
 
 	function onMessage(evt) {
-		$('.moreNews').html(evt.data);
+		$('#noticeCnt').html(evt.data);
 	}
 
 	function onError(evt) {
@@ -47,11 +47,11 @@ $(document).ready(function(){
 				var grade = data.GRADE;
 				var img = "";
 				if(grade == 'Gold'){
-					img = "<img class='gradeImg' src='imgs/hover_gold.jpg'/>";
+					img = "<img class='gradeImg' src='imgs/hover_gold2.jpg'/>";
 				}else if(grade == 'Silver'){
-					img = "<img class='gradeImg' src='imgs/hover_silver.jpg'/>";
+					img = "<img class='gradeImg' src='imgs/hover_silver2.jpg'/>";
 				}else if(grade == 'Bronze'){
-					img = "<img class='gradeImg' src='imgs/hover_bronze.jpg'/>";
+					img = "<img class='gradeImg' src='imgs/hover_bronze2.jpg'/>";
 				}
 				$('[data-toggle="tooltip"]').tooltip(
 						{title: "<a>신뢰지수 &nbsp" + mpoint + " / 100점</a><BR>" + 

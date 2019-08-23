@@ -114,7 +114,7 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 			while (true){
 				try {
 					int cnt = web_dao.getMyNoticeCount(mid);
-					sendMessage ("알림  "+ cnt);
+					sendMessage (""+ cnt);
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();

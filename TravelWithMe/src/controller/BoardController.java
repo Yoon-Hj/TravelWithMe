@@ -24,6 +24,10 @@ import org.springframework.web.servlet.View;
 
 import model.Comments;
 import model.GuideBoard;
+import model.Guideschedule;
+import model.Member;
+import model.Policy;
+import model.Register;
 import service.AdminService;
 import service.BoardService;
 import service.MemberService;
@@ -116,7 +120,6 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		mav.addAllObjects(b_bsvc.getBoardContent(bnum, bkind));
 		mav.addObject("commentList", b_bsvc.readComment(bnum));
-		mav.addObject("registerList", b_bsvc.getRegisterListByNum(bnum));
 		if(bkind.equals("A")) {
 			mav.setViewName("accomView");
 		}else if(bkind.equals("G")) {
@@ -125,6 +128,11 @@ public class BoardController {
 			mav.setViewName("commView");
 		}
 		return mav;
+	}
+	
+	@RequestMapping("getRList.do")
+	public @ResponseBody List<Register> getRList(int bnum){
+		return b_bsvc.getRegisterListByNum(bnum);
 	}
 	
 	@RequestMapping("writeComment.do")
@@ -139,7 +147,6 @@ public class BoardController {
 	
 	@RequestMapping("writeRecomment.do")
 	public @ResponseBody int writeRecomment(HttpSession session, int bnum, int cgrid, String ccontent) throws Exception {
-		System.out.println("와?");
 		String mid = (String) session.getAttribute("user");
 		Comments c = new Comments();
 		c.setMid(mid);
@@ -159,7 +166,15 @@ public class BoardController {
 		return b_bsvc.tryRegister(regId, nop, bnum, mid);
 	}
 	
+	@RequestMapping("getRegistInfo.do")
+	public @ResponseBody List<HashMap<String, Object>> getRegistInfo(int bnum) {
+		return b_bsvc.getRegistInfo(bnum);
+	}
 	
+	@RequestMapping("cancelRegister.do")
+	public @ResponseBody void cancelRegister(String mid, int bnum, String rid) {
+		b_bsvc.cancelRegister(mid, bnum, rid);
+	}
 	
 	
 	//가이드 게시글 작성하기

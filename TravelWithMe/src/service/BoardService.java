@@ -22,11 +22,13 @@ import dao.IBoardDao;
 import dao.IMemberDao;
 import model.AccomBoard;
 import model.Comments;
+import model.Member;
 import model.GuideBoard;
 import model.Guideschedule;
 import model.Notice;
 import model.Policy;
 import model.Preference;
+import model.Register;
 
 @Service
 public class BoardService {
@@ -260,7 +262,7 @@ public class BoardService {
 	}
 	
 	//해당 게시글의 신청내역 조회
-	public List<HashMap<String, Object>> getRegisterListByNum(int bnum){
+	public List<Register> getRegisterListByNum(int bnum){
 		return b_bdao.selectRegisterListByBnum(bnum);
 	}
 	
@@ -277,11 +279,27 @@ public class BoardService {
 			b_bdao.insertRegister(r);
 			//Notice n = new Notice();
 			//n.setNkcode("R-1");
+			//n.setBnum(bnum);
+			//n.setMid(mid);
 			//b_mdao.insertNotice(n);
 			return b_mdao.selectContact(mid);
 		}
 	}
 	
+	//신청자들 정보 조회
+	public List<HashMap<String, Object>> getRegistInfo(int bnum){
+		return b_mdao.selectRegiMemInfo(bnum);
+	}
+	
+	//신청취소
+	public void cancelRegister(String mid, int bnum, String rid) {
+		b_bdao.deleteRegister(rid);
+		//Notice n = new Notice();
+		//n.setNkcode("R-2");
+		//n.setBnum(bnum);
+		//n.setMid(mid);
+		//b_mdao.insertNotice(n);
+	}
 	
 	//가이드 게시글 insert
 	public void guideWrite(HttpSession session,
@@ -450,6 +468,8 @@ public class BoardService {
 		result.put("last", getLastpage(cnt));
 		result.put("totalBoard", cnt);
 		return result;
+		
+
 	}
 	
 }

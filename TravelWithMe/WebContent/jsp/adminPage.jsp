@@ -69,8 +69,8 @@ body {
 	</div>
 
 
-	<div class="gradeDiv">
-	  <h2>가이드 등급 관리</h2>
+	<div class="gradeDiv" style="display:none;">
+	  <h2>가이드 등급 관리</h2><BR>
 	  <center>
 	  	<table style="text-align:center">
 	  		<tr>
@@ -81,8 +81,8 @@ body {
 	  	</table>
 	  </center>
 	</div>  
-	<div class="themaDiv">
-	  <h2>여행취향 / 테마 관리</h2>
+	<div class="themaDiv" style="display:none;">
+	  <h2>여행취향 / 테마 관리</h2><BR>
 	  <center>
 	  	<table>
 	  		<tbody id="themaTbody"></tbody>

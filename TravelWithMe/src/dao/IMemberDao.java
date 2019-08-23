@@ -45,7 +45,7 @@ public interface IMemberDao {
 	public String selectContact(String mid);
 	
 	//게시글에 해당하는 신청자 리스트 조회
-	public HashMap<String, Object> selectRegiMemInfo(int bnum);
+	public List<HashMap<String, Object>> selectRegiMemInfo(int bnum);
 	
 	//회원정보 수정
 	public void updateMember(Member member);
