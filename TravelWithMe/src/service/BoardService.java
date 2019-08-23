@@ -1,5 +1,7 @@
 package service;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -379,10 +381,31 @@ public class BoardService {
 		}
 		
 		//사진삽입
-		HashMap<Object, Object> photoModel = new HashMap<Object, Object>();
+		HashMap<String, Object> photoModel = null;
 		if(photo.length!=0) {
 			for(int i = 0; i<photo.length;i++) {
-				photoModel.put(photo[i].getOriginalFilename(),i);	
+				photoModel = new HashMap<String, Object>();
+				if(photo[i].getOriginalFilename()!="") {			
+					String path= "C:/Temp/attach/";
+					File dir = new File(path);
+					if(!dir.exists()) dir.mkdirs();
+					String fileName=photo[i].getOriginalFilename();
+					File attachFile = new File(path+fileName);
+					try {
+						photo[i].transferTo(attachFile); 
+						photoModel.put("photopath", fileName);
+					} catch (IllegalStateException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				photoModel.put("porder", i);
+				photoModel.put("bnum", bnum);
+				b_bdao.insertPhoto(photoModel);
+				
 			}
 		}
 		
