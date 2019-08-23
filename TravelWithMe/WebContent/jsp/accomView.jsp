@@ -217,6 +217,7 @@
 				 return;
 			 }
 		});
+		
 		*/
 		//신청관리버튼 누르면 신청자들 정보 조회
 		$('#rmbtn').on('click', function(){
