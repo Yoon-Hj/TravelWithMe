@@ -234,4 +234,8 @@ public class BoardService {
 	}
 	
 	
+	
+	//가이드 게시글 insert
+	//public void guideWrite
+	
 }

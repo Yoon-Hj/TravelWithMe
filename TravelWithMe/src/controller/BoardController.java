@@ -12,7 +12,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import model.Comments;
 import model.GuideBoard;
-import model.Guideschedule;
-import model.Policy;
 import service.AdminService;
 import service.BoardService;
 import service.MemberService;
@@ -218,71 +215,7 @@ public class BoardController {
 									String[] DAY3time,String[] DAY3place ) throws ParseException{
 		System.out.println("컨트롤러 연결");
 		
-		String writeId = (String)session.getAttribute("user");
-		String garea = guideBoard.getGarea1() + " " + guideBoard.getGarea2();
-		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
-		Date togstartdate = (Date)fm.parse(JSPgstartdate);
-		Date togfinishdate = (Date)fm.parse(JSPgfinishdate);
-		Date togenddate = (Date)fm.parse(JSPgenddate);
 		
-		guideBoard.setMid(writeId);
-		guideBoard.setGarea(garea);
-		guideBoard.setGstartdate(togstartdate);
-		guideBoard.setGfinishdate(togfinishdate);
-		guideBoard.setGenddate(togenddate);
-		guideBoard.setBkind("G");
-		
-		Policy policy = new Policy();
-		List<Policy> policyList = new ArrayList<Policy>();
-		for(int i = 0; i<pcode.length;i++) {
-			policy.setPcode(Integer.parseInt(pcode[i]));
-			if(pvalue.length!=0) {
-				policy.setPvalue(Integer.parseInt(pvalue[i]));				
-			}
-			policyList.add(policy);
-		}
-		
-		
-		HashMap<Object, Object> photoModel = new HashMap<Object, Object>();
-		if(photo.length!=0) {
-			for(int i = 0; i<photo.length;i++) {
-				photoModel.put(photo[i].getOriginalFilename(),i);	
-			}
-		}
-
-		
-		Guideschedule guideSche1 = null;
-		Guideschedule guideSche2 = null;
-		Guideschedule guideSche3 = null;
-		List<Guideschedule> DAY1guideScheList = new ArrayList<Guideschedule>();
-		List<Guideschedule> DAY2guideScheList = new ArrayList<Guideschedule>();
-		List<Guideschedule> DAY3guideScheList = new ArrayList<Guideschedule>();
-		
-		for(int i = 0; i<DAY1time.length;i++) {
-			guideSche1 = new Guideschedule();
-			guideSche1.setSdate("DAY1");
-			guideSche1.setStime(DAY1time[i]);
-			guideSche1.setSplace(DAY1place[i]);
-			DAY1guideScheList.add(guideSche1);
-		}
-		if(DAY2time.length!=0) {
-			for(int i = 0; i<DAY2time.length;i++) {
-				guideSche2 = new Guideschedule();
-				guideSche2.setSdate("DAY2");
-				guideSche2.setStime(DAY2time[i]);
-				guideSche2.setSplace(DAY2place[i]);
-				DAY2guideScheList.add(guideSche2);
-			}
-		}
-		if(DAY3time.length!=0) {
-			for(int i = 0; i<DAY3time.length;i++) {
-				guideSche3 = new Guideschedule();
-				guideSche3.setSdate("DAY3");
-				guideSche3.setStime(DAY3time[i]);
-				guideSche3.setSplace(DAY3place[i]);
-				DAY3guideScheList.add(guideSche3);
-			}
-		}
 
 	}
 }

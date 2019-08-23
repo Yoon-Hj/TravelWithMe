@@ -182,7 +182,6 @@ $(function(){
 	
 					var html = "<a><img style='width:100px;height:100px;margin-top:5px;' src='"+e.target.result+"'>&nbsp;</a>";
 					$(".imgs_wrap").append(html);
-					ti++;
 					
 				}
 				reader.readAsDataURL(f);
