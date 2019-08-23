@@ -230,64 +230,64 @@ $(function(){
 	
 	//basic에서 detail로 넘어갈 때 제한사항
 	$("#basicTodetail").click(function(){
-//		var flag = false;
-//		var policyflag = false;
-//		
-//		//정책 제한하기
-//		var x = $("input:checkbox[name=pcode]:checked").length;
-//		if(x==0) flag=false;
-//		else{
-//			$('input:checkbox[name=pcode]:checked').each(function(){
-//				var t = $(this).val();
-//				if(t==1) policyflag = true;
-//				else if(t==2){
-//					if($("#pvalue2").val()=="") flag=false;
-//					if($("#pvalue2").val() < 0) {
-//						policyflag = false;
-//						alert("2번정책이 올바른 조건이 아닙니다. 다시 확인하세요.");
-//						$("#pvalue2").val("");
-//					}else{
-//						policyflag=true;
-//					}
-//				}
-//				else if(t==3){
-//					if($("#pvalue3").val()=="") flag=false;
-//					if($("#pvalue3").val()<0 || $("#pvalue3").val()>100 ){
-//						policyflag = false;
-//						alert("3번정책이 올바른 조건이 아닙니다. 다시 확인하세요.");
-//						$("#pvalue3").val("");
-//					}else{
-//						policyflag=true;
-//					}
-//				}
-//				
-//			});			
-//		}
-//		
-//		if($("#gstartdate").val()<todayDate || $("#gfinishdate").val() < $("#gstartdate").val() 
-//				|| $("#genddate").val() > $("#gstartdate").val()) {
-//				
-//				alert("올바른 날짜가 아닙니다. 다시 한번 확인하세요");
-//				$("#gstartdate").val("");
-//				$("#gfinishdate").val("");
-//				$("#genddate").val("");
-//			}
-//		
-//		if($("#btitle").val()!="" && $("#gstartdate").val()!="" && $("#gfinishdate").val()!=""
-//			&& $("#genddate").val()!="" && $("#gdepartplace").val()!="" && $("#gdeparttime").val()!=""
-//			&& $("#garea1").val()!="" && $("#garea2").val()!="" && $("#gnop").val()!="" )
-//		{
-//			flag=true;
-//		}
-//		
-//		if(!flag || !policyflag){
-//			alert("필수작성 사항을 기입해주세요");			
-//		}else if(flag && policyflag){
-//			openDetailInfo();
-//			flag=false;
-//			policyflag = false;
-//		}
-		openDetailInfo();
+		var flag = false;
+		var policyflag = false;
+		
+		//정책 제한하기
+		var x = $("input:checkbox[name=pcode]:checked").length;
+		if(x==0) flag=false;
+		else{
+			$('input:checkbox[name=pcode]:checked').each(function(){
+				var t = $(this).val();
+				if(t==1) policyflag = true;
+				else if(t==2){
+					if($("#pvalue2").val()=="") flag=false;
+					if($("#pvalue2").val() < 0) {
+						policyflag = false;
+						alert("2번정책이 올바른 조건이 아닙니다. 다시 확인하세요.");
+						$("#pvalue2").val("");
+					}else{
+						policyflag=true;
+					}
+				}
+				else if(t==3){
+					if($("#pvalue3").val()=="") flag=false;
+					if($("#pvalue3").val()<0 || $("#pvalue3").val()>100 ){
+						policyflag = false;
+						alert("3번정책이 올바른 조건이 아닙니다. 다시 확인하세요.");
+						$("#pvalue3").val("");
+					}else{
+						policyflag=true;
+					}
+				}
+				
+			});			
+		}
+		
+		if($("#gstartdate").val()<todayDate || $("#gfinishdate").val() < $("#gstartdate").val() 
+				|| $("#genddate").val() > $("#gstartdate").val()) {
+				
+				alert("올바른 날짜가 아닙니다. 다시 한번 확인하세요");
+				$("#gstartdate").val("");
+				$("#gfinishdate").val("");
+				$("#genddate").val("");
+			}
+		
+		if($("#btitle").val()!="" && $("#gstartdate").val()!="" && $("#gfinishdate").val()!=""
+			&& $("#genddate").val()!="" && $("#gdepartplace").val()!="" && $("#gdeparttime").val()!=""
+			&& $("#garea1").val()!="" && $("#garea2").val()!="" && $("#gnop").val()!="" )
+		{
+			flag=true;
+		}
+		
+		if(!flag || !policyflag){
+			alert("필수작성 사항을 기입해주세요");			
+		}else if(flag && policyflag){
+			openDetailInfo();
+			flag=false;
+			policyflag = false;
+		}
+
 	});
 	
 	//상세정보에서 기본정보로 넘어갈 때
@@ -301,22 +301,22 @@ $(function(){
 		
 	//상세정보에서 미리보기로 넘어갈 때
 	$("#detailToPreview").click(function(){
-//		var flag = true;
-//		
-//		
-//		$("#day > tbody").find(":input[type=text]").each(function(){
-//			if($(this).val()=="") flag = false;
-//		});
-//		$("#day > tbody").find(":input[type=time]").each(function(){
-//			if($(this).val()=="") flag = false;
-//		});
-//		
-//		if(!flag){
-//			alert("필수작성 사항을 기입해주세요");
-//		}else{
-//			openPreview();
-//		}
-		openPreview();
+		var flag = true;
+		
+		
+		$("#day > tbody").find(":input[type=text]").each(function(){
+			if($(this).val()=="") flag = false;
+		});
+		$("#day > tbody").find(":input[type=time]").each(function(){
+			if($(this).val()=="") flag = false;
+		});
+		
+		if(!flag){
+			alert("필수작성 사항을 기입해주세요");
+		}else{
+			openPreview();
+		}
+
 	});
 	
 	$("#previewToDetail").click(function(){
