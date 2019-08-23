@@ -51,11 +51,11 @@ $(document).ready(function(){
 		$('#keywordFormBtn').css('background-color', '#58ACFA');
 		$('#keywordFormBtn').css('color', 'white');
 	}else if(apitype == "2"){
-		$('#festivalForm').css('background-color', '#58ACFA');
-		$('#festivalForm').css('color', 'white');
+		$('#festivalFormBtn').css('background-color', '#58ACFA');
+		$('#festivalFormBtn').css('color', 'white');
 	}else if(apitype == "3"){
-		$('#areaForm').css('background-color', '#58ACFA');
-		$('#areaForm').css('color', 'white');
+		$('#areaFormBtn').css('background-color', '#58ACFA');
+		$('#areaFormBtn').css('color', 'white');
 	}
 	
 	

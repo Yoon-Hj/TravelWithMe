@@ -247,7 +247,7 @@
 	<selectKey resultType="int" keyProperty="rid" order="BEFORE">
 			select register_seq.nextval from dual
 	</selectKey>
-	insert into register values ('R'||${rid}, #{bnum}, #{regId}, default, #{nop}, default, default)
+	insert into register values ('R'||${rid}, #{bnum}, #{regId}, default, #{nop}, default)
 </insert>
 
 <!-- 게시글에 동행 및 가이드 투어 신청 취소하기 -->

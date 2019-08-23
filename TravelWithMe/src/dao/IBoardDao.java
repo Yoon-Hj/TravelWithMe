@@ -57,7 +57,7 @@ public interface IBoardDao {
 	public List<HashMap<String, Object>> selectRegisterListByBnum(int bnum);
 	public void deleteBoard(int bnum);
 	public int getPossibleNop(int bnum);
-	public void insertRegister(HashMap<String,Object> register);
+	public void insertRegister(HashMap<String, Object> register);
 	public void deleteRegister(String rid);
 	public int insertComment(Comments comments);
 	public int insertRecomment(Comments comments);

@@ -15,6 +15,7 @@ import dao.IBoardDao;
 import dao.IMemberDao;
 import model.AccomBoard;
 import model.Comments;
+import model.Notice;
 import model.Preference;
 
 @Service
@@ -180,8 +181,14 @@ public class BoardService {
 	}
 	
 	//해당 게시물 조회수 증가
-	public void uprcnt(int bnum) {
-		b_bdao.updateReadCount(bnum);
+	public void uprcnt(int bnum) throws Exception {
+		try {
+			b_bdao.updateReadCount(bnum);
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception();
+		}
+		
 	}
 	
 	//해당 게시글 내용 조회
@@ -206,13 +213,27 @@ public class BoardService {
 	}
 	
 	//댓글 작성
-	public int writeComment(Comments comments) {
-		return b_bdao.insertComment(comments);
+	public int writeComment(Comments comments) throws Exception {
+		int a = 0;
+		try {
+			a = b_bdao.insertComment(comments);
+		}catch (Exception e){
+			e.printStackTrace();
+			throw new Exception();
+		}
+		return a;
 	}
 	
 	//답글 작성
-	public int writeRecomment(Comments comments) {
-		return b_bdao.insertRecomment(comments);
+	public int writeRecomment(Comments comments) throws Exception {
+		int a = 0;
+		try {
+			a = b_bdao.insertRecomment(comments);
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception();
+		}
+		return a;
 	}
 	
 	//댓글 삭제
@@ -233,6 +254,23 @@ public class BoardService {
 		return b_bdao.selectRegisterListByBnum(bnum);
 	}
 	
+	//해당 게시글에 신청
+	public String tryRegister(String regId, int nop, int bnum, String mid) {
+		int pnum = b_bdao.getPossibleNop(bnum);
+		if(pnum < nop) {
+			return "모집 인원을 초과하여 신청이 불가합니다.";
+		}else {
+			HashMap<String, Object> r = new HashMap<String, Object>();
+			r.put("bnum", bnum);
+			r.put("regId", regId);
+			r.put("nop", nop);
+			b_bdao.insertRegister(r);
+			//Notice n = new Notice();
+			//n.setNkcode("R-1");
+			//b_mdao.insertNotice(n);
+			return b_mdao.selectContact(mid);
+		}
+	}
 	
 	
 	//가이드 게시글 insert
