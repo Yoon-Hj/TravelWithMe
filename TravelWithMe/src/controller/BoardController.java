@@ -162,7 +162,7 @@ public class BoardController {
 	
 	
 	
-	
+	//가이드 게시글 작성하기
 	@RequestMapping("guideWrite.do")
 	public @ResponseBody void guideWrite(
 									HttpSession session,
@@ -180,6 +180,7 @@ public class BoardController {
 
 	}
 	
+	//가이드 게시글 목록보기
 	@RequestMapping("guideBoardList.do")
 	public ModelAndView guideBoardList( @RequestParam(defaultValue="1") int page) {
 		ModelAndView mav = new ModelAndView();
@@ -190,11 +191,23 @@ public class BoardController {
 		return mav;
 	}
 	
+	//사진 화면에 출력하기
 	@RequestMapping("download.do")
 	public View download(String photopath) {
 		String path= "C:/Temp/attach/";
 		File attachFile = new File(path+photopath);
 		View view =new DownloadView(attachFile);
 		return view;
+	}
+	
+	//가이드 게시글 검색
+	@RequestMapping("guideSearch.do")
+	public ModelAndView guideSearch(@RequestParam(defaultValue="1") int page,
+							@RequestParam(defaultValue="1") int type, String keyword,
+							String sdate,String fdate) throws ParseException {
+		ModelAndView mav = new ModelAndView();
+		mav.addAllObjects(b_bsvc.getGuideSearchList(page, type, keyword, sdate, fdate));
+		mav.setViewName("guideBoardList");
+		return mav;
 	}
 }

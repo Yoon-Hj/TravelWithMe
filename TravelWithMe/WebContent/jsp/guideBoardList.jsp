@@ -26,18 +26,18 @@
 	
 	<div class="container">
 	
-		<a href="guideWriteForm" data-toggle="tooltip" data-placement="bottom" title="글 작성하기" 
+		<a href="guideWriteForm.do" data-toggle="tooltip" data-placement="bottom" title="글 작성하기" 
 			style="text-decoration: none; color: #787878; font-family: '함초롬돋움';">
 			원하는 가이드글이 없으신가요? 직접 가이드글을 작성해보세요.</a>
 		<br><br>
 
 		<div class="card" style="font-family: '함초롬돋움';">
-			 <form action="accomSearch.do">
+			 <form action="guideSearch.do">
 			 <table style="border: none;">
 			 <tr>
 			 	<td>
 				 	<select name="type" class="custom-select" style="width: 130px">
-				 	<option value="1" selected="selected">제목</option>
+				 		<option value="1">제목</option>
 						<option value="2">내용</option>
 						<option value="3">제목+내용</option>
 						<option value="4">작성자(아이디)</option>
@@ -54,7 +54,9 @@
 					<input type="date" name="fdate" max="2030-12-31" min="2019-01-01"
 							style="width: 250px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">
 				</td>
-				<td colspan="3" width=130px; style="margint-left: 20px; margin-top: 150px"><button type="submit" class="btn" style="background-color: #B5C3C8; color: white; width: 140px; height: 40px;">SEARCH&nbsp;&nbsp;<i class="fa fa-search"></i></button></td>
+				<td rowspan="2" width=130px; style="margint-left: 20px; margin-top: 150px">
+					<button type="submit" class="btn" style="vertical-align:center; background-color: #B5C3C8; color: white; width: 140px; height: 40px;">SEARCH&nbsp;&nbsp;<i class="fa fa-search"></i></button>
+				</td>
 			</tr>
 			</table>
 			</form>
@@ -67,7 +69,16 @@
 			<div class="row">
 			<c:forEach var="b" items="${readCntList}" varStatus="status">
 			  <div class="column">
-				<a href="readBoard.do?bnum=${b.bnum}&bkind=A"><img style="width:100%; height: 100%;" src="download.do?photopath=${b.photopath}"></a>
+				<a href="readBoard.do?bnum=${b.bnum}&bkind=G">
+				<c:choose>
+						<c:when test="${b.photopath==null}">
+							<img style="width:100%; height: 100%;" src="imgs/noImage.gif">
+						</c:when>
+						<c:otherwise>
+							<img style="width:100%; height: 100%;" src="download.do?photopath=${b.photopath}">
+						</c:otherwise>
+					</c:choose>
+				</a>
 				<div class="content">
 					<p class="iarea"><fmt:formatDate value="${b.gstartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${b.gfinishdate}" pattern="yyyy-MM-dd"/>
 					<br>[${b.garea}] ${b.btitle}<br>${b.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${b.breadcount}</p>
@@ -85,9 +96,18 @@
 			<div class="row">
 			<c:forEach var="g" items="${boardList}" varStatus="status">
 			  <div class="column" style="margin-bottom: 12px;">
-				<a href="readBoard.do?bnum=${g.bnum}&bkind=A"><img style="width:100%; height: 100%;" src="download.do?photopath=${g.photopath}"></a>
+				<a href="readBoard.do?bnum=${g.bnum}&bkind=G">
+					<c:choose>
+						<c:when test="${g.photopath==null}">
+							<img style="width:100%; height: 100%;" src="imgs/noImage.gif">
+						</c:when>
+						<c:otherwise>
+							<img style="width:100%; height: 100%;" src="download.do?photopath=${g.photopath}">
+						</c:otherwise>
+					</c:choose>
+				</a>
 				<div class="content">
-					<p class="iarea"><fmt:formatDate value="${g.gstartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${a.afinishdate}" pattern="yyyy-MM-dd"/>
+					<p class="iarea"><fmt:formatDate value="${g.gstartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${g.gfinishdate}" pattern="yyyy-MM-dd"/>
 					<br>[${g.garea}] ${g.btitle}<br>${g.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${g.breadcount}</p>
 				</div>
 			  </div>
@@ -99,8 +119,8 @@
 
 	<div class="pagination" style="margin-top: 25px; margin-left: 400px; text-align: center;">
 		<c:if test="${ start != 1}">
-			<a href="accomBoardList.do?page=1">&laquo;</a>
-			<a href="accomBoardList.do?page=${start-1}">&#8249;</a> 
+			<a href="guideBoardList.do?page=1">&laquo;</a>
+			<a href="guideBoardList.do?page=${start-1}">&#8249;</a> 
 		</c:if>
 		
 		<c:forEach var="i" begin="${ start }" end="${ end }" varStatus="status">
@@ -109,14 +129,14 @@
 					<a class="active">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="accomBoardList.do?page=${i}<c:if test="${ keyword != null }">&keyword=${keyword}&type=${type}</c:if>" style="font-size: 17px">${i}</a>
+					<a href="guideBoardList.do?page=${i}<c:if test="${ keyword != null }">&keyword=${keyword}&type=${type}</c:if>" style="font-size: 17px">${i}</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 			
 		<c:if test="${ end != last }">
-			<a href="accomBoardList.do?page=${end+1}">&#8250;</a> 
-			<a href="accomBoardList.do?page=${last}">&raquo;</a>
+			<a href="guideBoardList.do?page=${end+1}">&#8250;</a> 
+			<a href="guideBoardList.do?page=${last}">&raquo;</a>
 		</c:if>
 	</div>
 
