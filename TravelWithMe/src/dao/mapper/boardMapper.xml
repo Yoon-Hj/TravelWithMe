@@ -350,11 +350,11 @@
 </insert>
 
 <!-- 가이드게시글 세부일정 테이블에 삽입  -->
-<insert id="insertGuideSche" parameterType="guideschedule" useGeneratedKeys="true" keyProperty="scode">
-	<selectKey resultType="int" keyProperty="scode" order="BEFORE">
+<insert id="insertGuideSche" parameterType="guideschedule" useGeneratedKeys="true" keyProperty="scode_output">
+	<selectKey resultType="int" keyProperty="scode_output" order="BEFORE">
 			select guideschedule_seq.nextval from dual
 	</selectKey>
-	insert into guideschedule values ('S'||${scode}, #{bnum}, #{sdate}, #{stime}, #{splace})
+	insert into guideschedule values ('S'||${scode_output}, #{bnum}, #{sdate}, #{stime}, #{splace})
 </insert>
 
 <!-- 가이드게시글 사진 테이블에 삽입  -->
