@@ -90,6 +90,17 @@
 				<tr>
 					<td style="width:180px ; height:66px;">
 						<input type="button" id="keywordFormBtn" value="키워드 검색" style="width : 180px;height:66px; background-color: #B5C3C8; border: 0px; color:white; font-size: 17px; font-weight: bold;">
+					<td style="width : 200px; text-align:center;">
+					<c:choose>
+						<c:when test="${i.firstimage != null }">
+							<image src="${i.firstimage }" style="width:160px; height:160px; cursor:pointer;"
+							onclick="viewDetail('${i.contentid}', '${i.contenttypeid}', '${i.title }')"/>
+						</c:when>
+						<c:otherwise>
+						<image src="imgs/noImage.gif" style="width:160px; height:160px; cursor:pointer;"
+							onclick="viewDetail('${i.contentid}', '${i.contenttypeid}', '${i.title }')"/>
+						</c:otherwise>
+					</c:choose>
 					</td>
 				</tr>
 				<tr>
@@ -100,6 +111,17 @@
 				<tr>
 					<td style="height:66px">
 					<input type="button" id="areaFormBtn" value="지역 검색" style="width : 180px;height:66px; background-color: transparent; border: 0px; font-size: 17px; font-weight: bold;">
+					<td style="width : 200px; text-align:center;">
+					<c:choose>
+						<c:when test="${i.firstimage != null}">
+							<image src="${i.firstimage }" style="width:160px; height:160px; cursor:pointer;"
+							onclick="viewDetail('${i.contentid}', '${i.contenttypeid}', '${i.title }')"/>
+						</c:when>
+						<c:otherwise>
+						<image src="imgs/noImage.gif" style="width:160px; height:160px; cursor:pointer;"
+							onclick="viewDetail('${i.contentid}', '${i.contenttypeid}', '${i.title }')"/>
+						</c:otherwise>
+					</c:choose>
 					</td>
 				</tr>
 			</table>
@@ -164,6 +186,43 @@
 		</div>
 		
 	</div>
+=======
+		</td>
+		</c:when>
+		<c:otherwise>
+		<td>
+			<table>
+				<tr>
+					<td style="width : 200px; text-align:center;">
+					<c:choose>
+						<c:when test="${i.firstimage != null }">
+							<image src="${i.firstimage }" style="width:160px; height:160px; cursor:pointer;"
+							onclick="viewDetail('${i.contentid}', '${i.contenttypeid}', '${i.title }')"/>
+						</c:when>
+						<c:otherwise>
+						<image src="imgs/noImage.gif" style="width:160px; height:160px; cursor:pointer;"
+							onclick="viewDetail('${i.contentid}', '${i.contenttypeid}', '${i.title }')"/>
+						</c:otherwise>
+					</c:choose>
+					</td>
+				</tr>
+				<tr>
+					<td style="width : 160px; height : 100px;"><p>${i.title }</p></td>
+				</tr>
+			</table>
+		</td>
+		</c:otherwise>
+	</c:choose>
+</c:forEach>
+</tr>
+</table>
+<c:if test="${apiType != '0' }">
+
+	<c:if test="${startpage != 1 }">
+		<button class="PageNavi" value="1">처음</button>
+		<button class="PageNavi" value="${startpage - 1}">이전</button>
+	</c:if>
+>>>>>>> branch 'master' of https://github.com/Yoon-Hj/TravelWithMe.git
 	
 	
 	

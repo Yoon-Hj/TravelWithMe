@@ -63,7 +63,7 @@ public interface IBoardDao {
 	public int insertComment(Comments comments);
 	public int insertRecomment(Comments comments);
 	public int deleteComment(int cnum);
-	public void insertPolicy(HashMap<String, Object> policy);
+	public void insertPolicy(Policy policy);
 	public void deletePolicy(int bnum);
 	public int getBoardCount(HashMap<String, Object> bkind);
 	public List<HashMap<String, Object>> selectQuickSearch(String keyword);
