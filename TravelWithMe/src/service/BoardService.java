@@ -258,7 +258,7 @@ public class BoardService {
 	public String tryRegister(String regId, int nop, int bnum, String mid) {
 		int pnum = b_bdao.getPossibleNop(bnum);
 		if(pnum < nop) {
-			return "모집 인원을 초과하여 신청이 불가합니다.";
+			return "";
 		}else {
 			HashMap<String, Object> r = new HashMap<String, Object>();
 			r.put("bnum", bnum);
