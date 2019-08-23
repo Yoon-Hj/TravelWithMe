@@ -82,17 +82,17 @@ $(document).ready(function(){
 		
 		if(type == "1"){
 			var keyword = $("#storeKeyword").val();
-			location.href="attTest.do?type=1&page=" + page + "&keyword=" + keyword;
+			location.href="attractionInfo.do?type=1&page=" + page + "&keyword=" + keyword;
 		}else if(type == "2"){
 			var eventStartDate = $('#storeSdate').val();
 			var eventEndDate = $('#storeEdate').val();
 			var area = $('#storeArea').val();
 			
-			location.href="attTest.do?type=2&page=" + page + "&area=" + area + 
+			location.href="attractionInfo.do?type=2&page=" + page + "&area=" + area + 
 			"&eventStartDate=" + eventStartDate + "&eventEndDate=" + eventEndDate;
 		}else if(type == "3"){
 			var area = $('#storeArea').val();
-			location.href="attTest.do?type=3&page=" + page + "&area=" + area;
+			location.href="attractionInfo.do?type=3&page=" + page + "&area=" + area;
 		}
 		
 		
@@ -100,7 +100,7 @@ $(document).ready(function(){
 	
 	$(".areaBtn").on('click', function(){
 		var area = $(this).val();
-		location.href="attTest.do?type=3&area=" + area;
+		location.href="attractionInfo.do?type=3&area=" + area;
 	});
 	
 	// 지역검색 선택한 지역 비활성화
@@ -116,7 +116,7 @@ $(document).ready(function(){
 	$('#searchKeyword').on('click', function(){
 		var keyword = $('#keyword').val();
 		if(keyword.length != 0)
-			location.href='attTest.do?keyword=' + keyword + "&type=1";
+			location.href='attractionInfo.do?keyword=' + keyword + "&type=1";
 		else
 			alert("검색어를 입력해주세요.");
 	});

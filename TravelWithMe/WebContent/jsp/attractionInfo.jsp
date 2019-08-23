@@ -65,7 +65,7 @@
 	
 	<div id="festivalForm" style="width : 616px; height : 196px; float:left;display : inline; display:none;">
 		<div class="input-group mb-3" style="margin:auto;">
-		    	<form action="attTest.do">
+		    	<form action="attractionInfo.do">
 				<input type="date" name="eventStartDate" id="sDate" value="${eventStartDate }" required>
 				<input type="date" name="eventEndDate" id="eDate" value="${eventEndDate }">
 				<select name="area" id="area">
