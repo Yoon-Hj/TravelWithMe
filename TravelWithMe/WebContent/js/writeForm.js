@@ -275,7 +275,7 @@ $(function(){
 		
 		if($("#btitle").val()!="" && $("#gstartdate").val()!="" && $("#gfinishdate").val()!=""
 			&& $("#genddate").val()!="" && $("#gdepartplace").val()!="" && $("#gdeparttime").val()!=""
-			&& $("#garea1").val()!="" && $("#garea2").val()!="" && $("#gnop").val()!="" )
+			&& $("#garea1").val()!="" && $("#gnop").val()!="" )
 		{
 			flag=true;
 		}

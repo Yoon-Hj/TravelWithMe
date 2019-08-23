@@ -170,7 +170,7 @@ public class BoardController {
 									@RequestParam(name="photo",required=false) MultipartFile[] photo,
 									String[] DAY1time,String[] DAY1place,
 									String[] DAY2time,String[] DAY2place,
-									String[] DAY3time,String[] DAY3place ) throws ParseException{
+									String[] DAY3time,String[] DAY3place ) throws Exception{
 		System.out.println("컨트롤러 연결");
 		
 		b_bsvc.guideWrite(session,guideBoard,JSPgstartdate, JSPgfinishdate, JSPgenddate,

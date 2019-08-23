@@ -5,6 +5,7 @@ import java.util.Date;
 public class Guideschedule {
 	
 	private String scode;
+	private int scode_output;
 	private int bnum;
 	private String sdate;
 	private String stime;

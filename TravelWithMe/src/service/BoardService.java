@@ -291,7 +291,7 @@ public class BoardService {
 			MultipartFile[] photo,
 			String[] DAY1time,String[] DAY1place,
 			String[] DAY2time,String[] DAY2place,
-			String[] DAY3time,String[] DAY3place ) throws ParseException {
+			String[] DAY3time,String[] DAY3place ) throws Exception {
 		
 		String writeId = (String)session.getAttribute("user");
 		String garea = guideBoard.getGarea1() + " " + guideBoard.getGarea2();
@@ -307,106 +307,113 @@ public class BoardService {
 		guideBoard.setGenddate(togenddate);
 		guideBoard.setBkind("G");
 		
-		b_bdao.insertGuideBoard(guideBoard);
-		b_bdao.insertGuide(guideBoard);
 		
-		//스케쥴 삽입
-		int bnum = guideBoard.getBnum();
-		System.out.println("service bnum: "+bnum);
-		
-		Guideschedule guideSche1 = null;
-		Guideschedule guideSche2 = null;
-		Guideschedule guideSche3 = null;
-		List<Guideschedule> DAY1guideScheList = new ArrayList<Guideschedule>();
-		List<Guideschedule> DAY2guideScheList = new ArrayList<Guideschedule>();
-		List<Guideschedule> DAY3guideScheList = new ArrayList<Guideschedule>();
-		
-		for(int i = 0; i<DAY1time.length;i++) {
-			guideSche1 = new Guideschedule();
-			guideSche1.setBnum(bnum);
-			guideSche1.setSdate("DAY1");
-			guideSche1.setStime(DAY1time[i]);
-			guideSche1.setSplace(DAY1place[i]);
-			DAY1guideScheList.add(guideSche1);
-		}
-		if(DAY2time.length!=0) {
-			for(int i = 0; i<DAY2time.length;i++) {
-				guideSche2 = new Guideschedule();
-				guideSche2.setBnum(bnum);
-				guideSche2.setSdate("DAY2");
-				guideSche2.setStime(DAY2time[i]);
-				guideSche2.setSplace(DAY2place[i]);
-				DAY2guideScheList.add(guideSche2);
+		try {
+			b_bdao.insertGuideBoard(guideBoard);
+			b_bdao.insertGuide(guideBoard);
+			
+			//스케쥴 삽입
+			int bnum = guideBoard.getBnum();
+			System.out.println("service bnum: "+bnum);
+			
+			Guideschedule guideSche1 = null;
+			Guideschedule guideSche2 = null;
+			Guideschedule guideSche3 = null;
+			List<Guideschedule> DAY1guideScheList = new ArrayList<Guideschedule>();
+			List<Guideschedule> DAY2guideScheList = new ArrayList<Guideschedule>();
+			List<Guideschedule> DAY3guideScheList = new ArrayList<Guideschedule>();
+			
+			for(int i = 0; i<DAY1time.length;i++) {
+				guideSche1 = new Guideschedule();
+				guideSche1.setBnum(bnum);
+				guideSche1.setSdate("DAY1");
+				guideSche1.setStime(DAY1time[i]);
+				guideSche1.setSplace(DAY1place[i]);
+				DAY1guideScheList.add(guideSche1);
 			}
-		}
-		if(DAY3time.length!=0) {
-			for(int i = 0; i<DAY3time.length;i++) {
-				guideSche3 = new Guideschedule();
-				guideSche3.setBnum(bnum);
-				guideSche3.setSdate("DAY3");
-				guideSche3.setStime(DAY3time[i]);
-				guideSche3.setSplace(DAY3place[i]);
-				DAY3guideScheList.add(guideSche3);
-			}
-		}
-		
-		for(int i = 0 ; i<DAY1guideScheList.size(); i++) {
-			b_bdao.insertGuideSche(DAY1guideScheList.get(i));
-		}
-		if(DAY2guideScheList.size()!=0) {
-			for(int i = 0 ; i<DAY2guideScheList.size(); i++) {
-				b_bdao.insertGuideSche(DAY2guideScheList.get(i));
-			}
-		}
-		if(DAY3guideScheList.size()!=0) {
-			for(int i = 0 ; i<DAY3guideScheList.size(); i++) {
-				b_bdao.insertGuideSche(DAY3guideScheList.get(i));
-			}
-		}
-
-		//정책삽입
-		List<Policy> policyList = new ArrayList<Policy>();
-		for(int i = 0; i<pcode.length;i++) {
-			Policy policy = new Policy();
-			policy.setBnum(bnum);
-			policy.setPcode(Integer.parseInt(pcode[i]));
-			if(pvalue.length!=0) {
-				policy.setPvalue(Integer.parseInt(pvalue[i]));				
-			}
-			policyList.add(policy);
-		}
-		
-		for(int i = 0; i<policyList.size();i++) {
-			b_bdao.insertPolicy(policyList.get(i));
-		}
-		
-		//사진삽입
-		HashMap<String, Object> photoModel = null;
-		if(photo.length!=0) {
-			for(int i = 0; i<photo.length;i++) {
-				photoModel = new HashMap<String, Object>();
-				if(photo[i].getOriginalFilename()!="") {			
-					String path= "C:/Temp/attach/";
-					File dir = new File(path);
-					if(!dir.exists()) dir.mkdirs();
-					String fileName=photo[i].getOriginalFilename();
-					File attachFile = new File(path+fileName);
-					try {
-						photo[i].transferTo(attachFile); 
-						photoModel.put("photopath", fileName);
-					} catch (IllegalStateException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+			if(DAY2time.length!=0) {
+				for(int i = 0; i<DAY2time.length;i++) {
+					guideSche2 = new Guideschedule();
+					guideSche2.setBnum(bnum);
+					guideSche2.setSdate("DAY2");
+					guideSche2.setStime(DAY2time[i]);
+					guideSche2.setSplace(DAY2place[i]);
+					DAY2guideScheList.add(guideSche2);
 				}
-				photoModel.put("porder", i);
-				photoModel.put("bnum", bnum);
-				b_bdao.insertPhoto(photoModel);
-				
 			}
+			if(DAY3time.length!=0) {
+				for(int i = 0; i<DAY3time.length;i++) {
+					guideSche3 = new Guideschedule();
+					guideSche3.setBnum(bnum);
+					guideSche3.setSdate("DAY3");
+					guideSche3.setStime(DAY3time[i]);
+					guideSche3.setSplace(DAY3place[i]);
+					DAY3guideScheList.add(guideSche3);
+				}
+			}
+			
+			for(int i = 0 ; i<DAY1guideScheList.size(); i++) {
+				b_bdao.insertGuideSche(DAY1guideScheList.get(i));
+			}
+			if(DAY2guideScheList.size()!=0) {
+				for(int i = 0 ; i<DAY2guideScheList.size(); i++) {
+					b_bdao.insertGuideSche(DAY2guideScheList.get(i));
+				}
+			}
+			if(DAY3guideScheList.size()!=0) {
+				for(int i = 0 ; i<DAY3guideScheList.size(); i++) {
+					b_bdao.insertGuideSche(DAY3guideScheList.get(i));
+				}
+			}
+
+			//정책삽입
+			List<Policy> policyList = new ArrayList<Policy>();
+			for(int i = 0; i<pcode.length;i++) {
+				Policy policy = new Policy();
+				policy.setBnum(bnum);
+				policy.setPcode(Integer.parseInt(pcode[i]));
+				if(pvalue.length!=0) {
+					policy.setPvalue(Integer.parseInt(pvalue[i]));				
+				}
+				policyList.add(policy);
+			}
+			
+			for(int i = 0; i<policyList.size();i++) {
+				b_bdao.insertPolicy(policyList.get(i));
+			}
+			
+			//사진삽입
+			HashMap<String, Object> photoModel = null;
+			if(photo.length!=0) {
+				for(int i = 0; i<photo.length;i++) {
+					photoModel = new HashMap<String, Object>();
+					if(photo[i].getOriginalFilename()!="") {			
+						String path= "C:/Temp/attach/";
+						File dir = new File(path);
+						if(!dir.exists()) dir.mkdirs();
+						String fileName=photo[i].getOriginalFilename();
+						File attachFile = new File(path+fileName);
+						try {
+							photo[i].transferTo(attachFile); 
+							photoModel.put("photopath", fileName);
+						} catch (IllegalStateException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					photoModel.put("porder", i);
+					photoModel.put("bnum", bnum);
+					b_bdao.insertPhoto(photoModel);
+					
+				}
+			}
+			
+		}catch (Exception e){
+			e.printStackTrace();
+			throw new Exception();
 		}
 		
 		
