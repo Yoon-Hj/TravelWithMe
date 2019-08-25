@@ -16,7 +16,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-<%-- <script src="js/accomView.js?v=<%=System.currentTimeMillis() %>"></script> --%>
 <title>Travel With Me</title>
 <style type="text/css">
 
@@ -224,6 +223,7 @@
 			$('#mtable').empty();
 			var b = ${accomBoard.bnum};
 			var n = $('#hn').val();
+			var hi = $('#hid').val();
 			
 			$.ajax({
 				url : "getRegistInfo.do",
@@ -237,12 +237,35 @@
 							var th = "<tr><th>아이디</th><th>이름</th><th>연락처</th><th>신청인원</th><th>거절하기</th></tr>";
 							$('#mtable').append(th);
 							for(var i=0; i < rinfo.length; i++){
-								var tHTML="<tr><td>"+rinfo[i].MID+"</td><td>"+rinfo[i].MNAME+"</td><td>"+rinfo[i].MCONTACT+"</td><td>"+n+"명</td><td>"+"<button class='btn' style='border: 2px solid #B5C3C8; width: 80px; font-family: 배달의민족 주아; font-size: 13px;'>거절하기</button></td></tr>";
+								var tHTML="<tr><td>"+rinfo[i].MID+"<input type='hidden' value='"+hi+"'></td><td>"+rinfo[i].MNAME+"</td><td>"+rinfo[i].MCONTACT+"</td><td>"+n+"명</td><td>"+"<button class='btn' class='rejectbtn' style='border: 2px solid #B5C3C8; width: 80px; font-family: 배달의민족 주아; font-size: 13px;'>거절하기</button></td></tr>";
 								$('#mtable').append(tHTML);
 						}
 					}
 				}
 			});
+		});
+		
+		//거절하기 버튼
+		$(document).on('click', '.rejectbtn', function(){
+			
+			var r = $(this).parent("tr").find("td:eq(0)").siblings("input");
+			var m = $(this).parent("tr").find("td:eq(0)");
+			alert(r);
+			
+			if (confirm("정책에 기재된 사유가 아니면 불이익이 발생할 수 있습니다. 거절을 진행하시겠습니까?") == true){
+				 $.ajax({
+						url : "rejectRegister.do",
+						data : {bnum : b,
+								rid : r,
+								id : m},
+						type : "get",
+						success : function(data){
+									$('#rmbtn').trigger('click');
+						}
+				  });
+			 }else{
+				 return;
+			 }			
 		});
 		
 		//두번째 모달 나와줘
@@ -253,7 +276,7 @@
 		});
 		
 		$('#registerNum').focusout(function(){
-		
+			
 		});
 		
 		function check(elem){
@@ -357,6 +380,17 @@
 			history.go(0);
 		});
 		
+		//게시글 삭제 확인
+		$('#delBtn').on('click', function(){
+			 var b = ${accomBoard.bnum};
+			 if (confirm("해당 게시글을 삭제하시겠습니까?") == true){
+						$(this).attr("location.href", "'accomDeleteBoard.do?bnum='+b");
+				  });
+			 }else{
+				 return;
+			 }			
+		})
+		
 	});
 
 </script>
@@ -371,7 +405,7 @@
 		<c:if test="${user==accomBoard.mid}">
 			<div style="margin-bottom: 10px; margin-left: 860px; font-family: '배달의민족 주아';">
 				<input type="button" class="btn default" value="게시글 수정" id="modiBtn" style="border: 2px solid #B5C3C8;">
-				<input type="button" class="btn default" value="게시글 삭제" style="border: 2px solid #B5C3C8;">
+				<input type="button" class="btn default" value="게시글 삭제" id="delBtn" style="border: 2px solid #B5C3C8;">
 			</div>
 		</c:if>
 		

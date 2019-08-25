@@ -301,6 +301,34 @@ public class BoardService {
 		//b_mdao.insertNotice(n);
 	}
 	
+	//신청 거절하기
+	public void rejectRegister(int bnum, String rid, String id) {
+		if(b_bdao.deleteRegister(rid) == 1) {
+			//Notice n = new Notice();
+			//n.setNkcode("F-2");
+			//n.setBnum(bnum);
+			//n.setMid(id);
+			//b_mdao.insertNotice(n);
+		}
+	}
+	
+	//동행게시글 삭제
+	public void deleteBoard(int bnum, String bkind) {
+		b_bdao.deleteBoard(bnum);
+		List<Register> list = b_bdao.selectRegisterListByBnum(bnum);
+		for(Register r : list) {
+			String m = r.getMid();
+			Notice n = new Notice();
+			n.setNkcode("F-1");
+			n.setBnum(bnum);
+			n.setMid(m);
+			b_mdao.insertNotice(n);
+		}
+		if(bkind.equals("G")) {
+			//스케줄이랑 사진 지우기?
+		}
+	}
+	
 	//가이드 게시글 insert
 	public void guideWrite(HttpSession session,
 			GuideBoard guideBoard,

@@ -174,7 +174,16 @@ public class BoardController {
 		b_bsvc.cancelRegister(mid, bnum, rid);
 	}
 	
+	@RequestMapping("rejectRegister.do")
+	public @ResponseBody void rejectRegister(int bnum, String rid, String id) {
+		b_bsvc.rejectRegister(bnum, rid, id);
+	}
 	
+	@RequestMapping("accomDeleteBoard.do")
+	public String accomDeleteBoard(int bnum, String bkind) {
+		b_bsvc.deleteBoard(bnum, "A");
+		return "redirect: accomBoardList.do";
+	}
 	
 	@RequestMapping("guideWrite.do")
 	public @ResponseBody void guideWrite(

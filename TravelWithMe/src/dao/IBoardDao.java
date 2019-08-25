@@ -59,7 +59,7 @@ public interface IBoardDao {
 	public void deleteBoard(int bnum);
 	public int getPossibleNop(int bnum);
 	public void insertRegister(HashMap<String, Object> register);
-	public void deleteRegister(String rid);
+	public int deleteRegister(String rid);
 	public int insertComment(Comments comments);
 	public int insertRecomment(Comments comments);
 	public int deleteComment(int cnum);
