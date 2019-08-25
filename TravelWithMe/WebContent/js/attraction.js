@@ -47,7 +47,6 @@ $(document).ready(function(){
 	
 	
 	// 검색창 변경 버튼
-	/*
 	$('#keywordFormBtn').on('click', function(){
 		$('#keywordFormBtn').css('background-color', '#B5C3C8');
 		$('#keywordFormBtn').css('color', 'white');
@@ -86,7 +85,6 @@ $(document).ready(function(){
 		$('#keywordForm').hide();
 		$('#festivalForm').hide();
 	});
-	*/
 	
 	
 	

@@ -210,10 +210,10 @@
 			</div>
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" id="ok" class="btn btn-success" data-dismiss="modal" style="display:none">확인</button>
-		          <button type="button" id="evGuide" class="btn btn-success" data-dismiss="modal" style="display:none">확인</button>
-		          <button type="button" id="checkAttend" class="btn btn-success" data-dismiss="modal" style="display:none">확인</button>
-		          <button type="button" id="back" class="btn btn-secondary" style="display:none">이전</button>
+		          <button type="button" id="ok" class="btn btn-success notice" data-dismiss="modal" style="display:none">확인</button>
+		          <button type="button" id="evGuide" class="btn btn-success notice" data-dismiss="modal" style="display:none">확인</button>
+		          <button type="button" id="checkAttend" class="btn btn-success notice" data-dismiss="modal" style="display:none">확인</button>
+		          <button type="button" id="back" class="btn btn-secondary notice" style="display:none">이전</button>
 		          <input type="hidden" id="chk" value="f">
 		        </div>
 	       </div>

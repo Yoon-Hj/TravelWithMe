@@ -169,7 +169,7 @@ $(document).ready(function(){
 	// 알림부분
 	$('.moreNews').on('click', function(){
 		$('#chk').val("t");
-		$('.btn').hide();
+		$('.notice').hide();
 		$('#ok').show();
 		$('.starRev').hide();
 		$('.attendanceModal').hide();
@@ -238,7 +238,7 @@ $(document).ready(function(){
 		$('.modal-body').hide();
 		$('.attendanceModal').hide();
 		$('.starRev').show();
-		$('.btn').hide();
+		$('.notice').hide();
 		$('#evGuide').show();
 		if($('#chk').val() == "t")
 			$('#back').show();
@@ -265,7 +265,7 @@ $(document).ready(function(){
 		$('.modal-body').hide();
 		$('#evGuide').hide();
 		$('.starRev').hide();
-		$('.btn').hide();
+		$('.notice').hide();
 		$('.attendanceModal').show();
 		$('#checkAttend').show();
 		if($('#chk').val() == "t")
@@ -308,7 +308,7 @@ $(document).ready(function(){
 	
 	
 	$('#back').on('click', function(){
-		$('.btn').hide();
+		$('.notice').hide();
 		$('#ok').show();
 		$('#back').show();
 		$('.starRev').hide();
