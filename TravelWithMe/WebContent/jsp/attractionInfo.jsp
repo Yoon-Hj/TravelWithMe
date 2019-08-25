@@ -226,7 +226,7 @@
 				<a style="color:red">${i }</a>
 			</c:when>
 			<c:otherwise>
-				<button class="PageNavi" value="${i}">${i }</button>
+				<button class="PageNavi" value="${i}">${i}</button>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
