@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.lang.ProcessBuilder.Redirect;
 import java.net.URLEncoder;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import model.Comments;
 import model.GuideBoard;
@@ -185,6 +187,7 @@ public class BoardController {
 		return "redirect: accomBoardList.do";
 	}
 	
+	//가이드 게시글 작성하기
 	@RequestMapping("guideWrite.do")
 	public @ResponseBody void guideWrite(
 									HttpSession session,
@@ -200,5 +203,36 @@ public class BoardController {
 				pcode,pvalue,photo,DAY1time,DAY1place,DAY2time,DAY2place, DAY3time,DAY3place);
 		
 
+	}
+	
+	//가이드 게시글 목록보기
+	@RequestMapping("guideBoardList.do")
+	public ModelAndView guideBoardList( @RequestParam(defaultValue="1") int page) {
+		ModelAndView mav = new ModelAndView();
+		String bkind = "G";
+		mav.addAllObjects(b_bsvc.getBoardListByPage(page, bkind));
+		mav.addObject("readCntList", b_bsvc.getGuideBoardList());
+		mav.setViewName("guideBoardList");
+		return mav;
+	}
+	
+	//사진 화면에 출력하기
+	@RequestMapping("download.do")
+	public View download(String photopath) {
+		String path= "C:/Temp/attach/";
+		File attachFile = new File(path+photopath);
+		View view =new DownloadView(attachFile);
+		return view;
+	}
+	
+	//가이드 게시글 검색
+	@RequestMapping("guideSearch.do")
+	public ModelAndView guideSearch(@RequestParam(defaultValue="1") int page,
+							@RequestParam(defaultValue="1") int type, String keyword,
+							String sdate,String fdate) throws ParseException {
+		ModelAndView mav = new ModelAndView();
+		mav.addAllObjects(b_bsvc.getGuideSearchList(page, type, keyword, sdate, fdate));
+		mav.setViewName("guideBoardList");
+		return mav;
 	}
 }

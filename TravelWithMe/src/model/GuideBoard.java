@@ -27,6 +27,7 @@ public class GuideBoard {
 	private String gdeparttime;
 	private int gnop;
 	private String gthema;
+	private String photopath;
 	
 	@Override
 	public String toString() {
@@ -39,6 +40,14 @@ public class GuideBoard {
 				+ ", gthema=" + gthema + "]";
 	}
 
+	public String getPhotopath() {
+		return photopath;
+	}
+
+	public void setPhotopath(String photopath) {
+		this.photopath = photopath;
+	}
+	
 	public int getBnum() {
 		return bnum;
 	}

@@ -163,8 +163,8 @@ public class BoardService {
 		Date startdate = null;
 		Date finishdate = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		if(sdate != null) startdate = sdf.parse(sdate);
-		else if (fdate != null) finishdate = sdf.parse(fdate);
+		if(sdate != "") startdate = sdf.parse(sdate);
+		if(fdate != "") finishdate = sdf.parse(fdate);
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("offset", getOffset(page, 8));
@@ -184,7 +184,7 @@ public class BoardService {
 		result.put("finishdate", finishdate);
 		result.put("likecode", likecode);
 		result.put("current", page);
-		result.put("asList", alist);
+		result.put("boardList", alist);
 		result.put("start", getStartpage(page));
 		result.put("end", getEndpage(page, cnt));
 		result.put("last", getLastpage(cnt));
@@ -460,8 +460,42 @@ public class BoardService {
 			e.printStackTrace();
 			throw new Exception();
 		}
+	}
+	
+	//가이드 게시글 추천여행 게시글 뽑기
+	public List<GuideBoard> getGuideBoardList() {
+		return b_bdao.selectGuideListByRcnt();
+	}
+	
+	public HashMap<String, Object> getGuideSearchList(int page, int type, String keyword, String sdate, String fdate) throws ParseException {
+		Date startdate = null;
+		Date finishdate = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		if(sdate != "") startdate = sdf.parse(sdate);
+		if(fdate != "") finishdate = sdf.parse(fdate);
 		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("offset", getOffset(page, 8));
+		params.put("perpage", 8);
+		params.put("type", type);
+		params.put("keyword", keyword);
+		params.put("startdate", startdate);
+		params.put("finishdate", finishdate);
+		List<GuideBoard> guideBoardListBySearch = b_bdao.selectGuideBoardByKeyword(params);
+		int cnt = b_bdao.getGuideCountByKeyword(params);
 		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		result.put("type", type);
+		result.put("keyword", keyword);
+		result.put("startdate", startdate);
+		result.put("finishdate", finishdate);
+		result.put("current", page);
+		result.put("boardList", guideBoardListBySearch);
+		result.put("start", getStartpage(page));
+		result.put("end", getEndpage(page, cnt));
+		result.put("last", getLastpage(cnt));
+		result.put("totalBoard", cnt);
+		return result;
 		
 
 	}

@@ -20,7 +20,8 @@
 <body>
 <jsp:include page="header.jsp"/>
 <br><br><br>
-
+<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px;">Travel With Guide</h1>
+<hr>
 <div class="container">
 <div class="writeFormDiv">
 	<table>

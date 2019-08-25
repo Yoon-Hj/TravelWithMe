@@ -129,7 +129,8 @@
 				<h2 style="font-size: 45px">가이드를 만나 더 풍요로운 여행을 즐겨보세요</h2>
 				<br>
 				<input type="button" class="btn btn-danger btn-lg btn-block" 
-						value="Travel with Guide 목록 보기" 
+						value="Travel with Guide 목록 보기"
+						onclick="location.href='guideBoardList.do'" 
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">
 			
 				<br><br><br><br><br>

@@ -35,7 +35,7 @@
             from (select * from guide
                      <![CDATA[ where genddate >= sysdate ]]> ) g, board b left join (select bnum, photopath
                                                                                      from photo
-                                                                                     where porder = 1) p
+                                                                                     where porder = 0) p
             on b.bnum = p.bnum
             where b.bnum = g.bnum
             and b.cdel = 0
@@ -77,7 +77,7 @@
 	select * from (select rownum as rn ,e.* from 
 	(select b.bnum, b.btitle, b.breadcount, b.mid, g.garea ,g.gstartdate, g.gfinishdate, p.photopath
     from guide g, board b left join 
-    (select bnum, photopath from photo where porder = 1) p
+    (select bnum, photopath from photo where porder = 0) p
             on b.bnum = p.bnum
             where b.bnum = g.bnum
             and b.cdel = 0
