@@ -21,73 +21,64 @@ $(function(){
 	var endDate;
 	$("#gstartdate").focusout(function(){
 		
-		//종료날짜 모집마감날짜 제한하기 다시 짜기
+	
+		var minDate = $("#gstartdate").val();
+		$("#gfinishdate").attr('min',minDate);
+		var year = Number(minDate.split('-')[0]);
+		var month = Number(minDate.split('-')[1]);
+		var date = Number(minDate.split('-')[2]);
+		var lastDate = Number(new Date(year,month,0).getDate());
+		var resultDate;
+		if(date+2 > lastDate){
+			if(month==12){
+				month=1;
+				year+=1;
+				result = date+2 - lastDate;
+				if(month-10<0) month='0'+month;
+				if(result-10<0) result = '0'+result;
+				maxDate = year + '-' + month + '-' + result;
+			}else if(month<12){
+				month+=1;
+				result = date+2-lastDate;
+				if(month-10<0) month='0'+month;
+				if(result-10<0) result = '0'+result;
+				maxDate = year + '-' + month + '-' + result;
+			}
+		}else if(date+2 <= lastDate){
+			result = date+2;
+			if(month-10<0) month='0'+month;
+			if(result-10<0) result = '0'+result;
+			maxDate= year + '-' + month + '-' + result;
+		}
+		$("#gfinishdate").attr('max',maxDate);
 		
-//		var minDate = $("#gstartdate").val();
-//		$("#gfinishdate").attr('min',minDate);
-//		var minYear = Number(minDate.split('-')[0]);
-//		var minMonth = Number(minDate.split('-')[1]);
-//		var minDate = Number(minDate.split('-')[2]);
-//		var tmpDate1;
-//		var testDate1 = Number(new Date(minYear,minMonth,0).getDate());
-//		if(minDate+2 > testDate1){
-//			if(minMonth==12){
-//				minMonth=1;
-//				minYear+=1;
-//				tmpDate1 = minDate+2 - testDate1;
-//				if(minMonth-10<0) minMonth = '0'+minMonth;
-//				if(tmpDate1-10<0) tmpDate1 = '0'+tmpDate1;
-//				maxDate = minYear+'-'+minMonth+'-'+tmpDate1;
-//			}else{
-//				minMonth+=1;
-//				tmpDate1 = minDate+2 - testDate1;
-//				if(minMonth-10<0) minMonth = '0'+minMonth;
-//				if(tmpDate1-10<0) tmpDate1 = '0'+tmpDate1;
-//				maxDate = minYear+'-'+minMonth+'-'+tmpDate1;
-//			}
-//		}else{
-//			if(minMonth-10<0) minMonth = '0'+minMonth;
-//			if((minDate+2)-10<0) {
-//				minDate = '0'+(minDate+2);
-//			}else{
-//				minDate = minDate+2
-//			}
-//			maxDate = minYear+'-'+minMonth+'-'+minDate;
-//		}
-//		var minDate = $("#gstartdate").val();
-//		var minYear = Number(minDate.split('-')[0]);
-//		var minMonth = Number(minDate.split('-')[1]);
-//		var minDate = Number(minDate.split('-')[2]);
-//		var tmpDate2;
-//		var testDate2 = Number(new Date(minYear,minMonth-1,0).getDate());
-//		if(minDate-1 < 1){
-//			if(minMonth==1){
-//				minMonth=12;
-//				minYear-=1;
-//				tmpDate2 = testDate2;
-//				if(minMonth-10<0) minMonth = '0'+minMonth;
-//				if(tmpDate2-10<0) tmpDate2 = '0'+tmpDate2;
-//				endDate = minYear+'-'+minMonth+'-'+tmpDate2;
-//			}else{
-//				minMonth-=1;
-//				tmpDate2 = testDate2;
-//				if(minMonth-10<0) minMonth = '0'+minMonth;
-//				if(tmpDate2-10<0) tmpDate2 = '0'+tmpDate2;
-//				endDate = minYear+'-'+minMonth+'-'+tmpDate2;
-//			}
-//		}else{
-//			if(minMonth-10<0) minMonth = '0'+minMonth;
-//			if((minDate-1)-10<0) {
-//				minDate = '0'+(minDate-1);
-//			}else{
-//				minDate = minDate-1
-//			}
-//			maxDate = minYear+'-'+minMonth+'-'+minDate;
-//			endDate = minYear+'-'+minMonth+'-'+minDate;
-//		}
-//
-//		$("#gfinishdate").attr('max',maxDate);
-//		$("#genddate").attr('value',endDate);
+		year = Number(minDate.split('-')[0]);
+		month = Number(minDate.split('-')[1]);
+		date = Number(minDate.split('-')[2]);
+		var lastDateForLastMonth = Number(new Date(year,month-1,0).getDate());
+		if(date-1 <= 0){
+			if(month==1){
+				month=12;
+				year-=1;
+				result = lastDateForLastMonth;
+				if(month-10<0) month='0'+month;
+				if(result-10<0) result = '0'+result;
+				endDate = year + '-' + month + '-' + result;
+			}else if(month>1){
+				month-=1;
+				result = lastDateForLastMonth;
+				if(month-10<0) month='0'+month;
+				if(result-10<0) result = '0'+result;
+				endDate = year + '-' + month + '-' + result;
+			}
+		}else if(date-1 > 0){
+			result = date-1;
+			if(month-10<0) month='0'+month;
+			if(result-10<0) result = '0'+result;
+			endDate = year + '-' + month + '-' + result;
+		}
+		
+		$("#genddate").attr('value',endDate);
 
 	});
 	
@@ -101,7 +92,13 @@ $(function(){
 	//gtime라디오 버튼 생성하고 삭제하기
 	$("#gfinishdate").focusout(function(){
 
-		//종료날짜 제어하기 코드 다시짜기
+		if($("#gfinishdate").val()<$("#gstartdate").val()){
+			$("#gfinishdate").val($("#gstartdate").val());
+		}
+		
+		if($("#gfinishdate").val()>$("#gfinishdate").attr('max')){
+			$("#gfinishdate").val($("#gfinishdate").attr('max'));
+		}
 		
 		if($("#gstartdate").val()!=""){
 			if($("#gfinishdate").val()==$("#gstartdate").val()){
