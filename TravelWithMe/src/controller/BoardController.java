@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import model.AccomBoard;
 import model.Comments;
 import model.GuideBoard;
 import model.Guideschedule;
@@ -163,6 +164,7 @@ public class BoardController {
 	
 	@RequestMapping("tryRegister.do")
 	public @ResponseBody String tryRegister(String regId, int nop, int bnum, String mid) {
+		System.out.println("되고있니?");
 		return b_bsvc.tryRegister(regId, nop, bnum, mid);
 	}
 	
@@ -185,6 +187,23 @@ public class BoardController {
 	public String accomDeleteBoard(int bnum, String bkind) {
 		b_bsvc.deleteBoard(bnum, "A");
 		return "redirect: accomBoardList.do";
+	}
+	
+	@RequestMapping("accomWriteForm.do")
+	public ModelAndView accomWriteForm() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("likeList", b_asvc.getLikecode());
+		mav.setViewName("accomWriteForm");
+		return mav;
+	}
+	
+	@RequestMapping("accomWrite.do")
+	public @ResponseBody void accomWrite(
+						HttpSession session, AccomBoard accomBoard,
+						String JSPgstartdate, String JSPgfinishdate,
+						String[] pcode, @RequestParam(required=false) String[] pvalue) throws Exception{
+
+		b_bsvc.accomWrite(session, accomBoard, JSPgstartdate, JSPgfinishdate, pcode, pvalue);
 	}
 	
 	//가이드 게시글 작성하기
@@ -235,4 +254,7 @@ public class BoardController {
 		mav.setViewName("guideBoardList");
 		return mav;
 	}
+	
+	@RequestMapping("commBoardList.do")
+	public void commBoardList() {}
 }

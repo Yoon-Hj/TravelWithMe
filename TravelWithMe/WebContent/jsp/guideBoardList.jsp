@@ -29,7 +29,7 @@
 	
 	<div class="container">
 	
-		<a href="guideWriteForm.do" data-toggle="tooltip" data-placement="bottom" title="글 작성하기" 
+		<a href="guideWriteForm.do" id="writetip" data-toggle="tooltip" data-placement="bottom" title="글 작성하기" 
 			style="text-decoration: none; color: #787878; font-family: '함초롬돋움';">
 			원하는 가이드글이 없으신가요? 직접 가이드글을 작성해보세요.</a>
 		<br><br>

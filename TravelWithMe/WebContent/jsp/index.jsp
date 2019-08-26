@@ -116,7 +116,7 @@
 				<h2 style="font-size: 45px;">함께할 여행 친구들을 직접 모아보세요</h2>
 				<br>
 				<input type="button" class="btn btn-danger btn-lg btn-block" 
-						value="Travel with Me 글 작성" 
+						value="Travel with Me 글 작성" onclick="location.href='accomWriteForm.do'"
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">
 			</div>
 		</section>
@@ -164,7 +164,7 @@
 				<h2 style="font-size: 45px">궁금한 것은 질문하고, 여행후기도 공유해보세요</h2>
 				<br>
 				<input type="button" class="btn btn-danger btn-lg btn-block" 
-						value="Community 목록 보기" 
+						value="Community 목록 보기" onclick="location.href='commBoardList.do'"
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">			
 			</div>
 		</section>

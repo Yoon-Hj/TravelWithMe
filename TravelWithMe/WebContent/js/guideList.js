@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	
+	$('#writetip').tooltip();   
+		  
 	var type=$("#hiddenType").val();
 	//검색타입
 	if(type=='') {
