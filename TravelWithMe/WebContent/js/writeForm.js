@@ -594,7 +594,7 @@ function minusDetailSche(minusBtn){
 }
 
 function setDetailDay(){
-	
+	alert("Dfsd");
 	$("#day > tbody").empty();
 	var day;
 	if($("#gstartdate").val()==$("#gfinishdate").val()){
