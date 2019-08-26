@@ -3,6 +3,7 @@ package dao;
 import java.util.HashMap;
 import java.util.List;
 
+import model.GuideRating;
 import model.Member;
 import model.Preference;
 
@@ -14,7 +15,12 @@ public interface IAdminDao {
 	
 	//여행취향 리스트 관리
 	public List<Preference> selectLikeList();
-	public void insertPrefer(Preference preference);
-	public void updatePrefer(String likecode);
+	public void insertPrefer(HashMap<String, Object> params);
+	public void updatePreferOn(String likecode);
+	public void updatePreferOff(String likecode);
+	public String selectLikecodeByName(String likename);
 	
+	//가이드 등급관리
+	public List<GuideRating> selectAllGuiderating();
+	public void updateGuideRatingByGrade(GuideRating g);
 }
