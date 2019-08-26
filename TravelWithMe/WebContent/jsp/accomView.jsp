@@ -105,7 +105,11 @@
   
   table#mtable{
   	padding: 5px;
-  	margin-left: 20px;
+  	margin-left: 30px;
+  }
+  
+  table#mtable th, td{
+  	padding: 5px;
   }
   
 </style>
@@ -116,6 +120,7 @@
 	$(document).ready(function(){
 		 
 		var b = ${accomBoard.bnum};
+		var u = '${user}';
 		var rlist;
 		
 		$.ajax({
@@ -129,9 +134,10 @@
 							
 							//신청, 취소, 관리 버튼
 							for(var r in rlist){
-								if(user == rlist[r].mid) 
+								if(u == rlist[r].mid){
 									flag = true;
-								break;
+									break;
+								}
 							}
 						 	if(${user == accomBoard.mid}){
 								$('#rmbtn').show();
@@ -186,6 +192,7 @@
 				alert("신청인원이 존재하여 게시글 수정이 불가합니다.")
 		});
 	    
+	    //답글폼열기
 		$('.replyBtn').on('click', function(){
 				if(user == "null"){
 					alert("로그인이 필요한 서비스입니다.");
@@ -231,13 +238,13 @@
 				type : "get",
 				success : function(data){
 						if(data == ''){
-							$('#mtable').append("<tr><td style='color: #CD1039;'>신청자가 존재하지 않습니다.<td><tr>");
+							$('#mtable').append("<tr><td style='color: #CD1039;'><b>신청자가 존재하지 않습니다.</b><td><tr>");
 						}else{
 							var rinfo = data;
 							var th = "<tr><th>아이디</th><th>이름</th><th>연락처</th><th>신청인원</th><th>거절하기</th></tr>";
 							$('#mtable').append(th);
 							for(var i=0; i < rinfo.length; i++){
-								var tHTML="<tr><td>"+rinfo[i].MID+"<input type='hidden' value='"+hi+"'></td><td>"+rinfo[i].MNAME+"</td><td>"+rinfo[i].MCONTACT+"</td><td>"+n+"명</td><td>"+"<button class='btn' class='rejectbtn' style='border: 2px solid #B5C3C8; width: 80px; font-family: 배달의민족 주아; font-size: 13px;'>거절하기</button></td></tr>";
+								var tHTML="<tr><td>"+rinfo[i].MID+"<input type='hidden' value='"+hi+"'></td><td>"+rinfo[i].MNAME+"</td><td>"+rinfo[i].MCONTACT+"</td><td>"+n+"명</td><td>"+"<button class='btn rejectbtn' style='border: 2px solid #B5C3C8; width: 80px; font-family: 배달의민족 주아; font-size: 13px;'>거절하기</button></td></tr>";
 								$('#mtable').append(tHTML);
 						}
 					}
@@ -247,10 +254,9 @@
 		
 		//거절하기 버튼
 		$(document).on('click', '.rejectbtn', function(){
-			
-			var r = $(this).parent("tr").find("td:eq(0)").siblings("input");
-			var m = $(this).parent("tr").find("td:eq(0)");
-			alert(r);
+			var r = $(this).parent("td").parent("tr").find("td:eq(0)").find("input").val();
+			var m = $(this).parent("td").parent("tr").find("td:eq(0)").text();
+			var t = $(this).parent("td").parent("tr");
 			
 			if (confirm("정책에 기재된 사유가 아니면 불이익이 발생할 수 있습니다. 거절을 진행하시겠습니까?") == true){
 				 $.ajax({
@@ -260,7 +266,8 @@
 								id : m},
 						type : "get",
 						success : function(data){
-									$('#rmbtn').trigger('click');
+									t.remove();
+									alert("거절이 성공적으로 완료되었습니다.");
 						}
 				  });
 			 }else{
@@ -303,7 +310,7 @@
 			
 				  $.ajax({
 						url : "tryRegister.do",
-						data : {regId : user,
+						data : {regId : ${user},
 								bnum : b,
 								nop : rnum,
 								mid : wid},
@@ -318,11 +325,7 @@
 						}
 				  });
 		});
-		
-		$('#finishBtn').on('click', function(){
-			history.go(0);
-		});
-		
+
 		//댓글작성
 		$('.writecoBtn').on('click', function(){
 			var b = ${accomBoard.bnum};
@@ -341,8 +344,8 @@
 		//답글작성
 		$(document).on('click', '.writereBtn', function(){
 			var b = ${accomBoard.bnum};
-			var c = $(this).parent("td").parent("tr").siblings("tr:eq(0)").find("th:eq(0)").find("input").val();
-			alert(c);
+			var c = $(this).parent("td").parent("tr").siblings("tr:last").find("th:eq(0)").find("input").val();
+
 			$.ajax({
 				url : "writeRecomment.do",
 				data : {ccontent : $('.recontent').val(),
@@ -383,13 +386,14 @@
 		//게시글 삭제 확인
 		$('#delBtn').on('click', function(){
 			 var b = ${accomBoard.bnum};
+			 alert(b);
 			 if (confirm("해당 게시글을 삭제하시겠습니까?") == true){
-						$(this).attr("location.href", "'accomDeleteBoard.do?bnum='+b");
-				  });
+					location.href = 'accomDeleteBoard.do?bnum='+b;
+					alert("삭제가 성공적으로 완료되었습니다.");
 			 }else{
 				 return;
 			 }			
-		})
+		});
 		
 	});
 
@@ -507,7 +511,7 @@
 							<td>&nbsp;&nbsp;</td>
 							<td width="90px;" style="text-align: left; font-weight: bold;"><i class="material-icons" style="font-size: 15px;">&#xe5da;&nbsp;</i>${comment.mid}</td>
 							<td width="700px;" style="text-align: left;">
-								<c:if test="${comment.cdel==0}">${comment.ccontent} 
+								<c:if test="${comment.cdel==0}">${comment.ccontent}
 									<input type="hidden" value="${comment.cnum}">
 									<c:if test="${user==comment.mid}"><button class="commDelBtn">×</button></c:if>
 								</c:if>
@@ -519,7 +523,7 @@
 			</c:forEach>
 			</table>
 		</div>
-		 
+		
 	</div>
 	
 	<!-- 신청모달1 -->
@@ -564,7 +568,7 @@
 		        <!-- Modal Header -->
 		        <div class="modal-header">
 		          <h3 class="modal-title" style="font-family: '배달의민족 도현'">신청 가능 인원 수 : <span class="nop" style="color: #F56E6E; font-size: 25px;"></span>명</h3>
-					<button type="button" class="close" clss="cc">×</button>
+					<button type="button" class="close cc">×</button>
 		        </div>
 	        
 		        <!-- Modal body -->
@@ -599,7 +603,7 @@
 	        
 		        <!-- Modal body -->
 		        <div class="modal-body" style="text-align: center; font-family: '함초롬돋움';">
-		          작성자 연락처 : <span id="contact" style="color: #F56E6E;"></span><br><br>
+		          작성자 연락처 : <span id="contact" style="color: #F56E6E; font-weight: bold;"></span><br><br>
 		          
 					※ 작성자의 NoShow는 사이트 내 관리자 이메일로 문의바랍니다.<br>
 					즐겁게 여행을 마무리할 수 있도록 서로 배려하는 여행인이 됩시다.
@@ -607,7 +611,7 @@
 	        
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" class="btn" id="finishBtn" data-dismiss="modal" style="background-color: #B5C3C8; color:white; font-family: '배달의민족 주아';">확인</button>
+		          <button type="button" class="btn cc" style="background-color: #B5C3C8; color:white; font-family: '배달의민족 주아';">확인</button>
 		        </div>
 		        
       		</div>
@@ -627,7 +631,7 @@
 	        
 		        <!-- Modal body -->
 		        <div class="modal-body" style="text-align: center; font-family: '나눔고딕';">
-					<table id="mtable" style="text-align:center;">
+					<table id="mtable" style="text-align:center; padding: 5px;">
 
 					</table>
 		        </div>

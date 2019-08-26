@@ -33,7 +33,7 @@
 	</table>
 </div>
 
-<br><br><br>
+<br><br>
 
 <div id="basicInfo" style="font-family: 함초롬돋움">
 	<h3>
@@ -95,7 +95,7 @@
 			<td>
 			<input id="gnop" name="gnop" type="number" min="0" value="0" style="width:100px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">명
 			<br>
-			<a style="color: #b3b3b3; font-size: 15px;">※모집인원이 0명일경우 모집인원 무관으로 대체합니다.</a>
+			<a style="color: #b3b3b3; font-size: 15px;">※모집인원이 0명일 경우, 모집인원 무관으로 대체됩니다.</a>
 			</td>
 		</tr>
 	</table>
@@ -111,7 +111,7 @@
 	
 	<table>
 		<tr>
-			<td class="InfoTd">주요 정책</td>
+			<td class="InfoTd">주요정책</td>
 			<td>
 				<input type="checkbox" id="pcode1" name="pcode" value="1">
 				1. 공지된 미팅장소 및 시간에 모인 인원과 가이드 투어를 진행하며<br> 특별한 제제사항은 없습니다.<br><br>
@@ -217,7 +217,7 @@
 <div id="preview" style="font-family: 함초롬돋움">
 
 	<h3>
-		&nbsp;&nbsp;가이드 게시글 미리보기
+		&nbsp;&nbsp;작성글 미리보기
 	</h3>
 	<br>
 	<table id="previewTable" style="font-family: 함초롬돋움;">
@@ -276,7 +276,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="InfoTd">주요 정책</td>
+			<td class="InfoTd">주요정책</td>
 			<td></td>
 		</tr>
 	</table>
