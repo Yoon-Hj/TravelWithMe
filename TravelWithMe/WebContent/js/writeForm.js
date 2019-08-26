@@ -14,8 +14,8 @@ $(function(){
 	}else{
 		todayDate += "0"+today.getDate();		
 	}
-	$("#gstartdate").attr('min',todayDate);
-	$("#gfinishdate").attr('min',todayDate);
+	$("#startdate").attr('min',todayDate);
+	$("#finishdate").attr('min',todayDate);
 
 	//화면 로딩
 	$("#basicInfo").show();
@@ -27,11 +27,11 @@ $(function(){
 	//날짜제한
 	var maxDate;
 	var endDate;
-	$("#gstartdate").focusout(function(){
+	$("#startdate").focusout(function(){
 		
 	
-		var minDate = $("#gstartdate").val();
-		$("#gfinishdate").attr('min',minDate);
+		var minDate = $("#startdate").val();
+		$("#finishdate").attr('min',minDate);
 		var year = Number(minDate.split('-')[0]);
 		var month = Number(minDate.split('-')[1]);
 		var date = Number(minDate.split('-')[2]);
@@ -58,7 +58,7 @@ $(function(){
 			if(result-10<0) result = '0'+result;
 			maxDate= year + '-' + month + '-' + result;
 		}
-		$("#gfinishdate").attr('max',maxDate);
+		$("#finishdate").attr('max',maxDate);
 		
 		year = Number(minDate.split('-')[0]);
 		month = Number(minDate.split('-')[1]);
@@ -91,26 +91,26 @@ $(function(){
 	});
 	
 	
-	$("#gfinishdate").click(function(){
-		if($("#gstartdate").val()==""){
+	$("#finishdate").click(function(){
+		if($("#startdate").val()==""){
 			$("#gtimeLabel").remove();
 			alert("시작날짜를 먼저 선택해주세요");		
 		}
 	});
 	
 	//gtime라디오 버튼 생성하고 삭제하기
-	$("#gfinishdate").focusout(function(){
+	$("#finishdate").focusout(function(){
 
-		if($("#gfinishdate").val()<$("#gstartdate").val()){
-			$("#gfinishdate").val($("#gstartdate").val());
+		if($("#finishdate").val()<$("#startdate").val()){
+			$("#finishdate").val($("#startdate").val());
 		}
 		
-		if($("#gfinishdate").val()>$("#gfinishdate").attr('max')){
-			$("#gfinishdate").val($("#gfinishdate").attr('max'));
+		if($("#finishdate").val()>$("#finishdate").attr('max')){
+			$("#finishdate").val($("#finishdate").attr('max'));
 		}
 		
-		if($("#gstartdate").val()!=""){
-			if($("#gfinishdate").val()==$("#gstartdate").val()){
+		if($("#startdate").val()!=""){
+			if($("#finishdate").val()==$("#startdate").val()){
 				$("#gtimeLabel").remove();
 				var input = "";
 				input += "<label id='gtimeLabel'>";
@@ -118,7 +118,7 @@ $(function(){
 				input += "&nbsp;<input type='radio' id='gtime' name='gtime' value='오후'>&nbsp;오후";
 				input += "&nbsp;<input type='radio' id='gtime' name='gtime' value='종일' checked='checked'>&nbsp;종일";
 				input += "</label>";
-				$("#gfinishdate").after(input);			
+				$("#finishdate").after(input);			
 			}else{
 				$("#gtimeLabel").remove();
 			}			
@@ -128,7 +128,7 @@ $(function(){
 	
 	//genddate(모집마감날짜) 제어하기
 	$("#genddate").focus(function(){
-		var maxDate = $("#gstartdate").val();
+		var maxDate = $("#startdate").val();
 		$("#genddate").attr('max',maxDate);
 	});
 	
@@ -155,7 +155,7 @@ $(function(){
 	
 	//출발시간 제한
 	$("#gdeparttime").focusout(function(){
-		if($("#gstartdate").val()==""){
+		if($("#startdate").val()==""){
 			$("#gtimeLabel").remove();
 			alert("시작날짜를 먼저 선택해주세요");		
 		}
@@ -176,6 +176,14 @@ $(function(){
 			}
 		}
 
+	});
+	
+	//출발장소 글자 수 제한
+	$("#departplace").focusout(function(){
+		alert("df");
+		if($("#departplace").val().length > 100) {
+			alert("된");
+		}
 	});
 	
 	//테마 엔터키
@@ -334,16 +342,16 @@ $(function(){
 			});			
 		}
 		
-		if($("#gstartdate").val()<todayDate || $("#gfinishdate").val() < $("#gstartdate").val() 
-				|| $("#genddate").val() > $("#gstartdate").val()) {
+		if($("#startdate").val()<todayDate || $("#finishdate").val() < $("#startdate").val() 
+				|| $("#genddate").val() > $("#startdate").val()) {
 				
 				alert("올바른 날짜가 아닙니다. 다시 한번 확인하세요");
-				$("#gstartdate").val("");
-				$("#gfinishdate").val("");
+				$("#startdate").val("");
+				$("#finishdate").val("");
 				$("#genddate").val("");
 			}
 		
-		if($("#btitle").val()!="" && $("#gstartdate").val()!="" && $("#gfinishdate").val()!=""
+		if($("#btitle").val()!="" && $("#startdate").val()!="" && $("#finishdate").val()!=""
 			&& $("#genddate").val()!="" && $("#gdepartplace").val()!="" && $("#gdeparttime").val()!=""
 			&& $("#garea1").val()!="" && $("#gnop").val()!="" )
 		{
@@ -431,8 +439,8 @@ $(function(){
 	    
 
 	    formData.append("btitle" , $("#btitle").val());
-	    formData.append("JSPgstartdate" , $("#gstartdate").val());
-	    formData.append("JSPgfinishdate" , $("#gfinishdate").val());
+	    formData.append("JSPgstartdate" , $("#startdate").val());
+	    formData.append("JSPgfinishdate" , $("#finishdate").val());
 	    formData.append("gtime" , gtime);
 	    formData.append("JSPgenddate" , $("#genddate").val());
 	    formData.append("gdepartplace" , $("#gdepartplace").val());
@@ -598,12 +606,12 @@ function setDetailDay(){
 	alert("Dfsd");
 	$("#day > tbody").empty();
 	var day;
-	if($("#gstartdate").val()==$("#gfinishdate").val()){
+	if($("#startdate").val()==$("#finishdate").val()){
 		day=0;
 		alert(day);
 	}else{
-		var sdate = $("#gstartdate").val().split('-');
-		var fdate = $("#gfinishdate").val().split('-');
+		var sdate = $("#startdate").val().split('-');
+		var fdate = $("#finishdate").val().split('-');
 		
 		sdate = new Date(sdate[0],sdate[1],sdate[2]);
 		fdate = new Date(fdate[0],fdate[1],fdate[2]);
@@ -700,10 +708,10 @@ function openPreview() {
 	//사진
 	showSlides(slideIndex);
 	//날짜
-	if($("#gstartdate").val()==$("#gfinishdate").val()){
-		$("#previewTable").find("tr:eq(3)").find("td:eq(1)").html($("#gstartdate").val()+"&nbsp;&nbsp;~&nbsp;&nbsp;"+$("#gfinishdate").val()+"&nbsp;&nbsp;"+$("#gtime").val());				
+	if($("#startdate").val()==$("#finishdate").val()){
+		$("#previewTable").find("tr:eq(3)").find("td:eq(1)").html($("#startdate").val()+"&nbsp;&nbsp;~&nbsp;&nbsp;"+$("#finishdate").val()+"&nbsp;&nbsp;"+$("#gtime").val());				
 	}else{
-		$("#previewTable").find("tr:eq(3)").find("td:eq(1)").html($("#gstartdate").val()+"&nbsp;&nbsp;~&nbsp;&nbsp;"+$("#gfinishdate").val());				
+		$("#previewTable").find("tr:eq(3)").find("td:eq(1)").html($("#startdate").val()+"&nbsp;&nbsp;~&nbsp;&nbsp;"+$("#finishdate").val());				
 	}
 	//모집마감날짜
 	$("#previewTable").find("tr:eq(4)").find("td:eq(1)").text($("#genddate").val());

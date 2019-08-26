@@ -18,7 +18,14 @@
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script type="text/javascript" src="js/boardList.js?v=<%=System.currentTimeMillis() %>"></script>
 <title>Travel With Me</title>
-
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#writetip").click(function(){
+		var user = <%=(String)session.getAttribute("user")%>;
+		if(user == null) alert("로그인 후 사용가능한 서비스입니다.");
+	});
+});
+</script>
 </head>
 <body>	
 

@@ -569,7 +569,10 @@ public class BoardService {
 	}
 	
 	
-	
+	//mainSearch
+	public List<HashMap<String, Object>> getBoardListByMainSearch(String keyword){
+		return b_bdao.selectByKeyword(keyword);
+	}
 	
 	
 	

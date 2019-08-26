@@ -51,9 +51,9 @@
 			<td class="InfoTd">날짜</td>
 			<td>
 				<a style="color: #b3b3b3; font-size: 15px;">시작날짜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종료날짜</a><br>
-				<input type="date" name="gstartdate" id="gstartdate" max="2030-12-31" class="NoBootStrap">
+				<input type="date" name="gstartdate" id="startdate" max="2030-12-31" class="NoBootStrap">
 				~
-				<input type="date" name="gfinishdate" id="gfinishdate" max = "2030-12-31" class="NoBootStrap">
+				<input type="date" name="gfinishdate" id="finishdate" max = "2030-12-31" class="NoBootStrap">
 				<br>
 				<a style="color: #b3b3b3; font-size: 15px;">※가이드 투어는 최대 3일까지 등록 가능합니다.</a>
 			</td>
@@ -68,7 +68,7 @@
 		<tr>
 			<td class="InfoTd">출발장소 및 시간</td>
 			<td>
-				<input type="text" id="gdepartplace" name="gdepartplace" style="width:390px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">
+				<input type="text" id="departplace" name="gdepartplace" style="width:390px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">
 				<input type="time" class="NoBootStrap" id="gdeparttime" name="gdeparttime">
 			</td>
 		</tr>
