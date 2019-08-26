@@ -14,7 +14,8 @@ public interface IAdminDao {
 	
 	//여행취향 리스트 관리
 	public List<Preference> selectLikeList();
-	public void insertPrefer(Preference preference);
-	public void updatePrefer(String likecode);
-	
+	public void insertPrefer(HashMap<String, Object> params);
+	public void updatePreferOn(String likecode);
+	public void updatePreferOff(String likecode);
+	public String selectLikecodeByName(String likename);
 }

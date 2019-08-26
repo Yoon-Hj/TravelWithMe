@@ -61,6 +61,7 @@ body {
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+<input type="hidden" id="type" value="${type }">
 
 <div class="adminDiv">
 	<div class="sidenav">
@@ -83,14 +84,18 @@ body {
 	</div>  
 	<div class="themaDiv" style="display:none;">
 	  <h2>여행취향 / 테마 관리</h2><BR>
+	  	  <div style="float:right; right:20%;">
+		  </div>
 	  <center>
+	  	<input type="text" id="addlikes">
+		<input type="button" id="addLike" value="추가" style="background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
 	  	<table>
 	  		<tbody id="themaTbody"></tbody>
 	  	</table>
 	  </center>
 	</div>  
 </div>
-
+d
 
 
 </body>

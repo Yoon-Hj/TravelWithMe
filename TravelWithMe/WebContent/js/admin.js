@@ -1,5 +1,6 @@
 $(function(){
 	
+	
 	$('#manageGrade').on('click', function(){
 		$('.gradeDiv').show();
 		$('.themaDiv').hide();
@@ -19,6 +20,7 @@ $(function(){
 		$('.gradeDiv').hide();
 		$( 'tbody').empty();
 		var table = "";
+		
 		$.ajax({
 			url : "getThemas.do",
 			type : "post",
@@ -34,19 +36,50 @@ $(function(){
 				$("#themaTbody:last").append(table);
 				$('.themaRow').css('width', '100px');
 				$('.themaRow').css('height', '50px');
-				$('.delThema').click(function(){
+				$(document).on("click", ".delThema", function(){
 					if(confirm("삭제하시겠습니까?") == true){
-//						$.ajax({
-//							
-//						});
-						alert($(this).val());
+						$.ajax({
+							url : "deleteThema.do",
+							type : "post",
+							data : {
+								likecode : $(this).val()
+							},
+							success : function(){},
+							error : function(){}
+						});
+						$('#manageThema').trigger('click');
 					}
-				})
+				});
 			},
 			error : function(){}
 		});
 		
 	});
+	
+	
+	$('#addLike').on('click', function(){
+		var like = $('#addlikes').val();
+		
+		if(like == "")
+			alert("추가할 취향 / 테마를 입력해주세요.");
+		else{
+			$.ajax({
+				url : "addThema.do",
+				type : "post",
+				data : {
+					likename : like
+				},
+				success : function() {},
+				erreor : function(){}
+			});
+		}
+		
+		$('#manageThema').trigger('click');
+		
+		
+	});
+	
+	
 	
 	
 	
