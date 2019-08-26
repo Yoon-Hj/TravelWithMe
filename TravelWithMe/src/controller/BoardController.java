@@ -235,4 +235,11 @@ public class BoardController {
 		mav.setViewName("guideBoardList");
 		return mav;
 	}
+	
+	// csv테스트중...
+	@RequestMapping("a.do")
+	public void csvTest() {
+		System.out.println("컨트롤러옴");
+		b_bsvc.test();
+	}
 }
