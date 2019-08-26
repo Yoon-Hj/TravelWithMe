@@ -5,17 +5,25 @@
 <html lang='en'>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="fonts/font.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
 
+
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+<script language="javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
+</script>
 <script>
 
 $(document).ready(function(){
@@ -83,7 +91,12 @@ $(document).ready(function(){
 		};
 	});
 	
+	
+	
+	
 });
+
+
 
 //Get the modal
 //var modal = document.getElementById("myModal");
@@ -190,6 +203,7 @@ function validate() {
 	//modalBlock();
 	$('#myModal').css("display", "block");
 	
+   
 	return true;
 	
 }
@@ -203,11 +217,15 @@ function test(){
 
 </script>
 
+ 
+      
+
 </head>
 <style>
 
-	
-/* .all {
+
+
+.all {
 	width: 660px;
 	position: absolute;
 	top: 15%;
@@ -216,7 +234,7 @@ function test(){
   margin-left: auto;
   margin-right: auto;
 }
- */
+
 .title {
 	width: 400px;
 	position: absolute;
@@ -229,145 +247,187 @@ function test(){
 .bottom{
 
 	position: absolute;
+	width: 660px;
 	top: 35%;
 	left: 25%;
 	margin-left:; 
 	background-color: #f1f1f1;
 }
-
-
 </style>
 
 <body>
+	<h1 class="title">SIGN UP</h1>
 
-	<jsp:include page="header.jsp"></jsp:include>
-	
-	<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px;">Sign Up</h1>
-	<hr>
-	
-	<div class="container" style="margin-bottom: 400px;">
-	
-	<form name="join" action="joinMember.do" method="post">
+	<form name="join"action="joinMember.do" method="post">
 
-			<div class="form-group">
-				
-				<label><b>아이디</b></label>
+	<div class="all">	
+	
+			<div>
 				<input type="text" class="form-control" id="mid" name="mid"
-						placeholder="Enter ID" maxlength="12" style="width: 600px;">
+					placeholder="ID" maxlength="12">
 				<div class="check_font" id="id_check"></div>
-
-				<label><b>비밀번호</b></label>
-					<input type="password" class="form-control" id="mpw" name="mpw"
-						placeholder="Enter Password" style="width: 600px;">
-				<div class="check_font" id="pwd_check1"></div>
-
-				<label><b>비밀번호 확인</b></label>
-				<input type="password" class="form-control" id="mpw_check"
-						name="mpw_check" placeholder="Enter Password again" style="width: 600px;">
-				<div class="check_font" id="pwd_check"></div>
-				
-				<label><b>성명</b></label>
-				<input type="text" class="form-control" id="mname" name="mname"
-						placeholder="Enter Name" style="width: 600px;">
-				<div class="check_font" id="name_check"></div>
-					
-				<label><b>대표 연락처</b></label>
-				<input type="radio" name="contact" checked="checked" value="phone" /> 휴대폰 
-				<input type="radio" name="contact" value="email" /> email 
-				<input type="radio" name="contact" value="kakao" /> 카카오 아이디
-				<input type="text" name="mcontact" id="mcontact">
-				<p>※동행 및 가이드 매칭 참여시에 사용될 연락처이니 신중하게	기입바랍니다.</p>
-				
-				<label><b>생년월일</b></label>
-				<input type="date" id="mbirth" name="mbirth2">
-				
-				<label><b>성별</b></label>
-				<input type="radio" id="mgender" name="mgender" checked="checked" value="male" /> 남자
-				<input type="radio" name="mgender" value="female" /> 여자
-				
-				<input type="button" value="다음으로" onclick="validate()" id="nextChoice">
-			
 			</div>
 
+		
 
+			<div>
+				<input type="password" class="form-control" id="mpw"
+					name="mpw" placeholder="비밀번호" maxlength="12">
+				<div class="check_font" id="pwd_check1"></div>
+			</div>
+
+			<div>
+				<input type="password" class="form-control" id="mpw_check"
+					name="mpw_check" placeholder="비밀번호 확인">
+				<div class="check_font" id="pwd_check"></div>
+			</div>
+
+        
+			<div>
+				<input type="text" class="form-control" id="mname"
+					name="mname" placeholder="성명">
+				<div class="check_font" id="name_check"></div>
+			</div>
 </div>
 
-	<!-- The Modal -->
-	<div id="myModal" class="modal" style="display:none">
-	<div class="modal-dialog">
-	  <!-- Modal content -->
-	
-	  <div class="modal-content">
-	    <!-- <span class="close" id ="close"></span> -->
-	    <button type="button" id="close" onclick="test()">&times;</button>
-	     <!-- Modal Header -->
-			        <div class="modal-header">
-			          <h3 class="modal-title" style="font-family: 배달의민족 도현">당신의 여행 취향은?</h3>
+
+
+			<div class="bottom">
+			
+				<table>
+	    
+				<tr>
+					<td><p style="width:400px">대표 연락처</p></td>
+	<td>			
+	<input type="radio" name="contact" checked="checked" value="phone" />
+	휴대폰 
+    
+    <input type="radio" name="contact" value="email" />email
+												
+	<input type="radio" name="contact" value="kakao" /> 카카오 아이디
+	</td>
+</tr>
 				
-			        </div>
-	<table>
-	
-	
-	<tr>
-	<td>
-	  <h2>(최대 3개)</h2>
-	</td>
+		<tr>	
+   
+		<td colspan="2"><input type="text" name="mcontact" id="mcontact"></td>
+    
+	</tr>		          
+                
+		<tr>
+		<td colspan="2"><p>※동행 및 가이드 매칭 참여시에 사용될 연락처이니 신중하게 기입바랍니다.</p></td>
+		</tr>		
+
+    <tr>	
+	<td><p>생년월일</p></td>
+	<td><div><input type="date" id="mbirth" name="mbirth2"></div></td>
 	</tr>
 	
-	<tr><td><h2>(선택사항) 선택을 원하지 않으실 경우, 바로 회원가입을 눌러주세요.</h2></td></tr>
-	                     
-	 
-	<tr>
-	<td>
-	
-	
-	<div name="likecheck">
-	<c:forEach var="codelike" items="${codeList}">
-	<input type="checkbox" name="likecode" onClick="count_ck(this)" value="${codelike.likecode}" /> ${codelike.likename}
-	</c:forEach>
-	</div>
-	</td>
-	</tr>
-	
-	                <tr>
-	                <td><input class="btn btn-success" type="submit" value="회원가입"></td>
-	                </tr>
-	                
-	</table>
-	</div>
-	</div>
-	</div>
-	
-	<div style="position: fixed; bottom: 23px; right: 10px;">
-	 	 	<a href="#0"><img src="imgs/top.png" style="width: 60px;height: 60px;"></a>
-	 	</div> 
+	<tr>			
+	<td><p>성별</p></td>
+				
+	<td><input type="radio" id="mgender" name="mgender" checked="checked"
+						value="male" /> 남자 </div>
+						
+						
+	<input type="radio" name="mgender" value="female" />
+						여자</div></td>
+    
+    </tr>				
+             			  <tr>
+     
+     <td colspan="2"><input type="button" value="다음으로" onclick="validate()" id="nextChoice" >
+      </td>
+     </tr> 
+    
+               	</table>
+			
+		</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal" style="display:none">
+<div class="modal-dialog">
+  <!-- Modal content -->
+
+  <div class="modal-content">
+    <!-- <span class="close" id ="close"></span> -->
+    <button type="button" id="close" onclick="test()">&times;</button>
+     <!-- Modal Header -->
+		        <div class="modal-header">
+		          <h3 class="modal-title" style="font-family: 배달의민족 도현">당신의 여행 취향은?</h3>
+			
+		        </div>
+<table>
+
+
+<tr>
+<td>
+  <h2>(최대 3개)</h2>
+</td>
+</tr>
+
+<tr><td><h2>(선택사항) 선택을 원하지 않으실 경우, 바로 회원가입을 눌러주세요.</h2></td></tr>
+                     
+ 
+<tr>
+<td>
+
+
+<div name="likecheck">
+<c:forEach var="codelike" items="${codeList}">
+<input type="checkbox" name="likecode" onClick="count_ck(this)" value="${codelike.likecode}" /> ${codelike.likename}
+</c:forEach>
+</div>
+</td>
+</tr>
+
+                <tr>
+                <td><input class="btn btn-success" type="submit" value="회원가입"></td>
+                </tr>
+                
+</table>
+</div>
+</div>
+</div>
+
+<div style="position: fixed; bottom: 23px; right: 10px;">
+ 	 	<a href="#0"><img src="imgs/top.png" style="width: 60px;height: 60px;"></a>
+ 	</div> 
 	</form>
 
-	
-	<script>
-	function count_ck(obj){
-		var chkbox = document.getElementsByName("likecode");
-		var chkCnt = 0;
-	
-		for(var i=0;i<chkbox.length; i++){
-	
-			if(chkbox[i].checked){
-	
-				chkCnt++;
-	
-			}
-	
+
+
+<script>
+
+function count_ck(obj){
+
+	var chkbox = document.getElementsByName("likecode");
+
+	var chkCnt = 0;
+
+	for(var i=0;i<chkbox.length; i++){
+
+		if(chkbox[i].checked){
+
+			chkCnt++;
+
 		}
-	
-		if(chkCnt>3){
-			alert("3개까지 선택 가능합니다.");
-			obj.checked = false;
-			return false;
-		}
+
 	}
-	
-	</script>
-	
-	<jsp:include page="footer.jsp"></jsp:include>
+
+	if(chkCnt>3){
+
+		alert("3개까지 선택 가능합니다.");
+
+		obj.checked = false;
+
+		return false;
+
+	}
+}
+
+
+</script>
+
 </body>
 </html>
