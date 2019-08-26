@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,13 +16,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script type="text/javascript" src="js/guideList.js?v=<%=System.currentTimeMillis() %>"></script>
 <title>Travel With Me</title>
 
 </head>
 <body>	
+
 	<jsp:include page="header.jsp"></jsp:include>
 	
-	<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px;">Travel With Guide</h1>
+	<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px; cursor: pointer;" onclick="location.href='guideBoardList.do'">Travel With Guide</h1>
 	<hr>
 	
 	<div class="container">
@@ -43,15 +46,18 @@
 						<option value="4">작성자(아이디)</option>
 						<option value="5">지역</option>
 					</select>
+					<input type="hidden" id='hiddenType' value='${type}'>
 				</td>
-				<td><input type="text" class="form-control" name="keyword" style="width: 600px"></td>
+				<td>
+					<input type="text" class="form-control" value='${keyword}' name="keyword" style="width: 600px">
+				</td>
 			 </tr>
 			 <tr>
 			 	<td style="text-align: center">여행날짜</td>
 			 	<td width="700px">
-			 		<input type="date" name="sdate" max="2030-12-31" min="2019-01-01" 
+			 		<input type="date" name="sdate" value="${startdate}" max="2030-12-31" min="2019-01-01" 
 			 				style="width: 250px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">&nbsp; ~ &nbsp;
-					<input type="date" name="fdate" max="2030-12-31" min="2019-01-01"
+					<input type="date" name="fdate" value="${finishdate}" max="2030-12-31" min="2019-01-01"
 							style="width: 250px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">
 				</td>
 				<td rowspan="2" width=130px; style="margint-left: 20px; margin-top: 150px">
@@ -67,6 +73,11 @@
 		<h4 style="font-family: '함초롬돋움'; margin-bottom: 15px;">추천여행</h4>
 		
 			<div class="row">
+			<c:if test="${fn:length(readCntList)==0}">
+				<h5 style="font-family:'함초롬돋움'; margin-bottom: 15px; margin: auto">
+					오늘의 추천 여행이 존재하지 않습니다. 직접 가이드 투어를 계획해보세요.
+				</h5>
+			</c:if>
 			<c:forEach var="b" items="${readCntList}" varStatus="status">
 			  <div class="column">
 				<a href="readBoard.do?bnum=${b.bnum}&bkind=G">
@@ -94,6 +105,11 @@
 		<h4 style="font-family: '함초롬돋움'; margin-bottom: 15px;">전체여행</h4>
 		
 			<div class="row">
+			<c:if test="${fn:length(boardList)==0}">
+				<h5 style="font-family: '함초롬돋움'; margin-bottom: 15px; margin: auto">
+					검색결과가 존재하지 않습니다.
+				</h5>
+			</c:if>
 			<c:forEach var="g" items="${boardList}" varStatus="status">
 			  <div class="column" style="margin-bottom: 12px;">
 				<a href="readBoard.do?bnum=${g.bnum}&bkind=G">

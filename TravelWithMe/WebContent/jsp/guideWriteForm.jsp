@@ -91,8 +91,12 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="InfoTd">인원</td>
-			<td><input id="gnop" name="gnop" type="number" min="1" value="1" style="width:100px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">명</td>
+			<td class="InfoTd">모집인원</td>
+			<td>
+			<input id="gnop" name="gnop" type="number" min="0" value="1" style="width:100px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">명
+			<br>
+			<a style="color: #b3b3b3; font-size: 15px;">※모집인원이 0명일경우 모집인원 무관으로 대체합니다.</a>
+			</td>
 		</tr>
 	</table>
 	
@@ -197,7 +201,6 @@
 				<input type="file" id="photo" name="photo" multiple>
 				<label id="photoUpload"><i class="fa fa-folder"></i>&nbsp;첨부하기</label>
 				</form>
-				<a style="color: #b3b3b3; font-size: 15px;">※사진삭제를 원하시면 해당사진을 클릭하세요</a>
 				<br>
 				<div>
 					<div class="imgs_wrap" id="imgs_wrap">

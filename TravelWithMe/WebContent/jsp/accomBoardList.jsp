@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,6 +84,8 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 		  $('[data-toggle="tooltip"]').tooltip();   
+		  
+		  
 		
 			//이미지 분기
 			$('.iarea').find("input").each(function(){
@@ -127,7 +130,7 @@
 	
 	<jsp:include page="header.jsp"></jsp:include>
 	
-	<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px;">Travel With Me</h1>
+	<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px; cursor: pointer;" onclick="location.href='accomBoardList.do'">Travel With Me</h1>
 	<hr>
 	
 	<div class="container">
@@ -181,6 +184,11 @@
 		<h4 style="font-family: '함초롬돋움'; margin-bottom: 15px;">추천여행</h4>
 		
 			<div class="row">
+			<c:if test="${fn:length(recommList)==0}">
+				<h5 style="font-family: '함초롬돋움'; margin-bottom: 15px; margin: auto">
+					오늘의 추천 여행이 존재하지 않습니다. 직접 동행여행을 계획해보세요.
+				</h5>
+			</c:if>
 			<c:forEach var="b" items="${recommList}" varStatus="status">
 			  <div class="column">
 				<a href="readBoard.do?bnum=${b.bnum}&bkind=A"><img style="width:100%; height: 100%;"></a>
@@ -199,6 +207,11 @@
 		<h4 style="font-family: '함초롬돋움'; margin-bottom: 15px;">전체여행</h4>
 		
 			<div class="row">
+			<c:if test="${fn:length(boardList)==0}">
+				<h5 style="font-family: '함초롬돋움'; margin-bottom: 15px; margin: auto">
+					검색결과가 존재하지 않습니다.
+				</h5>
+			</c:if>
 			<c:forEach var="a" items="${boardList}" varStatus="status">
 			  <div class="column" style="margin-bottom: 12px;">
 				<a href="readBoard.do?bnum=${a.bnum}&bkind=A"><img style="width:100%; height: 100%;"></a>

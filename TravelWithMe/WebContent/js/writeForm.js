@@ -3,9 +3,17 @@ $(function(){
 	//오늘날짜 이전의 값은 선택불가
 	var today = new Date();
 	var todayDate = "";
-	todayDate += today.getFullYear()+"-0";
-	todayDate += (today.getMonth()+1)+"-";
-	todayDate += today.getDate();
+	todayDate += today.getFullYear()+"-";
+	if(today.getMonth()+1 > 9) {
+		todayDate += (today.getMonth()+1)+"-";		
+	}else{
+		todayDate += "0"+(today.getMonth()+1)+"-";		
+	}
+	if(today.getDate() > 9){
+		todayDate += today.getDate();		
+	}else{
+		todayDate += "0"+today.getDate();		
+	}
 	$("#gstartdate").attr('min',todayDate);
 	$("#gfinishdate").attr('min',todayDate);
 
@@ -283,8 +291,8 @@ $(function(){
 	//모집인원 마이너스값 못넣게 하기
 	$("#gnop").focusout(function(){
 		if($("#gnop").val()<0){
-			alert("1명보다 적은 모집인원은 선택할 수 없습니다. 다시 선택하세요");
-			$("#gnop").val("1");
+			alert("0명보다 적은 모집인원은 선택할 수 없습니다. 다시 선택하세요");
+			$("#gnop").val("0");
 		}
 	});
 
