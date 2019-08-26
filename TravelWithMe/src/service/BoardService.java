@@ -143,8 +143,8 @@ public class BoardService {
 		String likecode = null;
 		if(picklist != null) {
 			if(!picklist.isEmpty()) {
-				double randomValue = Math.random();
-				int ran = (int)(randomValue * picklist.size()) -1;
+				Random random = new Random();
+				int ran = random.nextInt(picklist.size());
 				likecode = picklist.get(ran);
 			}
 		}else {
