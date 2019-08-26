@@ -10,300 +10,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="fonts/font.css">
-<link rel="stylesheet" type="text/css" href="css/guideView.css">
+<link rel="stylesheet" type="text/css" href="css/guideView.css?v=<%=System.currentTimeMillis() %>">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script type="text/javascript" src="js/guideView.js?v=<%=System.currentTimeMillis() %>"></script>
 <title>Travel With Me</title>
 
 </head>
 <body>
-<script type="text/javascript">
-
-	$(document).ready(function(){
-		 
-		var b = ${accomBoard.bnum};
-		var rlist;
-		
-		$.ajax({
-				url : "getRList.do",
-				data : {bnum : b},
-				type : "get",
-				success : function(data){
-							
-							rlist = data;
-							var flag = false;
-							
-							//신청, 취소, 관리 버튼
-							for(var r in rlist){
-								if(user == rlist[r].mid) 
-									flag = true;
-								break;
-							}
-						 	if(${user == accomBoard.mid}){
-								$('#rmbtn').show();
-							}else if(flag){
-								$('#rcbtn').show();
-							}else{
-								$('#rbtn').show();
-							}
-						 	
-						 	//가능인원 계산
-						 	var an = ${accomBoard.anop};
-						 	if(an == 0) {
-								$('.nop').text("무관");
-							}
-
-							else{
-								var rn = 0;
-								for(var r in rlist){
-									rn += rlist[r].rnop;
-								}
-								var pn = an - rn;
-								$('.nop').text(pn);
-							}
-						 	//rid, rnop 숨겨놓기
-						 	for(var r in rlist){
-						 		$('#hid').val(rlist[r].rid);
-						 		$('#hn').val(rlist[r].rnop);
-						 	}
-						 	
-				}
-		});
-		
-		var user = "<%=(String) session.getAttribute("user")%>";
-		if(user == "null"){
-			$('#clform').show();
-		}else{
-			$('#cform').show();
-			$('#cbtn').show();
-		}
-		
-		if(user == "null") {
-			$('#rbtn').attr("disabled", "disabled");
-		}
-		
-		if($('.nop')==0){
-			$('#rbtn').attr("disabled", "disabled");
-		} 
-	
-	    //신청인원이 0이 아닐 때, 수정 버튼 누르면 alert 표시
-		$('#modiBtn').on('click', function(){
-			if($('.nop') != ${accomBoard.anop}) 
-				alert("신청인원이 존재하여 게시글 수정이 불가합니다.")
-		});
-	    
-		$('.replyBtn').on('click', function(){
-				if(user == "null"){
-					alert("로그인이 필요한 서비스입니다.");
-				}else{
-					if($('#cwf').text()==''){
-						$(this).closest("tr").after("<tr id='cwf'><td>&nbsp;&nbsp;</td><td colspan='2'><input type='text' class='recontent' style='width: 700px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;'><button type='submit' class='writereBtn'>답글작성</button></td></tr>");
-					}else{
-						$('#cwf').remove();
-					}
-				}
-		});
-		
-		//신청취소버튼 - 취소
-		$('#rcbtn').on('click', function(){
-			var b = ${accomBoard.bnum}; 
-			var hi = $('#hid').val();
-			 if (confirm("신청을 정말 취소하시겠습니까?") == true){
-				 $.ajax({
-						url : "cancelRegister.do",
-						data : {mid : user,
-								bnum : b,
-								rid : hi},
-						type : "get",
-						success : function(data){
-							history.go(0);
-						}
-				  });
-			 }else{
-				 return;
-			 }
-		});
-		
-		//신청관리버튼 누르면 신청자들 정보 조회
-		$('#rmbtn').on('click', function(){
-			$('#mtable').empty();
-			var b = ${accomBoard.bnum};
-			var n = $('#hn').val();
-			var hi = $('#hid').val();
-			
-			$.ajax({
-				url : "getRegistInfo.do",
-				data : {bnum : b},
-				type : "get",
-				success : function(data){
-						if(data == ''){
-							$('#mtable').append("<tr><td style='color: #CD1039;'>신청자가 존재하지 않습니다.<td><tr>");
-						}else{
-							var rinfo = data;
-							var th = "<tr><th>아이디</th><th>이름</th><th>연락처</th><th>신청인원</th><th>거절하기</th></tr>";
-							$('#mtable').append(th);
-							for(var i=0; i < rinfo.length; i++){
-								var tHTML="<tr><td>"+rinfo[i].MID+"<input type='hidden' value='"+hi+"'></td><td>"+rinfo[i].MNAME+"</td><td>"+rinfo[i].MCONTACT+"</td><td>"+n+"명</td><td>"+"<button class='btn' class='rejectbtn' style='border: 2px solid #B5C3C8; width: 80px; font-family: 배달의민족 주아; font-size: 13px;'>거절하기</button></td></tr>";
-								$('#mtable').append(tHTML);
-						}
-					}
-				}
-			});
-		});
-		
-		//거절하기 버튼
-		$(document).on('click', '.rejectbtn', function(){
-			
-			var r = $(this).parent("tr").find("td:eq(0)").siblings("input");
-			var m = $(this).parent("tr").find("td:eq(0)");
-			alert(r);
-			
-			if (confirm("정책에 기재된 사유가 아니면 불이익이 발생할 수 있습니다. 거절을 진행하시겠습니까?") == true){
-				 $.ajax({
-						url : "rejectRegister.do",
-						data : {bnum : b,
-								rid : r,
-								id : m},
-						type : "get",
-						success : function(data){
-									$('#rmbtn').trigger('click');
-						}
-				  });
-			 }else{
-				 return;
-			 }			
-		});
-		
-		//두번째 모달 나와줘
-		$(document).on('click', '#agreeBtn', function(){
-			$('#warningModal1').modal("hide");
-			$('#warningModal2').modal("show");
-			$('#registerNum').attr("max", pn);
-		});
-		
-		$('#registerNum').focusout(function(){
-			
-		});
-		
-		function check(elem){
-			var num = elem.value;
-			var remain = pn;
-			if(num > remain){
-				elem.value = remain;
-				num = elem.value;
-			}
-		}
-		
-		//세번째 모달 나와줘
-		$(document).on('click', '#regiBtn', function(){
-			$('#warningModal2').modal("hide");
-			$('#succModal').modal("show");
-		});
-		
-		//신청완료버튼 누르면
-		$(document).on('click', '#regiBtn', function(){
-			
-			var wid = $('#writeid').text();
-			var b = $('#hiddenbnum').val();
-			var rnum = $('#registerNum').val();
-			
-				  $.ajax({
-						url : "tryRegister.do",
-						data : {regId : user,
-								bnum : b,
-								nop : rnum,
-								mid : wid},
-						type : "get",
-						success : function(data){
-							if(data==""){
-								alert("모집 인원을 초과하여 신청이 불가합니다.");
-								history.go(0);
-							}else{
-								$('#contact').html(data);
-							}
-						}
-				  });
-		});
-		
-		$('#finishBtn').on('click', function(){
-			history.go(0);
-		});
-		
-		//댓글작성
-		$('.writecoBtn').on('click', function(){
-			var b = ${accomBoard.bnum};
-			
-			$.ajax({
-				url : "writeComment.do",
-				data : {ccontent : $('.cocontent').val(),
-					    bnum : b},
-				type : "get",
-				success : function(data){
-					history.go(0);
-				}
-			});
-		});
-		
-		//답글작성
-		$(document).on('click', '.writereBtn', function(){
-			var b = ${accomBoard.bnum};
-			var c = $(this).parent("td").parent("tr").siblings("tr:eq(0)").find("th:eq(0)").find("input").val();
-			alert(c);
-			$.ajax({
-				url : "writeRecomment.do",
-				data : {ccontent : $('.recontent').val(),
-					    bnum : b,
-					    cgrid : c},
-				type : "get",
-				success : function(data){
-					history.go(0);
-				}
-			});
-		});
-		
-		//댓글삭제
-		//댓글 삭제여부가 1이면, '해당 댓글은 삭제되었습니다.'(text) 로 대체
-		$('.commDelBtn').on('click', function(){
-			  if (confirm("해당 댓글을 삭제하시겠습니까?") == true){   
-				var delrow = $(this).siblings("input:hidden").val();
-				var tmp = $(this).parents("td");
-				  $.ajax({
-						url : "delComment.do",
-						data : {cnum : delrow},
-						type : "get",
-						success : function(data){
-							tmp.text("");
-							tmp.append("<span style='color: #828282; font-size: 13px;'>해당 댓글은 삭제되었습니다.</span>");
-						}
-				  });
-			  }else{   
-			      return;
-			  }
-		});
-		
-		//중간에 모달 x누르면 그냥 새로고침
-		$('.cc').on('click', function(){
-			history.go(0);
-		});
-		
-		//게시글 삭제 확인
-		$('#delBtn').on('click', function(){
-			 var b = ${accomBoard.bnum};
-			 if (confirm("해당 게시글을 삭제하시겠습니까?") == true){
-						$(this).attr("location.href", "'accomDeleteBoard.do?bnum='+b");
-				  });
-			 }else{
-				 return;
-			 }			
-		})
-		
-	});
-
-</script>
 
 	<jsp:include page="header.jsp"></jsp:include>
 	
@@ -320,7 +38,7 @@
 		</c:if>
 		
 		<div class="card">
-			<table class="viewCard"; style="border: none;">
+			<table class="viewCard" style="border: none;">
 				<tr>
 					<th>작성자</th>
 					<td id="writeid">${guideBoard.mid}</td>
@@ -328,6 +46,19 @@
 				<tr>
 					<th>제목</th>
 					<td>${guideBoard.btitle}<input type="hidden" id="hiddenbnum" value="${guideBoard.bnum}"></td>
+				</tr>
+				<tr>
+					<td colspan='2'">
+						<div class="slideshow-container" style="text-align: center; margin-left: 5%">
+						<a id='prev' style='color:white' onclick='plusSlides(-1)'>&#10094;</a>
+						<a id='next' style='color:white' onclick='plusSlides(1)'>&#10095;</a>
+							<c:forEach var="photo" items="${photo}">
+								<div class='mySlides'>
+									<a><img src="download.do?photopath=${photo}" style='width: 300px; height: 250px; margin-left: 83px;'></a>
+								</div>
+							</c:forEach>
+						</div>
+					</td>
 				</tr>
 				<tr>
 					<th>날짜</th>
@@ -345,22 +76,30 @@
 					<th>모집인원</th>
 					<td>
 						<c:choose>
-							<c:when test="${guideBoard.anop==0}">무관</c:when>
-							<c:otherwise>${guideBoard.anop}명</c:otherwise>
+							<c:when test="${guideBoard.gnop==0}">무관</c:when>
+							<c:otherwise>${guideBoard.gnop}명</c:otherwise>
 						</c:choose>
 					</td>
 				</tr>
 				<tr>
-					<th>취향</th>
-					<td>1. 여행테마 - ${accomBoard.likename} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. 선호 이동수단 - ${accomBoard.atransport}</td>
-				</tr>
-				<tr>
-					<th>필수여행지</th>
-					<td>${accomBoard.acourse}</td>
+					<th>테마</th>
+					<td>${guideBoard.gthema}</td>
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td>${accomBoard.bcontent}</td>
+					<td>${guideBoard.bcontent}</td>
+				</tr>
+				<tr>
+					<th style="vertical-align: top;">세부일정</th>
+					<td>
+						<div id='canvasDiv'>
+							<c:forEach var='sche' items="${guideSche}">
+								<input type="hidden" name='sdate' value="${sche.sdate }">
+								<input type="hidden" name='stime' value="${sche.stime }">
+								<input type="hidden" name='splace' value="${sche.splace }">
+							</c:forEach>
+						</div>
+					</td>
 				</tr>
 				<tr>
 					<th>주요정책</th>
@@ -380,7 +119,7 @@
 		</div>
 		
 		<div style="display: flex; margin-top: 10px; margin-left: 110px; font-family: '배달의민족 주아'">
-			<p><input type="button" class="btn default" value="목록으로" style="border: 2px solid #B5C3C8;" onclick="location.href='accomBoardList.do'"></p>
+			<p><input type="button" class="btn default" value="목록으로" style="border: 2px solid #B5C3C8;" onclick="location.href='guideBoardList.do'"></p>
 			<p style="float: right; margin-left: 610px;">현재 신청 가능 인원 수 <span class="nop" style="color: #F56E6E; font-size: 20px;"></span>명 &nbsp;&nbsp;
 					<input type="button" id="rmbtn" class="btn default" value="신청관리" data-toggle="modal" data-target="#manageModal" style="border: 2px solid #B5C3C8; width: 80px; display:none;">
 					<input type="button" id="rcbtn" class="btn default" value="신청취소" style="border: 2px solid #B5C3C8; width: 80px; display:none;">

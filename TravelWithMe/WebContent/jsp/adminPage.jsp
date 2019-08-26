@@ -56,11 +56,26 @@ body {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
+
+
+.gradeTable th{
+	border-bottom : 1px solid black;
+	width : 200px;
+	height : 50px;
+}
+.gradeTable td{
+	border : 1px solid black;
+	width : 200px;
+	height : 170px;
+}
+
 </style>
 
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+<input type="hidden" id="type" value="${type }">
 
 <div class="adminDiv">
 	<div class="sidenav">
@@ -72,26 +87,57 @@ body {
 	<div class="gradeDiv" style="display:none;">
 	  <h2>가이드 등급 관리</h2><BR>
 	  <center>
-	  	<table style="text-align:center">
+	  	<table class="gradeTable" style="text-align:center;">
+	  		<thead>
 	  		<tr>
 	  			<th>등급</th>
-	  			<th>점수</th>
+	  			<th colspan="2">점수</th>
+	  		</tr>
+	  		</thead>
+	  		<tr>
+	  			<td>
+	  			<img src="imgs/gold2.jpg" style="width:70px;height:70px;"/><BR>
+	  			<h4>Gold</h4></td>
+	  			<td><h4>9999</h4></td>
+	  			<td><input type="text" id="goldMin"></td>
+	  		</tr>
+	  		<tr>
+	  			<td>
+	  			<img src="imgs/silver2.jpg" style="width:70px;height:70px;"/><BR>
+	  			<h4>Silver</h4></td>
+	  			<td><input type="text" id="silverMax"></td>
+	  			<td><input type="text" id="silverMin"></td>
+	  		</tr>
+	  		<tr>
+	  			<td>
+	  			<img src="imgs/bronze2.jpg" style="width:70px;height:70px;"/><BR>
+	  			<h4>Bronze</h4></td>
+	  			<td><input type="text" id="bronzeMax"></td>
+	  			<td><h4>0</h4></td>
 	  		</tr>
 	  		<tbody id="gradeTbody"></tbody>
 	  	</table>
-	  </center>
+	  </center><BR>
+	  <div style="float:right; width : 200px">
+	  	<input type="button" id="modiGrade" value="변경" style="background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
+	  </div>
 	</div>  
+	
+	
+	
 	<div class="themaDiv" style="display:none;">
 	  <h2>여행취향 / 테마 관리</h2><BR>
+	  	  <div style="float:right; right:20%;">
+		  </div>
 	  <center>
+	  	<input type="text" id="addlikes">
+		<input type="button" id="addLike" value="추가" style="background-color: transparent; border: 0px; font-size: 20px; font-weight: bold;">
 	  	<table>
 	  		<tbody id="themaTbody"></tbody>
 	  	</table>
 	  </center>
 	</div>  
 </div>
-
-
 
 </body>
 </html>

@@ -596,10 +596,21 @@ function minusDetailSche(minusBtn){
 function setDetailDay(){
 	
 	$("#day > tbody").empty();
-	
-	var sdate = $("#gstartdate").val().split('-');
-	var fdate = $("#gfinishdate").val().split('-');
-	var day = fdate[2]-sdate[2];
+	var day;
+	if($("#gstartdate").val()==$("#gfinishdate").val()){
+		day=0;
+	}else{
+		var sdate = $("#gstartdate").val().split('-');
+		var fdate = $("#gfinishdate").val().split('-');
+		
+		sdate = new Date(sdate[0],sdate[1],sdate[2]);
+		fdate = new Date(fdate[0],fdate[1],fdate[2]);
+		
+		day = Math.abs(fdate.getTime() - sdate.getTime());
+		day = Math.ceil(day / (1000 * 3600 * 24));
+		day+=1;
+	}
+
 	var dayHTML = "";
 	var dayHTMLinput = "<td><input type='time' class='timeMinMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
 	dayHTMLinput += "<td class='placeTd'><input type='text' class='placeMax' style='width:200px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; '></td>";
@@ -699,7 +710,11 @@ function openPreview() {
 	//지역
 	$("#previewTable").find("tr:eq(6)").find("td:eq(1)").html($("#garea1").val()+"&nbsp;&nbsp;"+$("#garea2").val());
 	//인원
-	$("#previewTable").find("tr:eq(7)").find("td:eq(1)").text($("#gnop").val()+"명");
+	if($("#gnop").val()==0){
+		$("#previewTable").find("tr:eq(7)").find("td:eq(1)").text("무관");		
+	}else{
+		$("#previewTable").find("tr:eq(7)").find("td:eq(1)").text($("#gnop").val()+"명");		
+	}
 	//테마
 	$("#previewTable").find("tr:eq(8)").find("td:eq(1)").text($(".sharpThema").text());
 	//투어소개
