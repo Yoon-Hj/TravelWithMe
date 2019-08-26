@@ -1,23 +1,7 @@
 $(document).ready(function(){
 	showSlides(slideIndex);
-
 	setGuideScheduleArray();
-	$("#canvasDiv").empty();
-	if(DAY1Array.length!=0){
-		var guideScheCanvasDiv1 = "<canvas id='canvas1' width='600px' height='200px'></canvas><br>";
-		$("#canvasDiv").append(guideScheCanvasDiv1);
-		drawCanvas(1);
-	}
-	if(DAY2Array.length!=0){
-		var guideScheCanvasDiv2 = "<canvas id='canvas2' width='600px' height='200px'></canvas><br>";
-			$("#canvasDiv").append(guideScheCanvasDiv2);
-		drawCanvas(2);
-	}
-	if(DAY3Array.length!=0){
-		var guideScheCanvasDiv3 = "<canvas id='canvas3' width='600px' height='200px'></canvas><br>";
-		$("#canvasDiv").append(guideScheCanvasDiv3);
-		drawCanvas(3);
-	}
+
 });
 
 //사진 슬라이드
@@ -108,24 +92,31 @@ var DAY1Array = new Array();
 var DAY2Array = new Array();
 var DAY3Array = new Array();
 function setGuideScheduleArray(){
-	$("input[name=sdate]").each(function(){		
-		var day = $("input[name=sdate]").val();
-		if(day==DAY1){
-			var DAY1 = new Object;
-			DAY1.time=$("input[name=stime]").val();
-			DAY1.place=$("input[name=splace]").val();
-			DAY1Array.push(DAY1);
-		}else if(day==DAY2){
-			var DAY2 = new Object;
-			DAY2.time=$("input[name=stime]").val();
-			DAY2.place=$("input[name=splace]").val();
-			DAY2Array.push(DAY2);
-		}else if(day==DAY3){
-			var DAY3 = new Object;
-			DAY3.time=$("input[name=stime]").val();
-			DAY3.place=$("input[name=splace]").val();
-			DAY3Array.push(DAY3);
+	$("#canvasDiv").find(":input[name=sdate]").each(function(){
+		var day = $(this).val();
+		if(day=='DAY1'){
+			var DAY1 = new Object();
+			DAY1.time = $(this).parent("div").find("input[name=stime]").val();
+			DAY1.place = $(this).parent("div").find("input[name=splace]").val();
+			DAY1Array.push(DAY1);			
+		}else if(day=='DAY2'){
+			var DAY2 = new Object();
+			DAY2.time = $(this).parent("div").find("input[name=stime]").val();
+			DAY2.place = $(this).parent("div").find("input[name=splace]").val();
+			DAY2Array.push(DAY2);	
+		}else if(day=='DAY3'){
+			var DAY3 = new Object();
+			DAY3.time = $(this).parent("div").find("input[name=stime]").val();
+			DAY3.place = $(this).parent("div").find("input[name=splace]").val();
+			DAY3Array.push(DAY3);	
 		}
 	});
+	if(DAY1Array.length!=0){
+		drawCanvas(1);
+	}if(DAY2Array.length!=0){
+		drawCanvas(2);
+	}if(DAY3Array.length!=0){
+		drawCanvas(3);
+	}
 }
 
