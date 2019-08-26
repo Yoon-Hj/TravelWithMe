@@ -7,9 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-
-
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -241,7 +242,7 @@ function test(){
 	top: 0%;
 	left: 25%;
 	margin-left:; 
-	background-color: #f1f1f1;
+	background-color:;
 }
 
 .bottom{
@@ -256,7 +257,7 @@ function test(){
 </style>
 
 <body>
-	<h1 class="title">SIGN UP</h1>
+	<h1 class="title" style="font-family: '배달의민족 도현';">SIGN UP</h1>
 
 	<form name="join"action="joinMember.do" method="post">
 
@@ -307,6 +308,10 @@ function test(){
 	<input type="radio" name="contact" value="kakao" /> 카카오 아이디
 	</td>
 </tr>
+			
+			<tr>
+<td colspan="2"><br></td>
+</tr>
 				
 		<tr>	
    
@@ -315,13 +320,21 @@ function test(){
 	</tr>		          
                 
 		<tr>
-		<td colspan="2"><p>※동행 및 가이드 매칭 참여시에 사용될 연락처이니 신중하게 기입바랍니다.</p></td>
+		<td colspan="2"><a style="color: #b3b3b3; font-size: 15px;">※동행 및 가이드 매칭 참여시에 사용될 연락처이니 신중하게 기입바랍니다.</a></td>
 		</tr>		
+
+<tr>
+<td colspan="2"><br><br></td>
+</tr>
 
     <tr>	
 	<td><p>생년월일</p></td>
 	<td><div><input type="date" id="mbirth" name="mbirth2"></div></td>
 	</tr>
+	
+	<tr>
+<td colspan="2"><br></td>
+</tr>
 	
 	<tr>			
 	<td><p>성별</p></td>
@@ -334,9 +347,15 @@ function test(){
 						여자</div></td>
     
     </tr>				
+    
+    <tr>
+    <td colspan="2"><br><br></td>
+    </tr>
              			  <tr>
-     
-     <td colspan="2"><input type="button" value="다음으로" onclick="validate()" id="nextChoice" >
+   
+     <td colspan="2" >
+     <input type="button" value="다음으로" onclick="validate()" id="nextChoice" 
+     style="background-color: #B5C3C8; color:white; font-family:'배달의민족 주아'; margin-top: 5px; margin-left: 270px;">
       </td>
      </tr> 
     
@@ -349,9 +368,12 @@ function test(){
 <div class="modal-dialog">
   <!-- Modal content -->
 
-  <div class="modal-content">
+  <div class="modal-content" style="background-color: #f1f1f1;">
     <!-- <span class="close" id ="close"></span> -->
-    <button type="button" id="close" onclick="test()">&times;</button>
+   <div>
+    <button type="button" id="close" onclick="test()"  style="background-color: #B5C3C8;
+    margin-left: 472px;"> &times; </button>
+    </div>
      <!-- Modal Header -->
 		        <div class="modal-header">
 		          <h3 class="modal-title" style="font-family: 배달의민족 도현">당신의 여행 취향은?</h3>
@@ -360,13 +382,13 @@ function test(){
 <table>
 
 
+<tr><td><h3 style="font-family: 배달의민족 도현">(선택사항) 선택을 원하지 않으실 경우, 바로 회원가입을 눌러주세요.</h3></td></tr>
+
 <tr>
 <td>
-  <h2>(최대 3개)</h2>
+  <h3 style="font-family: 배달의민족 도현">(최대 3개)</h3>
 </td>
 </tr>
-
-<tr><td><h2>(선택사항) 선택을 원하지 않으실 경우, 바로 회원가입을 눌러주세요.</h2></td></tr>
                      
  
 <tr>

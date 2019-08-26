@@ -141,7 +141,7 @@ public class MemberController {
 	public ModelAndView joinForm(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String user = (String)session.getAttribute("user");
-		if(user != null) {
+		if(user == null) {
 			mav.addObject("codeList", m_asvc.getLikecode());
 			mav.setViewName("joinForm");
 			System.out.println(m_asvc.getLikecode());
