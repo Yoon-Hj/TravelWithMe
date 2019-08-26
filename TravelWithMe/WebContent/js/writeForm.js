@@ -599,6 +599,7 @@ function setDetailDay(){
 	var day;
 	if($("#gstartdate").val()==$("#gfinishdate").val()){
 		day=0;
+		alert(day);
 	}else{
 		var sdate = $("#gstartdate").val().split('-');
 		var fdate = $("#gfinishdate").val().split('-');
@@ -608,7 +609,7 @@ function setDetailDay(){
 		
 		day = Math.abs(fdate.getTime() - sdate.getTime());
 		day = Math.ceil(day / (1000 * 3600 * 24));
-		day+=1;
+		alert(day);
 	}
 
 	var dayHTML = "";
