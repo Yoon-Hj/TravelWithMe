@@ -87,6 +87,7 @@
 	}
 
 </style>
+
 </head>
 
 <jsp:include page="header.jsp"></jsp:include>
@@ -105,7 +106,7 @@
 				<div style="display: inline">
 					<input class="form-control mr-sm-2" type="search" placeholder="Quick Search" aria-label="Search" 
 							style="margin-left: 200px; width: 700px; height: 60px; float: left;">
-					<input type="button" class="btn btn-danger" value="SEARCH" 
+					<input type="button" class="btn btn-danger" id='mainSearch' value="SEARCH" 
 							style="width: 150px; height: 60px; margin-right: 150px; font-weight: bold; font-family: 배달의민족 도현; font-size: 20px">
 				</div>
 				<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -131,7 +132,7 @@
 				 
 				<h2 style="font-size: 45px;">함께할 여행 친구들을 직접 모아보세요</h2>
 				<br>
-				<input type="button" class="btn btn-danger btn-lg btn-block" 
+				<input type="button" id='AwriteBtn' class="btn btn-danger btn-lg btn-block" 
 						value="Travel with Me 글 작성" onclick="location.href='accomWriteForm.do'"
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">
 			
@@ -154,7 +155,7 @@
 			
 				<h2 style="font-size: 45px">나만의 투어를 계획하여 직접 가이드가 되어보세요</h2>
 				<br>
-				<input type="button" class="btn btn-danger btn-lg btn-block" 
+				<input type="button" id='GwriteBtn' class="btn btn-danger btn-lg btn-block" 
 						value="Travel with Guide 글 작성" 
 						onclick="location.href='guideWriteForm.do'"
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">

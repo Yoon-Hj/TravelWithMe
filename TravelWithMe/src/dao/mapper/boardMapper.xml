@@ -435,6 +435,11 @@
 	and p.likecode = a.likecode
 </select>
 
+<!-- 메인검색 -->
+<select id="selectByKeyword" parameterType="String" resultType="java.util.HashMap">
+	select * from (select * from board where cdel = 0 order by bnum desc ) b
+	where btitle like '%${value}%' or bcontent like '%${value}%'
+</select>
 </mapper>
 
 

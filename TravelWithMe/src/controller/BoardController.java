@@ -268,5 +268,13 @@ public class BoardController {
 	//커뮤니티 화면 출력
 	@RequestMapping("commBoardList.do")
 	public void commBoardList() {}
+	
+	@RequestMapping("mainSearch.do")
+	public ModelAndView mainSearch(String keyword) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("boardList", b_bsvc.getBoardListByMainSearch(keyword));
+		mav.setViewName("mainBoard");
+		return mav;
+	}
 
 }

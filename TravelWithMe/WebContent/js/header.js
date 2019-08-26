@@ -540,15 +540,18 @@ $(document).ready(function(){
 		location.href = "readBoard.do?bnum=" + bnum + "&bkind=" + bkind;
 	}
 	
-	
-	
-	
-	
+	//메인검색
+	$("#mainSearch").click(function(){
+		var keyword = $(this).siblings("input").val();
+		if(keyword == "") alert("검색어를 입력해주세요");
+		else{
+			location.href='mainSearch.do?keyword='+keyword;			
+		}
+	});
 
-	
-	
 
 });
+
 
 
 

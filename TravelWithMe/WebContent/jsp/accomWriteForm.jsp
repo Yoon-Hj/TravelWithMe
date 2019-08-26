@@ -50,16 +50,16 @@
 					<td class="InfoTd">날짜</td>
 					<td>
 						<a style="color: #b3b3b3; font-size: 15px;">시작날짜&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종료날짜</a><br>
-						<input type="date" name="astartdate" id="astartdate" max="2030-12-31" class="NoBootStrap">
+						<input type="date" name="astartdate" id="startdate" max="2030-12-31" class="NoBootStrap">
 						~
-						<input type="date" name="afinishdate" id="afinishdate" max = "2030-12-31" class="NoBootStrap">
-						<br><br>
+						<input type="date" name="afinishdate" id="finishdate" max = "2030-12-31" class="NoBootStrap">
+						<br>
 					</td>
 				</tr>
 				<tr>
 					<td class="InfoTd">출발장소 및 시간</td>
 					<td>
-						<input type="text" id="gdepartplace" name="adepartplace" style="width:390px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">
+						<input type="text" id="departplace" name="adepartplace" style="width:390px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878; ">
 						<input type="time" class="NoBootStrap" id="gdeparttime" name="adeparttime">
 					</td>
 				</tr>
