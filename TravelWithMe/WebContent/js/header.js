@@ -23,7 +23,7 @@ $(document).ready(function(){
 	}
 
 	function onMessage(evt) {
-		$('.moreNews').html(evt.data);
+		$('#noticeCnt').html(evt.data);
 	}
 
 	function onError(evt) {
@@ -47,11 +47,11 @@ $(document).ready(function(){
 				var grade = data.GRADE;
 				var img = "";
 				if(grade == 'Gold'){
-					img = "<img class='gradeImg' src='imgs/hover_gold.jpg'/>";
+					img = "<img class='gradeImg' src='imgs/hover_gold2.jpg'/>";
 				}else if(grade == 'Silver'){
-					img = "<img class='gradeImg' src='imgs/hover_silver.jpg'/>";
+					img = "<img class='gradeImg' src='imgs/hover_silver2.jpg'/>";
 				}else if(grade == 'Bronze'){
-					img = "<img class='gradeImg' src='imgs/hover_bronze.jpg'/>";
+					img = "<img class='gradeImg' src='imgs/hover_bronze2.jpg'/>";
 				}
 				$('[data-toggle="tooltip"]').tooltip(
 						{title: "<a>신뢰지수 &nbsp" + mpoint + " / 100점</a><BR>" + 
@@ -64,8 +64,6 @@ $(document).ready(function(){
 			},
 			error : function(){}
 		});
-//		$('.gradeImg').css('width', '10px');
-//		$('.gradeImg').css('height', '10px');
 	});
 	
 	
@@ -150,10 +148,7 @@ $(document).ready(function(){
 	
 	
 	
-	// 모달 닫으면 버튼이 보이게 ..
-	$('.modal').on('hidden.bs.modal', function(){
-		$('.btn').show();
-	});
+
 	
 	
 	
@@ -174,7 +169,7 @@ $(document).ready(function(){
 	// 알림부분
 	$('.moreNews').on('click', function(){
 		$('#chk').val("t");
-		$('.btn').hide();
+		$('.notice').hide();
 		$('#ok').show();
 		$('.starRev').hide();
 		$('.attendanceModal').hide();
@@ -243,7 +238,7 @@ $(document).ready(function(){
 		$('.modal-body').hide();
 		$('.attendanceModal').hide();
 		$('.starRev').show();
-		$('.btn').hide();
+		$('.notice').hide();
 		$('#evGuide').show();
 		if($('#chk').val() == "t")
 			$('#back').show();
@@ -270,7 +265,7 @@ $(document).ready(function(){
 		$('.modal-body').hide();
 		$('#evGuide').hide();
 		$('.starRev').hide();
-		$('.btn').hide();
+		$('.notice').hide();
 		$('.attendanceModal').show();
 		$('#checkAttend').show();
 		if($('#chk').val() == "t")
@@ -313,7 +308,7 @@ $(document).ready(function(){
 	
 	
 	$('#back').on('click', function(){
-		$('.btn').hide();
+		$('.notice').hide();
 		$('#ok').show();
 		$('#back').show();
 		$('.starRev').hide();

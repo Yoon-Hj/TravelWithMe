@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="fonts/font.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -70,34 +72,40 @@
 </style>
 </head>
 <body>
-<input type="hidden" id="user" value="${user }">
+
+<input type="hidden" id="user" value="${user}">
+	
+	<img src="imgs/logo.jpg" width="180px;" height="32px;" style="float: left; margin-left: 20px; margin-bottom: 20px; margin-top: 13px; cursor: pointer;" onclick="location.href='index.do'"> 
+		
 	<c:choose>
 		<c:when test="${user==null}">
-	   		<input type="button" value="LOGIN" data-toggle="modal" data-target="#loginForm" style="margin-left:1100px; background-color: transparent; border: 0px; font-size: 17px; font-family: D2Coding;">
+	
+	   		<input type="button" value="LOGIN" data-toggle="modal" data-target="#loginForm" style="margin-left:870px; background-color: transparent; border: 0px; font-size: 17px; font-family: D2Coding;">
 	   		<input type="button" value="JOIN" id="joinForm" style="margin-left:10px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
 
 	   		<span style="margin-left:10px; font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span> 
+	   
 	   	</c:when>
 	   	
 	   	<c:when test="${user=='admin'}">
 	   	
 	   		<input type="button" value="LOGOUT" id="logout" style="margin-left:1060px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
-	   		<input type="button" value="ADMIN PAGE" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
+	   		<input type="button" value="ADMIN PAGE" onclick="location.href='adminPage.do'" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
 
 	   		<span style="margin-left: 5px; font-size:30px; color: black; cursor:pointer" onclick="openNav()">&#9776;</span>
 	   	</c:when>
-	 
+	   	
 	   	<c:otherwise>
-		   		<a class="userId" style="font-family: D2Coding; margin-left: 905px; font-size: 17px;" data-toggle="tooltip">${user}</a>님
-				<a href="#" style="color: #969696; margin-left: 7px; font-family: D2Coding; font-size: 17px;" data-toggle="modal" data-target="#moreNewsForm" class="moreNews">Messages<span class="badge" style="color: black; font-size: 18px">5</span></a>
+		   		<a class="userId" style="font-family: D2Coding; margin-left: 716px; font-size: 17px;" data-toggle="tooltip">${user}</a>님
+				<a href="#" style="color: black; margin-left: 7px; font-family: D2Coding; font-size: 17px;" data-toggle="modal" data-target="#moreNewsForm" class="moreNews">알림<span id="noticeCnt" class="w3-badge w3-red" style="font-size: 15px">5</span></a>
 
 				<input type="button" value="LOGOUT" id="logout" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
-			   	<input type="button" value="MY PAGE" id="myPage" style="margin-left: 5px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
+			   	<input type="button" value="MY PAGE" id="myPage" style="margin-left: 3px; background-color: transparent; border: 0px; top: 30px; font-size: 17px; font-family: D2Coding;">
 
 			  	<span style="font-size:30px; color: black; margin-left: 5px; cursor:pointer" onclick="openNav()">&#9776;</span>
 	   	</c:otherwise>	
 	 </c:choose>
-  
+	
     <!-- 로그인 모달 -->
 	  <div class="modal fade" id="loginForm">
 		<div class="modal-dialog modal-sm">
@@ -110,14 +118,14 @@
 	        
 	        <!-- Modal body -->
 	        <div class="modal-body" style="text-align: center">
-	         	 <label for="id" style="margin-right: 45px"><b>ID</b></label>
+	         	 <label for="id" style="margin-left: 25px; margin-right: 37px; font-family: '함초롬돋움';"><b>ID</b></label>
 				 <input type="text" placeholder="Enter id" name="id" id="loginId" required><br>
 				
-				 <label for="pww"><b>Password</b></label>
+				 <label for="pww" style="margin-right: 8px; font-family: '함초롬돋움';"><b>Password</b></label>
 				 <input type="password" placeholder="Enter Password" name="pw" id="loginPw" required><br><br>
 				 
-				  <button type="button" class="btn btn-success" id="login">Login</button>
-				   <button type="button" class="btn btn-success" id="find">Find ID/PW</button>
+				  <button type="button" class="btn" id="login" style="background-color: #B5C3C8; color:white; font-family: '배달의민족 주아'; margin-left: 10px;">Login</button>
+				   <button type="button" class="btn" id="find" style="background-color: #B5C3C8; color:white; font-family: '배달의민족 주아'">Find ID/PW</button>
 				   
 	        </div>
 	       </div>
@@ -132,12 +140,12 @@
 			<tr>
 				<td>
 					<a style="color: #818181;">Travel with Me</a>
-					<a class="canClick" href="#">목록보기</a>
+					<a class="canClick" href="accomBoardList.do">목록보기</a>
 		   			<a class="canClick" href="#">글작성</a>
 				</td>
 				<td>
 				 	<a style="color: #818181;">Travel with Guide</a>
-				 	<a class="canClick" href="#">목록보기</a>
+				 	<a class="canClick" href="guideBoardList.do">목록보기</a>
 		   			<a class="canClick" href="guideWriteForm.do">글작성</a>
 				</td>
 				<td>
@@ -202,10 +210,10 @@
 			</div>
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" id="ok" class="btn btn-success" data-dismiss="modal" style="display:none">확인</button>
-		          <button type="button" id="evGuide" class="btn btn-success" data-dismiss="modal" style="display:none">확인</button>
-		          <button type="button" id="checkAttend" class="btn btn-success" data-dismiss="modal" style="display:none">확인</button>
-		          <button type="button" id="back" class="btn btn-secondary" style="display:none">이전</button>
+		          <button type="button" id="ok" class="btn btn-success notice" data-dismiss="modal" style="display:none">확인</button>
+		          <button type="button" id="evGuide" class="btn btn-success notice" data-dismiss="modal" style="display:none">확인</button>
+		          <button type="button" id="checkAttend" class="btn btn-success notice" data-dismiss="modal" style="display:none">확인</button>
+		          <button type="button" id="back" class="btn btn-secondary notice" style="display:none">이전</button>
 		          <input type="hidden" id="chk" value="f">
 		        </div>
 	       </div>

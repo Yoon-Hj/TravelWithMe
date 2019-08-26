@@ -38,7 +38,7 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/myPage.do"/>
 			<mvc:mapping path="/withdrawalUser.do"/>
-			
+			<mvc:mapping path="/guideWriteForm.do"/>			
 			<ref bean="loginCheckInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>

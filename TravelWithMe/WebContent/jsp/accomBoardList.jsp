@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/font.css">
+<link rel="stylesheet" type="text/css" href="fonts/font.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -58,7 +58,7 @@
 	  height: 30%;
 	  text-align: center;
 	  font-size: 12px;
-	  font-family: 함초롬돋움;
+	  font-family: '함초롬돋움';
   }
   
   .pagination a {
@@ -83,21 +83,61 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 		  $('[data-toggle="tooltip"]').tooltip();   
+		
+			//이미지 분기
+			$('.iarea').find("input").each(function(){
+				var ar = $(this).val();
+				ar = ar.split(' ')[0];
+				
+				var iloc = $(this).parent("p").parent("div").siblings("a").find("img");
+				if(ar=="제주도"){
+					iloc.attr("src", "imgs/jeju.PNG");
+				}
+				else if(ar=="서울특별시"){
+					iloc.attr("src", "imgs/seoul.jpg");
+				}
+				else if(ar=="경기도"){
+					iloc.attr("src", "imgs/gyeonggi.jpg");
+				}
+				else if(ar=="전라북도"){
+					iloc.attr("src", "imgs/jeonbuk.PNG");
+				}
+				else if(ar=="전라남도"){
+					iloc.attr("src", "imgs/jeonnam.jpg");
+				}
+				else if(ar=="경상북도"){
+					iloc.attr("src", "imgs/gyeongbuk.jpg");
+				}
+				else if(ar=="경상남도"){
+					iloc.attr("src", "imgs/gyeongnam.jpg");
+				}
+				else if(ar=="충청북도"){
+					iloc.attr("src", "imgs/chungbuk.PNG");
+				}
+				else if(ar=="충청남도"){
+					iloc.attr("src", "imgs/chungnam.PNG");
+				}
+				else if(ar=="강원도"){
+					iloc.attr("src", "imgs/gangwon.PNG");
+				}
+			});
+						
 		});
 	</script>
-
+	
 	<jsp:include page="header.jsp"></jsp:include>
 	
-	<h1 style="font-family: 함초롬돋움; margin-left: 30px">Travel With Me</h1>
+	<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px;">Travel With Me</h1>
 	<hr>
 	
 	<div class="container">
+	
 		<a href="accomWriteForm.do" data-toggle="tooltip" data-placement="bottom" title="글 작성하기" 
-			style="text-decoration: none; color: #787878; font-family: 함초롬돋움;">
+			style="text-decoration: none; color: #787878; font-family: '함초롬돋움';">
 			원하는 동행글이 없으신가요? 직접 동행글을 작성해보세요.</a>
 		<br><br>
 
-		<div class="card" style="font-family: 함초롬돋움;">
+		<div class="card" style="font-family: '함초롬돋움';">
 			 <form action="accomSearch.do">
 			 <table style="border: none;">
 			 <tr>
@@ -138,15 +178,15 @@
 		
 		<!-- 추천 4개 조회 -->
 		<div style="margin-top: 50px">
-		<h4 style="font-family: 함초롬돋움; margin-bottom: 15px;">추천여행</h4>
+		<h4 style="font-family: '함초롬돋움'; margin-bottom: 15px;">추천여행</h4>
 		
 			<div class="row">
 			<c:forEach var="b" items="${recommList}" varStatus="status">
 			  <div class="column">
-				<a href="readBoard.do?bnum=${b.bnum}&bkind=A"><img src="imgs/gangwon.PNG" style="width:100%"></a>
+				<a href="readBoard.do?bnum=${b.bnum}&bkind=A"><img style="width:100%; height: 100%;"></a>
 				<div class="content">
-					<p><fmt:formatDate value="${b.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${b.afinishdate}" pattern="yyyy-MM-dd"/>
-					<br>[${b.aarea}] ${b.btitle}<br>${b.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${b.breadcount}</p>
+					<p class="iarea"><fmt:formatDate value="${b.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${b.afinishdate}" pattern="yyyy-MM-dd"/>
+					<br><input type="hidden" value="${b.aarea}">[${b.aarea}] ${b.btitle}<br>${b.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${b.breadcount}</p>
 				</div>
 			  </div>
 			</c:forEach>
@@ -156,15 +196,15 @@
 		
 		<!-- 전체 리스트 조회 -->
 		<div style="margin-top: 60px">
-		<h4 style="font-family: 함초롬돋움; margin-bottom: 15px;">전체여행</h4>
+		<h4 style="font-family: '함초롬돋움'; margin-bottom: 15px;">전체여행</h4>
 		
 			<div class="row">
 			<c:forEach var="a" items="${boardList}" varStatus="status">
-			  <div class="column">
-				<a href="readBoard.do?bnum=${a.bnum}&bkind=A"><img src="imgs/gangwon.PNG" style="width:100%"></a>
+			  <div class="column" style="margin-bottom: 12px;">
+				<a href="readBoard.do?bnum=${a.bnum}&bkind=A"><img style="width:100%; height: 100%;"></a>
 				<div class="content">
-					<p><fmt:formatDate value="${a.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${a.afinishdate}" pattern="yyyy-MM-dd"/>
-					<br>[${a.aarea}] ${a.btitle}<br>${a.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${a.breadcount}</p>
+					<p class="iarea"><fmt:formatDate value="${a.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${a.afinishdate}" pattern="yyyy-MM-dd"/>
+					<br><input type="hidden" value="${a.aarea}">[${a.aarea}] ${a.btitle}<br>${a.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${a.breadcount}</p>
 				</div>
 			  </div>
 			</c:forEach>
@@ -195,7 +235,7 @@
 			<a href="accomBoardList.do?page=${last}">&raquo;</a>
 		</c:if>
 	</div>
-			
+
 	<jsp:include page="footer.jsp"></jsp:include>
 	
 </body>

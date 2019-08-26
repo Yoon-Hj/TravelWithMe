@@ -134,6 +134,7 @@ $(document).ready(function(){
 		$('#modiPw').val("");
 		$('#modiPwCheck').val("");
 		$('#pwChk').html('');
+		$('.btn').show();
 	});
 	
 	
@@ -283,6 +284,11 @@ $(document).ready(function(){
 			history.go(0);
 		}
 	});
+	
+	
+	
+	
+	
 	
 	
 });

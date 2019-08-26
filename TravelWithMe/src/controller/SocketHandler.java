@@ -94,7 +94,7 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		System.out.println("뭔가 되긴 하냐");
+		System.out.println("소켓 연결");
 	}
 	
 	
@@ -114,7 +114,7 @@ public class SocketHandler extends TextWebSocketHandler implements InitializingB
 			while (true){
 				try {
 					int cnt = web_dao.getMyNoticeCount(mid);
-					sendMessage ("알림  "+ cnt);
+					sendMessage (""+ cnt);
 					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();

@@ -15,11 +15,13 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script type="text/javascript" src="js/writeForm.js?v=<%=System.currentTimeMillis() %>"></script>
 
+
 </head>
 <body>
 <jsp:include page="header.jsp"/>
 <br><br><br>
-
+<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px;">Travel With Guide</h1>
+<hr>
 <div class="container">
 <div class="writeFormDiv">
 	<table>
@@ -38,13 +40,12 @@
 		&nbsp;&nbsp;기본정보
 		<a style="color : #b3b3b3; font-size: 15px;">&nbsp;투어의 기본정보를 작성하세요(필수)</a>
 	</h3>
-	
 	<br>
 	
 	<table>
 		<tr>
 			<td class="InfoTd">제목</td>
-			<td><input type="text" id="btitle" name="btitle" class="form-control" style="width: 600px" name="btitle"></td>
+			<td><input type="text" id="btitle" name="btitle" class="form-control" style="width: 600px"></td>
 		</tr>
 		<tr>
 			<td class="InfoTd">날짜</td>
@@ -111,7 +112,7 @@
 				<input type="checkbox" id="pcode1" name="pcode" value="1">
 				1. 공지된 미팅장소 및 시간에 모인 인원과 가이드 투어를 진행하며<br> 특별한 제제사항은 없습니다.<br><br>
 				<input type="checkbox" id="pcode2" name="pcode" value="2">
-				2. 여행 시작일 기준 <input id="pvalue2" name="pvalue" type="number" min="0" style="width:50px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">일
+				2. 여행 시작일 기준 <input id="pvalue2" name="pvalue" type="number" min="0" style="width:60px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">일
 				전까지 연락이 되지 않는 분은<br> 작성자 임의로 신청거절을 진행할 수 있습니다.<br><br>
 				<input type="checkbox" id="pcode3" name="pcode" value="3">
 				3. 신뢰지수 <input id="pvalue3" name="pvalue" type="number" max="100" min="0" style="width:70px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">점
@@ -135,7 +136,7 @@
 		<tr>
 			<td class="InfoTd">테마</td>
 			<td>
-				<input type="text" class="NoBootStrap" id="gthema"><br>
+				<input type="text" class="NoBootStrap" name="gthema" id="gthema"><br>
 				<a style="color: #b3b3b3; font-size: 15px;">※테마삭제를 원하시면 작성된 테마를 클릭하세요</a>
 			</td>
 		</tr>
@@ -174,7 +175,7 @@
 		<tr>
 			<td class="InfoTd">내용</td>
 			<td>
-				<textarea rows="15px" cols="80px" class="form-control"></textarea>
+				<textarea rows="15px" id="bcontent" name="bcontent" cols="80px" class="form-control"></textarea>
 			</td>
 		</tr>
 	</table>
@@ -192,9 +193,10 @@
 		<tr>
 			<td class="InfoTd">첨부</td>
 			<td>
-				<label id="photoUpload"><i class="fa fa-folder"></i>&nbsp;첨부하기</label>
+				<form id="uploadForm">
 				<input type="file" id="photo" name="photo" multiple>
-				<br>
+				<label id="photoUpload"><i class="fa fa-folder"></i>&nbsp;첨부하기</label>
+				</form>
 				<a style="color: #b3b3b3; font-size: 15px;">※사진삭제를 원하시면 해당사진을 클릭하세요</a>
 				<br>
 				<div>
@@ -206,23 +208,34 @@
 		</tr>
 	</table>
 	
-	<a class="previousA" onclick="openBasicInfo()">&laquo; Previous</a>
-	<a class="nextA" onclick="openPreview()">Next &raquo;</a>
+	<a class="previousA" id="detailToBasic">&laquo; Previous</a>
+	<a class="nextA" id="detailToPreview">Next &raquo;</a>
 </div>
 <div id="preview" style="font-family: 함초롬돋움">
-	<table>
+
+	<h3>
+		&nbsp;&nbsp;가이드 게시글 미리보기
+	</h3>
+	<br>
+	<table id="previewTable" style="font-family: 함초롬돋움;">
 		<tr>
 			<td class="InfoTd">작성자</td>
-			<td></td>
+			<td><%=(String)session.getAttribute("user")%></td>
 		</tr>
 		<tr>
 			<td class="InfoTd">제목</td>
 			<td></td>	
 		</tr>
-		<tr>
-			<td class="InfoTd">사진</td>
-			<td></td>
+		<tr id="photoTR">
+			
+			<td style="text-align: left;">
+				<div class="slideshow-container" style="text-align: left;">
+				
+
+				</div>
+			</td>
 		</tr>
+
 		<tr>
 			<td class="InfoTd">날짜</td>
 			<td></td>
@@ -253,7 +266,11 @@
 		</tr>
 		<tr>
 			<td class="InfoTd">세부일정</td>
-			<td></td>
+			<td>
+			    <div id="canvasDiv">
+
+			    </div>
+			</td>
 		</tr>
 		<tr>
 			<td class="InfoTd">주요 정책</td>
@@ -261,8 +278,8 @@
 		</tr>
 	</table>
 
-	<a class="previousA" onclick="openDetailInfo()">&laquo; Previous</a>
-	<a class="nextA" onclick="">Submit</a>
+	<a class="previousA" id="previewToDetail">&laquo; Previous</a>
+	<a class="nextA" id="submit">Submit</a>
 </div>
 </div>
 </body>

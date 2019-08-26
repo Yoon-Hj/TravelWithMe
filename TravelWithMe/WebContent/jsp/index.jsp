@@ -7,6 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="fonts/font.css">
 <link rel="stylesheet" type="text/css" href="css/full-page-scroll.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -17,14 +18,15 @@
 	.section1 {
 		background-image: url(imgs/korea.jpg);
 		background-size: cover;
+		margin-top: 15px;
 	}
-
+	
 	.section2 {
-		background-image: url(imgs/jeju.jpg);
+		background-image: url(imgs/yeosu.PNG);
 		background-size: cover;
-		margin-top: -40px;
+		margin-top: -60px;
 	}
-
+	
 	.section3 {
 		background-image: url(imgs/night.jpg);
 		background-size: cover;
@@ -36,14 +38,14 @@
 	}
 
 	.section5 {
-		background-image: url(imgs/yeosu.PNG);
+		background-image: url(imgs/je.jpg);
 		background-size: cover;
 	}
 	
 	.scroll-container{
 		height: 100%;
 	}
-			
+	
 	section div {
 		font-style: normal;
 		text-align: center;
@@ -51,7 +53,7 @@
 		top: 50%;  
 		transform: translateY(-50%);
 	}
-
+	
 	span {
 		font-size: 4em;
 		font-style: normal;
@@ -103,17 +105,17 @@
 		
 		<jsp:include page="mainHeader.jsp"></jsp:include>
 			<div>
-				<h2 style="font-size: 45px">나와 비슷한 취향의 여행 친구들을 찾아보세요</h2>
+				<h2 style="font-size: 45px;">나와 비슷한 취향의 여행 친구들을 찾아보세요</h2>
 				<br>
 				<input type="button" class="btn btn-danger btn-lg btn-block" 
 						value="Travel with Me 목록 보기" onclick="location.href='accomBoardList.do'"
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">
-				
+
 				<br><br><br><br><br>
-				
-				<h2 style="font-size: 45px">함께할 여행 친구들을 직접 모아보세요</h2>
+				 
+				<h2 style="font-size: 45px;">함께할 여행 친구들을 직접 모아보세요</h2>
 				<br>
-				<input type="button" class="btn btn-outline-danger" 
+				<input type="button" class="btn btn-danger btn-lg btn-block" 
 						value="Travel with Me 글 작성" 
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">
 			</div>
@@ -127,7 +129,8 @@
 				<h2 style="font-size: 45px">가이드를 만나 더 풍요로운 여행을 즐겨보세요</h2>
 				<br>
 				<input type="button" class="btn btn-danger btn-lg btn-block" 
-						value="Travel with Guide 목록 보기" 
+						value="Travel with Guide 목록 보기"
+						onclick="location.href='guideBoardList.do'" 
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">
 			
 				<br><br><br><br><br>
@@ -149,6 +152,7 @@
 				<br>
 				<input type="button" class="btn btn-danger btn-lg btn-block" 
 						value="Attraction Info 목록 보기" 
+						onclick="location.href='attractionInfo.do'"
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">				
 			</div>
 		</section>

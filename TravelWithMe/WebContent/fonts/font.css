@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+@font-face{
+	font-family:'함초롬돋움';
+	src : url('HANDotumB.ttf') format('truetype');
+}
+
+@font-face{
+	font-family:'D2Coding';
+	src : url('D2Coding.ttf') format('truetype');
+}
+
+@font-face{
+	font-family:'배달의민족 도현';
+	src : url('BMDOHYEON.ttf') format('truetype');
+}
+
+@font-face{
+	font-family:'배달의민족 주아';
+	src : url('BMJUA.ttf') format('truetype');
+}
+
+@font-face{
+	font-family:'나눔고딕';
+	src : url('NanumGothic.ttf') format('truetype');
+}

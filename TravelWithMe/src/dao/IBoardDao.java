@@ -9,6 +9,7 @@ import model.CommuBoard;
 import model.GuideBoard;
 import model.Guideschedule;
 import model.Policy;
+import model.Register;
 
 public interface IBoardDao {
 
@@ -54,18 +55,19 @@ public interface IBoardDao {
 	//게시글에서 공동으로 사용하는 DAO
 	public List<Policy> selectPolicyByBnum(int bnum);
 	public List<Comments> selectCommentList(int bnum);
-	public List<HashMap<String, Object>> selectRegisterListByBnum(int bnum);
+	public List<Register> selectRegisterListByBnum(int bnum);
 	public void deleteBoard(int bnum);
 	public int getPossibleNop(int bnum);
-	public void insertRegister(HashMap<String,Object> register);
-	public void deleteRegister(String rid);
+	public void insertRegister(HashMap<String, Object> register);
+	public int deleteRegister(String rid);
 	public int insertComment(Comments comments);
-	public void insertRecomment(Comments comments);
+	public int insertRecomment(Comments comments);
 	public int deleteComment(int cnum);
-	public void insertPolicy(HashMap<String, Object> policy);
+	public void insertPolicy(Policy policy);
 	public void deletePolicy(int bnum);
 	public int getBoardCount(HashMap<String, Object> bkind);
 	public List<HashMap<String, Object>> selectQuickSearch(String keyword);
+	public void updateReadCount(int bnum);
 
 	public int test();
 
