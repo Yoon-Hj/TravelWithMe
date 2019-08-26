@@ -41,6 +41,11 @@
 			<mvc:mapping path="/guideWriteForm.do"/>			
 			<ref bean="loginCheckInterceptor"/>
 		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/joinForm.do"/>
+			<ref bean="non_LoginCheckInterceptor"/>
+		</mvc:interceptor>
 	</mvc:interceptors>
 
 	<mvc:annotation-driven></mvc:annotation-driven>
