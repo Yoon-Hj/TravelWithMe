@@ -95,8 +95,6 @@ body {
 	  </center>
 	</div>  
 </div>
-d
-
 
 </body>
 </html>

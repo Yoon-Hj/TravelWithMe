@@ -36,7 +36,6 @@ public class AdminService {
 	
 	public void addThema(String likename) throws Exception {
 		try {
-			System.out.println("실행한다.");
 			HashMap<String, Object> params = new HashMap<String, Object>();
 			
 			String likecode = a_adao.selectLikecodeByName(likename);
@@ -45,7 +44,7 @@ public class AdminService {
 				params.put("likename", likename);
 				params.put("likecode", 0);
 				a_adao.insertPrefer(params);
-			}else
+			}else 
 				a_adao.updatePreferOn(likecode);
 		} catch (Exception e) {
 			// TODO: handle exception

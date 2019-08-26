@@ -1,4 +1,7 @@
-$(function(){
+$(document).ready(function(){
+	
+	
+	
 	
 	
 	$('#manageGrade').on('click', function(){
@@ -14,6 +17,8 @@ $(function(){
 			error : function(){}
 		});
 	});
+	
+	
 	
 	$('#manageThema').on('click', function(){
 		$('.themaDiv').show();
@@ -36,7 +41,8 @@ $(function(){
 				$("#themaTbody:last").append(table);
 				$('.themaRow').css('width', '100px');
 				$('.themaRow').css('height', '50px');
-				$(document).on("click", ".delThema", function(){
+				
+				$(".delThema").on("click", function(){
 					if(confirm("삭제하시겠습니까?") == true){
 						$.ajax({
 							url : "deleteThema.do",
@@ -47,6 +53,7 @@ $(function(){
 							success : function(){},
 							error : function(){}
 						});
+						alert("삭제되었습니다.");
 						$('#manageThema').trigger('click');
 					}
 				});
@@ -71,19 +78,12 @@ $(function(){
 				},
 				success : function() {},
 				erreor : function(){}
-			});
+			})
+			alert(like + "이 추가되었습니다.");
 		}
-		
 		$('#manageThema').trigger('click');
-		
-		
+		$('#addlikes').val("");
 	});
-	
-	
-	
-	
-	
-	
 	
 	
 	
