@@ -10,6 +10,11 @@
 		select * from member where mid like '%${keyword}%'
 	</select>
 	
+	<!-- 가이드 등급 가져오기 -->
+	<select id="selectAllGuiderating">
+		select * from guiderating;
+	</select>
+	
 	<!-- 회원 신뢰지수, 가이드등급 업데이트 -->
 	<update id="updateMemPoint" parameterType="java.util.HashMap">
 		update member set mpoint = mpoint + #{mpoint}, mguidepoint = mguidepoint + #{mguidepoint} where mid = #{mid}
@@ -33,7 +38,7 @@
 		insert into preference values ('L'||${likecode}, #{likename}, default)
 	</insert>
 	
-	<!-- 여행취향 추가 -->
+	<!-- 여행취향 활성화 -->
 	<update id="updatePreferOn" parameterType="String">
 		update preference set likeon = 1 where likecode = #{likecode}
 	</update>

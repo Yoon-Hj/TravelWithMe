@@ -23,7 +23,7 @@ $(document).ready(function(){
 	$('#manageThema').on('click', function(){
 		$('.themaDiv').show();
 		$('.gradeDiv').hide();
-		$( 'tbody').empty();
+		$( '#themaTbody').empty();
 		var table = "";
 		
 		$.ajax({
