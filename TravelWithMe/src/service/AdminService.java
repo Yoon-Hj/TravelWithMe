@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import dao.IAdminDao;
 import dao.IBoardDao;
 import dao.IMemberDao;
+import model.GuideRating;
 import model.Preference;
 
 @Service
@@ -53,8 +54,37 @@ public class AdminService {
 		}
 	}
 	
+	public List<GuideRating> getGuideGrade(){
+		return a_adao.selectAllGuiderating();
+	}
 	
-	
-	
+	public void modifyGuideRating(String gmin, String smax, String smin, String bmax) throws Exception {
+		try {
+			int gMinpoint = Integer.parseInt(gmin);
+			int sMaxpoint = Integer.parseInt(smax);
+			int sMinpoint = Integer.parseInt(smin);
+			int bMaxpoint = Integer.parseInt(bmax);
+			GuideRating g = new GuideRating();
+			
+			g.setGrade("Gold");
+			g.setMaxpoint(9999);
+			g.setMinpoint(gMinpoint);
+			a_adao.updateGuideRatingByGrade(g);
+			
+			g.setGrade("Silver");
+			g.setMaxpoint(sMaxpoint);
+			g.setMinpoint(sMinpoint);
+			a_adao.updateGuideRatingByGrade(g);
+			
+			g.setGrade("Bronze");
+			g.setMaxpoint(bMaxpoint);
+			g.setMinpoint(0);
+			a_adao.updateGuideRatingByGrade(g);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Exception();
+		}
+	}
 	
 }

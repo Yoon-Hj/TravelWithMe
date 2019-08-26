@@ -3,6 +3,7 @@ package dao;
 import java.util.HashMap;
 import java.util.List;
 
+import model.GuideRating;
 import model.Member;
 import model.Preference;
 
@@ -18,4 +19,8 @@ public interface IAdminDao {
 	public void updatePreferOn(String likecode);
 	public void updatePreferOff(String likecode);
 	public String selectLikecodeByName(String likename);
+	
+	//가이드 등급관리
+	public List<GuideRating> selectAllGuiderating();
+	public void updateGuideRatingByGrade(GuideRating g);
 }

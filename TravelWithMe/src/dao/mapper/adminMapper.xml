@@ -11,9 +11,15 @@
 	</select>
 	
 	<!-- 가이드 등급 가져오기 -->
-	<select id="selectAllGuiderating">
-		select * from guiderating;
+	<select id="selectAllGuiderating" resultType="guideRating">
+		select * from guiderating
 	</select>
+	
+	<!-- 가이드 등급 수정 -->
+	<update id="updateGuideRatingByGrade" parameterType="guideRating">
+		update guiderating set maxpoint = #{maxpoint}, minpoint = #{minpoint}
+		where grade = #{grade}
+	</update>
 	
 	<!-- 회원 신뢰지수, 가이드등급 업데이트 -->
 	<update id="updateMemPoint" parameterType="java.util.HashMap">

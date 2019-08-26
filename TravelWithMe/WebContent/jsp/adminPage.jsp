@@ -99,27 +99,27 @@ body {
 	  			<img src="imgs/gold2.jpg" style="width:70px;height:70px;"/><BR>
 	  			<h4>Gold</h4></td>
 	  			<td><h4>9999</h4></td>
-	  			<td><input type="text" value=""></td>
+	  			<td><input type="text" id="goldMin"></td>
 	  		</tr>
 	  		<tr>
 	  			<td>
 	  			<img src="imgs/silver2.jpg" style="width:70px;height:70px;"/><BR>
 	  			<h4>Silver</h4></td>
-	  			<td><input type="text" value=""></td>
-	  			<td><input type="text" value=""></td>
+	  			<td><input type="text" id="silverMax"></td>
+	  			<td><input type="text" id="silverMin"></td>
 	  		</tr>
 	  		<tr>
 	  			<td>
 	  			<img src="imgs/bronze2.jpg" style="width:70px;height:70px;"/><BR>
 	  			<h4>Bronze</h4></td>
-	  			<td><input type="text" value=""></td>
+	  			<td><input type="text" id="bronzeMax"></td>
 	  			<td><h4>0</h4></td>
 	  		</tr>
 	  		<tbody id="gradeTbody"></tbody>
 	  	</table>
 	  </center><BR>
 	  <div style="float:right; width : 200px">
-	  	<input type="button" id="midiGrade" value="변경" style="background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
+	  	<input type="button" id="modiGrade" value="변경" style="background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
 	  </div>
 	</div>  
 	

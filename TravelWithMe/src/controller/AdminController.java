@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import model.GuideRating;
 import model.Preference;
 import service.AdminService;
 import service.BoardService;
@@ -40,8 +41,9 @@ public class AdminController {
 	}
 	
 	@RequestMapping("getGuidegrades.do")
-	public void getGuidegrades(){
-		
+	public @ResponseBody List<GuideRating> getGuidegrades(){
+		System.out.println(a_asvc.getGuideGrade());
+		return a_asvc.getGuideGrade();
 	}
 	
 	@RequestMapping("getThemas.do")
@@ -61,5 +63,14 @@ public class AdminController {
 	public void addThema(String likename) throws Exception {
 		System.out.println(likename);
 		a_asvc.addThema(likename);
+	}
+	
+	@RequestMapping("modifyGuideRating.do")
+	public void modifyGuideRating(String gmin, String smax,
+			String smin, String bmax) throws Exception {
+		System.out.println(9999 + "  " + gmin);
+		System.out.println(smax + "  " + smin);
+		System.out.println(bmax + "  " + 0);
+		a_asvc.modifyGuideRating(gmin, smax, smin, bmax);
 	}
 }

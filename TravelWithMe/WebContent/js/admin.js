@@ -12,11 +12,58 @@ $(document).ready(function(){
 			url : "getGuidegrades.do",
 			type : "post",
 			success : function(data){
-				
+				$('#goldMin').val(data[0].minpoint);
+				$('#silverMax').val(data[1].maxpoint);
+				$('#silverMin').val(data[1].minpoint);
+				$('#bronzeMax').val(data[2].maxpoint);
+				$('#bronzeMin').val(data[2].minpoint);
 			},
 			error : function(){}
 		});
 	});
+	
+	$('#modiGrade').on('click', function(){
+		var gmin = Number($('#goldMin').val());
+		var smax = Number($('#silverMax').val());
+		var smin = Number($('#silverMin').val());
+		var bmax = Number($('#bronzeMax').val());
+		
+		if(gmin > 9000){
+			alert("Gold등급의 최소값은 9000까지 가능합니다.");
+		}else if(gmin <= smax){
+			alert("Silver등급의 최대값은 Gold등급의 최소값보다 작아야 합니다.");
+		}else if(smax <= smin){
+			alert("Silver등급의 최대값은 최소값보다 커야 합니다.");
+		}else if(smin <= bmax){
+			alert("Bronze등급의 최대값은 Siver등급의 최소값보다 작아야 합니다.");
+		}else if(bmax <= 1){
+			alert("Bronze등급의 최대값은 1보다 커야합니다.");
+		}else{
+			if(gmin - smax != 1){
+				smax = gmin -1;
+			}else if(smin - bmax != 1){
+				bmax = smin - 1;
+			}
+			$.ajax({
+				url : "modifyGuideRating.do",
+				type : "post",
+				data : {
+					gmin : gmin,
+					smax : smax,
+					smin : smin,
+					bmax : bmax
+				},
+				success : function(){},
+				error : function(){}
+			});
+			alert("수정이 완료되었습니다.");
+			$('#manageGrade').trigger('click');
+		}
+			
+		
+	});
+	
+	
 	
 	
 	
