@@ -14,6 +14,8 @@ public class AccomBoard {
 	private int cdel;
 	//accompany
 	private String aarea;
+	private String aarea1;
+	private String aarea2;
 	private Date astartdate;
 	private Date afinishdate;
 	private String atime;
@@ -76,8 +78,20 @@ public class AccomBoard {
 	public String getAarea() {
 		return aarea;
 	}
+	public String getAarea1() {
+		return aarea1;
+	}
+	public String getAarea2() {
+		return aarea2;
+	}
 	public void setAarea(String aarea) {
 		this.aarea = aarea;
+	}
+	public void setAarea1(String aarea1) {
+		this.aarea1 = aarea1;
+	}
+	public void setAarea2(String aarea2) {
+		this.aarea2 = aarea2;
 	}
 	public Date getAstartdate() {
 		return astartdate;
@@ -143,9 +157,9 @@ public class AccomBoard {
 	public String toString() {
 		return "AccomBoard [bnum=" + bnum + ", bkind=" + bkind + ", mid=" + mid + ", bwritedate=" + bwritedate
 				+ ", btitle=" + btitle + ", bcontent=" + bcontent + ", breadcount=" + breadcount + ", cdel=" + cdel
-				+ ", aarea=" + aarea + ", astartdate=" + astartdate + ", afinishdate=" + afinishdate + ", atime="
-				+ atime + ", adepartplace=" + adepartplace + ", adeparttime=" + adeparttime + ", anop=" + anop
-				+ ", likecode=" + likecode + ", atransport=" + atransport + ", acourse=" + acourse + ", likename="
-				+ likename + "]";
+				+ ", aarea=" + aarea + ", aarea1=" + aarea1 + ", aarea2=" + aarea2 + ", astartdate=" + astartdate
+				+ ", afinishdate=" + afinishdate + ", atime=" + atime + ", adepartplace=" + adepartplace
+				+ ", adeparttime=" + adeparttime + ", anop=" + anop + ", likecode=" + likecode + ", atransport="
+				+ atransport + ", acourse=" + acourse + ", likename=" + likename + "]";
 	}
 }

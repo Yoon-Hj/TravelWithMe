@@ -90,6 +90,7 @@ $(function(){
 
 	});
 	
+	
 	$("#gfinishdate").click(function(){
 		if($("#gstartdate").val()==""){
 			$("#gtimeLabel").remove();

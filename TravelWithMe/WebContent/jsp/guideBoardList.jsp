@@ -16,7 +16,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-<script type="text/javascript" src="js/guideList.js?v=<%=System.currentTimeMillis() %>"></script>
+<script type="text/javascript" src="js/boardList.js?v=<%=System.currentTimeMillis() %>"></script>
 <title>Travel With Me</title>
 
 </head>
@@ -29,13 +29,13 @@
 	
 	<div class="container">
 	
-		<a href="guideWriteForm.do" data-toggle="tooltip" data-placement="bottom" title="글 작성하기" 
+		<a href="guideWriteForm.do" id="writetip" data-toggle="tooltip" data-placement="bottom" title="글 작성하기" 
 			style="text-decoration: none; color: #787878; font-family: '함초롬돋움';">
 			원하는 가이드글이 없으신가요? 직접 가이드글을 작성해보세요.</a>
 		<br><br>
 
 		<div class="card" style="font-family: '함초롬돋움';">
-			 <form action="guideSearch.do">
+			 <form action="guideBoardList.do">
 			 <table style="border: none;">
 			 <tr>
 			 	<td>
@@ -145,7 +145,7 @@
 					<a class="active">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="guideBoardList.do?page=${i}<c:if test="${ keyword != null }">&keyword=${keyword}&type=${type}</c:if>" style="font-size: 17px">${i}</a>
+					<a href="guideBoardList.do?page=${i}<c:if test="${ keyword != null }">&keyword=${keyword}&type=${type}</c:if><c:if test='${startdate!=null}'>&sdate=${startdate}</c:if><c:if test='${finishdate!=null}'>&fdate=${finishdate}</c:if>" style="font-size: 17px">${i}</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>

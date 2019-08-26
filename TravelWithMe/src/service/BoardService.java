@@ -163,8 +163,17 @@ public class BoardService {
 		Date startdate = null;
 		Date finishdate = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		if(sdate != "") startdate = sdf.parse(sdate);
-		if(fdate != "") finishdate = sdf.parse(fdate);
+		if(sdate != "" && fdate == "") {
+			startdate = sdf.parse(sdate);
+			finishdate = sdf.parse("2030-12-31");
+		}else if(sdate == "" && fdate != "") {
+			startdate = sdf.parse("2019-01-01");
+			finishdate = sdf.parse(fdate);
+		}else if(sdate != "" && fdate != "") {
+			startdate = sdf.parse(sdate);
+			finishdate = sdf.parse(fdate);
+		}
+		
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("offset", getOffset(page, 8));
@@ -180,8 +189,8 @@ public class BoardService {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("type", type);
 		result.put("keyword", keyword);
-		result.put("startdate", startdate);
-		result.put("finishdate", finishdate);
+		result.put("startdate", sdate);
+		result.put("finishdate", fdate);
 		result.put("likecode", likecode);
 		result.put("current", page);
 		result.put("boardList", alist);
@@ -280,11 +289,11 @@ public class BoardService {
 			r.put("regId", regId);
 			r.put("nop", nop);
 			b_bdao.insertRegister(r);
-			//Notice n = new Notice();
-			//n.setNkcode("R-1");
-			//n.setBnum(bnum);
-			//n.setMid(mid);
-			//b_mdao.insertNotice(n);
+			Notice n = new Notice();
+			n.setNkcode("R-1");
+			n.setBnum(bnum);
+			n.setMid(mid);
+			b_mdao.insertNotice(n);
 			return b_mdao.selectContact(mid);
 		}
 	}
@@ -332,6 +341,48 @@ public class BoardService {
 		}
 	}
 	
+	//동행게시글 작성
+	public void accomWrite(HttpSession session, AccomBoard accomBoard,
+							String JSPgstartdate, String JSPgfinishdate,
+							String[] pcode, @RequestParam(required=false) String[] pvalue) throws Exception {
+		
+		String writeId = (String)session.getAttribute("user");
+		String aarea = accomBoard.getAarea1() + " " + accomBoard.getAarea2();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+		Date togstartdate = (Date)fm.parse(JSPgstartdate);
+		Date togfinishdate = (Date)fm.parse(JSPgfinishdate);
+		
+		accomBoard.setMid(writeId);
+		accomBoard.setAarea(aarea);
+		accomBoard.setAstartdate(togstartdate);
+		accomBoard.setAfinishdate(togfinishdate);
+		
+		try {
+			b_bdao.insertAccomBoard(accomBoard);
+			b_bdao.insertAccom(accomBoard);
+			
+			int bnum = accomBoard.getBnum();
+			List<Policy> policyList = new ArrayList<Policy>();
+			for(int i = 0; i<pcode.length;i++) {
+				Policy policy = new Policy();
+				policy.setBnum(bnum);
+				policy.setPcode(Integer.parseInt(pcode[i]));
+				if(pvalue.length!=0) {
+					policy.setPvalue(Integer.parseInt(pvalue[i]));				
+				}
+				policyList.add(policy);
+			}
+			
+			for(int i = 0; i<policyList.size();i++) {
+				b_bdao.insertPolicy(policyList.get(i));
+			}
+		
+		}catch (Exception e){
+			e.printStackTrace();
+			throw new Exception();
+		}
+	}
+	
 	//가이드 게시글 insert
 	public void guideWrite(HttpSession session,
 			GuideBoard guideBoard,
@@ -355,7 +406,6 @@ public class BoardService {
 		guideBoard.setGfinishdate(togfinishdate);
 		guideBoard.setGenddate(togenddate);
 		guideBoard.setBkind("G");
-		
 		
 		try {
 			b_bdao.insertGuideBoard(guideBoard);
@@ -474,8 +524,16 @@ public class BoardService {
 		Date startdate = null;
 		Date finishdate = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		if(sdate != "") startdate = sdf.parse(sdate);
-		if(fdate != "") finishdate = sdf.parse(fdate);
+		if(sdate != "" && fdate == "") {
+			startdate = sdf.parse(sdate);
+			finishdate = sdf.parse("2030-12-31");
+		}else if(sdate == "" && fdate != "") {
+			startdate = sdf.parse("2019-01-01");
+			finishdate = sdf.parse(fdate);
+		}else if(sdate != "" && fdate != "") {
+			startdate = sdf.parse(sdate);
+			finishdate = sdf.parse(fdate);
+		}
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("offset", getOffset(page, 8));
@@ -502,5 +560,37 @@ public class BoardService {
 		
 
 	}
+	
+	// csv테스트중...
+	public void test() {
+		System.out.println("서비스 옴");
+		CsvTest t = new CsvTest();
+		t.test(b_bdao.selectAllGuide_csv(), b_bdao.selectAllAccompany_csv());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

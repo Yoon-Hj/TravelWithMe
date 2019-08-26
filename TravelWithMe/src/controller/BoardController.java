@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import model.AccomBoard;
 import model.Comments;
 import model.GuideBoard;
 import model.Guideschedule;
@@ -91,28 +92,25 @@ public class BoardController {
 	
 	
 	@RequestMapping("accomBoardList.do")
-	public ModelAndView accomBoardList(HttpSession session, @RequestParam(defaultValue="1") int page) {
+	public ModelAndView accomBoardList(HttpSession session, 
+			@RequestParam(defaultValue="1") int page,
+			@RequestParam(defaultValue="1") int type, @RequestParam(required=false) String keyword,
+			@RequestParam(required=false) String sdate, @RequestParam(required=false) String fdate, 
+			@RequestParam(required=false) String like)throws ParseException, UnsupportedEncodingException {
 		ModelAndView mav = new ModelAndView();
 		List<String> picklist = (List<String>) session.getAttribute("picklist");
 		String bkind = "A";
-		mav.addObject("recommList", b_bsvc.getAccomBoardList(picklist));
-		mav.addAllObjects(b_bsvc.getBoardListByPage(page, bkind));
-		mav.addObject("likeList", b_asvc.getLikecode());
+		if(keyword!= null || sdate != null || fdate != null || like != null) {
+			mav.addAllObjects(b_bsvc.getAccomSearchList(page, type, keyword, sdate, fdate, like));
+		}else {
+			mav.addObject("recommList", b_bsvc.getAccomBoardList(picklist));
+			mav.addAllObjects(b_bsvc.getBoardListByPage(page, bkind));
+		}
+		mav.addObject("likeList", b_asvc.getLikecode());			
 		mav.setViewName("accomBoardList");
 		return mav;
 	}
-	
-	@RequestMapping("accomSearch.do")
-	public ModelAndView accomSearch(@RequestParam(defaultValue="1") int page,
-			@RequestParam(defaultValue="1") int type, @RequestParam(required=false) String keyword,
-			@RequestParam(required=false) String sdate, @RequestParam(required=false) String fdate, 
-			@RequestParam(required=false) String likecode) throws ParseException, UnsupportedEncodingException {
-		ModelAndView mav = new ModelAndView();
-		mav.addAllObjects(b_bsvc.getAccomSearchList(page, type, keyword, sdate, fdate, likecode));
-		mav.addObject("keyword", URLEncoder.encode(keyword, "UTF-8"));
-		mav.setViewName("accomBoardList");
-		return mav;
-	}
+
 	
 	@RequestMapping("readBoard.do")
 	public ModelAndView readBoard(int bnum, String bkind) throws Exception {
@@ -163,6 +161,7 @@ public class BoardController {
 	
 	@RequestMapping("tryRegister.do")
 	public @ResponseBody String tryRegister(String regId, int nop, int bnum, String mid) {
+		System.out.println("되고있니?");
 		return b_bsvc.tryRegister(regId, nop, bnum, mid);
 	}
 	
@@ -187,6 +186,23 @@ public class BoardController {
 		return "redirect: accomBoardList.do";
 	}
 	
+	@RequestMapping("accomWriteForm.do")
+	public ModelAndView accomWriteForm() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("likeList", b_asvc.getLikecode());
+		mav.setViewName("accomWriteForm");
+		return mav;
+	}
+	
+	@RequestMapping("accomWrite.do")
+	public @ResponseBody void accomWrite(
+						HttpSession session, AccomBoard accomBoard,
+						String JSPgstartdate, String JSPgfinishdate,
+						String[] pcode, @RequestParam(required=false) String[] pvalue) throws Exception{
+
+		b_bsvc.accomWrite(session, accomBoard, JSPgstartdate, JSPgfinishdate, pcode, pvalue);
+	}
+	
 	//가이드 게시글 작성하기
 	@RequestMapping("guideWrite.do")
 	public @ResponseBody void guideWrite(
@@ -207,10 +223,16 @@ public class BoardController {
 	
 	//가이드 게시글 목록보기
 	@RequestMapping("guideBoardList.do")
-	public ModelAndView guideBoardList( @RequestParam(defaultValue="1") int page) {
+	public ModelAndView guideBoardList(@RequestParam(defaultValue="1") int page,
+			@RequestParam(defaultValue="1") int type, String keyword,
+			String sdate,String fdate) throws ParseException {
 		ModelAndView mav = new ModelAndView();
 		String bkind = "G";
-		mav.addAllObjects(b_bsvc.getBoardListByPage(page, bkind));
+		if(keyword!= null || sdate != null || fdate != null) {
+			mav.addAllObjects(b_bsvc.getGuideSearchList(page, type, keyword, sdate, fdate));			
+		}else {
+			mav.addAllObjects(b_bsvc.getBoardListByPage(page, bkind));			
+		}
 		mav.addObject("readCntList", b_bsvc.getGuideBoardList());
 		mav.setViewName("guideBoardList");
 		return mav;
@@ -235,4 +257,16 @@ public class BoardController {
 		mav.setViewName("guideBoardList");
 		return mav;
 	}
+	
+	// csv테스트중...
+	@RequestMapping("a.do")
+	public void csvTest() {
+		System.out.println("컨트롤러옴");
+		b_bsvc.test();
+	}
+
+	//커뮤니티 화면 출력
+	@RequestMapping("commBoardList.do")
+	public void commBoardList() {}
+
 }

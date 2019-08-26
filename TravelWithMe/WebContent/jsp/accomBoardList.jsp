@@ -10,124 +10,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="fonts/font.css">
+<link rel="stylesheet" type="text/css" href="css/boardList.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script type="text/javascript" src="js/boardList.js?v=<%=System.currentTimeMillis() %>"></script>
 <title>Travel With Me</title>
-<style type="text/css">
-
- .card {
-	  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	  padding-top: 16px;
-	  padding-bottom: 16px;
-	  padding-left: 60px;
-	  text-align: left;
-	  background-color: #f1f1f1;
-  }
-  
-  * {
- 	 box-sizing: border-box;
-  }
-  
-  .column {
-	  float: left;
-	  width: 25%;
-	  padding-left: 5px;
-	  padding-right: 5px;
-	  padding-bottom: 0px;
-	  position: relative;
-	  margin: 0 auto;
-  }
-  
-  .row::after {
-	  content: "";
-	  clear: both;
-	  display: table;
-  }
-  
-  .column img {vertical-align: middle;}
-  
-  .column .content {
-	  position: absolute;
-	  bottom: 0;
-	  background: rgb(0, 0, 0); /* Fallback color */
-	  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
-	  color: #f1f1f1;
-	  width: 96.5%;
-	  height: 30%;
-	  text-align: center;
-	  font-size: 12px;
-	  font-family: '함초롬돋움';
-  }
-  
-  .pagination a {
-	  color: black;
-	  float: left;
-	  padding: 8px 16px;
-	  text-decoration: none;
-	  transition: background-color .3s;
-   }
-
-   .pagination a.active {
-	  background-color: #E8D4D4;
-	  color: white;
-   }
-
-	.pagination a:hover:not(.active) {background-color: #ddd;}
- 
-</style>
 </head>
 <body>
-
-	<script type="text/javascript">
-		$(document).ready(function(){
-		  $('[data-toggle="tooltip"]').tooltip();   
-		  
-		  
-		
-			//이미지 분기
-			$('.iarea').find("input").each(function(){
-				var ar = $(this).val();
-				ar = ar.split(' ')[0];
-				
-				var iloc = $(this).parent("p").parent("div").siblings("a").find("img");
-				if(ar=="제주도"){
-					iloc.attr("src", "imgs/jeju.PNG");
-				}
-				else if(ar=="서울특별시"){
-					iloc.attr("src", "imgs/seoul.jpg");
-				}
-				else if(ar=="경기도"){
-					iloc.attr("src", "imgs/gyeonggi.jpg");
-				}
-				else if(ar=="전라북도"){
-					iloc.attr("src", "imgs/jeonbuk.PNG");
-				}
-				else if(ar=="전라남도"){
-					iloc.attr("src", "imgs/jeonnam.jpg");
-				}
-				else if(ar=="경상북도"){
-					iloc.attr("src", "imgs/gyeongbuk.jpg");
-				}
-				else if(ar=="경상남도"){
-					iloc.attr("src", "imgs/gyeongnam.jpg");
-				}
-				else if(ar=="충청북도"){
-					iloc.attr("src", "imgs/chungbuk.PNG");
-				}
-				else if(ar=="충청남도"){
-					iloc.attr("src", "imgs/chungnam.PNG");
-				}
-				else if(ar=="강원도"){
-					iloc.attr("src", "imgs/gangwon.PNG");
-				}
-			});
-						
-		});
-	</script>
-	
 	<jsp:include page="header.jsp"></jsp:include>
 	
 	<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px; cursor: pointer;" onclick="location.href='accomBoardList.do'">Travel With Me</h1>
@@ -135,13 +27,13 @@
 	
 	<div class="container">
 	
-		<a href="accomWriteForm.do" data-toggle="tooltip" data-placement="bottom" title="글 작성하기" 
+		<a href="accomWriteForm.do" id="writetip" data-toggle="tooltip" data-placement="bottom" title="글 작성하기" 
 			style="text-decoration: none; color: #787878; font-family: '함초롬돋움';">
 			원하는 동행글이 없으신가요? 직접 동행글을 작성해보세요.</a>
 		<br><br>
 
 		<div class="card" style="font-family: '함초롬돋움';">
-			 <form action="accomSearch.do">
+			 <form action="accomBoardList.do">
 			 <table style="border: none;">
 			 <tr>
 			 	<td>
@@ -152,15 +44,16 @@
 						<option value="4">작성자(아이디)</option>
 						<option value="5">지역</option>
 					</select>
+					<input type="hidden" id='hiddenType' value='${type}'>
 				</td>
-				<td><input type="text" class="form-control" name="keyword" style="width: 600px"></td>
+				<td><input type="text" class="form-control" name="keyword" value='${keyword}' style="width: 600px"></td>
 			 </tr>
 			 <tr>
 			 	<td style="text-align: center">여행날짜</td>
 			 	<td width="700px">
-			 		<input type="date" name="sdate" max="2030-12-31" min="2019-01-01" 
+			 		<input type="date" name="sdate" value="${startdate}" max="2030-12-31" min="2019-01-01" 
 			 				style="width: 250px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">&nbsp; ~ &nbsp;
-					<input type="date" name="fdate" max="2030-12-31" min="2019-01-01"
+					<input type="date" name="fdate" value="${finishdate}" max="2030-12-31" min="2019-01-01"
 							style="width: 250px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">
 				</td>
 				<td colspan="3" width=130px; style="margint-left: 20px; margin-top: 150px"><button type="submit" class="btn" style="background-color: #B5C3C8; color: white; width: 140px; height: 40px;">SEARCH&nbsp;&nbsp;<i class="fa fa-search"></i></button></td>
@@ -168,6 +61,7 @@
 			<tr>
 				<td style="text-align: center">여행취향</td>
 				<td>
+					<input type="hidden" id='hiddenlikecode' value='${likecode}'>
 					<select name="like" class="custom-select" style="width: 130px">
 						<c:forEach var="like" items="${likeList}" varStatus="status">
 							<option value="${like.likecode}" >${like.likename}</option>	
@@ -238,7 +132,7 @@
 					<a class="active">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="accomBoardList.do?page=${i}<c:if test="${ keyword != null }">&keyword=${keyword}&type=${type}</c:if>" style="font-size: 17px">${i}</a>
+					<a href="accomBoardList.do?page=${i}<c:if test="${keyword != null }">&keyword=${keyword}&type=${type}</c:if><c:if test='${startdate!=null}'>&sdate=${startdate}</c:if><c:if test='${finishdate!=null}'>&fdate=${finishdate}</c:if><c:if test='${likecode!=null}'>&like=${likecode }</c:if>" style="font-size: 17px"> ${i}</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>

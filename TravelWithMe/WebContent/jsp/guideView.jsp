@@ -94,9 +94,25 @@
 					<td>
 						<div id='canvasDiv'>
 							<c:forEach var='sche' items="${guideSche}">
-								<input type="hidden" name='sdate' value="${sche.sdate }">
-								<input type="hidden" name='stime' value="${sche.stime }">
-								<input type="hidden" name='splace' value="${sche.splace }">
+								<c:set var="dayDiv" value="${fn:split(sche.sdate,'Y')[1] }" />
+									<c:choose>
+										<c:when test="${fn:split(sche.sdate,'Y')[1] != day }">
+											<canvas id='canvas${dayDiv }' width='600px' height='200px'></canvas><br>
+											<div>
+											<input type="hidden" name='sdate' value="${sche.sdate }">
+											<input type="hidden" name='stime' value="${sche.stime }">
+											<input type="hidden" name='splace' value="${sche.splace }">
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div>
+											<input type="hidden" name='sdate' value="${sche.sdate }">
+											<input type="hidden" name='stime' value="${sche.stime }">
+											<input type="hidden" name='splace' value="${sche.splace }">
+											</div>
+										</c:otherwise>
+									</c:choose>
+								<c:set var="day" value="${fn:split(sche.sdate,'Y')[1] }" />
 							</c:forEach>
 						</div>
 					</td>
