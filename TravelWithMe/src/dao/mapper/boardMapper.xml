@@ -414,11 +414,26 @@
 
 
 
-
-<select id="test" resultType="int">
-	select count(*) from board
+<!-- csv테스트중... -->
+<select id="selectAllGuide" resultType="guideBoard">
+	select * from board natural join guide
 </select>
-
+<select id="selectAllAccom" resultType="accomBoard">
+	select * from board natural join accompany
+</select>
+<select id="selectAllGuide_csv" resultType="java.util.HashMap">
+	select b.bnum, b.mid, garea, gthema, mbirth, mgender
+	from board b, guide g, member m
+	where b.bnum = g.bnum
+	and b.mid = m.mid
+</select>
+<select id="selectAllAccompany_csv" resultType="java.util.HashMap">
+	select b.bnum, b.mid, aarea, likename, mbirth, mgender
+	from board b, accompany a, member m, preference p
+	where b.bnum = a.bnum
+	and b.mid = m.mid
+	and p.likecode = a.likecode
+</select>
 
 
 </mapper>
