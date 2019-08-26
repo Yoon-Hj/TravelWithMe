@@ -211,7 +211,10 @@ public class BoardService {
 			result.put("policy", b_bdao.selectPolicyByBnum(bnum));
 		}
 		else if(bkind.equals("G")) {
-			
+			result.put("guideBoard", b_bdao.selectOneGuide(bnum));
+			result.put("policy", b_bdao.selectPolicyByBnum(bnum));
+			result.put("guideSche", b_bdao.selectGScheByBnum(bnum));
+			result.put("photo", b_bdao.selectAllPhotoByBnum(bnum));
 		}
 		else if(bkind.equals("C")) {
 			
@@ -487,8 +490,8 @@ public class BoardService {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("type", type);
 		result.put("keyword", keyword);
-		result.put("startdate", startdate);
-		result.put("finishdate", finishdate);
+		result.put("startdate", sdate);
+		result.put("finishdate", fdate);
 		result.put("current", page);
 		result.put("boardList", guideBoardListBySearch);
 		result.put("start", getStartpage(page));
