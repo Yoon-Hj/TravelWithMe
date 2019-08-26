@@ -247,6 +247,7 @@ function test(){
 .bottom{
 
 	position: absolute;
+	width: 660px;
 	top: 35%;
 	left: 25%;
 	margin-left:; 
@@ -325,18 +326,18 @@ function test(){
 	<tr>			
 	<td><p>성별</p></td>
 				
-	<td><div><input type="radio" id="mgender" name="mgender" checked="checked"
-						value="male" /> 남자 </div></td>
+	<td><input type="radio" id="mgender" name="mgender" checked="checked"
+						value="male" /> 남자 </div>
 						
-			<td>			
-	<div><input type="radio" name="mgender" value="female" />
+						
+	<input type="radio" name="mgender" value="female" />
 						여자</div></td>
     
     </tr>				
              			  <tr>
      
-     <input type="button" value="다음으로" onclick="validate()" id="nextChoice" >
-      
+     <td colspan="2"><input type="button" value="다음으로" onclick="validate()" id="nextChoice" >
+      </td>
      </tr> 
     
                	</table>

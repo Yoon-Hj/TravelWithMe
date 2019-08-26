@@ -142,9 +142,9 @@ public class MemberService {
 			String  birth = mbirth2; // 형식을 지켜야 함
 			java.sql.Date mbirth = java.sql.Date.valueOf(birth);
 			member.setMbirth(mbirth);
-			m_mdao.insertMember(member);
 			String a = sha.sha256(member.getMpw());
 			member.setMpw(a);
+			m_mdao.insertMember(member);
 			m_mdao.insertUsedid(member.getMid());
 			
 			String id = null;
@@ -253,9 +253,9 @@ public class MemberService {
 	}
 
 	public void repwd(Member member) {
-		m_mdao.updatePw(member);
 		String a = sha.sha256(member.getMpw());
 		member.setMpw(a);
+		m_mdao.updatePw(member);
 	}
 	
 }
