@@ -163,8 +163,17 @@ public class BoardService {
 		Date startdate = null;
 		Date finishdate = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		if(sdate != "") startdate = sdf.parse(sdate);
-		if(fdate != "") finishdate = sdf.parse(fdate);
+		if(sdate != "" && fdate == "") {
+			startdate = sdf.parse(sdate);
+			finishdate = sdf.parse("2030-12-31");
+		}else if(sdate == "" && fdate != "") {
+			startdate = sdf.parse("2019-01-01");
+			finishdate = sdf.parse(fdate);
+		}else if(sdate != "" && fdate != "") {
+			startdate = sdf.parse(sdate);
+			finishdate = sdf.parse(fdate);
+		}
+		
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("offset", getOffset(page, 8));
@@ -474,8 +483,16 @@ public class BoardService {
 		Date startdate = null;
 		Date finishdate = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		if(sdate != "") startdate = sdf.parse(sdate);
-		if(fdate != "") finishdate = sdf.parse(fdate);
+		if(sdate != "" && fdate == "") {
+			startdate = sdf.parse(sdate);
+			finishdate = sdf.parse("2030-12-31");
+		}else if(sdate == "" && fdate != "") {
+			startdate = sdf.parse("2019-01-01");
+			finishdate = sdf.parse(fdate);
+		}else if(sdate != "" && fdate != "") {
+			startdate = sdf.parse(sdate);
+			finishdate = sdf.parse(fdate);
+		}
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("offset", getOffset(page, 8));

@@ -91,28 +91,25 @@ public class BoardController {
 	
 	
 	@RequestMapping("accomBoardList.do")
-	public ModelAndView accomBoardList(HttpSession session, @RequestParam(defaultValue="1") int page) {
+	public ModelAndView accomBoardList(HttpSession session, 
+			@RequestParam(defaultValue="1") int page,
+			@RequestParam(defaultValue="1") int type, @RequestParam(required=false) String keyword,
+			@RequestParam(required=false) String sdate, @RequestParam(required=false) String fdate, 
+			@RequestParam(required=false) String like)throws ParseException, UnsupportedEncodingException {
 		ModelAndView mav = new ModelAndView();
 		List<String> picklist = (List<String>) session.getAttribute("picklist");
 		String bkind = "A";
-		mav.addObject("recommList", b_bsvc.getAccomBoardList(picklist));
-		mav.addAllObjects(b_bsvc.getBoardListByPage(page, bkind));
-		mav.addObject("likeList", b_asvc.getLikecode());
+		if(keyword!= null || sdate != null || fdate != null || like != null) {
+			mav.addAllObjects(b_bsvc.getAccomSearchList(page, type, keyword, sdate, fdate, like));
+		}else {
+			mav.addObject("recommList", b_bsvc.getAccomBoardList(picklist));
+			mav.addAllObjects(b_bsvc.getBoardListByPage(page, bkind));
+		}
+		mav.addObject("likeList", b_asvc.getLikecode());			
 		mav.setViewName("accomBoardList");
 		return mav;
 	}
-	
-	@RequestMapping("accomSearch.do")
-	public ModelAndView accomSearch(@RequestParam(defaultValue="1") int page,
-			@RequestParam(defaultValue="1") int type, @RequestParam(required=false) String keyword,
-			@RequestParam(required=false) String sdate, @RequestParam(required=false) String fdate, 
-			@RequestParam(required=false) String likecode) throws ParseException, UnsupportedEncodingException {
-		ModelAndView mav = new ModelAndView();
-		mav.addAllObjects(b_bsvc.getAccomSearchList(page, type, keyword, sdate, fdate, likecode));
-		mav.addObject("likeList", b_asvc.getLikecode());
-		mav.setViewName("accomBoardList");
-		return mav;
-	}
+
 	
 	@RequestMapping("readBoard.do")
 	public ModelAndView readBoard(int bnum, String bkind) throws Exception {
@@ -207,10 +204,16 @@ public class BoardController {
 	
 	//가이드 게시글 목록보기
 	@RequestMapping("guideBoardList.do")
-	public ModelAndView guideBoardList( @RequestParam(defaultValue="1") int page) {
+	public ModelAndView guideBoardList(@RequestParam(defaultValue="1") int page,
+			@RequestParam(defaultValue="1") int type, String keyword,
+			String sdate,String fdate) throws ParseException {
 		ModelAndView mav = new ModelAndView();
 		String bkind = "G";
-		mav.addAllObjects(b_bsvc.getBoardListByPage(page, bkind));
+		if(keyword!= null || sdate != null || fdate != null) {
+			mav.addAllObjects(b_bsvc.getGuideSearchList(page, type, keyword, sdate, fdate));			
+		}else {
+			mav.addAllObjects(b_bsvc.getBoardListByPage(page, bkind));			
+		}
 		mav.addObject("readCntList", b_bsvc.getGuideBoardList());
 		mav.setViewName("guideBoardList");
 		return mav;
@@ -225,14 +228,4 @@ public class BoardController {
 		return view;
 	}
 	
-	//가이드 게시글 검색
-	@RequestMapping("guideSearch.do")
-	public ModelAndView guideSearch(@RequestParam(defaultValue="1") int page,
-							@RequestParam(defaultValue="1") int type, String keyword,
-							String sdate,String fdate) throws ParseException {
-		ModelAndView mav = new ModelAndView();
-		mav.addAllObjects(b_bsvc.getGuideSearchList(page, type, keyword, sdate, fdate));
-		mav.setViewName("guideBoardList");
-		return mav;
-	}
 }

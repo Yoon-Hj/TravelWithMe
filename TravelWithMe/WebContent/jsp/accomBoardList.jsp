@@ -20,54 +20,6 @@
 <title>Travel With Me</title>
 </head>
 <body>
-
-	<script type="text/javascript">
-		$(document).ready(function(){
-		  $('[data-toggle="tooltip"]').tooltip();   
-		  
-		  
-		
-			//이미지 분기
-			$('.iarea').find("input").each(function(){
-				var ar = $(this).val();
-				ar = ar.split(' ')[0];
-				
-				var iloc = $(this).parent("p").parent("div").siblings("a").find("img");
-				if(ar=="제주도"){
-					iloc.attr("src", "imgs/jeju.PNG");
-				}
-				else if(ar=="서울특별시"){
-					iloc.attr("src", "imgs/seoul.jpg");
-				}
-				else if(ar=="경기도"){
-					iloc.attr("src", "imgs/gyeonggi.jpg");
-				}
-				else if(ar=="전라북도"){
-					iloc.attr("src", "imgs/jeonbuk.PNG");
-				}
-				else if(ar=="전라남도"){
-					iloc.attr("src", "imgs/jeonnam.jpg");
-				}
-				else if(ar=="경상북도"){
-					iloc.attr("src", "imgs/gyeongbuk.jpg");
-				}
-				else if(ar=="경상남도"){
-					iloc.attr("src", "imgs/gyeongnam.jpg");
-				}
-				else if(ar=="충청북도"){
-					iloc.attr("src", "imgs/chungbuk.PNG");
-				}
-				else if(ar=="충청남도"){
-					iloc.attr("src", "imgs/chungnam.PNG");
-				}
-				else if(ar=="강원도"){
-					iloc.attr("src", "imgs/gangwon.PNG");
-				}
-			});
-						
-		});
-	</script>
-	
 	<jsp:include page="header.jsp"></jsp:include>
 	
 	<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px; cursor: pointer;" onclick="location.href='accomBoardList.do'">Travel With Me</h1>
@@ -81,7 +33,7 @@
 		<br><br>
 
 		<div class="card" style="font-family: '함초롬돋움';">
-			 <form action="accomSearch.do">
+			 <form action="accomBoardList.do">
 			 <table style="border: none;">
 			 <tr>
 			 	<td>
@@ -109,6 +61,7 @@
 			<tr>
 				<td style="text-align: center">여행취향</td>
 				<td>
+					<input type="hidden" id='hiddenlikecode' value='${likecode}'>
 					<select name="like" class="custom-select" style="width: 130px">
 						<c:forEach var="like" items="${likeList}" varStatus="status">
 							<option value="${like.likecode}" >${like.likename}</option>	
@@ -179,14 +132,7 @@
 					<a class="active">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="accomBoardList.do?page=${i}
-					<c:if test="${ keyword != ' ' }">
-					&keyword=${keyword}&type=${type}
-					</c:if>
-					
-					
-					" 
-					style="font-size: 17px">${i}</a>
+					<a href="accomBoardList.do?page=${i}<c:if test="${keyword != null }">&keyword=${keyword}&type=${type}</c:if><c:if test='${startdate!=null}'>&sdate=${startdate}</c:if><c:if test='${finishdate!=null}'>&fdate=${finishdate}</c:if><c:if test='${likecode!=null}'>&like=${likecode }</c:if>" style="font-size: 17px"> ${i}</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>

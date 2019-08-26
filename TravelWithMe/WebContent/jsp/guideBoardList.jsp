@@ -35,7 +35,7 @@
 		<br><br>
 
 		<div class="card" style="font-family: '함초롬돋움';">
-			 <form action="guideSearch.do">
+			 <form action="guideBoardList.do">
 			 <table style="border: none;">
 			 <tr>
 			 	<td>
@@ -145,7 +145,7 @@
 					<a class="active">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="guideBoardList.do?page=${i}<c:if test="${ keyword != null }">&keyword=${keyword}&type=${type}</c:if>" style="font-size: 17px">${i}</a>
+					<a href="guideBoardList.do?page=${i}<c:if test="${ keyword != null }">&keyword=${keyword}&type=${type}</c:if><c:if test='${startdate!=null}'>&sdate=${startdate}</c:if><c:if test='${finishdate!=null}'>&fdate=${finishdate}</c:if>" style="font-size: 17px">${i}</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
