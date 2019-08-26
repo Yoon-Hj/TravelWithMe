@@ -109,7 +109,7 @@ public class BoardController {
 			@RequestParam(required=false) String likecode) throws ParseException, UnsupportedEncodingException {
 		ModelAndView mav = new ModelAndView();
 		mav.addAllObjects(b_bsvc.getAccomSearchList(page, type, keyword, sdate, fdate, likecode));
-		mav.addObject("keyword", URLEncoder.encode(keyword, "UTF-8"));
+		mav.addObject("likeList", b_asvc.getLikecode());
 		mav.setViewName("accomBoardList");
 		return mav;
 	}

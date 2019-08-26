@@ -180,8 +180,8 @@ public class BoardService {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("type", type);
 		result.put("keyword", keyword);
-		result.put("startdate", startdate);
-		result.put("finishdate", finishdate);
+		result.put("startdate", sdate);
+		result.put("finishdate", fdate);
 		result.put("likecode", likecode);
 		result.put("current", page);
 		result.put("boardList", alist);

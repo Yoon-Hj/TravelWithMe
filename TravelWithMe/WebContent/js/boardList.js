@@ -7,8 +7,4 @@ $(document).ready(function(){
 		$(".custom-select").val(type);
 	}
 
-
-	
-	
-	
 });

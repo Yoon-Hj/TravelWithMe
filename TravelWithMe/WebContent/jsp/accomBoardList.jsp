@@ -10,74 +10,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="fonts/font.css">
+<link rel="stylesheet" type="text/css" href="css/boardList.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script type="text/javascript" src="js/boardList.js?v=<%=System.currentTimeMillis() %>"></script>
 <title>Travel With Me</title>
-<style type="text/css">
-
- .card {
-	  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	  padding-top: 16px;
-	  padding-bottom: 16px;
-	  padding-left: 60px;
-	  text-align: left;
-	  background-color: #f1f1f1;
-  }
-  
-  * {
- 	 box-sizing: border-box;
-  }
-  
-  .column {
-	  float: left;
-	  width: 25%;
-	  padding-left: 5px;
-	  padding-right: 5px;
-	  padding-bottom: 0px;
-	  position: relative;
-	  margin: 0 auto;
-  }
-  
-  .row::after {
-	  content: "";
-	  clear: both;
-	  display: table;
-  }
-  
-  .column img {vertical-align: middle;}
-  
-  .column .content {
-	  position: absolute;
-	  bottom: 0;
-	  background: rgb(0, 0, 0); /* Fallback color */
-	  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
-	  color: #f1f1f1;
-	  width: 96.5%;
-	  height: 30%;
-	  text-align: center;
-	  font-size: 12px;
-	  font-family: '함초롬돋움';
-  }
-  
-  .pagination a {
-	  color: black;
-	  float: left;
-	  padding: 8px 16px;
-	  text-decoration: none;
-	  transition: background-color .3s;
-   }
-
-   .pagination a.active {
-	  background-color: #E8D4D4;
-	  color: white;
-   }
-
-	.pagination a:hover:not(.active) {background-color: #ddd;}
- 
-</style>
 </head>
 <body>
 
@@ -152,15 +92,16 @@
 						<option value="4">작성자(아이디)</option>
 						<option value="5">지역</option>
 					</select>
+					<input type="hidden" id='hiddenType' value='${type}'>
 				</td>
-				<td><input type="text" class="form-control" name="keyword" style="width: 600px"></td>
+				<td><input type="text" class="form-control" name="keyword" value='${keyword}' style="width: 600px"></td>
 			 </tr>
 			 <tr>
 			 	<td style="text-align: center">여행날짜</td>
 			 	<td width="700px">
-			 		<input type="date" name="sdate" max="2030-12-31" min="2019-01-01" 
+			 		<input type="date" name="sdate" value="${startdate}" max="2030-12-31" min="2019-01-01" 
 			 				style="width: 250px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">&nbsp; ~ &nbsp;
-					<input type="date" name="fdate" max="2030-12-31" min="2019-01-01"
+					<input type="date" name="fdate" value="${finishdate}" max="2030-12-31" min="2019-01-01"
 							style="width: 250px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;">
 				</td>
 				<td colspan="3" width=130px; style="margint-left: 20px; margin-top: 150px"><button type="submit" class="btn" style="background-color: #B5C3C8; color: white; width: 140px; height: 40px;">SEARCH&nbsp;&nbsp;<i class="fa fa-search"></i></button></td>
@@ -238,7 +179,14 @@
 					<a class="active">${i}</a>
 				</c:when>
 				<c:otherwise>
-					<a href="accomBoardList.do?page=${i}<c:if test="${ keyword != null }">&keyword=${keyword}&type=${type}</c:if>" style="font-size: 17px">${i}</a>
+					<a href="accomBoardList.do?page=${i}
+					<c:if test="${ keyword != ' ' }">
+					&keyword=${keyword}&type=${type}
+					</c:if>
+					
+					
+					" 
+					style="font-size: 17px">${i}</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
