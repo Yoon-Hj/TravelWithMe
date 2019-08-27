@@ -41,9 +41,6 @@ public class BoardService {
 	@Autowired
 	private UseAPI API;
 	
-	@Autowired
-	private CsvTest t;
-	
 	
 	
 	
@@ -644,11 +641,6 @@ public class BoardService {
 
 	}
 	
-	// csv테스트중...
-	public void test() {
-		System.out.println("서비스 옴");
-		t.test(b_bdao.selectAllGuide_csv(), b_bdao.selectAllAccompany_csv());
-	}
 	
 	
 	//mainSearch
