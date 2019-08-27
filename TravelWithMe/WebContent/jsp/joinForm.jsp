@@ -5,26 +5,16 @@
 <html lang='en'>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="fonts/font.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 </head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
-
-<script language="javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
-</script>
 <script>
 
 $(document).ready(function(){
@@ -217,206 +207,254 @@ function test(){
 
 
 </script>
-
- 
-      
-
 </head>
 <style>
-
-
-
-.all {
-	width: 660px;
-	position: absolute;
-	top: 15%;
-	left: 25%;
-	background-color: #f1f1f1;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.title {
-	width: 400px;
-	position: absolute;
-	top: 0%;
-	left: 25%;
-	margin-left:; 
-	background-color:;
-}
-
-.bottom{
-
-	position: absolute;
-	width: 660px;
-	top: 35%;
-	left: 25%;
-	margin-left:; 
-	background-color: #f1f1f1;
-}
+/* 	.all {
+		width: 660px;
+		position: absolute;
+		top: 15%;
+		left: 25%;
+		background-color: #f1f1f1;
+	  margin-left: auto;
+	  margin-right: auto;
+	}
+	 */
+	 
+	.form-control {
+		margin-bottom: 5px;
+	}
+	.title {
+		width: 400px;
+		position: absolute;
+		top: 0%;
+		left: 25%;
+		margin-left:; 
+		background-color:;
+	}
+	
+	.bottom{
+	
+		position: absolute;
+		width: 660px;
+		top: 35%;
+		left: 25%;
+		margin-left:; 
+		background-color: #f1f1f1;
+	}
 </style>
 
 <body>
-	<h1 class="title" style="font-family: '배달의민족 도현';">SIGN UP</h1>
 
-	<form name="join"action="joinMember.do" method="post">
-
-	<div class="all">	
+	<jsp:include page="header.jsp"></jsp:include>
 	
-			<div>
-				<input type="text" class="form-control" id="mid" name="mid"
-					placeholder="ID" maxlength="12">
-				<div class="check_font" id="id_check"></div>
-			</div>
+	<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px;">Sign Up</h1>
+	<hr>
+	
+	<div class="container" style="margin-bottom: 300px;">
 
-		
-
-			<div>
-				<input type="password" class="form-control" id="mpw"
-					name="mpw" placeholder="비밀번호" maxlength="12">
-				<div class="check_font" id="pwd_check1"></div>
-			</div>
-
-			<div>
-				<input type="password" class="form-control" id="mpw_check"
-					name="mpw_check" placeholder="비밀번호 확인">
-				<div class="check_font" id="pwd_check"></div>
-			</div>
-
-        
-			<div>
-				<input type="text" class="form-control" id="mname"
-					name="mname" placeholder="성명">
-				<div class="check_font" id="name_check"></div>
-			</div>
-</div>
-
-
-
-			<div class="bottom">
+			<form name="join" action="joinMember.do" method="post">
 			
-				<table>
-	    
+			
+			<div class="form-group">
+				
+				<label><b>아이디</b></label>
+				<input type="text" class="form-control" id="mid" name="mid"
+						placeholder="Enter ID" maxlength="12" style="width: 600px;">
+				<div class="check_font" id="id_check"></div>
+
+				<label><b>비밀번호</b></label>
+					<input type="password" class="form-control" id="mpw" name="mpw"
+						placeholder="Enter Password" style="width: 600px;">
+				<div class="check_font" id="pwd_check1"></div>
+
+				<label><b>비밀번호 확인</b></label>
+				<input type="password" class="form-control" id="mpw_check"
+						name="mpw_check" placeholder="Enter Password again" style="width: 600px;">
+				<div class="check_font" id="pwd_check"></div>
+				
+				<label><b>성명</b></label>
+				<input type="text" class="form-control" id="mname" name="mname"
+						placeholder="Enter Name" style="width: 600px;">
+				<div class="check_font" id="name_check"></div>
+					
+				<label><b>대표 연락처</b></label><br>
+				<input type="radio" name="contact" checked="checked" value="phone" /> 휴대폰 &nbsp;&nbsp;&nbsp;
+				<input type="radio" name="contact" value="email" /> email &nbsp;&nbsp;&nbsp;
+				<input type="radio" name="contact" value="kakao" /> 카카오 아이디 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="text" name="mcontact" id="mcontact" style="width: 250px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;"> 
+				<p>※ 동행 및 가이드 신청시에 사용될 연락처이니 신중하게	기입바랍니다.</p>
+				
+				<label><b>생년월일</b></label>
+				<input type="date" id="mbirth" name="mbirth2" class="form-control" style="width: 250px;">
+				
+				<br>
+				
+				<label><b>성별</b></label>
+				<input type="radio" id="mgender" name="mgender" checked="checked" value="male" /> 남자
+				<input type="radio" name="mgender" value="female" /> 여자
+				
+				<input type="button" value="다음으로" onclick="validate()" id="nextChoice">
+
+			</div>
+	</div>			
+	<jsp:include page="footer.jsp"></jsp:include>
+		
+			<!-- <div class="all">	
+			
+					<div>
+						<input type="text" class="form-control" id="mid" name="mid"
+							placeholder="ID" maxlength="12" style="margin-bottom: 10px;">
+						<div class="check_font" id="id_check"></div>
+					</div>
+		
+				
+		
+					<div>
+						<input type="password" class="form-control" id="mpw"
+							name="mpw" placeholder="비밀번호" maxlength="12"  style="margin-bottom: 10px;">
+						<div class="check_font" id="pwd_check1"></div>
+					</div>
+		
+					<div>
+						<input type="password" class="form-control" id="mpw_check"
+							name="mpw_check" placeholder="비밀번호 확인"  style="margin-bottom: 10px;">
+						<div class="check_font" id="pwd_check"></div>
+					</div>
+		
+		        
+					<div>
+						<input type="text" class="form-control" id="mname"
+							name="mname" placeholder="성명"  style="margin-bottom: 10px;">
+						<div class="check_font" id="name_check"></div>
+					</div>
+			</div>
+		
+		
+		
+					<div class="bottom">
+					
+						<table>
+			    
+						<tr>
+							<td><p style="width:400px">대표 연락처</p></td>
+			<td>			
+			<input type="radio" name="contact" checked="checked" value="phone" />
+			휴대폰 
+		    
+		    <input type="radio" name="contact" value="email" />email
+														
+			<input type="radio" name="contact" value="kakao" /> 카카오 아이디
+			</td>
+		</tr>
+					
+					<tr>
+		<td colspan="2"><br></td>
+		</tr>
+						
+				<tr>	
+		   
+				<td colspan="2"><input type="text" name="mcontact" id="mcontact"></td>
+		    
+			</tr>		          
+		                
 				<tr>
-					<td><p style="width:400px">대표 연락처</p></td>
-	<td>			
-	<input type="radio" name="contact" checked="checked" value="phone" />
-	휴대폰 
-    
-    <input type="radio" name="contact" value="email" />email
-												
-	<input type="radio" name="contact" value="kakao" /> 카카오 아이디
-	</td>
-</tr>
+				<td colspan="2"><a style="color: #b3b3b3; font-size: 15px;">※동행 및 가이드 매칭 참여시에 사용될 연락처이니 신중하게 기입바랍니다.</a></td>
+				</tr>		
+		
+		<tr>
+		<td colspan="2"><br><br></td>
+		</tr>
+		
+		    <tr>	
+			<td><p>생년월일</p></td>
+			<td><div><input type="date" id="mbirth" name="mbirth2"></div></td>
+			</tr>
 			
 			<tr>
-<td colspan="2"><br></td>
-</tr>
-				
-		<tr>	
-   
-		<td colspan="2"><input type="text" name="mcontact" id="mcontact"></td>
-    
-	</tr>		          
-                
+		<td colspan="2"><br></td>
+		</tr>
+			
+			<tr>			
+			<td><p>성별</p></td>
+						
+			<td><input type="radio" id="mgender" name="mgender" checked="checked"
+								value="male" /> 남자 </div>
+								
+								
+			<input type="radio" name="mgender" value="female" />
+								여자</div></td>
+		    
+		    </tr>				
+		    
+		    <tr>
+		    <td colspan="2"><br><br></td>
+		    </tr>
+		             			  <tr>
+		   
+		     <td colspan="2" >
+		     <input type="button" value="다음으로" onclick="validate()" id="nextChoice" 
+		     style="background-color: #B5C3C8; color:white; font-family:'배달의민족 주아'; margin-top: 5px; margin-left: 270px;">
+		      </td>
+		     </tr> 
+		    
+		               	</table>
+					
+				</div> -->
+		
+		<!-- The Modal -->
+		<div id="myModal" class="modal" style="display:none">
+		<div class="modal-dialog">
+		  <!-- Modal content -->
+		
+		  <div class="modal-content" style="background-color: #f1f1f1;">
+		    <!-- <span class="close" id ="close"></span> -->
+		   <div>
+		    <button type="button" id="close" onclick="test()"  style="background-color: #B5C3C8;
+		    margin-left: 472px;"> &times; </button>
+		    </div>
+		     <!-- Modal Header -->
+				        <div class="modal-header">
+				          <h3 class="modal-title" style="font-family: 배달의민족 도현">당신의 여행 취향은?</h3>
+					
+				        </div>
+		<table>
+		
+		
+		<tr><td><h3 style="font-family: 배달의민족 도현">(선택사항) 선택을 원하지 않으실 경우, 바로 회원가입을 눌러주세요.</h3></td></tr>
+		
 		<tr>
-		<td colspan="2"><a style="color: #b3b3b3; font-size: 15px;">※동행 및 가이드 매칭 참여시에 사용될 연락처이니 신중하게 기입바랍니다.</a></td>
-		</tr>		
-
-<tr>
-<td colspan="2"><br><br></td>
-</tr>
-
-    <tr>	
-	<td><p>생년월일</p></td>
-	<td><div><input type="date" id="mbirth" name="mbirth2"></div></td>
-	</tr>
-	
-	<tr>
-<td colspan="2"><br></td>
-</tr>
-	
-	<tr>			
-	<td><p>성별</p></td>
-				
-	<td><input type="radio" id="mgender" name="mgender" checked="checked"
-						value="male" /> 남자 </div>
-						
-						
-	<input type="radio" name="mgender" value="female" />
-						여자</div></td>
-    
-    </tr>				
-    
-    <tr>
-    <td colspan="2"><br><br></td>
-    </tr>
-             			  <tr>
-   
-     <td colspan="2" >
-     <input type="button" value="다음으로" onclick="validate()" id="nextChoice" 
-     style="background-color: #B5C3C8; color:white; font-family:'배달의민족 주아'; margin-top: 5px; margin-left: 270px;">
-      </td>
-     </tr> 
-    
-               	</table>
-			
+		<td>
+		  <h3 style="font-family: 배달의민족 도현">(최대 3개)</h3>
+		</td>
+		</tr>
+		                     
+		 
+		<tr>
+		<td>
+		
+		
+		<div name="likecheck">
+		<c:forEach var="codelike" items="${codeList}">
+		<input type="checkbox" name="likecode" onClick="count_ck(this)" value="${codelike.likecode}" /> ${codelike.likename}
+		</c:forEach>
 		</div>
-
-<!-- The Modal -->
-<div id="myModal" class="modal" style="display:none">
-<div class="modal-dialog">
-  <!-- Modal content -->
-
-  <div class="modal-content" style="background-color: #f1f1f1;">
-    <!-- <span class="close" id ="close"></span> -->
-   <div>
-    <button type="button" id="close" onclick="test()"  style="background-color: #B5C3C8;
-    margin-left: 472px;"> &times; </button>
-    </div>
-     <!-- Modal Header -->
-		        <div class="modal-header">
-		          <h3 class="modal-title" style="font-family: 배달의민족 도현">당신의 여행 취향은?</h3>
-			
-		        </div>
-<table>
-
-
-<tr><td><h3 style="font-family: 배달의민족 도현">(선택사항) 선택을 원하지 않으실 경우, 바로 회원가입을 눌러주세요.</h3></td></tr>
-
-<tr>
-<td>
-  <h3 style="font-family: 배달의민족 도현">(최대 3개)</h3>
-</td>
-</tr>
-                     
- 
-<tr>
-<td>
-
-
-<div name="likecheck">
-<c:forEach var="codelike" items="${codeList}">
-<input type="checkbox" name="likecode" onClick="count_ck(this)" value="${codelike.likecode}" /> ${codelike.likename}
-</c:forEach>
-</div>
-</td>
-</tr>
-
-                <tr>
-                <td><input class="btn btn-success" type="submit" value="회원가입"></td>
-                </tr>
-                
-</table>
-</div>
-</div>
-</div>
-
-<div style="position: fixed; bottom: 23px; right: 10px;">
- 	 	<a href="#0"><img src="imgs/top.png" style="width: 60px;height: 60px;"></a>
- 	</div> 
-	</form>
-
+		</td>
+		</tr>
+		
+		                <tr>
+		                <td><input class="btn btn-success" type="submit" value="회원가입"></td>
+		                </tr>
+		                
+		</table>
+		</div>
+		</div>
+		</div>
+		
+		<div style="position: fixed; bottom: 23px; right: 10px;">
+		 	 	<a href="#0"><img src="imgs/top.png" style="width: 60px;height: 60px;"></a>
+		 	</div> 
+			</form>
+	</div>
 
 
 <script>
