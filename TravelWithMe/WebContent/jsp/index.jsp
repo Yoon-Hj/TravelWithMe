@@ -132,8 +132,8 @@
 				 
 				<h2 style="font-size: 45px;">함께할 여행 친구들을 직접 모아보세요</h2>
 				<br>
-				<input type="button" id='AwriteBtn' class="btn btn-danger btn-lg btn-block" 
-						value="Travel with Me 글 작성" onclick="location.href='accomWriteForm.do'"
+				<input type="button" id='AwriteBtnInIndex' class="btn btn-danger btn-lg btn-block" 
+						value="Travel with Me 글 작성" 
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">
 			
 			</div>			
@@ -155,9 +155,8 @@
 			
 				<h2 style="font-size: 45px">나만의 투어를 계획하여 직접 가이드가 되어보세요</h2>
 				<br>
-				<input type="button" id='GwriteBtn' class="btn btn-danger btn-lg btn-block" 
+				<input type="button" id='GwriteBtnInIndex' class="btn btn-danger btn-lg btn-block" 
 						value="Travel with Guide 글 작성" 
-						onclick="location.href='guideWriteForm.do'"
 						style="float: right; margin-right: 100px; width: 300px; border-width: 3px; background-color: transparent !important; font-family: 배달의민족 도현; font-size: 20px">
 			</div>
 		</section>

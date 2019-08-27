@@ -18,14 +18,6 @@
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script type="text/javascript" src="js/boardList.js?v=<%=System.currentTimeMillis() %>"></script>
 <title>Travel With Me</title>
-<script type="text/javascript">
-$(document).ready(function(){
-	$("#writetip").click(function(){
-		var user = <%=(String)session.getAttribute("user")%>;
-		if(user == null) alert("로그인 후 사용가능한 서비스입니다.");
-	});
-});
-</script>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -35,8 +27,9 @@ $(document).ready(function(){
 	
 	<div class="container">
 	
-		<a href="accomWriteForm.do" id="writetip" data-toggle="tooltip" data-placement="bottom" title="글 작성하기" 
-			style="text-decoration: none; color: #787878; font-family: '함초롬돋움';">
+		<a id="Awritetip" data-toggle="tooltip" data-placement="bottom" title="글 작성하기" 
+			style="text-decoration: none; color: #787878; font-family: '함초롬돋움';
+			cursor: pointer;">
 			원하는 동행글이 없으신가요? 직접 동행글을 작성해보세요.</a>
 		<br><br>
 

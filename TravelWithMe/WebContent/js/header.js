@@ -548,10 +548,42 @@ $(document).ready(function(){
 			location.href='mainSearch.do?keyword='+keyword;			
 		}
 	});
+	
+	$("#AwriteBtn").click(function(){
+		if(sessionChk()) location.href='accomWriteForm.do';
+	});
 
+	$("#GwriteBtn").click(function(){
+		if(sessionChk()) location.href='guideWriteForm.do';
+	});
 
+	$("#AwriteBtnInIndex").click(function(){
+		if(sessionChk()) location.href='accomWriteForm.do';
+	});
+	
+	$("#GwriteBtnInIndex").click(function(){
+		if(sessionChk()) location.href='guideWriteForm.do';
+	});
+	
+	$("#Awritetip").click(function(){
+		if(sessionChk()) location.href='accomWriteForm.do';
+	});
+	
+	$("#Gwritetip").click(function(){
+		if(sessionChk()) location.href='guideWriteForm.do';
+	});
 });
 
+function sessionChk(){
+	var user = $("#user").val();
+	if(user == ""){
+		alert("로그인 후 사용가능한 서비스입니다.");
+		return false;
+	}else{
+		return true;
+	}
+		
+}
 
 
 

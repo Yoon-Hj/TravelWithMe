@@ -70,20 +70,6 @@
    	cursor:default;'
    }
 </style>
-
-<script type="text/javascript">
-$(document).ready(function(){
-	$("#AwriteBtn").click(function(){
-		var user = <%=(String)session.getAttribute("user")%>;
-		if(user == null) alert("로그인 후 사용가능한 서비스입니다.");
-	});
-	$("#GwriteBtn").click(function(){
-		var user = <%=(String)session.getAttribute("user")%>;
-		if(user == null) alert("로그인 후 사용가능한 서비스입니다.");
-	});
-});
-</script>
-
 </head>
 <body>
 
@@ -155,12 +141,12 @@ $(document).ready(function(){
 				<td>
 					<a style="color: #818181;">Travel with Me</a>
 					<a class="canClick" href="accomBoardList.do">목록보기</a>
-		   			<a class="canClick" id='AwriteBtn' href="accomWriteForm.do">글작성</a>
+		   			<a class="canClick" id='AwriteBtn'>글작성</a>
 				</td>
 				<td>
 				 	<a style="color: #818181;">Travel with Guide</a>
 				 	<a class="canClick" href="guideBoardList.do">목록보기</a>
-		   			<a class="canClick" id='GwriteBtn' href="guideWriteForm.do">글작성</a>
+		   			<a class="canClick" id='GwriteBtn'>글작성</a>
 				</td>
 				<td>
 					<a class="canClick" href="attractionInfo.do">Attraction Info</a>
