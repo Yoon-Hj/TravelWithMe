@@ -46,7 +46,7 @@
 									break;
 								}
 							}
-						 	if(${user == guideBoard.mid}){
+						 	if('${guideBoard.mid}'==u){
 								$('#rmbtn').show();
 							}else if(flag){
 								$('#rcbtn').show();
@@ -99,7 +99,7 @@
 		
 	    //신청인원이 0이 아닐 때, 수정 버튼 누르면 alert 표시
 		$('#modiBtn').on('click', function(){
-			if($('.nop') != ${guideBoard.gnop}) 
+			if(true) 
 				alert("신청인원이 존재하여 게시글 수정이 불가합니다.");
 		});
 	    
@@ -108,10 +108,11 @@
 				if(user == "null"){
 					alert("로그인이 필요한 서비스입니다.");
 				}else{
-					if($('#cwf').text()==''){
-						$(this).closest("tr").after("<tr id='cwf'><td>&nbsp;&nbsp;</td><td colspan='2'><input type='text' class='recontent' style='width: 700px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;'><button type='submit' class='writereBtn'>답글작성</button></td></tr>");
-					}else{
-						$('#cwf').remove();
+					
+					if($(this).parent('td').parent("tr").next("tr").attr('class')!="cwf"){
+						$(this).closest("tr").after("<tr class='cwf'><td>&nbsp;&nbsp;</td><td colspan='2'><input type='text' class='recontent' style='width: 700px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;'><button type='submit' class='writereBtn'>답글작성</button></td></tr>");
+					}else if($(this).parent('td').parent("tr").next("tr").attr('class')=="cwf"){
+						$(this).parent('td').parent("tr").next("").remove(); 
 					}
 				}
 		});
@@ -184,6 +185,10 @@
 						type : "get",
 						success : function(data){
 									t.remove();
+									if($("#mtable").find("tr:last").find("th:eq(0)").text()=='아이디'){
+										$("#mtable").find("tr:last").remove();
+										$('#mtable').append("<tr><td style='color: #CD1039;'><b>신청자가 존재하지 않습니다.</b><td><tr>");
+									}
 									alert("거절이 성공적으로 완료되었습니다.");
 						}
 				  });
@@ -222,7 +227,7 @@
 			var rnum = $('#registerNum').val();
 			if(rnum=='0'){
 				alert("1명이상의 신청인원만 가능합니다.");
-				$('#registerNum').val("");
+				$('#registerNum').val("1");
 			}else{
 				  $.ajax({
 						url : "tryRegisterG.do",
@@ -248,8 +253,7 @@
 		
 		//댓글작성
 		$('.writecoBtn').on('click', function(){
-			var b = ${guideBoard.bnum};
-			
+			var b = $('#hiddenbnum').val();
 			$.ajax({
 				url : "writeComment.do",
 				data : {ccontent : $('.cocontent').val(),
@@ -264,8 +268,7 @@
 		//답글작성
 		$(document).on('click', '.writereBtn', function(){
 			var b = ${guideBoard.bnum};
-			var c = $(this).parent("td").parent("tr").siblings("tr:last").find("th:eq(0)").find("input").val();
-
+			var c = $(this).parent("td").parent("tr").prev("tr").find("th").find("input").val();
 			$.ajax({
 				url : "writeRecomment.do",
 				data : {ccontent : $('.recontent').val(),
@@ -364,7 +367,12 @@
 				</tr>
 				<tr>
 					<th>날짜</th>
-					<td><fmt:formatDate value="${guideBoard.gstartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${guideBoard.gstartdate}" pattern="yyyy-MM-dd"/></td>
+					<td>
+					<fmt:formatDate value="${guideBoard.gstartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${guideBoard.gfinishdate}" pattern="yyyy-MM-dd"/>
+					<c:if test="${guideBoard.gstartdate == guideBoard.gfinishdate}">
+						&nbsp;${guideBoard.gtime}
+					</c:if>
+					</td>
 				</tr>
 				<tr>
 					<th>출발장소 및 시간</th>
@@ -461,7 +469,7 @@
 					<tr>
 						<c:choose>
 						<c:when test="${comment.cnum==comment.cgrid}">
-							<th width="100px;" style="text-align: center; font-weight: bold;"><input type="hidden" value="${comment.cgrid}">${comment.mid}</th>
+							<th width="100px;" style="text-align: center; font-weight: bold;"><input type="hidden" value="${comment.cgrid}"><a class='userId'>${comment.mid}</a></th>
 							<td colspan="2">
 								<c:if test="${comment.cdel==0}">${comment.ccontent} 
 									<input type="hidden" value="${comment.cnum}">
@@ -473,7 +481,7 @@
 						</c:when>
 						<c:otherwise>
 							<td>&nbsp;&nbsp;</td>
-							<td width="90px;" style="text-align: left; font-weight: bold;"><i class="material-icons" style="font-size: 15px;">&#xe5da;&nbsp;</i>${comment.mid}</td>
+							<td width="90px;" style="text-align: left; font-weight: bold;"><i class="material-icons" style="font-size: 15px;">&#xe5da;&nbsp;</i><a class='userId'>${comment.mid}</a></td>
 							<td width="700px;" style="text-align: left;">
 								<c:if test="${comment.cdel==0}">${comment.ccontent} 
 									<input type="hidden" value="${comment.cnum}">
@@ -533,7 +541,7 @@
 		        <!-- Modal Header -->
 		        <div class="modal-header">
 		          <h3 class="modal-title" style="font-family: '배달의민족 도현'">신청 가능 인원 수 : <span class="nop" style="color: #F56E6E; font-size: 25px;"></span></h3>
-					<button type="button" class="close" clss="cc">×</button>
+					<button type="button" class="close cc">×</button>
 		        </div>
 	        
 		        <!-- Modal body -->
