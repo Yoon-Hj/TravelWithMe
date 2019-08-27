@@ -492,7 +492,7 @@
 		</div>
 		
 		<div style="display: flex; margin-top: 10px; margin-left: 110px; font-family: '배달의민족 주아'">
-			<p><input type="button" class="btn default" value="목록으로" style="border: 2px solid #B5C3C8;" onclick="location.href='accomBoardList.do'"></p>
+			<p><input type="button" class="btn default" value="목록으로" style="border: 2px solid #B5C3C8;" onclick="location.href='accomBoardList.do?page=${page}<c:if test="${keyword != null }">&keyword=${keyword}&type=${type}</c:if><c:if test='${sdate!=null}'>&sdate=${sdate}</c:if><c:if test='${fdate!=null}'>&fdate=${fdate}</c:if><c:if test='${likecode!=null}'>&like=${likecode }</c:if>'"></p>
 			<p style="float: right; margin-left: 610px;">현재 신청 가능 인원 수 <span class="nop" style="color: #F56E6E; font-size: 20px;"></span> &nbsp;&nbsp;
 					<input type="button" id="rmbtn" class="btn default" value="신청관리" data-toggle="modal" data-target="#manageModal" style="border: 2px solid #B5C3C8; width: 80px; display:none;">
 					<input type="button" id="rcbtn" class="btn default" value="신청취소" style="border: 2px solid #B5C3C8; width: 80px; display:none;">

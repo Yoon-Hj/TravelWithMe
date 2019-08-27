@@ -103,9 +103,9 @@ public class BoardController {
 		if(keyword!= null || sdate != null || fdate != null || like != null) {
 			mav.addAllObjects(b_bsvc.getAccomSearchList(page, type, keyword, sdate, fdate, like));
 		}else {
-			mav.addObject("recommList", b_bsvc.getAccomBoardList(picklist));
 			mav.addAllObjects(b_bsvc.getBoardListByPage(page, bkind));
 		}
+		mav.addObject("recommList", b_bsvc.getAccomBoardList(picklist));
 		mav.addObject("likeList", b_asvc.getLikecode());			
 		mav.setViewName("accomBoardList");
 		return mav;
@@ -113,11 +113,21 @@ public class BoardController {
 
 	
 	@RequestMapping("readBoard.do")
-	public ModelAndView readBoard(int bnum, String bkind) throws Exception {
+	public ModelAndView readBoard(int bnum, String bkind,
+			@RequestParam(defaultValue="1") int page,
+			@RequestParam(defaultValue="1") int type, @RequestParam(required=false) String keyword,
+			@RequestParam(required=false) String sdate, @RequestParam(required=false) String fdate, 
+			@RequestParam(required=false) String like) throws Exception {
 		b_bsvc.uprcnt(bnum);
 		ModelAndView mav = new ModelAndView();
 		mav.addAllObjects(b_bsvc.getBoardContent(bnum, bkind));
 		mav.addObject("commentList", b_bsvc.readComment(bnum));
+		mav.addObject("page", page);
+		mav.addObject("type", type);
+		mav.addObject("keyword", keyword);
+		mav.addObject("sdate", sdate);
+		mav.addObject("fdate", fdate);
+		mav.addObject("like", like);
 		if(bkind.equals("A")) {
 			mav.setViewName("accomView");
 		}else if(bkind.equals("G")) {
@@ -250,17 +260,6 @@ public class BoardController {
 		File attachFile = new File(path+photopath);
 		View view =new DownloadView(attachFile);
 		return view;
-	}
-	
-	//가이드 게시글 검색
-	@RequestMapping("guideSearch.do")
-	public ModelAndView guideSearch(@RequestParam(defaultValue="1") int page,
-							@RequestParam(defaultValue="1") int type, String keyword,
-							String sdate,String fdate) throws ParseException {
-		ModelAndView mav = new ModelAndView();
-		mav.addAllObjects(b_bsvc.getGuideSearchList(page, type, keyword, sdate, fdate));
-		mav.setViewName("guideBoardList");
-		return mav;
 	}
 	
 	// csv테스트중...
