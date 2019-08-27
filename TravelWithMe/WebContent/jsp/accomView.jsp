@@ -162,7 +162,7 @@
 									rn += rlist[r].rnop;
 								}
 								pn = an - rn;
-								$('.nop').text(pn);
+								$('.nop').text(pn+'명');
 							}
 						 	//rid, rnop 숨겨놓기
 						 	var ids = new Array;
@@ -487,7 +487,7 @@
 		
 		<div style="display: flex; margin-top: 10px; margin-left: 110px; font-family: '배달의민족 주아'">
 			<p><input type="button" class="btn default" value="목록으로" style="border: 2px solid #B5C3C8;" onclick="location.href='accomBoardList.do'"></p>
-			<p style="float: right; margin-left: 610px;">현재 신청 가능 인원 수 <span class="nop" style="color: #F56E6E; font-size: 20px;"></span>명 &nbsp;&nbsp;
+			<p style="float: right; margin-left: 610px;">현재 신청 가능 인원 수 <span class="nop" style="color: #F56E6E; font-size: 20px;"></span> &nbsp;&nbsp;
 					<input type="button" id="rmbtn" class="btn default" value="신청관리" data-toggle="modal" data-target="#manageModal" style="border: 2px solid #B5C3C8; width: 80px; display:none;">
 					<input type="button" id="rcbtn" class="btn default" value="신청취소" style="border: 2px solid #B5C3C8; width: 80px; display:none;">
 					<input type="button" id="rbtn" class="btn default" value="신청" data-toggle="modal" data-target="#warningModal1" style="border: 2px solid #B5C3C8; width: 80px; display:none;">
