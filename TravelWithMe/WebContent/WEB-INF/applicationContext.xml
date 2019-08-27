@@ -16,6 +16,9 @@
 	
 	<bean class="service.SHA256" id="sHA256">
 	</bean>
+	
+	<bean class="service.CsvTest" id="csvTest">
+	</bean>
 
 	<bean class="org.apache.commons.dbcp.BasicDataSource"
 		id="dataSource">

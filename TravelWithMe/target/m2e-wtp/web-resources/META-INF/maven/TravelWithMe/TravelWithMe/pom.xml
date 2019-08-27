@@ -213,9 +213,9 @@
 
 
 
-	<!-- 하이브 테스트.. -->
+		<!-- 하이브 테스트.. -->
 
-<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common -->
+		<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-common -->
 		<dependency>
 			<groupId>jdk.tools</groupId>
 			<artifactId>jdk.tools</artifactId>
@@ -238,6 +238,22 @@
 			<artifactId>hive-jdbc</artifactId>
 			<version>2.3.4</version>
 		</dependency>
+
+		<!-- RServe -->
+		<!-- https://mvnrepository.com/artifact/org.nuiton.thirdparty/Rserve -->
+		<dependency>
+			<groupId>org.nuiton.thirdparty</groupId>
+			<artifactId>Rserve</artifactId>
+			<version>1.7-3</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.nuiton.thirdparty/REngine -->
+		<dependency>
+			<groupId>org.nuiton.thirdparty</groupId>
+			<artifactId>REngine</artifactId>
+			<version>1.7-3</version>
+		</dependency>
+
 
 
 
