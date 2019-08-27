@@ -6,13 +6,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="fonts/font.css">
+<link rel="stylesheet" type="text/css" href="css/boardList.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<title>Travel With Me</title>
+<script src="js/mypage.js?v=<%=System.currentTimeMillis() %>"></script>
 <style>
 	h1{
 		margin:10%;
 	}
 	
-	.row{
+	/* .row{
 		grid-template-columns:auto auto auto;
 	}
 	
@@ -75,10 +84,7 @@
 	#memInfo > th{
 		width : 200px;
 	}
-	
-	
-	
-	
+	 */
 	.starR{
 	  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
 	  background-size: auto 100%;
@@ -90,158 +96,225 @@
 	}
 	.starR.on{background-position:0 0;}
 	
+	 .card {
+	 	  width: 500px;
+	 	  height: 500px;
+	 	  margin-left: 10px;
+		  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+		  padding-top: 16px;
+		  padding-bottom: 16px;
+		  padding-left: 20px;
+		  padding-right: 30px;
+		  text-align: left;
+		  background-color: #f1f1f1;
+		  font-family: '나눔고딕';
+	  }
+	  
+	  .viewCard th{
+	  	  width: 20%;
+	  	  padding: 5px;
+	  	  text-align: center;
+	  }
+	  
+	  .viewCard td{
+	  	 color: #464646;
+	  }
+	  
+	  .column {
+	  float: left;
+	  width: 50%;
+	  padding: 10px;
+	  }
 	
 	
+	.row:after {
+	  content: "";
+	  display: table;
+	  clear: both;
+	  }
+	  
+	 .badge badge-primary{
+	 	padding: 5px;
+	 }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="js/mypage.js?v=<%=System.currentTimeMillis() %>"></script>
 </head>
 <body>
-<jsp:include page="header.jsp"></jsp:include>
-<%
-response.setHeader("cache-control","no-store");
-response.setHeader("expires","0");
-response.setHeader("pragma","no-cache");
-%>
-<h1>MY PAGE</h1><HR>
-<div class="row">
-<div class="myInfo">
-<h4>MY INFO</h4><BR>
-<center>
-<table id="info" style="width : 400px; height : 100px; text-align:center;">
-	<tr>
-		<th>아이디</th>
-		<td>${memberInfo.mid }</td>
-		<th rowspan="4">
-		<c:choose>
-			<c:when test="${memPoint.CNT > 0 }">
-				<c:choose>
-					<c:when test="${memPoint.GRADE == 'Gold' }">
-						<img src="imgs/gold2.jpg" style="width:70px;height:70px;"/><BR>
-					</c:when>
-					<c:when test="${memPoint.GRADE == 'Silver' }">
-						<img src="imgs/silver2.jpg" style="width:70px;height:70px;"/><BR>
-					</c:when>
-					<c:when test="${memPoint.GRADE == 'Bronze' }">
-						<img src="imgs/bronze2.jpg" style="width:70px;height:70px;"/><BR>
-					</c:when>
-				</c:choose>
-					가이드 포인트  ${memberInfo.mguidepoint}점<BR>
-					가이드 횟수 ${memPoint.CNT }회
-			</c:when>
-			<c:otherwise>
-				아직 가이드경험이 없습니다.
-			</c:otherwise>
-		</c:choose>
-		</th>
-	</tr>
-	<tr>
-		<th>성명</th>
-		<td>${memberInfo.mname}</td>
-	</tr>
-	<tr>
-		<th>연락처</th>
-		<td>${memberInfo.mcontact}</td>
-	</tr>
-	<tr>
-		<th>
-			신뢰지수<BR>
-		</th>
-		<td>
-			${memberInfo.mpoint } / 100 점
-		</td>
-	</tr>
-</table><BR>
-</center>
-<div class="inInfo">
-<input type="button" id="reviseForm" value="회원정보 수정" data-toggle="modal" data-target="#meminfoReviseForm" style="background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
-<input type="button" id="withdrawal" value="회원탈퇴" data-toggle="modal" data-target="#meminfoReviseForm" style="background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
-</div>
-</div>
 
-<!-- 스크립트는 header.js에 있다. -->
-<div class="myNews">
-<h4>알림내역</h4>
-<table class="news" style="width:500px">
-<c:forEach var="n" items="${notice }">
-	<tr>
-		<td style="height:70px;width:500px">
-		<input type="hidden" value="${n.NOTICESTATUS }">
-		<input type="hidden" value="${n.BNUM }">
-		<input type="hidden" value="${n.BKIND }">
-		<input type="hidden" value="${n.NKCODE }">
-		<input type="hidden" value="${n.EVALSTATUS }">
-		<input type="hidden" value="${n.NID }">
-		<input type="hidden" value="${n.BTITLE }">
-		<a class="newsRows">
-		${n.BTITLE }<BR>
-		${n.NKREASON }</a></td>
-	</tr>
-</c:forEach>
-</table>
-<c:if test="${fn:length(notice) == 5}">
-<div class="inNews">
-<input type="button" class="moreNews" value="더보기" data-toggle="modal" data-target="#moreNewsForm" style="background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
-</div>
-</c:if>
-</div>
-
-<div class="myBoards">
-<h4>내가 작성한 글</h4>
-<table>
-<c:forEach var="b" items="${myBoard }">
-	<tr>
-		<td style="width:400px;height:40px;">
-		<a class="boardsRow">
-		<input type="hidden" value="${b.BNUM }"/>
-		<input type="hidden" value="${b.BKIND }"/>
-		<c:choose>
-			<c:when test="${b.BKIND == 'A' }">[Travel with Me]</c:when>
-			<c:when test="${b.BKIND == 'G' }">[Travel with Guide]</c:when>
-			<c:when test="${b.BKIND == 'C' }">[Community]</c:when>
-		</c:choose>
-		${b.BTITLE }</a>
-		</td>
-	</tr>
-</c:forEach>
-</table>
-<div class="inBoards">
-<input type="button" id="moreBoards" value="더보기" style="background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
-</div>
-</div>
-
-<div class="myRegister">
-<h4>신청내역</h4>
-<table class="myRegi">
-<c:forEach var="r" items="${register }">
-	<tr>
-		<td style="width:400px;height:40px;">
-		<a class="regisRow">
-		<input type="hidden" value="${r.BNUM }"/>
-		<input type="hidden" value="${r.BKIND }"/>
-		<c:choose>
-			<c:when test="${r.BKIND == 'A' }">[Travel with Me]</c:when>
-			<c:when test="${r.BKIND == 'G' }">[Travel with Guide]</c:when>
-		</c:choose>
-		${r.BTITLE }</a>
-		<div style="width:100px;margin-left:auto;">
+	<jsp:include page="header.jsp"></jsp:include>
+	<%
+	response.setHeader("cache-control","no-store");
+	response.setHeader("expires","0");
+	response.setHeader("pragma","no-cache");
+	%>
+	<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px; margin-top: 10px;">MY PAGE</h1><hr>
+	
+<div class="container">
+	
+	<div class="row">
+		<div class="myInfo column">
+		
+			<div class="card">
+				<span class="badge badge-primary" style="font-family: '함초롬돋움'; clear: both; margin-bottom: 10px; font-size: 25px; background-color: #E8D4D4; color: black;">MY INFO</span>
+			
+				<table id="info" style="width : 450px; height : 150px; text-align: left; border: none;" class="viewCard">
+					<tr>
+						<th>아이디</th>
+						<td>${memberInfo.mid }</td>
+						<th rowspan="2">
+						<c:choose>
+							<c:when test="${memPoint.CNT > 0 }">
+								<c:choose>
+									<c:when test="${memPoint.GRADE == 'Gold' }">
+										<img src="imgs/gold2.jpg" style="width:70px;height:70px;"/><BR>
+									</c:when>
+									<c:when test="${memPoint.GRADE == 'Silver' }">
+										<img src="imgs/silver2.jpg" style="width:70px;height:70px;"/><BR>
+									</c:when>
+									<c:when test="${memPoint.GRADE == 'Bronze' }">
+										<img src="imgs/bronze2.jpg" style="width:70px;height:70px;"/><BR>
+									</c:when>
+								</c:choose>
+									<BR>
+									
+							</c:when>
+							<c:otherwise>
+								아직 가이드경험이 없습니다.
+							</c:otherwise>
+						</c:choose>
+						</th>
+					</tr>
+					<tr>
+						<th>성명</th>
+						<td>${memberInfo.mname}</td>
+					</tr>
+					<tr>
+						<th>연락처</th>
+						<td>${memberInfo.mcontact}</td>
+						<td>가이드 포인트  ${memberInfo.mguidepoint}점</td>
+					</tr>
+					<tr>
+						<th>
+							신뢰지수<BR>
+						</th>
+						<td>${memberInfo.mpoint } / 100 점</td>
+						<td>가이드 횟수 ${memPoint.CNT }회</td>
+					</tr>
+				</table>
+				
+				<div class="inInfo" style="margin-top: 20px; margin-left: 200px;">
+					<input type="button" id="reviseForm" class="btn" value="회원정보 수정" data-toggle="modal" data-target="#meminfoReviseForm" style="width: 120px; background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아';">
+					<input type="button" id="withdrawal" class="btn" value="회원탈퇴" data-toggle="modal" data-target="#meminfoReviseForm" style="width: 120px; background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아';">
+				</div>
+			</div>
+	</div>
+	
+	<!-- 스크립트는 header.js에 있다. -->
+	<div class="myNews column">
+		<div class="card">
+			<span class="badge badge-primary" style="font-family: '함초롬돋움'; clear: both; margin-bottom: 5px; font-size: 25px; background-color: #E8D4D4; color: black;">알림내역</span>
+			
+			<table class="news viewCard" style="width: 440px; font-size: 14px;">
+			<c:forEach var="n" items="${notice }">
+				<tr>
+					<td>
+						<input type="hidden" value="${n.NOTICESTATUS }">
+						<input type="hidden" value="${n.BNUM }">
+						<input type="hidden" value="${n.BKIND }">
+						<input type="hidden" value="${n.NKCODE }">
+						<input type="hidden" value="${n.EVALSTATUS }">
+						<input type="hidden" value="${n.NID }">
+						<input type="hidden" value="${n.BTITLE }">
+						<a class="newsRows">
+						${n.BTITLE }<BR>
+						${n.NKREASON }</a>
+					</td>
+				</tr>
+			</c:forEach>
+			</table>
+			
+			<c:if test="${fn:length(notice) == 5}">
+			
+				<div class="inNews" style="margin-left: 330px;">
+					<input type="button" class="moreNews btn" value="더보기" data-toggle="modal" data-target="#moreNewsForm" style="width: 120px; background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아';">
+				</div>
+				</c:if>
+			
 		</div>
-		</td>
-	</tr>
-</c:forEach>
-</table>
-<c:if test="${fn:length(register) == 5}">
-<div class="inRegister">
-<input type="button" id="moreRegister" value="더보기" data-toggle="modal" data-target="#moreRegiForm" style="background-color: transparent; border: 0px; font-size: 20px; font-family: 함초롬돋움; font-weight: bold;">
+	</div>		
+	
+	<!-- 첫low끝나는 div -->
+	</div>
+
+	<div class="row">
+	
+		<div class="myBoards column">
+			<div class="card" style="height: 300px;">
+				<span class="badge badge-primary" style="font-family: '함초롬돋움'; clear: both; margin-bottom: 10px; font-size: 25px; background-color: #E8D4D4; color: black;">내가 작성한 글</span>
+				
+				<table class="viewCard" style="font-family: '나눔고딕'">
+				<c:forEach var="b" items="${myBoard }">
+					<tr>
+						<td  style="padding: 5px;">
+							<a class="boardsRow">
+							<input type="hidden" value="${b.BNUM }"/>
+							<input type="hidden" value="${b.BKIND }"/>
+							<c:choose>
+								<c:when test="${b.BKIND == 'A' }">[Travel with Me]</c:when>
+								<c:when test="${b.BKIND == 'G' }">[Travel with Guide]</c:when>
+								<c:when test="${b.BKIND == 'C' }">[Community]</c:when>
+							</c:choose>
+							${b.BTITLE }</a>
+						</td>
+					</tr>
+				</c:forEach>
+				</table>
+				
+				<div class="inBoards" style="margin-top: 20px; margin-left: 350px;">
+					<input type="button" class="btn" id="moreBoards" value="더보기" style="width: 120px; background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아';">
+				</div>
+			</div>
+		</div>
+		
+		<div class="myRegister column">
+			<div class="card" style="height: 300px;">
+			<span class="badge badge-primary" style="font-family: '함초롬돋움'; clear: both; margin-bottom: 10px; font-size: 25px; background-color: #E8D4D4; color: black;">신청내역</span>
+			
+			<table class="myRegi viewCard" style="font-family: '나눔고딕'">
+			<c:forEach var="r" items="${register }">
+				<tr>
+					<td style="padding: 5px;">
+						<a class="regisRow">
+						<input type="hidden" value="${r.BNUM }"/>
+						<input type="hidden" value="${r.BKIND }"/>
+						<c:choose>
+							<c:when test="${r.BKIND == 'A' }">[Travel with Me]</c:when>
+							<c:when test="${r.BKIND == 'G' }">[Travel with Guide]</c:when>
+						</c:choose>
+						${r.BTITLE }</a>
+						<div style="width:100px;margin-left:auto;">
+						</div>
+					</td>
+				</tr>
+			</c:forEach>
+			</table>
+			
+			<c:if test="${fn:length(register) == 5}">
+			<div class="inRegister" style="margin-top: 20px; margin-left: 350px;">
+				<input type="button" class="btn" id="moreRegister" value="더보기" data-toggle="modal" data-target="#moreRegiForm" style="width: 120px; background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아';">
+			</div>
+			</c:if>
+			
+			</div>
+		</div>
+		
+	</div>	
+	</div>
+	
 </div>
-</c:if>
-</div>
 
 </div>
 
-
-
-
+<jsp:include page="footer.jsp"></jsp:include>
 
 
 	<!-- 신청내역 더보기 -->	
