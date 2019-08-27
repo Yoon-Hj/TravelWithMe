@@ -141,12 +141,12 @@
 				<td>
 					<a style="color: #818181;">Travel with Me</a>
 					<a class="canClick" href="accomBoardList.do">목록보기</a>
-		   			<a class="canClick" id='AwriteBtn'>글작성</a>
+		   			<a class="canClick" id='AwriteBtn' href='#'>글작성</a>
 				</td>
 				<td>
 				 	<a style="color: #818181;">Travel with Guide</a>
 				 	<a class="canClick" href="guideBoardList.do">목록보기</a>
-		   			<a class="canClick" id='GwriteBtn'>글작성</a>
+		   			<a class="canClick" id='GwriteBtn' href='#'>글작성</a>
 				</td>
 				<td>
 					<a class="canClick" href="attractionInfo.do">Attraction Info</a>

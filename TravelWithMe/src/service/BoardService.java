@@ -393,6 +393,7 @@ public class BoardService {
 			String[] DAY2time,String[] DAY2place,
 			String[] DAY3time,String[] DAY3place ) throws Exception {
 		
+	    if(guideBoard.getGtime()=="undefined")guideBoard.setGtime("종일");
 		String writeId = (String)session.getAttribute("user");
 		String garea = guideBoard.getGarea1() + " " + guideBoard.getGarea2();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
