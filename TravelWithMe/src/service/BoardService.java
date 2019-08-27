@@ -347,7 +347,7 @@ public class BoardService {
 	}
 	
 	//동행게시글 삭제
-	public void deleteBoard(int bnum, String bkind) throws Exception {
+	public void deleteBoard(int bnum) throws Exception {
 		try {
 			b_bdao.deleteBoard(bnum);
 			List<Register> list = b_bdao.selectRegisterListByBnum(bnum);
@@ -358,9 +358,6 @@ public class BoardService {
 				n.setBnum(bnum);
 				n.setMid(m);
 				b_mdao.insertNotice(n);
-			}
-			if(bkind.equals("G")) {
-				//스케줄이랑 사진 지우기?
 			}
 		}catch (Exception e) {
 			// TODO: handle exception

@@ -191,7 +191,7 @@ public class BoardController {
 	
 	@RequestMapping("accomDeleteBoard.do")
 	public String accomDeleteBoard(int bnum, String bkind) throws Exception {
-		b_bsvc.deleteBoard(bnum, "A");
+		b_bsvc.deleteBoard(bnum);
 		return "redirect: accomBoardList.do";
 	}
 	

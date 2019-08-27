@@ -21,6 +21,304 @@
 <title>Travel With Me</title>
 
 </head>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		var b = ${guideBoard.bnum};
+		var u = '${user}';
+		var rlist;
+		var pn;
+		
+		$.ajax({
+				url : "getRList.do",
+				data : {bnum : b},
+				type : "get",
+				success : function(data){
+							
+							rlist = data;
+							var flag = false;
+							
+							//신청, 취소, 관리 버튼
+							for(var r in rlist){
+								if(u == rlist[r].mid){
+									flag = true;
+									break;
+								}
+							}
+						 	if(${user == accomBoard.mid}){
+								$('#rmbtn').show();
+							}else if(flag){
+								$('#rcbtn').show();
+							}else{
+								$('#rbtn').show();
+							}
+						 	
+						 	//가능인원 계산
+						 	var an = ${accomBoard.anop};
+						 	if(an == 0) {
+								$('.nop').text("무관");
+							}
+
+							else{
+								var rn = 0;
+								for(var r in rlist){
+									rn += rlist[r].rnop;
+								}
+								pn = an - rn;
+								$('.nop').text(pn+'명');
+
+								if(pn==0){
+									$('#rbtn').attr("disabled", "true");
+								} 
+							}
+						 	//rid, rnop 숨겨놓기
+						 	var ids = new Array;
+						 	var nops = new Array;
+						 	for(var r in rlist){
+						 		ids.push(rlist[r].rid);
+						 		nops.push(rlist[r].rnop);
+						 	}
+						 	$('#hid').val(ids);
+					 		$('#hn').val(nops);
+						 	
+				}
+		});
+		
+		var user = "<%=(String) session.getAttribute("user")%>";
+		if(user == "null"){
+			$('#clform').show();
+		}else{
+			$('#cform').show();
+			$('#cbtn').show();
+		}
+		
+		if(user == "null") {
+			$('#rbtn').attr("disabled", "disabled");
+		}
+		
+	    //신청인원이 0이 아닐 때, 수정 버튼 누르면 alert 표시
+		$('#modiBtn').on('click', function(){
+			if($('.nop') != ${accomBoard.anop}) 
+				alert("신청인원이 존재하여 게시글 수정이 불가합니다.");
+		});
+	    
+	    //답글폼열기
+		$('.replyBtn').on('click', function(){
+				if(user == "null"){
+					alert("로그인이 필요한 서비스입니다.");
+				}else{
+					if($('#cwf').text()==''){
+						$(this).closest("tr").after("<tr id='cwf'><td>&nbsp;&nbsp;</td><td colspan='2'><input type='text' class='recontent' style='width: 700px; border: 1px solid #ccc; border-radius: 4px; padding: 5px; color: #787878;'><button type='submit' class='writereBtn'>답글작성</button></td></tr>");
+					}else{
+						$('#cwf').remove();
+					}
+				}
+		});
+		
+		//신청취소버튼 - 취소
+		$('#rcbtn').on('click', function(){
+			var b = ${accomBoard.bnum}; 
+			
+			 if (confirm("신청을 정말 취소하시겠습니까?") == true){
+				 $.ajax({
+						url : "cancelRegister.do",
+						data : {mid : user,
+								bnum : b},
+						type : "get",
+						success : function(data){
+							history.go(0);
+							alert("신청취소가 성공적으로 완료되었습니다.")
+						}
+				  });
+			 }else{
+				 return;
+			 }
+		});
+		
+		//신청관리버튼 누르면 신청자들 정보 조회
+		$('#rmbtn').on('click', function(){
+			$('#mtable').empty();
+			var b = ${accomBoard.bnum};
+			var n = $('#hn').val();
+			var hi = $('#hid').val();
+			
+			$.ajax({
+				url : "getRegistInfo.do",
+				data : {bnum : b},
+				type : "get",
+				success : function(data){
+						if(data == ''){
+							$('#mtable').append("<tr><td style='color: #CD1039;'><b>신청자가 존재하지 않습니다.</b><td><tr>");
+						}else{
+							var rinfo = data;
+							var th = "<tr><th>아이디</th><th>이름</th><th>연락처</th><th>신청인원</th><th>거절하기</th></tr>";
+							$('#mtable').append(th);
+							for(var i=0; i < rinfo.length; i++){
+								var hivar = "";
+								hivar += hi[i+(3*i)];
+								hivar += hi[i+(3*i)+1];
+								hivar += hi[i+(3*i)+2];
+								var tHTML="<tr><td>"+rinfo[i].MID+"<input type='hidden' value='"+hivar+"'></td><td>"+rinfo[i].MNAME+"</td><td>"+rinfo[i].MCONTACT+"</td><td style='text-align:center'>"+n[2*i]+"명</td><td>"+"<button class='btn rejectbtn' style='border: 2px solid #B5C3C8; width: 80px; font-family: 배달의민족 주아; font-size: 13px;'>거절하기</button></td></tr>";
+								$('#mtable').append(tHTML);
+						}
+					}
+				}
+			});
+		});
+		
+		//거절하기 버튼
+		$(document).on('click', '.rejectbtn', function(){
+			
+			var b = ${accomBoard.bnum};
+			var r = $(this).parent("td").parent("tr").find("td:eq(0)").find("input").val();
+			var m = $(this).parent("td").parent("tr").find("td:eq(0)").text();
+			var t = $(this).parent("td").parent("tr");
+			
+			if (confirm("정책에 기재된 사유가 아니면 불이익이 발생할 수 있습니다. 거절을 진행하시겠습니까?") == true){
+				 $.ajax({
+						url : "rejectRegister.do",
+						data : {bnum : b,
+								rid : r,
+								id : m},
+						type : "get",
+						success : function(data){
+									t.remove();
+									alert("거절이 성공적으로 완료되었습니다.");
+						}
+				  });
+			 }else{
+				 return;
+			 }			
+		});
+		
+		//두번째 모달 나와줘
+		$(document).on('click', '#agreeBtn', function(){
+			$('#warningModal1').modal("hide");
+			$('#warningModal2').modal("show");
+			$('#registerNum').attr("max", pn);
+		});
+		
+		$('#registerNum').focusout(function(){
+			
+		});
+		
+		function check(elem){
+			var num = elem.value;
+			var remain = pn;
+			if(num > remain){
+				elem.value = remain;
+				num = elem.value;
+			}
+		}
+		
+		//세번째 모달 나와줘
+		$(document).on('click', '#regiBtn', function(){
+			$('#warningModal2').modal("hide");
+			$('#succModal').modal("show");
+		});
+		
+		//신청완료버튼 누르면
+		$(document).on('click', '#regiBtn', function(){
+			
+			var uid = "<%=(String) session.getAttribute("user")%>";
+			var wid = $('#writeid').text();
+			var b = $('#hiddenbnum').val();
+			var rnum = $('#registerNum').val();
+			
+				  $.ajax({
+						url : "tryRegister.do",
+						data : {regId : uid,
+								bnum : b,
+								nop : rnum,
+								mid : wid},
+						type : "get",
+						success : function(data){
+							if(data==""){
+								alert("모집 인원을 초과하여 신청이 불가합니다.");
+								history.go(0);
+							}else{
+								$('#contact').html(data);
+							}
+						}
+				  });
+		});
+		
+		//댓글작성
+		$('.writecoBtn').on('click', function(){
+			var b = ${accomBoard.bnum};
+			
+			$.ajax({
+				url : "writeComment.do",
+				data : {ccontent : $('.cocontent').val(),
+					    bnum : b},
+				type : "get",
+				success : function(data){
+					history.go(0);
+				}
+			});
+		});
+		
+		//답글작성
+		$(document).on('click', '.writereBtn', function(){
+			var b = ${accomBoard.bnum};
+			var c = $(this).parent("td").parent("tr").siblings("tr:last").find("th:eq(0)").find("input").val();
+
+			$.ajax({
+				url : "writeRecomment.do",
+				data : {ccontent : $('.recontent').val(),
+					    bnum : b,
+					    cgrid : c},
+				type : "get",
+				success : function(data){
+					history.go(0);
+				}
+			});
+		});
+		
+		//댓글삭제
+		//댓글 삭제여부가 1이면, '해당 댓글은 삭제되었습니다.'(text) 로 대체
+		$('.commDelBtn').on('click', function(){
+			  if (confirm("해당 댓글을 삭제하시겠습니까?") == true){   
+				var delrow = $(this).siblings("input:hidden").val();
+				var tmp = $(this).parents("td");
+				  $.ajax({
+						url : "delComment.do",
+						data : {cnum : delrow},
+						type : "get",
+						success : function(data){
+							tmp.text("");
+							tmp.append("<span style='color: #828282; font-size: 13px;'>해당 댓글은 삭제되었습니다.</span>");
+						}
+				  });
+			  }else{   
+			      return;
+			  }
+		});
+		
+		//중간에 모달 x누르면 그냥 새로고침
+		$('.cc').on('click', function(){
+			history.go(0);
+		});
+		
+		$('.rfinish').on('click', function(){
+			alert("신청이 성공적으로 완료되었습니다.");
+			history.go(0);
+		});
+		
+		//게시글 삭제 확인
+		$('#delBtn').on('click', function(){
+			 var b = ${accomBoard.bnum};
+			 if (confirm("해당 게시글을 삭제하시겠습니까?") == true){
+					location.href = 'accomDeleteBoard.do?bnum='+b;
+					alert("삭제가 성공적으로 완료되었습니다.");
+			 }else{
+				 return;
+			 }			
+		});
+	});
+	
+</script>
 <body>
 
 	<jsp:include page="header.jsp"></jsp:include>
