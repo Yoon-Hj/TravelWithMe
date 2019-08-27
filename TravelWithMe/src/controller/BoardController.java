@@ -214,10 +214,16 @@ public class BoardController {
 									String[] DAY2time,String[] DAY2place,
 									String[] DAY3time,String[] DAY3place ) throws Exception{
 		
+		System.out.println("크기 : " + photo.length);
+		for(MultipartFile p : photo) {
+			System.out.println("getname : " + p.getName());
+			System.out.println("getcontenttype : " + p.getContentType());
+			System.out.println("getfilename : " + p.getOriginalFilename());
+		}
+		System.out.println("컨트롤러"+photo);
 		b_bsvc.guideWrite(session,guideBoard,JSPgstartdate, JSPgfinishdate, JSPgenddate,
 				pcode,pvalue,photo,DAY1time,DAY1place,DAY2time,DAY2place, DAY3time,DAY3place);
 		
-
 	}
 	
 	//가이드 게시글 목록보기

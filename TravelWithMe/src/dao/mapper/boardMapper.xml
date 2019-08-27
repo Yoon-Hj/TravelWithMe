@@ -294,7 +294,7 @@
 <insert id="insertAccom" parameterType="accomBoard">
 	insert into accompany values 
 	(#{bnum}, #{aarea}, #{astartdate}, #{afinishdate}, #{atime}, #{adepartplace}, #{adeparttime},
-                                               #{anop}, #{likecode}, #{transport}, #{acourse})
+                                               #{anop}, #{likecode}, #{atransport}, #{acourse})
 </insert>
 
 <!-- 정책테이블에 새로운 게시글의 정책 삽입 -->
