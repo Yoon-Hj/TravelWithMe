@@ -86,7 +86,7 @@
 			</c:if>
 			<c:forEach var="b" items="${recommList}" varStatus="status">
 			  <div class="column">
-				<a href="readBoard.do?bnum=${b.bnum}&bkind=A"><img style="width:100%; height: 100%;"></a>
+				<a href="readBoard.do?bnum=${b.bnum}&bkind=A&page=${current}<c:if test="${keyword != null }">&keyword=${keyword}&type=${type}</c:if><c:if test='${startdate!=null}'>&sdate=${startdate}</c:if><c:if test='${finishdate!=null}'>&fdate=${finishdate}</c:if><c:if test='${likecode!=null}'>&like=${likecode }</c:if>"><img style="width:100%; height: 100%;"></a>
 				<div class="content">
 					<p class="iarea"><fmt:formatDate value="${b.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${b.afinishdate}" pattern="yyyy-MM-dd"/>
 					<br><input type="hidden" value="${b.aarea}">[${b.aarea}] ${b.btitle}<br>${b.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${b.breadcount}</p>
@@ -109,7 +109,7 @@
 			</c:if>
 			<c:forEach var="a" items="${boardList}" varStatus="status">
 			  <div class="column" style="margin-bottom: 12px;">
-				<a href="readBoard.do?bnum=${a.bnum}&bkind=A"><img style="width:100%; height: 100%;"></a>
+				<a href="readBoard.do?bnum=${a.bnum}&bkind=A&page=${current}<c:if test="${keyword != null }">&keyword=${keyword}&type=${type}</c:if><c:if test='${startdate!=null}'>&sdate=${startdate}</c:if><c:if test='${finishdate!=null}'>&fdate=${finishdate}</c:if><c:if test='${likecode!=null}'>&like=${likecode }</c:if>"><img style="width:100%; height: 100%;"></a>
 				<div class="content">
 					<p class="iarea"><fmt:formatDate value="${a.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${a.afinishdate}" pattern="yyyy-MM-dd"/>
 					<br><input type="hidden" value="${a.aarea}">[${a.aarea}] ${a.btitle}<br>${a.mid} &nbsp;&nbsp; <i class='far fa-eye'></i>&nbsp; ${a.breadcount}</p>

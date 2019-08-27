@@ -162,7 +162,8 @@
 									rn += rlist[r].rnop;
 								}
 								pn = an - rn;
-								$('.nop').text(pn);
+								$('.nop').text(pn+'명');
+
 								if(pn==0){
 									$('#rbtn').attr("disabled", "true");
 								} 
@@ -307,11 +308,11 @@
 			}
 		}
 		
-		//세번째 모달 나와줘
+/* 		//세번째 모달 나와줘
 		$(document).on('click', '#regiBtn', function(){
 			$('#warningModal2').modal("hide");
 			$('#succModal').modal("show");
-		});
+		}); */
 		
 		//신청완료버튼 누르면
 		$(document).on('click', '#regiBtn', function(){
@@ -320,7 +321,10 @@
 			var wid = $('#writeid').text();
 			var b = $('#hiddenbnum').val();
 			var rnum = $('#registerNum').val();
-			
+			if(rnum=='0'){
+				alert("1명이상의 신청인원만 가능합니다.");
+				$('#registerNum').val("");
+			}else{
 				  $.ajax({
 						url : "tryRegister.do",
 						data : {regId : uid,
@@ -337,6 +341,9 @@
 							}
 						}
 				  });
+				  $('#warningModal2').modal("hide");
+				  $('#succModal').modal("show");
+			}
 		});
 		
 		//댓글작성
@@ -405,7 +412,7 @@
 		$('#delBtn').on('click', function(){
 			 var b = ${accomBoard.bnum};
 			 if (confirm("해당 게시글을 삭제하시겠습니까?") == true){
-					location.href = 'accomDeleteBoard.do?bnum='+b;
+					location.href = 'deleteBoard.do?bnum='+b+'&bkind=A';
 					alert("삭제가 성공적으로 완료되었습니다.");
 			 }else{
 				 return;
@@ -491,8 +498,8 @@
 		</div>
 		
 		<div style="display: flex; margin-top: 10px; margin-left: 110px; font-family: '배달의민족 주아'">
-			<p><input type="button" class="btn default" value="목록으로" style="border: 2px solid #B5C3C8;" onclick="location.href='accomBoardList.do'"></p>
-			<p style="float: right; margin-left: 610px;">현재 신청 가능 인원 수 <span class="nop" style="color: #F56E6E; font-size: 20px;"></span>명 &nbsp;&nbsp;
+			<p><input type="button" class="btn default" value="목록으로" style="border: 2px solid #B5C3C8;" onclick="location.href='accomBoardList.do?page=${page}<c:if test="${keyword != null }">&keyword=${keyword}&type=${type}</c:if><c:if test='${sdate!=null}'>&sdate=${sdate}</c:if><c:if test='${fdate!=null}'>&fdate=${fdate}</c:if><c:if test='${likecode!=null}'>&like=${likecode }</c:if>'"></p>
+			<p style="float: right; margin-left: 610px;">현재 신청 가능 인원 수 <span class="nop" style="color: #F56E6E; font-size: 20px;"></span> &nbsp;&nbsp;
 					<input type="button" id="rmbtn" class="btn default" value="신청관리" data-toggle="modal" data-target="#manageModal" style="border: 2px solid #B5C3C8; width: 80px; display:none;">
 					<input type="button" id="rcbtn" class="btn default" value="신청취소" style="border: 2px solid #B5C3C8; width: 80px; display:none;">
 					<input type="button" id="rbtn" class="btn default" value="신청" data-toggle="modal" data-target="#warningModal1" style="border: 2px solid #B5C3C8; width: 80px; display:none;">
@@ -559,6 +566,7 @@
 		    		<c:choose>
 						<c:when test="${fn:length(policy) != 0}">
 						<c:forEach var="p" items="${policy}" varStatus="status">
+						<c:if test="${p.pcode==1}">공지된 출발장소 및 시간에 모인 인원과 동행을 진행하며, 특별한 제제사항은 없습니다.</c:if>
 						<c:if test="${p.pcode==2}">여행 시작일 기준 <b style="color:#CD1039">${p.pvalue}일 전까지 연락이 되지 않는 분</b>은 작성자 임의로 신청거절을 진행할 수 있습니다.<br></c:if>
 						<c:if test="${p.pcode==3}"><b style="color:#CD1039">신뢰지수 ${p.pvalue}점 이하</b>의 회원은 작성자 임의로 신청거절을 진행할 수 있습니다.<br></c:if>
 						</c:forEach>

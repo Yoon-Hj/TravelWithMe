@@ -242,6 +242,16 @@
     where bnum = #{bnum}
 </select>
 
+<!-- 게시글 번호로 가이드게시글 현재 신청가능 인원 수 조회하기  -->
+<select id="getPossibleGNop" parameterType="int" resultType="int">
+	 select gnop - nvl((select sum(rnop)
+                       from register
+                       where bnum = #{bnum}
+                       group by bnum), 0)
+    from guide
+    where bnum = #{bnum}
+</select>
+
 <!-- 게시글에 동행 및 가이드투어 신청하기 -->
 <insert id="insertRegister" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="rid">
 	<selectKey resultType="int" keyProperty="rid" order="BEFORE">
@@ -282,12 +292,22 @@
 </update>
 
 <!-- 동행글 게시글테이블 삽입 -->
+<sql id="bcontent">
+		<choose>
+			<when test="bcontent!=''">
+				#{bcontent}				
+			</when>
+			<otherwise>
+				'내용없음'
+			</otherwise>
+		</choose>
+	</sql>
 <insert id="insertAccomBoard" parameterType="accomBoard" useGeneratedKeys="true" keyProperty="bnum">
 	<selectKey resultType="int" keyProperty="bnum" order="BEFORE">
 			select board_seq.nextval from dual
 	</selectKey>
 	insert into board values 
-	(#{bnum}, #{bkind}, #{mid}, default, #{btitle}, #{bcontent}, default, default)
+	(#{bnum}, #{bkind}, #{mid}, default, #{btitle}, <include refid="bcontent"/>, default, default)
 </insert>
 
 <!-- 동행글 동행테이블 삽입 -->
@@ -340,7 +360,7 @@
 	<selectKey resultType="int" keyProperty="bnum" order="BEFORE">
 			select board_seq.nextval from dual
 	</selectKey>
-	insert into board values (#{bnum}, #{bkind}, #{mid}, default, #{btitle}, #{bcontent}, default, default)
+	insert into board values (#{bnum}, #{bkind}, #{mid}, default, #{btitle}, <include refid="bcontent"/>, default, default)
 </insert> 
 
 <!-- 가이드게시글 가이드 테이블에 삽입  -->

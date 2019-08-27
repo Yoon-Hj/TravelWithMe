@@ -16,6 +16,9 @@
 	
 	<bean class="service.SHA256" id="sHA256">
 	</bean>
+	
+	<bean class="service.CsvTest" id="csvTest">
+	</bean>
 
 	<bean class="org.apache.commons.dbcp.BasicDataSource"
 		id="dataSource">
@@ -53,6 +56,62 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactoryBean"></property>
 		<property name="mapperInterface" value="dao.IAdminDao"></property>
 	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 하이브 dao 테스트중... -->
+	<bean id="hiveDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.apache.hive.jdbc.HiveDriver"></property>
+		<property name="url" value="jdbc:hive2://192.168.10.101:10000/default"></property>
+		<property name="username" value="hive"></property>
+		<property name="password" value="hive"></property>
+	</bean>
+	
+	<bean id="hiveSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="hiveDataSource"></property>
+		<property name="typeAliasesPackage" value="model"></property>
+		<property name="mapperLocations" value="classpath*:dao/mapper/**/*.xml"></property>
+	</bean>
+	
+	<bean id="hiveSqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="hiveSqlSessionFactory"></constructor-arg>
+	</bean>
+	
+	<bean id="hiveDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="dao.IHiveDao"></property>
+		<property name="sqlSessionTemplate" ref="hiveSqlSession"></property>
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
