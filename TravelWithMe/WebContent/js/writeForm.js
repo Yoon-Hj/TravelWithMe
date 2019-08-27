@@ -180,9 +180,8 @@ $(function(){
 	
 	//출발장소 글자 수 제한
 	$("#departplace").focusout(function(){
-		alert("df");
 		if($("#departplace").val().length > 100) {
-			alert("된");
+			alert("출발장소는 100글자 제한입니다.");
 		}
 	});
 	
@@ -206,6 +205,7 @@ $(function(){
 		}			
 	
 	});
+
 
 	//가이드 테마 삭제하기
 	$(document).on('click','.sharpThema',function(){
@@ -352,7 +352,7 @@ $(function(){
 			}
 		
 		if($("#btitle").val()!="" && $("#startdate").val()!="" && $("#finishdate").val()!=""
-			&& $("#genddate").val()!="" && $("#gdepartplace").val()!="" && $("#gdeparttime").val()!=""
+			&& $("#genddate").val()!="" && $("#departplace").val()!="" && $("#gdeparttime").val()!=""
 			&& $("#garea1").val()!="" && $("#gnop").val()!="" )
 		{
 			flag=true;
@@ -368,17 +368,21 @@ $(function(){
 
 	});
 	
-	//상세정보에서 기본정보로 넘어갈 때
-	$("#detailToBasic").click(function(){
+	//상세정보에서 기본정보로 넘어갈 때(가이드)
+	$("#detailToBasicG").click(function(){
 		  if (confirm("현재 페이지 이동을 하면 현재 페이지에 작성한 세부일정이 삭제됩니다. 그래도 이동하시겠습니까?") == true){   
 			  openBasicInfo();
 		  }else{   
 			  return;
 		  }			    
 	});
+	//상세정보에서 기본정보로 넘어갈 때(동행)
+	$("#detailToBasicA").click(function(){
+		openBasicInfo();
+	});
 		
-	//상세정보에서 미리보기로 넘어갈 때
-	$("#detailToPreview").click(function(){
+	//상세정보에서 미리보기로 넘어갈 때(가이드)
+	$("#GdetailToPreview").click(function(){
 		var flag = true;
 		
 		
@@ -392,9 +396,24 @@ $(function(){
 		if(!flag){
 			alert("필수작성 사항을 기입해주세요");
 		}else{
-			openPreview();
+			openPreviewGuide();
 		}
 
+	});
+	
+	//상세정보에서 미리보기로 넘어갈 때(동행)
+	$("#AdetailToPreview").click(function(){
+		var flag = true;
+		
+		if($(':radio[name="like"]:checked').val()==null) flag=false;
+		if($(':radio[name="transport"]:checked').val()==null) flag=false;
+		
+		if(!flag){
+			alert("필수작성 사항을 기입해주세요");
+		}else{
+			openPreviewAccom();
+		}
+		
 	});
 	
 	$("#previewToDetail").click(function(){
@@ -443,7 +462,7 @@ $(function(){
 	    formData.append("JSPgfinishdate" , $("#finishdate").val());
 	    formData.append("gtime" , gtime);
 	    formData.append("JSPgenddate" , $("#genddate").val());
-	    formData.append("gdepartplace" , $("#gdepartplace").val());
+	    formData.append("gdepartplace" , $("#departplace").val());
 	    formData.append("gdeparttime" , $("#gdeparttime").val());
 	    formData.append("garea1" , $("#garea1").val());
 	    formData.append("garea2" , $("#garea2").val());
@@ -603,12 +622,10 @@ function minusDetailSche(minusBtn){
 }
 
 function setDetailDay(){
-	alert("Dfsd");
 	$("#day > tbody").empty();
 	var day;
 	if($("#startdate").val()==$("#finishdate").val()){
 		day=0;
-		alert(day);
 	}else{
 		var sdate = $("#startdate").val().split('-');
 		var fdate = $("#finishdate").val().split('-');
@@ -618,7 +635,6 @@ function setDetailDay(){
 		
 		day = Math.abs(fdate.getTime() - sdate.getTime());
 		day = Math.ceil(day / (1000 * 3600 * 24));
-		alert(day);
 	}
 
 	var dayHTML = "";
@@ -694,7 +710,8 @@ function openDetailInfo() {
 	$("#previewBtn").css({'background-color':'white','color':'black','opacity':'0.6'});
 }
 
-function openPreview() {
+//가이드미리보기
+function openPreviewGuide() {
 	$("#basicInfo").hide();
 	$("#detailInfo").hide();
 	$("#preview").show();
@@ -716,7 +733,7 @@ function openPreview() {
 	//모집마감날짜
 	$("#previewTable").find("tr:eq(4)").find("td:eq(1)").text($("#genddate").val());
 	//출발장소 및 시간
-	$("#previewTable").find("tr:eq(5)").find("td:eq(1)").html($("#gdepartplace").val()+"&nbsp;&nbsp;"+$("#gdeparttime").val());
+	$("#previewTable").find("tr:eq(5)").find("td:eq(1)").html($("#departplace").val()+"&nbsp;&nbsp;"+$("#gdeparttime").val());
 	//지역
 	$("#previewTable").find("tr:eq(6)").find("td:eq(1)").html($("#garea1").val()+"&nbsp;&nbsp;"+$("#garea2").val());
 	//인원
@@ -769,10 +786,62 @@ function openPreview() {
 			
 		}
 	}
+}
 
+//동행 미리보기
+function openPreviewAccom() {
+	$("#basicInfo").hide();
+	$("#detailInfo").hide();
+	$("#preview").show();
+	$('html').scrollTop(0);
+	$("#previewBtn").css({'background-color':'rgb(181, 195, 200)','color':'white','opacity':'1'});
+	$("#basicBtn").css({'background-color':'white','color':'black','opacity':'0.6'});
+	$("#detailBtn").css({'background-color':'white','color':'black','opacity':'0.6'});
 	
-	
-	
+	//제목
+	$("#previewTable").find("tr:eq(1)").find("td:eq(1)").text($("#btitle").val());
+	//날짜
+	if($("#startdate").val()==$("#finishdate").val()){
+		$("#previewTable").find("tr:eq(2)").find("td:eq(1)").html($("#startdate").val()+"&nbsp;&nbsp;~&nbsp;&nbsp;"+$("#finishdate").val()+"&nbsp;&nbsp;"+$("#gtime").val());				
+	}else{
+		$("#previewTable").find("tr:eq(2)").find("td:eq(1)").html($("#startdate").val()+"&nbsp;&nbsp;~&nbsp;&nbsp;"+$("#finishdate").val());				
+	}
+	//출발장소 및 시간
+	$("#previewTable").find("tr:eq(3)").find("td:eq(1)").html($("#departplace").val()+"&nbsp;&nbsp;"+$("#gdeparttime").val());
+	//지역
+	$("#previewTable").find("tr:eq(4)").find("td:eq(1)").html($("#garea1").val()+"&nbsp;&nbsp;"+$("#garea2").val());
+	//인원
+	if($("#gnop").val()==0){
+		$("#previewTable").find("tr:eq(5)").find("td:eq(1)").text("무관");		
+	}else{
+		$("#previewTable").find("tr:eq(5)").find("td:eq(1)").text($("#gnop").val()+"명");		
+	}
+	//여행취향 및 이동수단
+	$("#previewTable").find("tr:eq(6)").find("td:eq(1)").html("1. 여행테마 - "+$("label[for='"+$(':radio[name="like"]:checked').val()+"']").text()+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. 선호 이동수단 -"+$(':radio[name="transport"]:checked').val());
+	//필수여행지
+	$("#previewTable").find("tr:eq(7)").find("td:eq(1)").text($(".sharpThema").text());
+	//투어소개
+	$("#previewTable").find("tr:eq(8)").find("td:eq(1)").text($("#bcontent").val());
+	//주요 정책
+	setPolicyArray();
+	var policy1 = "공지된 미팅장소 및 시간에 모인 인원과 가이드 투어를 진행하며 특별한 제제사항은 없습니다.";
+	var policy2 = "여행 시작일 기준 <b style='color:#CD1039'>";
+	var policy3 = "<b style='color:#CD1039'>신뢰지수 ";
+	for(var p = 0 ; p < pcodeArray.length; p++){
+		if(pcodeArray[p]==1){
+			$("#previewTable").find("tr:eq(9)").find("td:eq(1)").text(policy1);
+		}else if(pcodeArray[p]==2){
+			policy2 += pvalueArray[p];
+			policy2 += "일 전까지 연락이 되지 않는 분</b>은 작성자 임의로 신청거절을 진행할 수 있습니다.<br><br>";			
+			$("#previewTable").find("tr:eq(9)").find("td:eq(1)").append(policy2);
+			
+		}else if(pcodeArray[p]==3){
+			policy3 += pvalueArray[p];
+			policy3 += "점 이하</b>의 회원은 작성자 임의로 신청거절을 진행할 수 있습니다.<br><br>";
+			$("#previewTable").find("tr:eq(9)").find("td:eq(1)").append(policy3);
+			
+		}
+	}
 }
 
 
