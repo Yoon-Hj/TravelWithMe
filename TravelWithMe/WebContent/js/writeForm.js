@@ -308,7 +308,16 @@ $(function(){
 	
 	//basic에서 detail로 넘어갈 때 제한사항
 	$("#basicTodetail").click(function(){
-		var flag = true;
+		var flag = false;
+		
+		if($("#startdate").val()<todayDate || $("#finishdate").val() < $("#startdate").val() 
+				|| $("#genddate").val() > $("#startdate").val()) {
+				
+				alert("올바른 날짜가 아닙니다. 다시 한번 확인하세요");
+				$("#startdate").val("");
+				$("#finishdate").val("");
+				$("#genddate").val("");
+			}
 		
 		if($("#btitle").val()!="" && $("#startdate").val()!="" && $("#finishdate").val()!=""
 			&& $("#genddate").val()!="" && $("#departplace").val()!="" && $("#gdeparttime").val()!=""
@@ -346,17 +355,8 @@ $(function(){
 					});			
 			
 				}
-		}
-		
-		if($("#startdate").val()<todayDate || $("#finishdate").val() < $("#startdate").val() 
-				|| $("#genddate").val() > $("#startdate").val()) {
 				
-				alert("올바른 날짜가 아닙니다. 다시 한번 확인하세요");
-				$("#startdate").val("");
-				$("#finishdate").val("");
-				$("#genddate").val("");
-			}
-		
+		}	
 		
 		
 		if(!flag){

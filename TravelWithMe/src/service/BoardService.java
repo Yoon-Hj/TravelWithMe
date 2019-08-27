@@ -346,17 +346,18 @@ public class BoardService {
 	public void accomWrite(HttpSession session, AccomBoard accomBoard,
 							String JSPgstartdate, String JSPgfinishdate,
 							String[] pcode, @RequestParam(required=false) String[] pvalue) throws Exception {
-		if(accomBoard.getAtime().equals("undefined"))accomBoard.setAtime("종일");
 		String writeId = (String)session.getAttribute("user");
 		String aarea = accomBoard.getAarea1() + " " + accomBoard.getAarea2();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
 		Date togstartdate = (Date)fm.parse(JSPgstartdate);
 		Date togfinishdate = (Date)fm.parse(JSPgfinishdate);
 		
+		if(accomBoard.getAtime().equals("undefined"))accomBoard.setAtime("종일");
 		accomBoard.setMid(writeId);
 		accomBoard.setAarea(aarea);
 		accomBoard.setAstartdate(togstartdate);
 		accomBoard.setAfinishdate(togfinishdate);
+		accomBoard.setBkind("A");
 		
 		try {
 			b_bdao.insertAccomBoard(accomBoard);
