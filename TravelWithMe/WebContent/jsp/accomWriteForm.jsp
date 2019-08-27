@@ -200,7 +200,7 @@
 			<table id="previewTable" style="font-family: 함초롬돋움;">
 				<tr>
 					<td class="InfoTd">작성자</td>
-					<td><%=(String)session.getAttribute("user")%></td>
+					<td><a class='userId'><%=(String)session.getAttribute("user")%></a></td>
 				</tr>
 				<tr>
 					<td class="InfoTd">제목</td>
