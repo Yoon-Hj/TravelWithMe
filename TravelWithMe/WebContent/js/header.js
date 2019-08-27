@@ -32,6 +32,7 @@ $(document).ready(function(){
 	
 	$('.userId').each(function(){
 		$(this).hover(function(){
+			var thiId = $(this)
 			var mid = $(this).html();
 			$.ajax({
 				url : "getUserPoint.do",
@@ -52,7 +53,7 @@ $(document).ready(function(){
 					}else if(grade == 'Bronze'){
 						img = "<img class='gradeImg' src='imgs/hover_bronze2.jpg'/>";
 					}
-					$('[data-toggle="tooltip"]').tooltip(
+					$(thiId).tooltip(
 							{title: "<a>신뢰지수 &nbsp" + mpoint + " / 100점</a><BR>" + 
 									"<a>가이드 등급 &nbsp" + img + "</a><BR>" +
 //									"<img class='gradeImg' src='imgs/hover_gold.jpg'/>" + 
