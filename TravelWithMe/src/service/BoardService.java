@@ -321,8 +321,10 @@ public class BoardService {
 	public String tryRegisterG(String regId, int bnum, int nop, String mid) throws Exception {
 		String result = null;
 		try {
+			//신청시간대 제한
+			
 			int pnum = b_bdao.getPossibleGNop(bnum);
-			System.out.println(pnum);
+			//신청자 수 관련 제한
 			if(pnum<=0) {
 				HashMap<String, Object> r = new HashMap<String, Object>();
 				r.put("bnum", bnum);
