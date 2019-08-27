@@ -267,7 +267,7 @@
 		//거절하기 버튼
 		$(document).on('click', '.rejectbtn', function(){
 			
-			var b = ${guideBoard.bnum};
+			var b = ${accomBoard.bnum};
 			var r = $(this).parent("td").parent("tr").find("td:eq(0)").find("input").val();
 			var m = $(this).parent("td").parent("tr").find("td:eq(0)").text();
 			var t = $(this).parent("td").parent("tr");
@@ -367,7 +367,7 @@
 		
 		//답글작성
 		$(document).on('click', '.writereBtn', function(){
-			var b = ${guideBoard.bnum};
+			var b = ${accomBoard.bnum};
 			var c = $(this).parent("td").parent("tr").prev("tr").find("th").find("input").val();
 			$.ajax({
 				url : "writeRecomment.do",
@@ -451,7 +451,12 @@
 				</tr>
 				<tr>
 					<th>날짜</th>
-					<td><fmt:formatDate value="${accomBoard.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${accomBoard.astartdate}" pattern="yyyy-MM-dd"/></td>
+					<td>
+					<fmt:formatDate value="${accomBoard.astartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${accomBoard.afinishdate}" pattern="yyyy-MM-dd"/>
+					<c:if test="${accomBoard.astartdate == accomBoard.afinishdate}">
+						&nbsp;${accomBoard.atime}
+					</c:if>
+					</td>
 				</tr>
 				<tr>
 					<th>출발장소 및 시간</th>

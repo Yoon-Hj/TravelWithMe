@@ -367,7 +367,12 @@
 				</tr>
 				<tr>
 					<th>날짜</th>
-					<td><fmt:formatDate value="${guideBoard.gstartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${guideBoard.gstartdate}" pattern="yyyy-MM-dd"/></td>
+					<td>
+					<fmt:formatDate value="${guideBoard.gstartdate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${guideBoard.gfinishdate}" pattern="yyyy-MM-dd"/>
+					<c:if test="${guideBoard.gstartdate == guideBoard.gfinishdate}">
+						&nbsp;${guideBoard.gtime}
+					</c:if>
+					</td>
 				</tr>
 				<tr>
 					<th>출발장소 및 시간</th>
