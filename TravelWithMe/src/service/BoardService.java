@@ -214,11 +214,17 @@ public class BoardService {
 	public HashMap<String, Object> getBoardContent(int bnum, String bkind) {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		if(bkind.equals("A")) {
-			result.put("accomBoard", b_bdao.selectOneAccom(bnum));
+			AccomBoard accomboard = b_bdao.selectOneAccom(bnum);
+			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+			accomboard.setStringFinishdate(fm.format(accomboard.getAfinishdate()));
+			result.put("accomBoard",accomboard);
 			result.put("policy", b_bdao.selectPolicyByBnum(bnum));
 		}
 		else if(bkind.equals("G")) {
-			result.put("guideBoard", b_bdao.selectOneGuide(bnum));
+			GuideBoard guideboard = b_bdao.selectOneGuide(bnum);			
+			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+			guideboard.setStringGenddate(fm.format(guideboard.getGenddate()));
+			result.put("guideBoard", guideboard);
 			result.put("policy", b_bdao.selectPolicyByBnum(bnum));
 			result.put("guideSche", b_bdao.selectGScheByBnum(bnum));
 			result.put("photo", b_bdao.selectAllPhotoByBnum(bnum));

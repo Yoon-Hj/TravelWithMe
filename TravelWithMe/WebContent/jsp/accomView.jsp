@@ -125,6 +125,24 @@
 		var u = '${user}';
 		var rlist;
 		var pn;
+		//마감날짜가 지난 게시글 신청버튼 비활성화
+		var today = new Date(); 
+		var todayYear = today.getFullYear(); 
+		var todayMonth = new String(today.getMonth()+1); 
+		var todayDay = new String(today.getDate());  
+		if(todayMonth.length == 1){ 
+			todayMonth = "0" + todayMonth; 
+		} 
+		if(todayDay.length == 1){ 
+			todayDay = "0" + todayDay; 
+		} 
+		today = todayYear+"-"+todayMonth+"-"+todayDay; 
+		var endDate = '${accomBoard.stringFinishdate}';
+
+		if(endDate < today){
+			$('#rbtn').attr("disabled", "true");
+			$('#rbtn').attr("value", "모집마감");
+		}
 		
 		$.ajax({
 				url : "getRList.do",

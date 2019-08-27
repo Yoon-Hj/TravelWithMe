@@ -461,9 +461,16 @@
 	where btitle like '%${value}%' or bcontent like '%${value}%'
 </select>
 
-	<select id="selectRidForDel" parameterType="java.util.HashMap" resultType="String">
-		select rid from register where bnum = #{bnum} and mid = #{mid}
-	</select>
+<select id="selectRidForDel" parameterType="java.util.HashMap" resultType="String">
+	select rid from register where bnum = #{bnum} and mid = #{mid}
+</select>
+
+<select id="selectCanRegiAccom">
+	select * from (select astartdate,afinishdate,atime from accompany a, register r
+	where a.bnum=r.bnum and r.mid=#{mid}) astartdate between #{}
+</select>
+<select id="selectCanRegiGuide">
+</select>
 </mapper>
 
 
