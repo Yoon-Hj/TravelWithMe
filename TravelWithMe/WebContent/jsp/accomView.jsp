@@ -584,7 +584,7 @@
       		
 		        <!-- Modal Header -->
 		        <div class="modal-header">
-		          <h3 class="modal-title" style="font-family: '배달의민족 도현'">신청 가능 인원 수 : <span class="nop" style="color: #F56E6E; font-size: 25px;"></span>명</h3>
+		          <h3 class="modal-title" style="font-family: '배달의민족 도현'">신청 가능 인원 수 : <span class="nop" style="color: #F56E6E; font-size: 25px;"></span></h3>
 					<button type="button" class="close cc">×</button>
 		        </div>
 	        
