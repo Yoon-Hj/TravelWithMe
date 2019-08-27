@@ -242,7 +242,7 @@
 			</table>
 		
 			<a class="previousA" id="previewToDetail">&laquo; Previous</a>
-			<a class="nextA" id="submit">Submit</a>
+			<a class="nextA" id="Asubmit">Submit</a>
 		</div>
 </div>
 </body>

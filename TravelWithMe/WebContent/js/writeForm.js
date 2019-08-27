@@ -308,38 +308,44 @@ $(function(){
 	
 	//basic에서 detail로 넘어갈 때 제한사항
 	$("#basicTodetail").click(function(){
-		var flag = false;
-		var policyflag = false;
+		var flag = true;
 		
-		//정책 제한하기
-		var x = $("input:checkbox[name=pcode]:checked").length;
-		if(x==0) flag=false;
-		else{
-			$('input:checkbox[name=pcode]:checked').each(function(){
-				var t = $(this).val();
-				if(t==1) policyflag = true;
-				else if(t==2){
-					if($("#pvalue2").val()=="") flag=false;
-					if($("#pvalue2").val() < 0) {
-						policyflag = false;
-						alert("2번정책이 올바른 조건이 아닙니다. 다시 확인하세요.");
-						$("#pvalue2").val("");
-					}else{
-						policyflag=true;
-					}
+		if($("#btitle").val()!="" && $("#startdate").val()!="" && $("#finishdate").val()!=""
+			&& $("#genddate").val()!="" && $("#departplace").val()!="" && $("#gdeparttime").val()!=""
+				&& $("#garea1").val()!="" && $("#gnop").val()!="" )
+		{
+				//정책 제한하기
+				var x = $("input:checkbox[name=pcode]:checked").length;
+				if(x==0) flag=false;
+				else{
+					$('input:checkbox[name=pcode]:checked').each(function(){
+						var t = $(this).val();
+						if(t==1) flag = true;
+						else if(t==2){
+							if($("#pvalue2").val()=="") flag=false;
+							
+							else if($("#pvalue2").val() < 0) {
+								flag = false;
+								alert("2번정책이 올바른 조건이 아닙니다. 다시 확인하세요.");
+								$("#pvalue2").val("");
+							}else{
+								flag=true;
+							}
+						}
+						else if(t==3){
+							if($("#pvalue3").val()=="") flag=false;
+							else if($("#pvalue3").val()<0 || $("#pvalue3").val()>100 ){
+								flag = false;
+								alert("3번정책이 올바른 조건이 아닙니다. 다시 확인하세요.");
+								$("#pvalue3").val("");
+							}else{
+								flag=true;
+							}
+						}
+						
+					});			
+			
 				}
-				else if(t==3){
-					if($("#pvalue3").val()=="") flag=false;
-					if($("#pvalue3").val()<0 || $("#pvalue3").val()>100 ){
-						policyflag = false;
-						alert("3번정책이 올바른 조건이 아닙니다. 다시 확인하세요.");
-						$("#pvalue3").val("");
-					}else{
-						policyflag=true;
-					}
-				}
-				
-			});			
 		}
 		
 		if($("#startdate").val()<todayDate || $("#finishdate").val() < $("#startdate").val() 
@@ -351,19 +357,13 @@ $(function(){
 				$("#genddate").val("");
 			}
 		
-		if($("#btitle").val()!="" && $("#startdate").val()!="" && $("#finishdate").val()!=""
-			&& $("#genddate").val()!="" && $("#departplace").val()!="" && $("#gdeparttime").val()!=""
-			&& $("#garea1").val()!="" && $("#gnop").val()!="" )
-		{
-			flag=true;
-		}
 		
-		if(!flag || !policyflag){
+		
+		if(!flag){
 			alert("필수작성 사항을 기입해주세요");			
-		}else if(flag && policyflag){
+		}else if(flag){
 			openDetailInfo();
 			flag=false;
-			policyflag = false;
 		}
 
 	});
@@ -420,7 +420,8 @@ $(function(){
 		openDetailInfo();
 	});
 	
-	$("#submit").click(function(){
+	//가이드서브밋
+	$("#Gsubmit").click(function(){
 		//gtime담기
 		var gtime = $("#gtime").val();
 		var form = $('#uploadForm')[0];
@@ -489,6 +490,49 @@ $(function(){
 			success : function(data){
 				alert("가이드 게시글이 성공적으로 작성되었습니다.");
 				location.href='guideBoardList.do';
+			},
+			error: function(){
+				alert("다시 시도해주세요");
+			}
+			
+		});
+	});
+	
+	
+	$("#Asubmit").click(function(){
+		//gtime담기
+		var gtime = $("#gtime").val();
+		
+		var form = $('#uploadForm')[0];
+		var formData = new FormData(form);
+	
+		formData.append("btitle" , $("#btitle").val());
+		formData.append("JSPgstartdate" , $("#startdate").val());
+		formData.append("JSPgfinishdate" , $("#finishdate").val());
+		formData.append("atime" , gtime);
+		formData.append("adepartplace" , $("#departplace").val());
+		formData.append("adeparttime" , $("#gdeparttime").val());
+		formData.append("aarea1" , $("#garea1").val());
+		formData.append("aarea2" , $("#garea2").val());
+		formData.append("anop" , $("#gnop").val());
+		formData.append("pcode" , pcodeArray);
+		formData.append("pvalue" , pvalueArray);
+		formData.append("acourse" , $(".sharpThema").text());
+		formData.append("bcontent" , $("#bcontent").val());
+		formData.append("likecode" , $(':radio[name="like"]:checked').val());
+		formData.append("atransport" , $(':radio[name="transport"]:checked').val());
+		
+		
+		$.ajax({
+			url : "accomWrite.do",
+			traditional : true,
+			processData: false,
+			contentType: false,
+			type : "POST",
+			data : formData,
+			success : function(data){
+				alert("동행 게시글이 성공적으로 작성되었습니다.");
+				location.href='accomBoardList.do';
 			},
 			error: function(){
 				alert("다시 시도해주세요");
