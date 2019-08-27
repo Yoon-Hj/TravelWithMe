@@ -114,9 +114,9 @@ $(function(){
 				$("#gtimeLabel").remove();
 				var input = "";
 				input += "<label id='gtimeLabel'>";
-				input += "&nbsp;<input type='radio' id='gtime' name='gtime' value='오전'>&nbsp;오전";
-				input += "&nbsp;<input type='radio' id='gtime' name='gtime' value='오후'>&nbsp;오후";
-				input += "&nbsp;<input type='radio' id='gtime' name='gtime' value='종일' checked='checked'>&nbsp;종일";
+				input += "&nbsp;<input type='radio' name='gtime' value='오전'>&nbsp;오전";
+				input += "&nbsp;<input type='radio' name='gtime' value='오후'>&nbsp;오후";
+				input += "&nbsp;<input type='radio' name='gtime' value='종일' checked='checked'>&nbsp;종일";
 				input += "</label>";
 				$("#finishdate").after(input);			
 			}else{
@@ -423,7 +423,7 @@ $(function(){
 	//가이드서브밋
 	$("#Gsubmit").click(function(){
 		//gtime담기
-		var gtime = $("#gtime").val();
+		var gtime = $("#gtimeLabel").find(':radio[name="gtime"]:checked').val();
 		var form = $('#uploadForm')[0];
 	    var formData = new FormData(form);
 	    
@@ -501,7 +501,7 @@ $(function(){
 	
 	$("#Asubmit").click(function(){
 		//gtime담기
-		var gtime = $("#gtime").val();
+		var gtime = $("#gtimeLabel").find(':radio[name="gtime"]:checked').val();
 		
 		var form = $('#uploadForm')[0];
 		var formData = new FormData(form);
@@ -743,7 +743,7 @@ function openDetailInfo() {
 	DAY1Array = new Array();
 	DAY2Array = new Array();
 	DAY3Array = new Array();
-
+	
 	$("#basicInfo").hide();
 	$("#detailInfo").show();
 	$("#preview").hide();
@@ -770,7 +770,7 @@ function openPreviewGuide() {
 	showSlides(slideIndex);
 	//날짜
 	if($("#startdate").val()==$("#finishdate").val()){
-		$("#previewTable").find("tr:eq(3)").find("td:eq(1)").html($("#startdate").val()+"&nbsp;&nbsp;~&nbsp;&nbsp;"+$("#finishdate").val()+"&nbsp;&nbsp;"+$("#gtime").val());				
+		$("#previewTable").find("tr:eq(3)").find("td:eq(1)").html($("#startdate").val()+"&nbsp;&nbsp;~&nbsp;&nbsp;"+$("#finishdate").val()+"&nbsp;&nbsp;"+$("#gtimeLabel").find(':radio[name="gtime"]:checked').val());				
 	}else{
 		$("#previewTable").find("tr:eq(3)").find("td:eq(1)").html($("#startdate").val()+"&nbsp;&nbsp;~&nbsp;&nbsp;"+$("#finishdate").val());				
 	}
@@ -846,7 +846,7 @@ function openPreviewAccom() {
 	$("#previewTable").find("tr:eq(1)").find("td:eq(1)").text($("#btitle").val());
 	//날짜
 	if($("#startdate").val()==$("#finishdate").val()){
-		$("#previewTable").find("tr:eq(2)").find("td:eq(1)").html($("#startdate").val()+"&nbsp;&nbsp;~&nbsp;&nbsp;"+$("#finishdate").val()+"&nbsp;&nbsp;"+$("#gtime").val());				
+		$("#previewTable").find("tr:eq(2)").find("td:eq(1)").html($("#startdate").val()+"&nbsp;&nbsp;~&nbsp;&nbsp;"+$("#finishdate").val()+"&nbsp;&nbsp;"+$("#gtimeLabel").find(':radio[name="gtime"]:checked').val());				
 	}else{
 		$("#previewTable").find("tr:eq(2)").find("td:eq(1)").html($("#startdate").val()+"&nbsp;&nbsp;~&nbsp;&nbsp;"+$("#finishdate").val());				
 	}
