@@ -133,7 +133,7 @@
 					<td class="InfoTd">1. 여행테마</td>
 					<td>
 						<c:forEach var="like" items="${likeList}" varStatus="status">
-							<input type="radio" name="like" value="${like.likecode}">&nbsp; ${like.likename} &nbsp;&nbsp;&nbsp;
+							<input type="radio" name="like" value="${like.likecode}">&nbsp;<label for="${like.likecode}">${like.likename}</label> &nbsp;&nbsp;&nbsp;
 						</c:forEach>
 					</td>
 				</tr>
@@ -161,6 +161,7 @@
 					<td class="InfoTd">필수여행지</td>
 					<td>
 						<input type="text" class="NoBootStrap" name="acourse" id="gthema"><br>
+						<a style="color: #b3b3b3; font-size: 15px;">※여행지 추가를 원하시면 여행지 작성 후 Enter 또는 Tab을 눌러주세요</a><br>
 						<a style="color: #b3b3b3; font-size: 15px;">※여행지 삭제를 원하시면 작성된 여행지를 클릭하세요</a>
 					</td>
 				</tr>
@@ -186,8 +187,8 @@
 			
 			<br>
 			
-			<a class="previousA" id="detailToBasic">&laquo; Previous</a>
-			<a class="nextA" id="detailToPreview">Next &raquo;</a>
+			<a class="previousA" id="detailToBasicA">&laquo; Previous</a>
+			<a class="nextA" id="AdetailToPreview">Next &raquo;</a>
 		</div>
 		
 		<div id="preview" style="font-family: 함초롬돋움">

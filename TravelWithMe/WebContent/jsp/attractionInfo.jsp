@@ -24,7 +24,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-<h1>ATTRACTION INFO</h1><hr>
+<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px;">ATTRACTION INFO</h1>
 <input type="hidden" id="apiType" value="${apiType }">
 
 

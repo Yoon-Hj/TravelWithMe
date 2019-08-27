@@ -141,6 +141,7 @@
 			<td class="InfoTd">테마</td>
 			<td>
 				<input type="text" class="NoBootStrap" name="gthema" id="gthema"><br>
+				<a style="color: #b3b3b3; font-size: 15px;">※테마 추가를 원하시면 여행지 작성 후 Enter 또는 Tab을 눌러주세요</a><br>
 				<a style="color: #b3b3b3; font-size: 15px;">※테마삭제를 원하시면 작성된 테마를 클릭하세요</a>
 			</td>
 		</tr>
@@ -211,8 +212,8 @@
 		</tr>
 	</table>
 	
-	<a class="previousA" id="detailToBasic">&laquo; Previous</a>
-	<a class="nextA" id="detailToPreview">Next &raquo;</a>
+	<a class="previousA" id="detailToBasicG">&laquo; Previous</a>
+	<a class="nextA" id="GdetailToPreview">Next &raquo;</a>
 </div>
 <div id="preview" style="font-family: 함초롬돋움">
 
