@@ -13,7 +13,9 @@ $(document).ready(function(){
 	
 
 	//accomBoardList JS
-	$('[data-toggle="tooltip"]').tooltip();   
+	$('#Awritetip').tooltip(); 
+
+	$('#Gwritetip').tooltip();
   
 	//이미지 분기
 	$('.iarea').find("input").each(function(){

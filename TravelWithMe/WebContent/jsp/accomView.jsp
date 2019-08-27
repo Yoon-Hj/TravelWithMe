@@ -417,7 +417,7 @@
 			<table class="viewCard"; style="border: none;">
 				<tr>
 					<th>작성자</th>
-					<td id="writeid">${accomBoard.mid}</td>
+					<td id="writeid"><a class="userId">${accomBoard.mid}</a></td>
 				</tr>
 				<tr>
 					<th>제목</th>
