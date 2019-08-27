@@ -279,7 +279,7 @@ public class BoardService {
 	}
 	
 	//해당 게시글에 신청
-	public String tryRegister(String regId, int nop, int bnum, String mid) {
+	public String tryRegister(String regId, int bnum, int nop, String mid) {
 		int pnum = b_bdao.getPossibleNop(bnum);
 		if(pnum < nop) {
 			return "";
@@ -290,9 +290,10 @@ public class BoardService {
 			r.put("nop", nop);
 			b_bdao.insertRegister(r);
 			Notice n = new Notice();
-			n.setNkcode("R-1");
+			n.setNkcode("RG-1");
 			n.setBnum(bnum);
-			n.setMid(mid);
+			n.setMid(regId);
+			System.out.println("서비스 : " + n);
 			b_mdao.insertNotice(n);
 			return b_mdao.selectContact(mid);
 		}
@@ -306,18 +307,18 @@ public class BoardService {
 	//신청취소
 	public void cancelRegister(String mid, int bnum, String rid) {
 		b_bdao.deleteRegister(rid);
-		//Notice n = new Notice();
-		//n.setNkcode("R-2");
-		//n.setBnum(bnum);
-		//n.setMid(mid);
-		//b_mdao.insertNotice(n);
+		Notice n = new Notice();
+		n.setNkcode("RG-2");
+		n.setBnum(bnum);
+		n.setMid(mid);
+		b_mdao.insertNotice(n);
 	}
 	
 	//신청 거절하기
 	public void rejectRegister(int bnum, String rid, String id) {
 		if(b_bdao.deleteRegister(rid) == 1) {
 			//Notice n = new Notice();
-			//n.setNkcode("F-2");
+			//n.setNkcode("RC-2");
 			//n.setBnum(bnum);
 			//n.setMid(id);
 			//b_mdao.insertNotice(n);

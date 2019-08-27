@@ -3,6 +3,8 @@ package model;
 import java.util.Date;
 
 public class Notice {
+	// 테스트
+	private int nidNum;
 	
 	private String nid;
 	private String nkcode;
@@ -77,11 +79,19 @@ public class Notice {
 	public void setEvalstatus(int evalstatus) {
 		this.evalstatus = evalstatus;
 	}
+	
+	
+	public int getNidNum() {
+		return nidNum;
+	}
+	public void setNidNum(int nidNum) {
+		this.nidNum = nidNum;
+	}
 	@Override
 	public String toString() {
-		return "Notice [nid=" + nid + ", nkcode=" + nkcode + ", bnum=" + bnum + ", mid=" + mid + ", noticetime="
-				+ noticetime + ", noticestatus=" + noticestatus + ", nkreason=" + nkreason + ", btitle=" + btitle
-				+ ", bkind=" + bkind + ", evalstatus=" + evalstatus + "]";
+		return "Notice [nidNum=" + nidNum + ", nid=" + nid + ", nkcode=" + nkcode + ", bnum=" + bnum + ", mid=" + mid
+				+ ", noticetime=" + noticetime + ", noticestatus=" + noticestatus + ", nkreason=" + nkreason
+				+ ", btitle=" + btitle + ", bkind=" + bkind + ", evalstatus=" + evalstatus + "]";
 	}
 	
 }
