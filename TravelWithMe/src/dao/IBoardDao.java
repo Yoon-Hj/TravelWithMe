@@ -69,6 +69,7 @@ public interface IBoardDao {
 	public List<HashMap<String, Object>> selectQuickSearch(String keyword);
 	public void updateReadCount(int bnum);
 	public List<HashMap<String, Object>> selectByKeyword(String keyword);
+	public String selectRidForDel(HashMap<String, Object> params);
 	
 	// csv테스트중...
 	public List<GuideBoard> selectAllGuide();

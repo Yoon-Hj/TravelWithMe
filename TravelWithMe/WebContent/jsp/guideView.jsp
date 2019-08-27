@@ -50,8 +50,10 @@
 				<tr>
 					<td colspan='2'">
 						<div class="slideshow-container" style="text-align: center; margin-left: 5%">
-						<a id='prev' style='color:white' onclick='plusSlides(-1)'>&#10094;</a>
-						<a id='next' style='color:white' onclick='plusSlides(1)'>&#10095;</a>
+							<c:if test="${fn:length(photo) != 0}">
+							<a id='prev' style='color:white' onclick='plusSlides(-1)'>&#10094;</a>
+							<a id='next' style='color:white' onclick='plusSlides(1)'>&#10095;</a>
+							</c:if>
 							<c:forEach var="photo" items="${photo}">
 								<div class='mySlides'>
 									<a><img src="download.do?photopath=${photo}" style='width: 300px; height: 250px; margin-left: 83px;'></a>

@@ -282,12 +282,22 @@
 </update>
 
 <!-- 동행글 게시글테이블 삽입 -->
+<sql id="bcontent">
+		<choose>
+			<when test="bcontent!=''">
+				#{bcontent}				
+			</when>
+			<otherwise>
+				'내용없음'
+			</otherwise>
+		</choose>
+	</sql>
 <insert id="insertAccomBoard" parameterType="accomBoard" useGeneratedKeys="true" keyProperty="bnum">
 	<selectKey resultType="int" keyProperty="bnum" order="BEFORE">
 			select board_seq.nextval from dual
 	</selectKey>
 	insert into board values 
-	(#{bnum}, #{bkind}, #{mid}, default, #{btitle}, #{bcontent}, default, default)
+	(#{bnum}, #{bkind}, #{mid}, default, #{btitle}, <include refid="bcontent"/>, default, default)
 </insert>
 
 <!-- 동행글 동행테이블 삽입 -->
@@ -340,7 +350,7 @@
 	<selectKey resultType="int" keyProperty="bnum" order="BEFORE">
 			select board_seq.nextval from dual
 	</selectKey>
-	insert into board values (#{bnum}, #{bkind}, #{mid}, default, #{btitle}, #{bcontent}, default, default)
+	insert into board values (#{bnum}, #{bkind}, #{mid}, default, #{btitle}, <include refid="bcontent"/>, default, default)
 </insert> 
 
 <!-- 가이드게시글 가이드 테이블에 삽입  -->
@@ -440,6 +450,10 @@
 	select * from (select * from board where cdel = 0 order by bnum desc ) b
 	where btitle like '%${value}%' or bcontent like '%${value}%'
 </select>
+
+	<select id="selectRidForDel" parameterType="java.util.HashMap" resultType="String">
+		select rid from register where bnum = #{bnum} and mid = #{mid}
+	</select>
 </mapper>
 
 

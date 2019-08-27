@@ -279,24 +279,30 @@ public class BoardService {
 	}
 	
 	//해당 게시글에 신청
-	public String tryRegister(String regId, int bnum, int nop, String mid) {
-		int pnum = b_bdao.getPossibleNop(bnum);
-		if(pnum < nop) {
-			return "";
-		}else {
-			HashMap<String, Object> r = new HashMap<String, Object>();
-			r.put("bnum", bnum);
-			r.put("regId", regId);
-			r.put("nop", nop);
-			b_bdao.insertRegister(r);
-			Notice n = new Notice();
-			n.setNkcode("RG-1");
-			n.setBnum(bnum);
-			n.setMid(regId);
-			System.out.println("서비스 : " + n);
-			b_mdao.insertNotice(n);
-			return b_mdao.selectContact(mid);
+	public String tryRegister(String regId, int bnum, int nop, String mid) throws Exception {
+		String result = null;
+		try {
+			int pnum = b_bdao.getPossibleNop(bnum);
+			if(pnum < nop) {
+				return "";
+			}else {
+				HashMap<String, Object> r = new HashMap<String, Object>();
+				r.put("bnum", bnum);
+				r.put("regId", regId);
+				r.put("nop", nop);
+				b_bdao.insertRegister(r);
+				Notice n = new Notice();
+				n.setNkcode("RG-1");
+				n.setBnum(bnum);
+				n.setMid(regId);
+				b_mdao.insertNotice(n);
+				result = b_mdao.selectContact(mid);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new Exception();
 		}
+		return result;
 	}
 	
 	//신청자들 정보 조회
@@ -305,40 +311,61 @@ public class BoardService {
 	}
 	
 	//신청취소
-	public void cancelRegister(String mid, int bnum, String rid) {
-		b_bdao.deleteRegister(rid);
-		Notice n = new Notice();
-		n.setNkcode("RG-2");
-		n.setBnum(bnum);
-		n.setMid(mid);
-		b_mdao.insertNotice(n);
+	public void cancelRegister(String mid, int bnum) throws Exception {
+		try {
+			HashMap<String, Object> params = new HashMap<String, Object>();
+			params.put("bnum", bnum);
+			params.put("mid", mid);
+			String rid = b_bdao.selectRidForDel(params); 
+			b_bdao.deleteRegister(rid);
+			Notice n = new Notice();
+			n.setNkcode("RG-2");
+			n.setBnum(bnum);
+			n.setMid(mid);
+			b_mdao.insertNotice(n);
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new Exception();
+		}
 	}
 	
 	//신청 거절하기
-	public void rejectRegister(int bnum, String rid, String id) {
-		if(b_bdao.deleteRegister(rid) == 1) {
-			//Notice n = new Notice();
-			//n.setNkcode("RC-2");
-			//n.setBnum(bnum);
-			//n.setMid(id);
-			//b_mdao.insertNotice(n);
+	public void rejectRegister(int bnum, String rid, String id) throws Exception {
+		try {
+			if(b_bdao.deleteRegister(rid) == 1) {
+				//Notice n = new Notice();
+				//n.setNkcode("RC-2");
+				//n.setBnum(bnum);
+				//n.setMid(id);
+				//b_mdao.insertNotice(n);
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Exception();
 		}
 	}
 	
 	//동행게시글 삭제
-	public void deleteBoard(int bnum, String bkind) {
-		b_bdao.deleteBoard(bnum);
-		List<Register> list = b_bdao.selectRegisterListByBnum(bnum);
-		for(Register r : list) {
-			String m = r.getMid();
-			Notice n = new Notice();
-			n.setNkcode("F-1");
-			n.setBnum(bnum);
-			n.setMid(m);
-			b_mdao.insertNotice(n);
-		}
-		if(bkind.equals("G")) {
-			//스케줄이랑 사진 지우기?
+	public void deleteBoard(int bnum, String bkind) throws Exception {
+		try {
+			b_bdao.deleteBoard(bnum);
+			List<Register> list = b_bdao.selectRegisterListByBnum(bnum);
+			for(Register r : list) {
+				String m = r.getMid();
+				Notice n = new Notice();
+				n.setNkcode("F-1");
+				n.setBnum(bnum);
+				n.setMid(m);
+				b_mdao.insertNotice(n);
+			}
+			if(bkind.equals("G")) {
+				//스케줄이랑 사진 지우기?
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			throw new Exception();
 		}
 	}
 	
