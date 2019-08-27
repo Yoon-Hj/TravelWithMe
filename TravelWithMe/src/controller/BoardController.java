@@ -160,7 +160,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("tryRegister.do")
-	public @ResponseBody String tryRegister(String regId, int bnum, int nop, String mid) {
+	public @ResponseBody String tryRegister(String regId, int bnum, int nop, String mid) throws Exception {
 		return b_bsvc.tryRegister(regId, bnum, nop, mid);
 	}
 	
@@ -170,17 +170,17 @@ public class BoardController {
 	}
 	
 	@RequestMapping("cancelRegister.do")
-	public @ResponseBody void cancelRegister(String mid, int bnum, String rid) {
-		b_bsvc.cancelRegister(mid, bnum, rid);
+	public @ResponseBody void cancelRegister(String mid, int bnum) throws Exception {
+		b_bsvc.cancelRegister(mid, bnum);
 	}
 	
 	@RequestMapping("rejectRegister.do")
-	public @ResponseBody void rejectRegister(int bnum, String rid, String id) {
+	public @ResponseBody void rejectRegister(int bnum, String rid, String id) throws Exception {
 		b_bsvc.rejectRegister(bnum, rid, id);
 	}
 	
 	@RequestMapping("accomDeleteBoard.do")
-	public String accomDeleteBoard(int bnum, String bkind) {
+	public String accomDeleteBoard(int bnum, String bkind) throws Exception {
 		b_bsvc.deleteBoard(bnum, "A");
 		return "redirect: accomBoardList.do";
 	}

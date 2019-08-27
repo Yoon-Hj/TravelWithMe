@@ -120,7 +120,7 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		 
+		
 		var b = ${accomBoard.bnum};
 		var u = '${user}';
 		var rlist;
@@ -163,6 +163,9 @@
 								}
 								pn = an - rn;
 								$('.nop').text(pn);
+								if(pn==0){
+									$('#rbtn').attr("disabled", "true");
+								} 
 							}
 						 	//rid, rnop 숨겨놓기
 						 	var ids = new Array;
@@ -189,14 +192,10 @@
 			$('#rbtn').attr("disabled", "disabled");
 		}
 		
-		if($('.nop').text()==0){
-			$('#rbtn').attr("disabled", "disabled");
-		} 
-	
 	    //신청인원이 0이 아닐 때, 수정 버튼 누르면 alert 표시
 		$('#modiBtn').on('click', function(){
 			if($('.nop') != ${accomBoard.anop}) 
-				alert("신청인원이 존재하여 게시글 수정이 불가합니다.")
+				alert("신청인원이 존재하여 게시글 수정이 불가합니다.");
 		});
 	    
 	    //답글폼열기
@@ -215,16 +214,16 @@
 		//신청취소버튼 - 취소
 		$('#rcbtn').on('click', function(){
 			var b = ${accomBoard.bnum}; 
-			var hi = $('#hid').val();
+			
 			 if (confirm("신청을 정말 취소하시겠습니까?") == true){
 				 $.ajax({
 						url : "cancelRegister.do",
 						data : {mid : user,
-								bnum : b,
-								rid : hi},
+								bnum : b},
 						type : "get",
 						success : function(data){
 							history.go(0);
+							alert("신청취소가 성공적으로 완료되었습니다.")
 						}
 				  });
 			 }else{
@@ -397,6 +396,11 @@
 			history.go(0);
 		});
 		
+		$('.rfinish').on('click', function(){
+			alert("신청이 성공적으로 완료되었습니다.");
+			history.go(0);
+		});
+		
 		//게시글 삭제 확인
 		$('#delBtn').on('click', function(){
 			 var b = ${accomBoard.bnum};
@@ -474,6 +478,7 @@
 						<c:choose>
 							<c:when test="${fn:length(policy) != 0}">
 							<c:forEach var="p" items="${policy}" varStatus="status">
+							<c:if test="${p.pcode==1}">공지된 출발장소 및 시간에 모인 인원과 동행을 진행하며, 특별한 제제사항은 없습니다.</c:if>
 							<c:if test="${p.pcode==2}">여행 시작일 기준 <b style="color:#CD1039">${p.pvalue}일 전까지 연락이 되지 않는 분</b>은 작성자 임의로 신청거절을 진행할 수 있습니다.<br></c:if>
 							<c:if test="${p.pcode==3}"><b style="color:#CD1039">신뢰지수 ${p.pvalue}점 이하</b>의 회원은 작성자 임의로 신청거절을 진행할 수 있습니다.<br></c:if>
 							</c:forEach>
@@ -610,7 +615,6 @@
 		        <!-- Modal Header -->
 		        <div class="modal-header">
 		          <h3 class="modal-title" style="font-family: '배달의민족 도현'">신청이 완료되었습니다</h3>
-					<button type="button" class="close" data-dismiss="modal">×</button>
 		        </div>
 	        
 		        <!-- Modal body -->
@@ -623,7 +627,7 @@
 	        
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" class="btn cc" style="background-color: #B5C3C8; color:white; font-family: '배달의민족 주아';">확인</button>
+		          <button type="button" class="btn rfinish" style="background-color: #B5C3C8; color:white; font-family: '배달의민족 주아';">확인</button>
 		        </div>
 		        
       		</div>
@@ -638,7 +642,7 @@
 		        <!-- Modal Header -->
 		        <div class="modal-header">
 		          <h3 class="modal-title" style="font-family: '배달의민족 도현'">신청현황</h3>
-					<button type="button" class="close" data-dismiss="modal">×</button>
+					<button type="button" class="close cc" data-dismiss="modal">×</button>
 		        </div>
 	        
 		        <!-- Modal body -->
