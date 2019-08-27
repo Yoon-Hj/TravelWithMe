@@ -105,7 +105,8 @@
   
   table#mtable{
   	padding: 5px;
-  	margin-left: 30px;
+  	text-align: center;
+  	margin-left: 40px;
   }
   
   table#mtable th, td{
@@ -115,6 +116,7 @@
 </style>
 </head>
 <body>
+
 <script type="text/javascript">
 
 	$(document).ready(function(){
@@ -122,6 +124,7 @@
 		var b = ${accomBoard.bnum};
 		var u = '${user}';
 		var rlist;
+		var pn;
 		
 		$.ajax({
 				url : "getRList.do",
@@ -158,14 +161,18 @@
 								for(var r in rlist){
 									rn += rlist[r].rnop;
 								}
-								var pn = an - rn;
+								pn = an - rn;
 								$('.nop').text(pn);
 							}
 						 	//rid, rnop 숨겨놓기
+						 	var ids = new Array;
+						 	var nops = new Array;
 						 	for(var r in rlist){
-						 		$('#hid').val(rlist[r].rid);
-						 		$('#hn').val(rlist[r].rnop);
+						 		ids.push(rlist[r].rid);
+						 		nops.push(rlist[r].rnop);
 						 	}
+						 	$('#hid').val(ids);
+					 		$('#hn').val(nops);
 						 	
 				}
 		});
@@ -182,7 +189,7 @@
 			$('#rbtn').attr("disabled", "disabled");
 		}
 		
-		if($('.nop')==0){
+		if($('.nop').text()==0){
 			$('#rbtn').attr("disabled", "disabled");
 		} 
 	
@@ -244,7 +251,11 @@
 							var th = "<tr><th>아이디</th><th>이름</th><th>연락처</th><th>신청인원</th><th>거절하기</th></tr>";
 							$('#mtable').append(th);
 							for(var i=0; i < rinfo.length; i++){
-								var tHTML="<tr><td>"+rinfo[i].MID+"<input type='hidden' value='"+hi+"'></td><td>"+rinfo[i].MNAME+"</td><td>"+rinfo[i].MCONTACT+"</td><td>"+n+"명</td><td>"+"<button class='btn rejectbtn' style='border: 2px solid #B5C3C8; width: 80px; font-family: 배달의민족 주아; font-size: 13px;'>거절하기</button></td></tr>";
+								var hivar = "";
+								hivar += hi[i+(3*i)];
+								hivar += hi[i+(3*i)+1];
+								hivar += hi[i+(3*i)+2];
+								var tHTML="<tr><td>"+rinfo[i].MID+"<input type='hidden' value='"+hivar+"'></td><td>"+rinfo[i].MNAME+"</td><td>"+rinfo[i].MCONTACT+"</td><td style='text-align:center'>"+n[2*i]+"명</td><td>"+"<button class='btn rejectbtn' style='border: 2px solid #B5C3C8; width: 80px; font-family: 배달의민족 주아; font-size: 13px;'>거절하기</button></td></tr>";
 								$('#mtable').append(tHTML);
 						}
 					}
@@ -254,6 +265,8 @@
 		
 		//거절하기 버튼
 		$(document).on('click', '.rejectbtn', function(){
+			
+			var b = ${accomBoard.bnum};
 			var r = $(this).parent("td").parent("tr").find("td:eq(0)").find("input").val();
 			var m = $(this).parent("td").parent("tr").find("td:eq(0)").text();
 			var t = $(this).parent("td").parent("tr");
@@ -304,13 +317,14 @@
 		//신청완료버튼 누르면
 		$(document).on('click', '#regiBtn', function(){
 			
+			var uid = "<%=(String) session.getAttribute("user")%>";
 			var wid = $('#writeid').text();
 			var b = $('#hiddenbnum').val();
 			var rnum = $('#registerNum').val();
 			
 				  $.ajax({
 						url : "tryRegister.do",
-						data : {regId : ${user},
+						data : {regId : uid,
 								bnum : b,
 								nop : rnum,
 								mid : wid},
@@ -325,7 +339,7 @@
 						}
 				  });
 		});
-
+		
 		//댓글작성
 		$('.writecoBtn').on('click', function(){
 			var b = ${accomBoard.bnum};
@@ -386,7 +400,6 @@
 		//게시글 삭제 확인
 		$('#delBtn').on('click', function(){
 			 var b = ${accomBoard.bnum};
-			 alert(b);
 			 if (confirm("해당 게시글을 삭제하시겠습니까?") == true){
 					location.href = 'accomDeleteBoard.do?bnum='+b;
 					alert("삭제가 성공적으로 완료되었습니다.");
@@ -394,9 +407,8 @@
 				 return;
 			 }			
 		});
-		
 	});
-
+	
 </script>
 
 	<jsp:include page="header.jsp"></jsp:include>
@@ -603,7 +615,7 @@
 	        
 		        <!-- Modal body -->
 		        <div class="modal-body" style="text-align: center; font-family: '함초롬돋움';">
-		          작성자 연락처 : <span id="contact" style="color: #F56E6E; font-weight: bold;"></span><br><br>
+		          작성자 연락처 : <span id="contact" style="color: #F56E6E; font-size: 15px;"></span><br><br>
 		          
 					※ 작성자의 NoShow는 사이트 내 관리자 이메일로 문의바랍니다.<br>
 					즐겁게 여행을 마무리할 수 있도록 서로 배려하는 여행인이 됩시다.
@@ -638,7 +650,7 @@
 	        
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" class="btn" data-dismiss="modal" style="background-color: #B5C3C8; color:white; font-family: '배달의민족 주아'">확인</button>
+		          <button type="button" class="btn cc" data-dismiss="modal" style="background-color: #B5C3C8; color:white; font-family: '배달의민족 주아'">확인</button>
 		        </div>
 		        
       		</div>

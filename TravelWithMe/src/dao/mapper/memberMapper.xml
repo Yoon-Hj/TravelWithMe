@@ -81,11 +81,11 @@
 	</insert>
 	
 	<!-- 알림내역 추가 -->
-	<insert id="insertNotice" parameterType="notice" useGeneratedKeys="true" keyProperty="nid">
-		<selectKey resultType="int" keyProperty="nid" order="BEFORE">
+	<insert id="insertNotice" parameterType="notice" useGeneratedKeys="true" keyProperty="nidNum">
+		<selectKey resultType="int" keyProperty="nidNum" order="BEFORE">
 			select notice_seq.nextval from dual		
 		</selectKey>
-			insert into notice values ('N'||${nid}, #{nkcode}, #{bnum}, #{mid}, default, default)
+			insert into notice values ('N'||${nidNum}, #{nkcode}, #{bnum}, #{mid}, default, default, default)
 	</insert>
 	
 	<!-- 아이디로 연락처 조회 -->

@@ -160,9 +160,8 @@ public class BoardController {
 	}
 	
 	@RequestMapping("tryRegister.do")
-	public @ResponseBody String tryRegister(String regId, int nop, int bnum, String mid) {
-		System.out.println("되고있니?");
-		return b_bsvc.tryRegister(regId, nop, bnum, mid);
+	public @ResponseBody String tryRegister(String regId, int bnum, int nop, String mid) {
+		return b_bsvc.tryRegister(regId, bnum, nop, mid);
 	}
 	
 	@RequestMapping("getRegistInfo.do")
