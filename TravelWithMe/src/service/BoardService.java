@@ -284,7 +284,60 @@ public class BoardService {
 		String result = null;
 		try {
 			int pnum = b_bdao.getPossibleNop(bnum);
-			if(pnum < nop) {
+			if(pnum<=0) {
+				HashMap<String, Object> r = new HashMap<String, Object>();
+				r.put("bnum", bnum);
+				r.put("regId", regId);
+				r.put("nop", nop);
+				b_bdao.insertRegister(r);
+				Notice n = new Notice();
+				n.setNkcode("RG-1");
+				n.setBnum(bnum);
+				n.setMid(regId);
+				b_mdao.insertNotice(n);
+				result = b_mdao.selectContact(mid);
+			}
+			else if(pnum < nop) {
+				return "";
+			}else {
+				HashMap<String, Object> r = new HashMap<String, Object>();
+				r.put("bnum", bnum);
+				r.put("regId", regId);
+				r.put("nop", nop);
+				b_bdao.insertRegister(r);
+				Notice n = new Notice();
+				n.setNkcode("RG-1");
+				n.setBnum(bnum);
+				n.setMid(regId);
+				b_mdao.insertNotice(n);
+				result = b_mdao.selectContact(mid);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw new Exception();
+		}
+		return result;
+	}
+	//가이드 게시글에 신청
+	public String tryRegisterG(String regId, int bnum, int nop, String mid) throws Exception {
+		String result = null;
+		try {
+			int pnum = b_bdao.getPossibleGNop(bnum);
+			System.out.println(pnum);
+			if(pnum<=0) {
+				HashMap<String, Object> r = new HashMap<String, Object>();
+				r.put("bnum", bnum);
+				r.put("regId", regId);
+				r.put("nop", nop);
+				b_bdao.insertRegister(r);
+				Notice n = new Notice();
+				n.setNkcode("RG-1");
+				n.setBnum(bnum);
+				n.setMid(regId);
+				b_mdao.insertNotice(n);
+				result = b_mdao.selectContact(mid);
+			}
+			else if(pnum < nop) {
 				return "";
 			}else {
 				HashMap<String, Object> r = new HashMap<String, Object>();
@@ -348,7 +401,7 @@ public class BoardService {
 	}
 	
 	//동행게시글 삭제
-	public void deleteBoard(int bnum, String bkind) throws Exception {
+	public void deleteBoard(int bnum) throws Exception {
 		try {
 			b_bdao.deleteBoard(bnum);
 			List<Register> list = b_bdao.selectRegisterListByBnum(bnum);
@@ -359,9 +412,6 @@ public class BoardService {
 				n.setBnum(bnum);
 				n.setMid(m);
 				b_mdao.insertNotice(n);
-			}
-			if(bkind.equals("G")) {
-				//스케줄이랑 사진 지우기?
 			}
 		}catch (Exception e) {
 			// TODO: handle exception

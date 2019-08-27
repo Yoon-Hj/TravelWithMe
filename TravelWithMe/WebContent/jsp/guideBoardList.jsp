@@ -81,7 +81,7 @@
 			</c:if>
 			<c:forEach var="b" items="${readCntList}" varStatus="status">
 			  <div class="column">
-				<a href="readBoard.do?bnum=${b.bnum}&bkind=G">
+				<a href="readBoard.do?bnum=${b.bnum}&bkind=G&page=${current}<c:if test="${keyword != null }">&keyword=${keyword}&type=${type}</c:if><c:if test='${startdate!=null}'>&sdate=${startdate}</c:if><c:if test='${finishdate!=null}'>&fdate=${finishdate}</c:if>">
 				<c:choose>
 						<c:when test="${b.photopath==null}">
 							<img style="width:100%; height: 100%;" src="imgs/noImage.gif">
@@ -113,7 +113,7 @@
 			</c:if>
 			<c:forEach var="g" items="${boardList}" varStatus="status">
 			  <div class="column" style="margin-bottom: 12px;">
-				<a href="readBoard.do?bnum=${g.bnum}&bkind=G">
+				<a href="readBoard.do?bnum=${g.bnum}&bkind=G&page=${current}<c:if test="${keyword != null }">&keyword=${keyword}&type=${type}</c:if><c:if test='${startdate!=null}'>&sdate=${startdate}</c:if><c:if test='${finishdate!=null}'>&fdate=${finishdate}</c:if>">
 					<c:choose>
 						<c:when test="${g.photopath==null}">
 							<img style="width:100%; height: 100%;" src="imgs/noImage.gif">

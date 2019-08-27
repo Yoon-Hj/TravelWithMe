@@ -242,6 +242,16 @@
     where bnum = #{bnum}
 </select>
 
+<!-- 게시글 번호로 가이드게시글 현재 신청가능 인원 수 조회하기  -->
+<select id="getPossibleGNop" parameterType="int" resultType="int">
+	 select gnop - nvl((select sum(rnop)
+                       from register
+                       where bnum = #{bnum}
+                       group by bnum), 0)
+    from guide
+    where bnum = #{bnum}
+</select>
+
 <!-- 게시글에 동행 및 가이드투어 신청하기 -->
 <insert id="insertRegister" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="rid">
 	<selectKey resultType="int" keyProperty="rid" order="BEFORE">
