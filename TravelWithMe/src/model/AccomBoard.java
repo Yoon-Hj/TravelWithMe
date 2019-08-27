@@ -19,6 +19,7 @@ public class AccomBoard {
 	private Date astartdate;
 	private Date afinishdate;
 	private String atime;
+	private String stringFinishdate;
 	private String adepartplace;
 	private String adeparttime;
 	private int anop;
@@ -27,6 +28,12 @@ public class AccomBoard {
 	private String acourse;
 	private String likename;
 	
+	public String getStringFinishdate() {
+		return stringFinishdate;
+	}
+	public void setStringFinishdate(String stringFinishdate) {
+		this.stringFinishdate = stringFinishdate;
+	}
 	public int getBnum() {
 		return bnum;
 	}
