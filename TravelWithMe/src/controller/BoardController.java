@@ -174,6 +174,11 @@ public class BoardController {
 		return b_bsvc.tryRegister(regId, bnum, nop, mid);
 	}
 	
+	@RequestMapping("tryRegisterG.do")
+	public @ResponseBody String tryRegisterG(String regId, int bnum, int nop, String mid) throws Exception {
+		return b_bsvc.tryRegisterG(regId, bnum, nop, mid);
+	}
+	
 	@RequestMapping("getRegistInfo.do")
 	public @ResponseBody List<HashMap<String, Object>> getRegistInfo(int bnum) {
 		return b_bsvc.getRegistInfo(bnum);
@@ -189,10 +194,14 @@ public class BoardController {
 		b_bsvc.rejectRegister(bnum, rid, id);
 	}
 	
-	@RequestMapping("accomDeleteBoard.do")
+	@RequestMapping("deleteBoard.do")
 	public String accomDeleteBoard(int bnum, String bkind) throws Exception {
 		b_bsvc.deleteBoard(bnum);
-		return "redirect: accomBoardList.do";
+		if(bkind.equals("A")) {
+			return "redirect: accomBoardList.do";			
+		}else{
+			return "redirect: guideBoardList.do";						
+		}
 	}
 	
 	@RequestMapping("accomWriteForm.do")
