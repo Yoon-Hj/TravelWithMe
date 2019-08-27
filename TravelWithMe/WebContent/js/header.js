@@ -30,41 +30,46 @@ $(document).ready(function(){
 		//alert("에러임");
 	}
 	
-	
-	
-	$('.userId').hover(function(){
-		var mid = $(this).html();
-		$.ajax({
-			url : "getUserPoint.do",
-			type : "post",
-			data : {
-				mid : mid
-			},
-			success : function(data){
-				var mpoint = data.MPOINT;
-				var gpoint = data.MGUIDEPOINT;
-				var cnt = data.CNT;
-				var grade = data.GRADE;
-				var img = "";
-				if(grade == 'Gold'){
-					img = "<img class='gradeImg' src='imgs/hover_gold2.jpg'/>";
-				}else if(grade == 'Silver'){
-					img = "<img class='gradeImg' src='imgs/hover_silver2.jpg'/>";
-				}else if(grade == 'Bronze'){
-					img = "<img class='gradeImg' src='imgs/hover_bronze2.jpg'/>";
-				}
-				$('[data-toggle="tooltip"]').tooltip(
-						{title: "<a>신뢰지수 &nbsp" + mpoint + " / 100점</a><BR>" + 
-								"<a>가이드 등급 &nbsp" + img + "</a><BR>" +
-//								"<img class='gradeImg' src='imgs/hover_gold.jpg'/>" + 
-								"<a>가이드 횟수 &nbsp" + cnt + "회</a><BR>" 
-							, 
-							html: true, placement: "bottom"
-				});
-			},
-			error : function(){}
+	$('.userId').each(function(){
+		$(this).hover(function(){
+			var thiId = $(this)
+			var mid = $(this).html();
+			$.ajax({
+				url : "getUserPoint.do",
+				type : "post",
+				data : {
+					mid : mid
+				},
+				success : function(data){
+					var mpoint = data.MPOINT;
+					var gpoint = data.MGUIDEPOINT;
+					var cnt = data.CNT;
+					var grade = data.GRADE;
+					var img = "";
+					if(grade == 'Gold'){
+						img = "<img class='gradeImg' src='imgs/hover_gold2.jpg'/>";
+					}else if(grade == 'Silver'){
+						img = "<img class='gradeImg' src='imgs/hover_silver2.jpg'/>";
+					}else if(grade == 'Bronze'){
+						img = "<img class='gradeImg' src='imgs/hover_bronze2.jpg'/>";
+					}
+					$(thiId).tooltip(
+							{title: "<a>신뢰지수 &nbsp" + mpoint + " / 100점</a><BR>" + 
+									"<a>가이드 등급 &nbsp" + img + "</a><BR>" +
+//									"<img class='gradeImg' src='imgs/hover_gold.jpg'/>" + 
+									"<a>가이드 횟수 &nbsp" + cnt + "회</a><BR>" 
+								, 
+								html: true, placement: "bottom"
+					});
+				},
+				error : function(){}
+			});
 		});
 	});
+	
+//	$('.userId').hover(function(){
+//		
+//	});
 	
 	
 	
