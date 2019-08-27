@@ -465,10 +465,23 @@
 	select rid from register where bnum = #{bnum} and mid = #{mid}
 </select>
 
-<select id="selectCanRegiAccom">
+<sql id='atime'>
+	<choose>
+		<when test="sdate == fdate">
+			and atime = #{atime}
+		</when>
+		<otherwise>
+			
+		</otherwise>
+	</choose>
+</sql>
+
+<select id="selectCanRegiAccom" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	select * from (select astartdate,afinishdate,atime from accompany a, register r
-	where a.bnum=r.bnum and r.mid=#{mid}) astartdate between #{}
+	where a.bnum=r.bnum and r.mid=#{mid}) astartdate between #{sdate} and #{fdate} 
+	or afinishdate between #{sdate} and #{fdate}
 </select>
+
 <select id="selectCanRegiGuide">
 </select>
 </mapper>

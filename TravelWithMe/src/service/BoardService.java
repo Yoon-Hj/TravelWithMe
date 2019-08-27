@@ -657,7 +657,14 @@ public class BoardService {
 	}
 	
 	
-	
+	public List<HashMap<String,Object>> getMyAccomRegisterSche(HttpSession session,String sdate,String fdate, String atime){
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("mid", (String)session.getAttribute("user"));
+		param.put("sdate", sdate);
+		param.put("fdate", fdate);
+		param.put("atime", atime);
+		return b_bdao.selectCanRegiAccom(param);
+	}
 	
 	
 	

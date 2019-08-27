@@ -284,4 +284,11 @@ public class BoardController {
 		return mav;
 	}
 
+	@RequestMapping("getMyAccomRegisterSche.do")
+	public void getMyAccomRegisterSche(HttpSession session, String sdate, String fdate, String atime) {
+		System.out.println(sdate);
+		System.out.println(fdate);
+		System.out.println(atime);
+		//System.out.println(b_bsvc.getMyAccomRegisterSche(session,sdate,fdate,atime));
+	}
 }
