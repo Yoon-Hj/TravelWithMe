@@ -867,6 +867,7 @@ function openPreviewAccom() {
 	//투어소개
 	$("#previewTable").find("tr:eq(8)").find("td:eq(1)").text($("#bcontent").val());
 	//주요 정책
+	$("#previewTable").find("tr:eq(9)").find("td:eq(1)").text("");
 	setPolicyArray();
 	var policy1 = "공지된 미팅장소 및 시간에 모인 인원과 가이드 투어를 진행하며 특별한 제제사항은 없습니다.";
 	var policy2 = "여행 시작일 기준 <b style='color:#CD1039'>";
