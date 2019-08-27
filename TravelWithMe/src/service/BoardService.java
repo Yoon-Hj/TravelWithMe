@@ -345,7 +345,7 @@ public class BoardService {
 	public void accomWrite(HttpSession session, AccomBoard accomBoard,
 							String JSPgstartdate, String JSPgfinishdate,
 							String[] pcode, @RequestParam(required=false) String[] pvalue) throws Exception {
-		
+		if(accomBoard.getAtime().equals("undefined"))accomBoard.setAtime("종일");
 		String writeId = (String)session.getAttribute("user");
 		String aarea = accomBoard.getAarea1() + " " + accomBoard.getAarea2();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
@@ -393,7 +393,6 @@ public class BoardService {
 			String[] DAY2time,String[] DAY2place,
 			String[] DAY3time,String[] DAY3place ) throws Exception {
 		
-	    if(guideBoard.getGtime()=="undefined")guideBoard.setGtime("종일");
 		String writeId = (String)session.getAttribute("user");
 		String garea = guideBoard.getGarea1() + " " + guideBoard.getGarea2();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
@@ -401,12 +400,15 @@ public class BoardService {
 		Date togfinishdate = (Date)fm.parse(JSPgfinishdate);
 		Date togenddate = (Date)fm.parse(JSPgenddate);
 		
+		if(guideBoard.getGtime().equals("undefined")) guideBoard.setGtime("종일");
 		guideBoard.setMid(writeId);
 		guideBoard.setGarea(garea);
 		guideBoard.setGstartdate(togstartdate);
 		guideBoard.setGfinishdate(togfinishdate);
 		guideBoard.setGenddate(togenddate);
 		guideBoard.setBkind("G");
+		
+		System.out.println(guideBoard);
 		
 		try {
 			b_bdao.insertGuideBoard(guideBoard);
@@ -483,7 +485,7 @@ public class BoardService {
 			
 			//사진삽입
 			HashMap<String, Object> photoModel = null;
-			if(photo.length!=0) {
+			if(!photo[0].getOriginalFilename().equals("")) {
 				for(int i = 0; i<photo.length;i++) {
 					photoModel = new HashMap<String, Object>();
 					if(photo[i].getOriginalFilename()!="") {			
