@@ -17,7 +17,7 @@ $(document).ready(function(){
 	
 	
 	$('#moreBoards').on('click', function(){
-		alert("게시판 더보기 페이지로 이동해");
+		location.href='myBoards.do';
 	});
 	
 	$('#moreRegister').on('click', function(){
