@@ -31,7 +31,7 @@
 	<!-- 아이디로 알림내역 5개만 조회 -->
 	<select id="selectNoticeById" parameterType="String" resultType="java.util.HashMap">
 		select b1.bkind, b1.btitle, b2.* from board b1, (select a1.*, a2.nkreason from notice a1, noticekind a2
-        where a1.nkcode = a2.nkcode order by a1.noticetime desc) b2 where b1.bnum = b2.bnum and b2.mid = #{mid} and rownum <![CDATA[ <= ]]> 5
+        where a1.nkcode = a2.nkcode order by a1.noticetime desc) b2 where b1.bnum = b2.bnum and b2.mid = #{mid} and <![CDATA[rownum <= 5]]>
 	</select>
 	
 	<!-- 아이디로 회원정보 조회 -->
@@ -42,7 +42,7 @@
 	<!-- 아이디로 신청내역 5개만 조회 -->
 	<select id="selectRegisterById" parameterType="String" resultType="java.util.HashMap">
 		 select bkind, btitle, b.bnum, rid from board b, (select * from register where mid = #{mid} order by rdate desc) r
-		 where b.bnum = r.bnum and rownum <![CDATA[ <= ]]> 5
+		 where b.bnum = r.bnum and <![CDATA[rownum <= 5]]>
 	</select>
 	
 	<!-- 아이디 찾기 -->

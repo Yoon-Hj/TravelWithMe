@@ -11,7 +11,7 @@
 <select id="selectBoardById" parameterType="String" resultType="java.util.HashMap">
 	select bnum,bkind,bwritedate,btitle from 
 	(select * from board where mid = #{mid} and cdel = 0 order by bwritedate desc) 
-     where rownum <![CDATA[ <= ]]> 5
+    <![CDATA[ where rownum <= 5]]>
 </select>
 
 <!-- 여행취향에 맞는 동행게시물 4개조회하기 -->
@@ -25,7 +25,7 @@
 	         where b.bnum = a.bnum
 	         and b.cdel = 0
 	         order by b.breadcount desc) a
-	where rownum <![CDATA[ <= ]]> 4
+	<![CDATA[where rownum <= 4]]>
 </select>
 
 <!-- 조회순으로 가이드 게시물 조회하기 -->
@@ -33,14 +33,14 @@
 	select * 
     from (select b.bnum, b.btitle, b.breadcount, b.mid, g.garea ,g.gstartdate, g.gfinishdate, p.photopath
             from (select * from guide
-                      where genddate <![CDATA[ >= ]]> sysdate  ) g, board b left join (select bnum, photopath
+                     <![CDATA[ where genddate >= sysdate ]]> ) g, board b left join (select bnum, photopath
                                                                                      from photo
                                                                                      where porder = 0) p
             on b.bnum = p.bnum
             where b.bnum = g.bnum
             and b.cdel = 0
             order by b.breadcount desc)
-     where rownum <![CDATA[ <= ]]> 4
+    <![CDATA[ where rownum <= 4]]>
 </select>
 
 <!-- 각 게시판의 전체 게시글 갯수 조회 -->
@@ -127,7 +127,7 @@
 	<if test="type==2 or type==3"> <include refid="andor"/> bcontent like '%${keyword}%' </if>
 	<if test="type==4"> <include refid="andor"/> mid like '%${keyword}%' </if>
 	<if test="type==5"> <include refid="andor"/> aarea like '%${keyword}%' </if>
-	<if test="startdate != null"> <include refid="andor"/> astartdate <![CDATA[ >= ]]> #{startdate} and afinishdate <![CDATA[ < ]]> #{finishdate} </if>
+	<if test="startdate != null"> <include refid="andor"/> <![CDATA[ astartdate >= #{startdate} and afinishdate < TO_DATE(#{finishdate}, 'YY-MM-DD') + 1  ]]> </if>
 	<if test="likecode != null"> <include refid="andor"/> likecode = #{likecode} </if>
 </select>
 
@@ -144,7 +144,7 @@
 	<if test="type==2 or type==3"> <include refid="andor"/> bcontent like '%${keyword}%' </if>
 	<if test="type==4"> <include refid="andor"/> mid like '%${keyword}%' </if>
 	<if test="type==5"> <include refid="andor"/> aarea like '%${keyword}%' </if>
-	<if test="startdate != null"> <include refid="andor"/>  astartdate <![CDATA[ >= ]]> #{startdate} and afinishdate <![CDATA[ < ]]> #{finishdate} </if>
+	<if test="startdate != null"> <include refid="andor"/> <![CDATA[ astartdate >= #{startdate} and afinishdate < TO_DATE(#{finishdate}, 'YY-MM-DD') + 1 ]]> </if>
 	<if test="likecode != null"> <include refid="andor"/> likecode = #{likecode} </if>) e) 
 	where rn between #{offset} and #{offset} + #{perpage} - 1
 </select>
@@ -164,7 +164,7 @@
 	<if test="type==4"> <include refid="andor"/> mid like '%${keyword}%' </if>
 	<if test="type==5"> <include refid="andor"/> garea like '%${keyword}%' </if>
 	<if test="type==6"> <include refid="andor"/> gthema like '%${keyword}%' </if>
-	<if test="startdate != null"> <include refid="andor"/>  gstartdate <![CDATA[ >= ]]> #{startdate} and gfinishdate <![CDATA[ < ]]> #{finishdate}  </if>
+	<if test="startdate != null"> <include refid="andor"/> <![CDATA[ gstartdate >= #{startdate} and gfinishdate < TO_DATE(#{finishdate}, 'YY-MM-DD') + 1 ]]> </if>
 </select>
 
 <!-- 키워드로 가이드게시글 조회하기 -->
@@ -182,7 +182,7 @@
 	<if test="type==4"> <include refid="andor"/> mid like '%${keyword}%' </if>
 	<if test="type==5"> <include refid="andor"/> garea like '%${keyword}%' </if>
 	<if test="type==6"> <include refid="andor"/> gthema like '%${keyword}%' </if>
-	<if test="startdate != null"> <include refid="andor"/>  gstartdate <![CDATA[ >= ]]> #{startdate} and gfinishdate <![CDATA[ < ]]> #{finishdate}  </if>) e) 
+	<if test="startdate != null"> <include refid="andor"/> <![CDATA[ gstartdate >= #{startdate} and gfinishdate < TO_DATE(#{finishdate}, 'YY-MM-DD') + 1 ]]> </if>) e) 
 	where rn between #{offset} and #{offset} + #{perpage} - 1
 </select>
 
@@ -434,26 +434,6 @@
 
 
 
-<!-- csv테스트중... -->
-<select id="selectAllGuide" resultType="guideBoard">
-	select * from board natural join guide
-</select>
-<select id="selectAllAccom" resultType="accomBoard">
-	select * from board natural join accompany
-</select>
-<select id="selectAllGuide_csv" resultType="java.util.HashMap">
-	select b.bnum, b.mid, garea, gthema, mbirth, mgender
-	from board b, guide g, member m
-	where b.bnum = g.bnum
-	and b.mid = m.mid
-</select>
-<select id="selectAllAccompany_csv" resultType="java.util.HashMap">
-	select b.bnum, b.mid, aarea, likename, mbirth, mgender
-	from board b, accompany a, member m, preference p
-	where b.bnum = a.bnum
-	and b.mid = m.mid
-	and p.likecode = a.likecode
-</select>
 
 <!-- 메인검색 -->
 <select id="selectByKeyword" parameterType="String" resultType="java.util.HashMap">
@@ -461,14 +441,27 @@
 	where btitle like '%${value}%' or bcontent like '%${value}%'
 </select>
 
-<select id="selectRidForDel" parameterType="java.util.HashMap" resultType="String">
-	select rid from register where bnum = #{bnum} and mid = #{mid}
+	<select id="selectRidForDel" parameterType="java.util.HashMap" resultType="String">
+		select rid from register where bnum = #{bnum} and mid = #{mid}
+	</select>
+	
+	<sql id='atime'>
+	<choose>
+		<when test="sdate == fdate">
+			and atime = #{atime}
+		</when>
+		<otherwise>
+			
+		</otherwise>
+	</choose>
+</sql>
+
+<select id="selectCanRegiAccom" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	select * from (select astartdate,afinishdate,atime from accompany a, register r
+	where a.bnum=r.bnum and r.mid=#{mid}) where (astartdate between #{sdate} and TO_DATE(#{fdate}, 'YY-MM-DD') + 1 
+	or afinishdate between #{sdate} and TO_DATE(#{fdate}, 'YY-MM-DD') + 1)
 </select>
 
-<select id="selectCanRegiAccom">
-	select * from (select astartdate,afinishdate,atime from accompany a, register r
-	where a.bnum=r.bnum and r.mid=#{mid}) astartdate between #{}
-</select>
 <select id="selectCanRegiGuide">
 </select>
 </mapper>
