@@ -216,6 +216,7 @@ public class BoardService {
 		if(bkind.equals("A")) {
 			AccomBoard accomboard = b_bdao.selectOneAccom(bnum);
 			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+			accomboard.setStringStartdate(fm.format(accomboard.getAstartdate()));
 			accomboard.setStringFinishdate(fm.format(accomboard.getAfinishdate()));
 			result.put("accomBoard",accomboard);
 			result.put("policy", b_bdao.selectPolicyByBnum(bnum));
@@ -657,7 +658,14 @@ public class BoardService {
 	}
 	
 	
-	
+	public List<HashMap<String,Object>> getMyAccomRegisterSche(HttpSession session,String sdate,String fdate, String atime){
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("mid", (String)session.getAttribute("user"));
+		param.put("sdate", sdate);
+		param.put("fdate", fdate);
+		param.put("atime", atime);
+		return b_bdao.selectCanRegiAccom(param);
+	}
 	
 	
 	
