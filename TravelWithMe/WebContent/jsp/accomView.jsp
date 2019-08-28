@@ -147,8 +147,8 @@
 			url : "getMyAccomRegisterSche.do",
 			type : "POST",
 			data : {
-				sdate : '${accomBoard.astartdate}',
-				fdate : '${accomBoard.afinishdate}',
+				sdate : '${accomBoard.stringStartdate}',
+				fdate : '${accomBoard.stringFinishdate}',
 				atime : '${accomBoard.atime}',
 			},
 			success : function(data){

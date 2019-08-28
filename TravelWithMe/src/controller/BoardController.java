@@ -289,6 +289,6 @@ public class BoardController {
 		System.out.println(sdate);
 		System.out.println(fdate);
 		System.out.println(atime);
-		//System.out.println(b_bsvc.getMyAccomRegisterSche(session,sdate,fdate,atime));
+		System.out.println(b_bsvc.getMyAccomRegisterSche(session,sdate,fdate,atime));
 	}
 }
