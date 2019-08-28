@@ -445,7 +445,7 @@
 		select rid from register where bnum = #{bnum} and mid = #{mid}
 	</select>
 	
-	<sql id='atime'>
+<sql id='atime'>
 	<choose>
 		<when test="sdate == fdate">
 			and atime = #{atime}
@@ -459,10 +459,25 @@
 <select id="selectCanRegiAccom" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	select * from (select astartdate,afinishdate,atime from accompany a, register r
 	where a.bnum=r.bnum and r.mid=#{mid}) where (astartdate between #{sdate} and TO_DATE(#{fdate}, 'YY-MM-DD') + 1 
-	or afinishdate between #{sdate} and TO_DATE(#{fdate}, 'YY-MM-DD') + 1)
+	or afinishdate between #{sdate} and TO_DATE(#{fdate}, 'YY-MM-DD') + 1) <include refid="atime"/>
 </select>
 
-<select id="selectCanRegiGuide">
+<sql id='gtime'>
+	<choose>
+		<when test="sdate == fdate">
+			and gtime = #{gtime}
+		</when>
+		<otherwise>
+			
+		</otherwise>
+	</choose>
+</sql>
+
+<select id="selectCanRegiGuide" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	select * from (select gstartdate,gfinishdate,gtime from guide g, register r
+	where g.bnum=r.bnum and r.mid=#{mid}) where (gstartdate between #{sdate} and TO_DATE(#{fdate}, 'YY-MM-DD') + 1 
+	or gfinishdate between #{sdate} and TO_DATE(#{fdate}, 'YY-MM-DD') + 1) <include refid="gtime"/>
+
 </select>
 </mapper>
 

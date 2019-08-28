@@ -285,10 +285,14 @@ public class BoardController {
 	}
 
 	@RequestMapping("getMyAccomRegisterSche.do")
-	public void getMyAccomRegisterSche(HttpSession session, String sdate, String fdate, String atime) {
-		System.out.println(sdate);
-		System.out.println(fdate);
-		System.out.println(atime);
-		System.out.println(b_bsvc.getMyAccomRegisterSche(session,sdate,fdate,atime));
+	public @ResponseBody boolean getMyAccomRegisterSche(HttpSession session, String sdate, String fdate, String atime) {
+		boolean result = false;
+		if(!((String)session.getAttribute("user")).equals("")) {
+			if(b_bsvc.getMyAccomRegisterSche(session,sdate,fdate,atime).size()==0) {
+				result = true;
+			}
+		}
+		
+		return result;
 	}
 }
