@@ -77,4 +77,8 @@ public interface IBoardDao {
 	public List<AccomBoard> selectAllAccom();
 	public List<HashMap<String, Object>> selectAllGuide_csv();
 	public List<HashMap<String, Object>> selectAllAccompany_csv();
+	
+	//신청막기테스트
+	public List<HashMap<String, Object>> selectCanRegiAccom(HashMap<String, Object> param);
+	public List<HashMap<String, Object>> selectCanRegiGuide(HashMap<String, Object> param);
 }

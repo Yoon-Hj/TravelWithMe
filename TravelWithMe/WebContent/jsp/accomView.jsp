@@ -143,6 +143,22 @@
 			$('#rbtn').attr("disabled", "true");
 			$('#rbtn').attr("value", "모집마감");
 		}
+		$.ajax({
+			url : "getMyAccomRegisterSche.do",
+			type : "POST",
+			data : {
+				sdate : '${accomBoard.stringStartdate}',
+				fdate : '${accomBoard.stringFinishdate}',
+				atime : '${accomBoard.atime}',
+			},
+			success : function(data){
+				alert("성공");
+			},
+			error: function(){
+				alert("다시 시도해주세요");
+			}
+			
+		});
 		
 		$.ajax({
 				url : "getRList.do",
