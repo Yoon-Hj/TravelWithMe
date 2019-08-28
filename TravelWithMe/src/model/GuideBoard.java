@@ -20,9 +20,9 @@ public class GuideBoard {
 	private Date gstartdate;
 	private Date gfinishdate;
 	private Date genddate;
-	private java.sql.Date sqlGstartdate;
-	private java.sql.Date sqlGfinishdate;
-	private java.sql.Date sqlGenddate;
+	private String stringStartdate;
+	private String stringFinishdate;
+	private String stringGenddate;
 	private String gdepartplace;
 	private String gdeparttime;
 	private int gnop;
@@ -35,9 +35,42 @@ public class GuideBoard {
 				+ ", btitle=" + btitle + ", bcontent=" + bcontent + ", breadcount=" + breadcount + ", cdel=" + cdel
 				+ ", garea=" + garea + ", garea1=" + garea1 + ", garea2=" + garea2 + ", gtime=" + gtime
 				+ ", gstartdate=" + gstartdate + ", gfinishdate=" + gfinishdate + ", genddate=" + genddate
-				+ ", sqlGstartdate=" + sqlGstartdate + ", sqlGfinishdate=" + sqlGfinishdate + ", sqlGenddate="
-				+ sqlGenddate + ", gdepartplace=" + gdepartplace + ", gdeparttime=" + gdeparttime + ", gnop=" + gnop
+				+ ", gdepartplace=" + gdepartplace + ", gdeparttime=" + gdeparttime + ", gnop=" + gnop
 				+ ", gthema=" + gthema + "]";
+	}
+	
+	
+	
+	public String getStringStartdate() {
+		return stringStartdate;
+	}
+
+
+
+	public void setStringStartdate(String stringStartdate) {
+		this.stringStartdate = stringStartdate;
+	}
+
+
+
+	public String getStringFinishdate() {
+		return stringFinishdate;
+	}
+
+
+
+	public void setStringFinishdate(String stringFinishdate) {
+		this.stringFinishdate = stringFinishdate;
+	}
+
+
+
+	public String getStringGenddate() {
+		return stringGenddate;
+	}
+
+	public void setStringGenddate(String stringGenddate) {
+		this.stringGenddate = stringGenddate;
 	}
 
 	public String getPhotopath() {
@@ -166,30 +199,6 @@ public class GuideBoard {
 
 	public void setGenddate(Date genddate) {
 		this.genddate = genddate;
-	}
-
-	public java.sql.Date getSqlGstartdate() {
-		return sqlGstartdate;
-	}
-
-	public void setSqlGstartdate(java.sql.Date sqlGstartdate) {
-		this.sqlGstartdate = sqlGstartdate;
-	}
-
-	public java.sql.Date getSqlGfinishdate() {
-		return sqlGfinishdate;
-	}
-
-	public void setSqlGfinishdate(java.sql.Date sqlGfinishdate) {
-		this.sqlGfinishdate = sqlGfinishdate;
-	}
-
-	public java.sql.Date getSqlGenddate() {
-		return sqlGenddate;
-	}
-
-	public void setSqlGenddate(java.sql.Date sqlGenddate) {
-		this.sqlGenddate = sqlGenddate;
 	}
 
 	public String getGdepartplace() {

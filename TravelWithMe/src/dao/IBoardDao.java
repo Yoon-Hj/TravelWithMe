@@ -72,9 +72,10 @@ public interface IBoardDao {
 	public List<HashMap<String, Object>> selectByKeyword(String keyword);
 	public String selectRidForDel(HashMap<String, Object> params);
 	
-	// csv테스트중...
-	public List<GuideBoard> selectAllGuide();
-	public List<AccomBoard> selectAllAccom();
-	public List<HashMap<String, Object>> selectAllGuide_csv();
-	public List<HashMap<String, Object>> selectAllAccompany_csv();
+	// 내 게시물 가져오기
+	public List<HashMap<String, Object>> selectMyBoardListByMid(String mid);
+	
+	//신청막기테스트
+	public List<HashMap<String, Object>> selectCanRegiAccom(HashMap<String, Object> param);
+	public List<HashMap<String, Object>> selectCanRegiGuide(HashMap<String, Object> param);
 }

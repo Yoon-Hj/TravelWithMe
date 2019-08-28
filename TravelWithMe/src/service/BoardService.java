@@ -70,7 +70,10 @@ public class BoardService {
 	public HashMap<String, Object> viewDetail(String contentid, String contenttypeid){
 		return API.detailSearch(contentid, contenttypeid);
 	}
-	
+	// 자기 게시물 가져오기
+	public List<HashMap<String, Object>> getMyBoards(String mid) {
+		return b_bdao.selectMyBoardListByMid(mid);
+	}
 	
 	//페이징 처리
 	public int getStartpage(int page) {
@@ -214,11 +217,20 @@ public class BoardService {
 	public HashMap<String, Object> getBoardContent(int bnum, String bkind) {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		if(bkind.equals("A")) {
-			result.put("accomBoard", b_bdao.selectOneAccom(bnum));
+			AccomBoard accomboard = b_bdao.selectOneAccom(bnum);
+			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+			accomboard.setStringStartdate(fm.format(accomboard.getAstartdate()));
+			accomboard.setStringFinishdate(fm.format(accomboard.getAfinishdate()));
+			result.put("accomBoard",accomboard);
 			result.put("policy", b_bdao.selectPolicyByBnum(bnum));
 		}
 		else if(bkind.equals("G")) {
-			result.put("guideBoard", b_bdao.selectOneGuide(bnum));
+			GuideBoard guideboard = b_bdao.selectOneGuide(bnum);			
+			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+			guideboard.setStringGenddate(fm.format(guideboard.getGenddate()));
+			guideboard.setStringStartdate(fm.format(guideboard.getGstartdate()));
+			guideboard.setStringFinishdate(fm.format(guideboard.getGfinishdate()));
+			result.put("guideBoard", guideboard);
 			result.put("policy", b_bdao.selectPolicyByBnum(bnum));
 			result.put("guideSche", b_bdao.selectGScheByBnum(bnum));
 			result.put("photo", b_bdao.selectAllPhotoByBnum(bnum));
@@ -651,25 +663,26 @@ public class BoardService {
 	}
 	
 	
+	public List<HashMap<String,Object>> getMyAccomRegisterSche(HttpSession session,String sdate,String fdate, String atime){
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("mid", (String)session.getAttribute("user"));
+		param.put("sdate", sdate);
+		param.put("fdate", fdate);
+		param.put("atime", atime);
+		return b_bdao.selectCanRegiAccom(param);
+	}
+	
+	public List<HashMap<String,Object>> getMyGuideRegisterSche(HttpSession session,String sdate,String fdate, String gtime){
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("mid", (String)session.getAttribute("user"));
+		param.put("sdate", sdate);
+		param.put("fdate", fdate);
+		param.put("gtime", gtime);
+		return b_bdao.selectCanRegiGuide(param);
+	}
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 }
