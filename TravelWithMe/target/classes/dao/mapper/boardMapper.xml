@@ -432,8 +432,10 @@
 	update board set breadcount=breadcount+1 where bnum=#{bnum}
 </update>
 
-
-
+<!-- 내 게시물 가져오기 -->
+<select id="selectMyBoardListByMid" parameterType="String" resultType="java.util.HashMap">
+	select * from board where mid = #{mid} and cdel = 0
+</select>
 
 <!-- 메인검색 -->
 <select id="selectByKeyword" parameterType="String" resultType="java.util.HashMap">
