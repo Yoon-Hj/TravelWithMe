@@ -285,22 +285,37 @@ public class BoardController {
 	}
 
 	@RequestMapping("getMyAccomRegisterSche.do")
-	public void getMyAccomRegisterSche(HttpSession session, String sdate, String fdate, String atime) {
-		System.out.println(sdate);
-		System.out.println(fdate);
-		System.out.println(atime);
-		System.out.println(b_bsvc.getMyAccomRegisterSche(session,sdate,fdate,atime));
+	public @ResponseBody boolean getMyAccomRegisterSche(HttpSession session, String sdate, String fdate, String atime) {
+		boolean result = false;
+		if(!((String)session.getAttribute("user")).equals("")) {
+			if(b_bsvc.getMyAccomRegisterSche(session,sdate,fdate,atime).size()==0) {
+				result = true;
+			}
+		}
+		
+		return result;
 	}
-	
+
 	@RequestMapping("myBoards.do")
 	public ModelAndView myBoards(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String mid = (String)session.getAttribute("user");
 		for(HashMap<String, Object> a : (List<HashMap<String, Object>>)b_bsvc.getMyBoards(mid)) {
-			System.out.println("잘 되녀ㅑ : " + a);
 		}
 		mav.addObject("boardList", b_bsvc.getMyBoards(mid));
 		mav.setViewName("myBoards");
 		return mav;
+	}
+	
+	@RequestMapping("getMyGuideRegisterSche.do")
+	public @ResponseBody boolean getMyGuideRegisterSche(HttpSession session, String sdate, String fdate, String gtime) {
+		boolean result = false;
+		if(!((String)session.getAttribute("user")).equals("")) {
+			if(b_bsvc.getMyGuideRegisterSche(session,sdate,fdate,gtime).size()==0) {
+				result = true;
+			}
+		}
+		
+		return result;
 	}
 }

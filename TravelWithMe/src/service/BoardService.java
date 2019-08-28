@@ -228,6 +228,8 @@ public class BoardService {
 			GuideBoard guideboard = b_bdao.selectOneGuide(bnum);			
 			SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
 			guideboard.setStringGenddate(fm.format(guideboard.getGenddate()));
+			guideboard.setStringStartdate(fm.format(guideboard.getGstartdate()));
+			guideboard.setStringFinishdate(fm.format(guideboard.getGfinishdate()));
 			result.put("guideBoard", guideboard);
 			result.put("policy", b_bdao.selectPolicyByBnum(bnum));
 			result.put("guideSche", b_bdao.selectGScheByBnum(bnum));
@@ -670,23 +672,17 @@ public class BoardService {
 		return b_bdao.selectCanRegiAccom(param);
 	}
 	
+	public List<HashMap<String,Object>> getMyGuideRegisterSche(HttpSession session,String sdate,String fdate, String gtime){
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("mid", (String)session.getAttribute("user"));
+		param.put("sdate", sdate);
+		param.put("fdate", fdate);
+		param.put("gtime", gtime);
+		return b_bdao.selectCanRegiGuide(param);
+	}
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 }

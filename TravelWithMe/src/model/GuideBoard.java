@@ -20,6 +20,8 @@ public class GuideBoard {
 	private Date gstartdate;
 	private Date gfinishdate;
 	private Date genddate;
+	private String stringStartdate;
+	private String stringFinishdate;
 	private String stringGenddate;
 	private String gdepartplace;
 	private String gdeparttime;
@@ -37,6 +39,32 @@ public class GuideBoard {
 				+ ", gthema=" + gthema + "]";
 	}
 	
+	
+	
+	public String getStringStartdate() {
+		return stringStartdate;
+	}
+
+
+
+	public void setStringStartdate(String stringStartdate) {
+		this.stringStartdate = stringStartdate;
+	}
+
+
+
+	public String getStringFinishdate() {
+		return stringFinishdate;
+	}
+
+
+
+	public void setStringFinishdate(String stringFinishdate) {
+		this.stringFinishdate = stringFinishdate;
+	}
+
+
+
 	public String getStringGenddate() {
 		return stringGenddate;
 	}

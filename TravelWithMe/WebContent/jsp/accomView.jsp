@@ -143,8 +143,9 @@
 			$('#rbtn').attr("disabled", "true");
 			$('#rbtn').attr("value", "모집마감");
 		}
+		
 		$.ajax({
-			url : "getMyAccomRegisterSche.do",
+			url : "getMyRegisterSche.do",
 			type : "POST",
 			data : {
 				sdate : '${accomBoard.stringStartdate}',
@@ -152,7 +153,10 @@
 				atime : '${accomBoard.atime}',
 			},
 			success : function(data){
-				alert("성공");
+				if(!data) {
+					$('#rbtn').attr("disabled", "true");
+					$('#rbtn').attr("value", "신청불가");
+				}
 			},
 			error: function(){
 				alert("다시 시도해주세요");
