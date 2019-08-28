@@ -15,6 +15,7 @@
  
  .column {
   float: left;
+  height: 80px;
   width: 25%;
   padding-left: 5px;
   padding-right: 5px;

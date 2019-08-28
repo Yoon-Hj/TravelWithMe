@@ -1,21 +1,5 @@
 $(document).ready(function(){
 	
-	function open(evt, formName) {
-	  var i, tabcontent, tablinks;
-	  tabcontent = document.getElementsByClassName("tabcontent");
-	  for (i = 0; i < tabcontent.length; i++) {
-	    tabcontent[i].style.display = "none";
-	  }
-	  tablinks = document.getElementsByClassName("tablinks");
-	  for (i = 0; i < tablinks.length; i++) {
-	    tablinks[i].className = tablinks[i].className.replace(" active", "");
-	  }
-	  document.getElementById(cityName).style.display = "block";
-	  evt.currentTarget.className += " active";
-	}
-	 
-	document.getElementById("keywordForm").click();
-	  
 	// 페이지 로딩시 타입 저장 / 버튼색 지정
 	var apitype = $('#apiType').val();
 	if(apitype == "0" || apitype == "1"){
@@ -44,7 +28,6 @@ $(document).ready(function(){
 		$('#keywordForm').hide();
 		$('#festivalForm').hide();
 	}
-	
 	
 	// 검색창 변경 버튼
 	$('#keywordFormBtn').on('click', function(){

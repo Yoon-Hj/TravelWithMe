@@ -121,21 +121,17 @@
 	  }
 	  
 	  .column {
-	  float: left;
-	  width: 50%;
-	  padding: 10px;
+		  float: left;
+		  width: 50%;
+		  padding: 10px;
 	  }
 	
 	
 	.row:after {
-	  content: "";
-	  display: table;
-	  clear: both;
+		  content: "";
+		  display: table;
+		  clear: both;
 	  }
-	  
-	 .badge badge-primary{
-	 	padding: 5px;
-	 }
 </style>
 </head>
 <body>
@@ -148,30 +144,31 @@
 	%>
 	<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px; margin-top: 10px;">MY PAGE</h1><hr>
 	
-<div class="container">
+<div class="container" style="margin-bottom: 20px;">
 	
-	<div class="row">
+	<div class="row" style="margin-bottom: 15px;">
 		<div class="myInfo column">
 		
-			<div class="card">
-				<span class="badge badge-primary" style="font-family: '함초롬돋움'; clear: both; margin-bottom: 10px; font-size: 25px; background-color: #E8D4D4; color: black;">MY INFO</span>
+			<div class="card" style="position: absolute; left: 60px; top: 15px;">
+				<span class="badge badge-primary" 
+					style="font-family: '함초롬돋움'; clear: both; margin-bottom: 20px; font-size: 25px; background-color: #E8D4D4; color: black;">MY INFO</span>
 			
 				<table id="info" style="width : 450px; height : 150px; text-align: left; border: none;" class="viewCard">
 					<tr>
 						<th>아이디</th>
 						<td>${memberInfo.mid }</td>
-						<th rowspan="2">
+						<td rowspan="2">
 						<c:choose>
 							<c:when test="${memPoint.CNT > 0 }">
 								<c:choose>
 									<c:when test="${memPoint.GRADE == 'Gold' }">
-										<img src="imgs/gold2.jpg" style="width:70px;height:70px;"/><BR>
+										<img src="imgs/gold2.jpg" style="width:70px;height:70px; margin-left: 30px;"/><BR>
 									</c:when>
 									<c:when test="${memPoint.GRADE == 'Silver' }">
-										<img src="imgs/silver2.jpg" style="width:70px;height:70px;"/><BR>
+										<img src="imgs/silver2.jpg" style="width:70px;height:70px; margin-left: 30px;"/><BR>
 									</c:when>
 									<c:when test="${memPoint.GRADE == 'Bronze' }">
-										<img src="imgs/bronze2.jpg" style="width:70px;height:70px;"/><BR>
+										<img src="imgs/bronze2.jpg" style="width:70px;height:70px; margin-left: 30px;"/><BR>
 									</c:when>
 								</c:choose>
 									<BR>
@@ -181,7 +178,7 @@
 								아직 가이드경험이 없습니다.
 							</c:otherwise>
 						</c:choose>
-						</th>
+						</td>
 					</tr>
 					<tr>
 						<th>성명</th>
@@ -190,14 +187,14 @@
 					<tr>
 						<th>연락처</th>
 						<td>${memberInfo.mcontact}</td>
-						<td>가이드 포인트  ${memberInfo.mguidepoint}점</td>
+						<td><b>가이드 포인트</b> &nbsp;&nbsp;  ${memberInfo.mguidepoint}점</td>
 					</tr>
 					<tr>
 						<th>
 							신뢰지수<BR>
 						</th>
 						<td>${memberInfo.mpoint } / 100 점</td>
-						<td>가이드 횟수 ${memPoint.CNT }회</td>
+						<td style="margin-left: 10px;"><b>가이드 횟수</b> &nbsp;&nbsp; ${memPoint.CNT }회</td>
 					</tr>
 				</table>
 				
@@ -211,12 +208,12 @@
 	<!-- 스크립트는 header.js에 있다. -->
 	<div class="myNews column">
 		<div class="card">
-			<span class="badge badge-primary" style="font-family: '함초롬돋움'; clear: both; margin-bottom: 5px; font-size: 25px; background-color: #E8D4D4; color: black;">알림내역</span>
+			<span class="badge badge-primary" style="font-family: '함초롬돋움'; clear: both; font-size: 25px; background-color: #E8D4D4; color: black;">알림내역</span>
 			
-			<table class="news viewCard" style="width: 440px; font-size: 14px;">
+			<table class="news viewCard" style="width: 450px; font-size: 14px; font-family: '나눔고딕'">
 			<c:forEach var="n" items="${notice }">
 				<tr>
-					<td>
+					<td style="padding: 5px;">
 						<input type="hidden" value="${n.NOTICESTATUS }">
 						<input type="hidden" value="${n.BNUM }">
 						<input type="hidden" value="${n.BKIND }">
@@ -245,16 +242,16 @@
 	<!-- 첫low끝나는 div -->
 	</div>
 
-	<div class="row">
+	<div class="row" style="margin-top:10px;">
 	
 		<div class="myBoards column">
-			<div class="card" style="height: 300px;">
-				<span class="badge badge-primary" style="font-family: '함초롬돋움'; clear: both; margin-bottom: 10px; font-size: 25px; background-color: #E8D4D4; color: black;">내가 작성한 글</span>
+			<div class="card" style="height: 300px; position: relative; left: 50px; top:450px;">
+				<span class="badge badge-primary" style="font-family: '함초롬돋움'; clear: both; margin-bottom: 20px; font-size: 25px; background-color: #E8D4D4; color: black;">내가 작성한 글</span>
 				
 				<table class="viewCard" style="font-family: '나눔고딕'">
 				<c:forEach var="b" items="${myBoard }">
 					<tr>
-						<td  style="padding: 5px;">
+						<td style="padding: 5px;">
 							<a class="boardsRow">
 							<input type="hidden" value="${b.BNUM }"/>
 							<input type="hidden" value="${b.BKIND }"/>
@@ -276,8 +273,8 @@
 		</div>
 		
 		<div class="myRegister column">
-			<div class="card" style="height: 300px;">
-			<span class="badge badge-primary" style="font-family: '함초롬돋움'; clear: both; margin-bottom: 10px; font-size: 25px; background-color: #E8D4D4; color: black;">신청내역</span>
+			<div class="card" style="height: 300px;  position: relative; top:450px;">
+			<span class="badge badge-primary" style="font-family: '함초롬돋움'; clear: both; margin-bottom: 20px; font-size: 25px; background-color: #E8D4D4; color: black;">신청내역</span>
 			
 			<table class="myRegi viewCard" style="font-family: '나눔고딕'">
 			<c:forEach var="r" items="${register }">
@@ -308,13 +305,10 @@
 		</div>
 		
 	</div>	
-	</div>
 	
 </div>
+	
 
-</div>
-
-<jsp:include page="footer.jsp"></jsp:include>
 
 
 	<!-- 신청내역 더보기 -->	
@@ -335,7 +329,7 @@
 	        </div>
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" id="evGuide" class="btn btn-success" data-dismiss="modal">확인</button>
+		          <button type="button" id="evGuide" class="btn" data-dismiss="modal" style="background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아';">확인</button>
 		        </div>
 	       </div>
 	     </div>
@@ -356,7 +350,7 @@
 	        <!-- Modal body -->
 	        <div class="modal-body" style="text-align: right">
 	        	<center>
-	        	<h5>수정하고 싶은 정보를 다시 입력하세요</h5><br>
+	        	<h5 style="font-family: '함초롬돋움';">※ 수정하고 싶은 정보를 다시 입력하세요</h5><br>
 	        	<form id="modiForm" action="">
 	        		<table id="memInfo" style="wirth:300px;">
 	        			<tr>
@@ -365,25 +359,25 @@
 	        			</tr>
 	        			<tr>
 	        				<th style="width:100px">이름</th>
-	        				<td><input type="text" name="mname" id="name" value="${memberInfo.mname }"></td>
+	        				<td><input type="text" name="mname" id="name" value="${memberInfo.mname }" class="form-control" style="width:200px;"></td>
 	        			</tr>
 	        			<tr>
 	        				<th style="width:100px">대표 연락처</th>
-	        				<td><input type="text" name="mcontact" id="contact" value="${memberInfo.mcontact }"></td>
+	        				<td><input type="text" name="mcontact" id="contact" value="${memberInfo.mcontact }" class="form-control" style="width:200px;"></td>
 	        			</tr>
 		        	</form>
 	        		</table>
 	        	</center><BR>
-	        	<input type="button" id="modiPassForm" value="비밀번호 변경" style="background-color: transparent; border: 0px; font-size: 15px; font-weight: bold;">
+	        	<input type="button" id="modiPassForm" value="비밀번호 변경" style="background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아'; padding: 5px;">
 	        	<input type="hidden" id="storeName" value="${memberInfo.mname }">
 	        	<input type="hidden" id="storeContact" value="${memberInfo.mcontact }">
 	        </div>
 	        <div id="checkPw" style="display:none; text-align:center;">
-	        	<BR><h4>비밀번호를 입력하세요</h4><br>
-	        	<input type="password" id="pw"/><BR><BR>
+	        	<BR><h4 style="font-family: '함초롬돋움';">비밀번호를 입력하세요</h4><br>
+	        	<input type="password" id="pw" class="form-control" style="width: 300px; margin-left: 100px;"/><BR><BR>
 	        </div>
 	        <div id="modiPwForm" style="display:none; text-align:center;">
-	        	<BR><h4>비밀번호 변경</h4><br>
+	        	<BR><h4 style="font-family: '함초롬돋움';">비밀번호 변경</h4><br>
 	        	<center>
 	        	<table>
 	        		<tr>
@@ -403,10 +397,10 @@
 	        <input type="hidden" id="passType" value="f">
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" id="ok" class="btn btn-success" data-dismiss="modal" style="display:none">확인</button>
-		          <button type="button" id="checkPass" class="btn btn-success">확인</button>
-		          <button type="button" id="modiInfo" class="btn btn-info" style="display:none">수정</button>
-		          <button type="button" id="modiPwBtn" class="btn btn-info" style="display:none">수정</button>
+		          <button type="button" id="ok" class="btn" data-dismiss="modal" style="background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아'; display:none;">확인</button>
+		          <button type="button" id="checkPass" class="btn" style="background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아';">확인</button>
+		          <button type="button" id="modiInfo" class="btn" style="background-color: #E8D4D4; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아'; display:none;">수정</button>
+		          <button type="button" id="modiPwBtn" class="btn" style="background-color: #E8D4D4; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아'; display:none;">수정</button>
 		        </div>
 	       </div>
 	     </div>
