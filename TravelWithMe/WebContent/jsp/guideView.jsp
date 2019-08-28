@@ -50,26 +50,6 @@
 		
 		
 		$.ajax({
-			url : "getMyRegisterSche.do",
-			type : "POST",
-			data : {
-				sdate : '${gudieBoard.stringStartdate}',
-				fdate : '${gudieBoard.stringFinishdate}',
-				gtime : '${guideBoard.gtime}',
-			},
-			success : function(data){
-				if(!data) {
-					$('#rbtn').attr("disabled", "true");
-					$('#rbtn').attr("value", "신청불가");
-				}
-			},
-			error: function(){
-				alert("다시 시도해주세요");
-			}
-			
-		});
-		
-		$.ajax({
 				url : "getRList.do",
 				data : {bnum : b},
 				type : "get",

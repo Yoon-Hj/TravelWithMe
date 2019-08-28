@@ -145,26 +145,6 @@
 		}
 		
 		$.ajax({
-			url : "getMyRegisterSche.do",
-			type : "POST",
-			data : {
-				sdate : '${accomBoard.stringStartdate}',
-				fdate : '${accomBoard.stringFinishdate}',
-				atime : '${accomBoard.atime}',
-			},
-			success : function(data){
-				if(!data) {
-					$('#rbtn').attr("disabled", "true");
-					$('#rbtn').attr("value", "신청불가");
-				}
-			},
-			error: function(){
-				alert("다시 시도해주세요");
-			}
-			
-		});
-		
-		$.ajax({
 				url : "getRList.do",
 				data : {bnum : b},
 				type : "get",
