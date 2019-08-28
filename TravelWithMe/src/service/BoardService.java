@@ -70,7 +70,10 @@ public class BoardService {
 	public HashMap<String, Object> viewDetail(String contentid, String contenttypeid){
 		return API.detailSearch(contentid, contenttypeid);
 	}
-	
+	// 자기 게시물 가져오기
+	public List<HashMap<String, Object>> getMyBoards(String mid) {
+		return b_bdao.selectMyBoardListByMid(mid);
+	}
 	
 	//페이징 처리
 	public int getStartpage(int page) {

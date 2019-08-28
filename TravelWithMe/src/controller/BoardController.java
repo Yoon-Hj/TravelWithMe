@@ -291,4 +291,16 @@ public class BoardController {
 		System.out.println(atime);
 		System.out.println(b_bsvc.getMyAccomRegisterSche(session,sdate,fdate,atime));
 	}
+	
+	@RequestMapping("myBoards.do")
+	public ModelAndView myBoards(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String mid = (String)session.getAttribute("user");
+		for(HashMap<String, Object> a : (List<HashMap<String, Object>>)b_bsvc.getMyBoards(mid)) {
+			System.out.println("잘 되녀ㅑ : " + a);
+		}
+		mav.addObject("boardList", b_bsvc.getMyBoards(mid));
+		mav.setViewName("myBoards");
+		return mav;
+	}
 }
