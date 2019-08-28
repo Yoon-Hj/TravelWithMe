@@ -143,6 +143,7 @@
 			$('#rbtn').attr("disabled", "true");
 			$('#rbtn').attr("value", "모집마감");
 		}
+
 		
 		$.ajax({
 				url : "getRList.do",
