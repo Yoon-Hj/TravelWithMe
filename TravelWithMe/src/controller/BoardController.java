@@ -301,10 +301,21 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		String mid = (String)session.getAttribute("user");
 		for(HashMap<String, Object> a : (List<HashMap<String, Object>>)b_bsvc.getMyBoards(mid)) {
-			System.out.println("잘 되녀ㅑ : " + a);
 		}
 		mav.addObject("boardList", b_bsvc.getMyBoards(mid));
 		mav.setViewName("myBoards");
 		return mav;
+	}
+	
+	@RequestMapping("getMyGuideRegisterSche.do")
+	public @ResponseBody boolean getMyGuideRegisterSche(HttpSession session, String sdate, String fdate, String gtime) {
+		boolean result = false;
+		if(!((String)session.getAttribute("user")).equals("")) {
+			if(b_bsvc.getMyGuideRegisterSche(session,sdate,fdate,gtime).size()==0) {
+				result = true;
+			}
+		}
+		
+		return result;
 	}
 }

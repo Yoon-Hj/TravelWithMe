@@ -145,7 +145,7 @@
 		}
 		
 		$.ajax({
-			url : "getMyAccomRegisterSche.do",
+			url : "getMyRegisterSche.do",
 			type : "POST",
 			data : {
 				sdate : '${accomBoard.stringStartdate}',

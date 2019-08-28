@@ -452,9 +452,6 @@
 		<when test="sdate == fdate">
 			and atime = #{atime}
 		</when>
-		<otherwise>
-			
-		</otherwise>
 	</choose>
 </sql>
 
@@ -469,9 +466,6 @@
 		<when test="sdate == fdate">
 			and gtime = #{gtime}
 		</when>
-		<otherwise>
-			
-		</otherwise>
 	</choose>
 </sql>
 
