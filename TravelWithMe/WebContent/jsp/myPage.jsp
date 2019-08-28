@@ -144,7 +144,7 @@
 	%>
 	<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px; margin-top: 10px;">MY PAGE</h1><hr>
 	
-<div class="container" style="margin-bottom: 20px;">
+<div class="container" style="margin-bottom: 450px;">
 	
 	<div class="row" style="margin-bottom: 15px;">
 		<div class="myInfo column">
@@ -232,7 +232,8 @@
 			<c:if test="${fn:length(notice) == 5}">
 			
 				<div class="inNews" style="margin-left: 330px;">
-					<input type="button" class="moreNews btn" value="더보기" data-toggle="modal" data-target="#moreNewsForm" style="width: 120px; background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아';">
+					<input type="button" class="moreNews 
+" value="더보기" data-toggle="modal" data-target="#moreNewsForm" style="width: 120px; background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아';">
 				</div>
 				</c:if>
 			
@@ -245,7 +246,7 @@
 	<div class="row" style="margin-top:10px;">
 	
 		<div class="myBoards column">
-			<div class="card" style="height: 300px; position: relative; left: 50px; top:450px;">
+			<div class="card" style="height: 300px; position: relative; left: 50px; top: 300px;">
 				<span class="badge badge-primary" style="font-family: '함초롬돋움'; clear: both; margin-bottom: 20px; font-size: 25px; background-color: #E8D4D4; color: black;">내가 작성한 글</span>
 				
 				<table class="viewCard" style="font-family: '나눔고딕'">
@@ -273,7 +274,7 @@
 		</div>
 		
 		<div class="myRegister column">
-			<div class="card" style="height: 300px;  position: relative; top:450px;">
+			<div class="card" style="height: 300px;  position: relative; top:300px;">
 			<span class="badge badge-primary" style="font-family: '함초롬돋움'; clear: both; margin-bottom: 20px; font-size: 25px; background-color: #E8D4D4; color: black;">신청내역</span>
 			
 			<table class="myRegi viewCard" style="font-family: '나눔고딕'">
@@ -413,7 +414,7 @@
 
 
 
-
+<jsp:include page="footer.jsp"></jsp:include>
 
 
 

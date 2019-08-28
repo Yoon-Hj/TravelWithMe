@@ -16,11 +16,12 @@
 <script src="js/attraction.js?v=<%=System.currentTimeMillis() %>"></script>
 
 <style type="text/css">
-/* 	h1{
+ 	h1{
 		margin:10%;
 	}
-	searchDiv{
-		border : solid 1px #828282;
+	
+	#searchDiv{
+		border : solid 2px #828282;
 		height : 205px;
 		width : 800px;
 		grid-template-columns:auto auto auto;
@@ -43,6 +44,7 @@
 </style>
 </head>
 <body>
+
 	<jsp:include page="header.jsp"></jsp:include>
 	<h1 style="font-family: '함초롬돋움'; clear: both; margin-left: 30px; margin-top: 10px;">ATTRACTION INFO</h1><hr>
 	<input type="hidden" id="apiType" value="${apiType }">
@@ -120,7 +122,7 @@
 
 	
 	<div id="areaForm" style="width : 616px; height : 196px; float:left;display : inline; display:none;">
-		<div class="input-group mb-3" style="margin:auto; width : 200px; font-family: 'D2Coding'">
+		<div class="input-group mb-3" style="width : 200px; font-family: 'D2Coding'">
 		<div class="tabcontent" id="areaForm">
 		    	<button class="areaBtn btn" value="1" style="border: 2px solid #B5C3C8; width: 100px; margin-left: 20px;">서울</button>
 					<button class="areaBtn btn" value="31" style="border: 2px solid #B5C3C8; width: 100px; margin-left: 20px;">경기도</button>
@@ -136,11 +138,6 @@
 	</div>
 	</div>
 
-	
-	
-	
-	
-	
 	
 	
 </div>
@@ -264,6 +261,6 @@
 </div>
 
 </div>
-<jsp:include page="footer.jsp"></jsp:include>
+
 </body>
 </html>

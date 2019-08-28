@@ -210,10 +210,10 @@
 			</div>
 		        <!-- Modal footer -->
 		        <div class="modal-footer">
-		          <button type="button" id="ok" class="btn" data-dismiss="modal" style="background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아'; display:none;">확인</button>
-		          <button type="button" id="evGuide" class="btn" data-dismiss="modal" style="background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아'; display:none;">확인</button>
-		          <button type="button" id="checkAttend" class="btn" data-dismiss="modal" style="background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아'; display:none;">확인</button>
-		          <button type="button" id="back" class="btn" style="background-color: #E8D4D4; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아'; display:none;">이전</button>
+		          <button type="button" id="ok" class="btn notice" data-dismiss="modal" style="background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아'; display:none;">확인</button>
+		          <button type="button" id="evGuide" class="btn notice" data-dismiss="modal" style="background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아'; display:none;">확인</button>
+		          <button type="button" id="checkAttend" class="btn notice" data-dismiss="modal" style="background-color: #B5C3C8; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아'; display:none;">확인</button>
+		          <button type="button" id="back" class="btn notice" style="background-color: #E8D4D4; border: 0px; font-size: 17px; color:white; font-family: '배달의민족 주아'; display:none;">이전</button>
 		          <input type="hidden" id="chk" value="f">
 		        </div>
 	       </div>

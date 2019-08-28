@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	// 웹소켓 부분
-//	var wsUri = "ws://70.12.109.65:80/TravelWithMe/websocket/echo.do";
-	var wsUri = "ws://localhost/TravelWithMe/websocket/echo.do";
+	var wsUri = "ws://70.12.109.65:80/TravelWithMe/websocket/echo.do";
+//	var wsUri = "ws://localhost/TravelWithMe/websocket/echo.do";
 	var websocket = null;
 	
 	var user = $('#user').val();
